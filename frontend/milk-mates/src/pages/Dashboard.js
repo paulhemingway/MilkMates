@@ -1,7 +1,9 @@
-import React, { PureComponent } from "react";
+import React from 'react'
 
-export default class Dashboard extends PureComponent {
-  render() {
-    return <div>this is the dashboard</div>;
-  }
+export default function Dashboard() {
+  return (
+    <div>
+      This is the dashboard
+    </div>
+  )
 }
