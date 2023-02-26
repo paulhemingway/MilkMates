@@ -1,0 +1,11 @@
+CREATE TABLE notifications (
+  notificationId INT NOT NULL AUTO_INCREMENT,
+  senderId INT NOT NULL,
+  receiverId INT NOT NULL,
+  message VARCHAR(255) NOT NULL,
+  listingId INT NOT NULL,
+  PRIMARY KEY (notificationId),
+  FOREIGN KEY (senderId) REFERENCES users(userid),
+  FOREIGN KEY (receiverId) REFERENCES users(userid),
+  FOREIGN KEY (listingId) REFERENCES listings(listingId)
+);
