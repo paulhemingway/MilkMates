@@ -25,7 +25,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         transition: all 0.3s ease;
-        box-shadow: 4px 6px 10px rgba(0,0,0,0.1);
+        box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.1);
       }
 
       img {
@@ -39,13 +39,13 @@
 
       &:hover > img {
         height: 90%;
-        -webkit-filter: drop-shadow(0 0 4px rgba(255,255,255,0.8));
-        filter: drop-shadow(0 0 4px rgba(255,255,255,0.8));
+        -webkit-filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
       }
       &:hover > .logo-circle {
         height: 50%;
         width: 50%;
-        box-shadow: 2px 3px 5px rgba(0,0,0,0.3);
+        box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
         opacity: 0.5;
       }
     }
@@ -79,6 +79,101 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    form {
+      background-color: white;
+      padding: 30px;
+      border-radius: 20px;
+      width: 350px;
+
+      .input-container {
+        display: flex;
+        flex-direction: column;
+
+        label {
+          font-size: 0.8em;
+        }
+
+        .field {
+          border: 1px solid rgba(0, 0, 0, 0.2);
+          padding: 7px 5px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-radius: 5px;
+
+          &:focus-within {
+            border: 1px solid var(--pink);
+          }
+
+          input {
+            border: none;
+            outline: none;
+            width: 100%;
+          }
+
+          span {
+            display: flex;
+            align-items: center;
+            outline: none;
+
+            &:focus svg {
+              fill: var(--blue);
+              outline: 1px solid rgba(0,0,0,0.6);
+            }
+
+            svg {
+              cursor: pointer;
+              height: 100%;
+
+              &:hover {
+                fill: var(--blue);
+              }
+            }
+          }
+        }
+
+        .forgot {
+          text-align: right;
+          cursor: pointer;
+          font-size: 0.7em;
+          color: var(--blue);
+          display: inline-block;
+          width: auto;
+
+          &:hover,
+          &:focus {
+            outline: none;
+            text-decoration: underline;
+          }
+        }
+      }
+
+      & > * {
+        margin-bottom: 20px;
+      }
+
+      &.login-form {
+      }
+
+      .submit-btn {
+        width: 100%;
+        padding: 7px 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        border: none;
+        background-color: var(--pink);
+        color: white;
+        text-transform: uppercase;
+        font-weight: 700;
+        transition: background-color 0.2s ease;
+
+        &:hover,
+        &:focus {
+          background-color: var(--hover-pink);
+        }
+      }
+    }
   }
 
   .icons-container {

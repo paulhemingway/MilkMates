@@ -41,7 +41,7 @@ export default function Landing() {
         <Form />
       </div>
       <div className="icons-container">
-        
+
       </div>
     </div>
   );
