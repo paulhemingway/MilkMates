@@ -4,6 +4,7 @@ import Dashboard from "pages/Dashboard";
 import NoPage from "pages/NoPage";
 import Help from "pages/Help";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./assets/styles/global.scss"
 
 function App() {
   return (

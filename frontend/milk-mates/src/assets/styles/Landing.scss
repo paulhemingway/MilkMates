@@ -1,9 +1,9 @@
 .landing-container {
   min-height: 100vh;
-  background: var(--light-blue);
+  background: white;
 
   .top-bar {
-    background-color: var(--light-blue);
+    background-color: white;
     overflow: hidden;
     display: flex;
     justify-content: space-between;
@@ -16,7 +16,7 @@
       width: 80px;
 
       &-circle {
-        background: white;
+        border: 1px solid var(--pink);
         border-radius: 100%;
         height: 90%;
         width: 90%;
@@ -39,8 +39,8 @@
 
       &:hover > img {
         height: 90%;
-        -webkit-filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
-        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+        -webkit-filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.2));
+        filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.2));
       }
       &:hover > .logo-circle {
         height: 50%;
@@ -60,31 +60,34 @@
       height: 70px;
 
       a {
-        color: var(--dark-blue);
         font-size: 0.8rem;
-
-        &:hover {
-          color: var(--blue);
-        }
       }
     }
   }
 
   .form-container {
     min-height: 500px;
-    height: 50vh;
-    background-image: url("../images/mother.png");
+    height: 60vh;
+    background: linear-gradient(0deg, rgba(197, 234, 250, 0.8), rgba(197, 234, 250, 0.5)), url("../images/mother.jpg");
     background-size: cover;
-    background-position: right;
+    background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
 
     form {
-      background-color: white;
+      background-color: rgba(255, 255, 255, 0.9);
       padding: 30px;
       border-radius: 20px;
       width: 350px;
+
+      &.create-account-form {
+        width: 500px;
+      }
+
+      h2 {
+        text-align: center;
+      }
 
       .input-container {
         display: flex;
@@ -95,7 +98,7 @@
         }
 
         .field {
-          border: 1px solid rgba(0, 0, 0, 0.2);
+          border: 1px solid rgba(0, 0, 0, 0.15);
           padding: 7px 5px;
           display: flex;
           justify-content: space-between;
@@ -110,6 +113,7 @@
             border: none;
             outline: none;
             width: 100%;
+            background-color: rgba(0, 0, 0, 0);
           }
 
           span {
@@ -119,12 +123,13 @@
 
             &:focus svg {
               fill: var(--blue);
-              outline: 1px solid rgba(0,0,0,0.6);
+              outline: 1px solid rgba(0, 0, 0, 0.6);
             }
 
             svg {
               cursor: pointer;
               height: 100%;
+              font-size: 18px;
 
               &:hover {
                 fill: var(--blue);
@@ -135,21 +140,13 @@
 
         .forgot {
           text-align: right;
-          cursor: pointer;
           font-size: 0.7em;
-          color: var(--blue);
           display: inline-block;
           width: auto;
-
-          &:hover,
-          &:focus {
-            outline: none;
-            text-decoration: underline;
-          }
         }
       }
 
-      & > * {
+      & > *:not(p) {
         margin-bottom: 20px;
       }
 
@@ -161,17 +158,26 @@
         padding: 7px 5px;
         border-radius: 5px;
         cursor: pointer;
-        border: none;
-        background-color: var(--pink);
-        color: white;
+        border: 2px solid var(--pink);
         text-transform: uppercase;
         font-weight: 700;
         transition: background-color 0.2s ease;
-
+        color: white;
+        background-color: var(--pink);
         &:hover,
         &:focus {
-          background-color: var(--hover-pink);
+          color: var(--pink);
+          background-color: rgba(0, 0, 0, 0);
+          outline: none;
         }
+      }
+    }
+
+    .bottom-txt {
+      text-align: center;
+      font-size: 0.8em;
+
+      span {
       }
     }
   }

@@ -1,0 +1,30 @@
+:root {
+  --white: #fff;
+  --light-blue: #c5eafa;
+  --blue: #346898;
+  --dark-blue: #142a40;
+  --pink: #dd6794;
+  --hover-pink: #b75279;
+}
+
+.link {
+  color: var(--blue);
+  cursor: pointer;
+  text-decoration: none;
+  
+  &:hover,
+  &:focus {
+    outline: none;
+    text-decoration: underline;
+  }
+}
+
+.two-col {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+
+  & > div {
+    flex: 50%;
+  }
+}
