@@ -4,6 +4,8 @@ import Dashboard from "pages/Dashboard";
 import NoPage from "pages/NoPage";
 import Help from "pages/Help";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./assets/styles/global.scss"
+import Terms from "pages/Terms";
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
         </Route>
 
         <Route path="help" element={<Help />} />
+        <Route path="tos" element={<Terms />} />
         {/* this path value points to all other paths. It's for the 404 not found page */}
         <Route path="*" element={<NoPage />} />
       </Routes>

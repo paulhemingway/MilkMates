@@ -2,7 +2,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Inter, sans-serif;
+  font-family: Lora, sans-serif;
+  color: var(--dark-blue);
 }
 
 /* importing fonts */
@@ -16,4 +17,10 @@
   font-family: "Inter";
   src: local("Inter"),
     url("assets/fonts/Inter/Inter-VariableFont_slnt\,wght.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Lora";
+  src: local("Lora"),
+    url("assets/fonts/Lora/Lora-Italic-VariableFont_wght.ttf") format("truetype");
 }
