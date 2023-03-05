@@ -31,9 +31,8 @@ export default function LoginForm({ forgotPassword, signUp }) {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="login-form">
+      <form onSubmit={handleSubmit} className="login-form shadow">
         <h2>Welcome back!</h2>
-        <h3>Login</h3>
         <div className="input-container">
           <label>
             Username
@@ -67,14 +66,14 @@ export default function LoginForm({ forgotPassword, signUp }) {
 
         <input type="submit" value="Login" className="submit-btn" />
         <p className="bottom-txt">
-          Don't have an account?{" "}
+          New to MilkMates?{" "}
           <span
             className="link"
             onClick={signUpClicked}
             onKeyDown={signUpKeyPress}
             tabIndex="0"
           >
-            Sign up
+            Create an account
           </span>
         </p>
       </form>

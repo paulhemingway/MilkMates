@@ -8,12 +8,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 15px;
+    padding: 8px 15px;
 
     .logo {
       position: relative;
-      height: 80px;
-      width: 80px;
+      height: 70px;
+      width: 70px;
 
       &-circle {
         border: 1px solid var(--pink);
@@ -150,9 +150,6 @@
         margin-bottom: 20px;
       }
 
-      &.login-form {
-      }
-
       .submit-btn {
         width: 100%;
         padding: 7px 5px;
@@ -164,6 +161,8 @@
         transition: background-color 0.2s ease;
         color: white;
         background-color: var(--pink);
+        font-size: 16px;
+
         &:hover,
         &:focus {
           color: var(--pink);
@@ -182,7 +181,50 @@
     }
   }
 
-  .icons-container {
-    box-shadow: 0 0 40px black;
+  .info-container {
+
+    h2 {
+      text-align: center;
+      margin: 20px 0;
+      color: var(--pink);
+    }
+
+    .icons {
+      background-color: var(--light-blue);
+      width: 80%;
+      max-width: 1200px;
+      min-width: 400px;
+      margin: 0 auto;
+      padding: 20px 20px 30px;
+      border-radius: 20px;
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 30px;
+
+      .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 175px;
+        text-align: center;
+        
+
+        svg {
+          font-size: 5em;
+          height: 100px;
+        }
+
+        h3 {
+          margin-bottom: 5px;
+        }
+
+        p {
+          font-size: 12px;
+        }
+      }
+    }
   }
 }

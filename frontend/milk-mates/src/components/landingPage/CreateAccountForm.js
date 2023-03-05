@@ -26,9 +26,8 @@ export default function CreateAccountForm({ login }) {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="create-account-form">
+      <form onSubmit={handleSubmit} className="create-account-form shadow">
         <h2>Join MilkMates today</h2>
-        <h3>Create an account</h3>
 
         <div className="two-col">
           <div className="input-container">
@@ -104,16 +103,15 @@ export default function CreateAccountForm({ login }) {
         <p className="bottom-txt">
           By signing up, you agree to the{" "}
           <a
-            tabIndex="_blank"
+            target="_blank"
             className="link"
             alt="Terms of service"
-            
+            href="/tos"
           >
             Terms of Service
           </a>
           .
         </p>
-
         <p className="bottom-txt">
           Already have an account?{" "}
           <span
