@@ -1,12 +1,22 @@
 CREATE TABLE users (
   userid INT NOT NULL AUTO_INCREMENT,
   username VARCHAR(50) NOT NULL,
-  password VARCHAR(50) NOT NULL,
+  password CHAR(64) NOT NULL, -- changed from VARCHAR(50)
   email VARCHAR(100) NOT NULL,
   fName VARCHAR(50) NOT NULL,
   IName VARCHAR(50) NOT NULL,
   phone VARCHAR(20) NOT NULL,
   zipCode VARCHAR(10) NOT NULL,
+  lastActiveTime DATETIME DEFAULT NULL,
+  isActive BOOLEAN DEFAULT FALSE,
   isAdmin BOOLEAN DEFAULT FALSE,
+  addedDateTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (userid)
 );
+
+//lastActiveTime: This column stores the date and time of the user's last activity. The default value is NULL, indicating that the user 
+//has not yet engaged in any activity.
+//isActive: This column is a boolean flag indicating whether the user is currently active or not. The default value is FALSE.
+//To implement the 90-day inactivity rule, we can set up a background task that runs periodically and checks for users who have not engaged 
+//in any activity for more than 90 days. When such users are found, we can set their isActive flag to FALSE. We can also update their 
+//lastActiveTime column to reflect the last time they were active before becoming inactive. This task can be scheduled to run daily or weekly.
