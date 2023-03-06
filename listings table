@@ -6,10 +6,11 @@ CREATE TABLE listings (
   title VARCHAR(255) NOT NULL,
   description TEXT NOT NULL,
   price DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
-  isActive BOOLEAN NOT NULL DEFAULT TRUE, -- added column
+  isActive BOOLEAN NOT NULL DEFAULT TRUE,
   isFulfilled BOOLEAN NOT NULL DEFAULT FALSE,
   createdDateTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  lastActiveDateTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, -- added column
+  lastActiveDateTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  viewsCount INT NOT NULL DEFAULT 0, -- added column
   PRIMARY KEY (listingId),
   FOREIGN KEY (userId) REFERENCES users(userid)
 );
