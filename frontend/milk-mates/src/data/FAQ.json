@@ -1,0 +1,48 @@
+[
+    {
+        "Question": "What is MilkMates?",
+        "Answer": "MilkMates is a breastmilk sharing app. Whether you are a parent who overproduces or underproduces breastmilk, this app can benefit you! MilkMates connects those who need milk with those who are selling milk within a certain distance. Other features on top of the breastmilk marketplace  include pump tracking, experience tracking, batch status, and more!"
+    },
+
+    {
+        "Question": "Is it safe?",
+        "Answer": "Breastmilk can be shared safely amongst parents. The organization, Eats on Feets (http://eatsonfeets.org/), developed the Four Pillars of Safe Breast MilkSharing (http://eatsonfeets.org/docs/the_complete_four_pillars_of_safe_breast_milk_sharing.pdf), which highlights what is important to consider when buying and selling breastmilk. It is important for our MilkMates users to uphold those four pillars in order to keep the milk in our community safe to drink." 
+    },
+
+    {
+        "Question": "Is there a fee to use MilkMates?",
+        "Answer": "There is no fee to use the MilkMates platform. We believe that breastmilk should be available to all people. However, some people may charge for their breastmilk, while others might give it away for free." 
+    },
+
+    {
+        "Question": "How do I store the breastmilk?",
+        "Answer": "Breastmilk can be stored at different temperatures, but each have a different time frame. For freshly pumped breastmilk, it can last up to 4 hours at room temperature, up to 4 days in the fridge, and up to 12 months in the freezer although using within 6 months is best. For thawed, previously frozen breastmilk, it can last at room temperature for 1-2 hours, in the fridge for 1 day and it should never be refrozen. Finally for breastmilk that is leftover from a feeding, the milk must be finished within 2 hours after the baby is finished, or else it must be pitched. For more information, please visit https://www.cdc.gov/breastfeeding/recommendations/handling_breastmilk.htm."
+    },
+
+    {
+        "Question": "What are the benefits of breastmilk?",
+        "Answer": "Breastmilk has many benefits for the baby. The first benefit of breastfeeding is that breastmilk is the best source of nutrition for most babies. The second benefit of breastfeeding is that it can help protect babies against some different illnesses and diseases. According to the CDC, breastfed babies have a lower risk of asthma, obesity, type 1 diabetes, and SIDS. They are also less likely to have ear infections and stomach bugs. The third benefit to breastfeeding is that breastmilk shares antibodies from the mother to her baby, which help the baby develop a stronger immune system."
+    },
+
+    {
+        "Question": "What are the rules in my state regarding the buying/selling of breastmilk?",
+        "Answer": "Laws regarding the buying and selling of breastmilk vary between each state. You can find your state and see what the laws are here: https://www.ncsl.org/health/breastfeeding-state-laws."
+    },
+
+    {
+        "Question": "How can I test the milk I receive?",
+        "Answer": "If you are concerned about the breastmilk you are receiving, we recommend using alcohol testing strips, protein testing strips, or conducting at home pasteurization https://www.onlythebreast.com/buy-sell-donate-breast-milk/breastmilk-pasteurization-tips/." 
+    },
+
+    {
+        "Question": "How can I report abusers of MilkMates?",
+        "Answer": "Please report those who do not abide by our terms and conditions to milkmatesadmin@gmail.com."
+    },
+
+    {
+        "Question": "Have more questions?",
+        "Answer": "If you have any other questions please email milkmatesadmin@gmail.com and an admin will respond to you within 48 business hours."
+    }
+
+
+]
