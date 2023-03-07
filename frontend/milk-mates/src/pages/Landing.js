@@ -17,12 +17,6 @@ export default function Landing() {
   const [isLogin, setIsLogin] = useState(true);
   const [forgotPasswordShowing, setForgotPasswordShowing] = useState(false);
 
-  const icons = [
-    {
-      title: "Diary & Tracking",
-    },
-    {},
-  ];
 
   const forgotPasswordClicked = () => {
     setForgotPasswordShowing(true);
@@ -44,7 +38,7 @@ export default function Landing() {
   }
 
   return (
-    <div className="landing-container">
+    <div className="landing">
       <Header />
       <div className="form-container">
         <Form />
