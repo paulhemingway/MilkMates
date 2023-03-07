@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Dashboard() {
+export default function Messages() {
   return (
     <div>
-      Dashboard page
+      Messages
     </div>
   )
 }
