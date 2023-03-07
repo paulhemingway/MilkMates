@@ -44,7 +44,7 @@ export default function Landing() {
   }
 
   return (
-    <div className="landing-container">
+    <div className="landing">
       <div className="top-bar">
         <div className="logo">
           <div className="logo-circle"></div>
