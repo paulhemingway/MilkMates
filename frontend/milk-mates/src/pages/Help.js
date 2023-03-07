@@ -6,17 +6,14 @@ import Accordion from "../components/helpPage/Accordion"
 import FAQ from "../data/FAQ.json"
 import "assets/styles/global.scss"
 import "assets/styles/Landing.scss";
+import "assets/styles/HelpPage.scss"
 
 
 import MilkMatesLogo from "assets/images/logo/logo-pink.png";
 
 export default function Help() {
 
-  const questions = []
 
-  // const questions = FAQ.map((question, index) => {
-  //   return (<Help question={question} key={index} />)
-  // })
 
   return (
     <>
@@ -35,7 +32,7 @@ export default function Help() {
           </div>
         </div>
         <div className="accordions">
-          {questions}
+          {FAQ.map((q, index) => (<Accordion question={q} key={index} />))}
         </div>
       </div>
 

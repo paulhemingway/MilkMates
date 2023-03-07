@@ -7,8 +7,10 @@ export default function Accordion(props) {
       }) 
     
     return (
-        <div>
-            {props.question.Question}
+        <div className="accordion">
+            <h3>{props.question.Question}</h3>
+            <p>{props.question.Answer}</p>
+            <br></br>
         </div>
     )
 }
