@@ -5,7 +5,7 @@ var router = express.Router();
 var Names = {};
 
 var connection = mysql.createConnection({
-    host     : 'ec2-3-83-148-232.compute-1.amazonaws.com',
+    host     : 'ec2-54-159-200-221.compute-1.amazonaws.com',
     port     : '3306',
     user     : 'milkmates',
     password : 'MilkmatesPassword11!!',
