@@ -1,7 +1,7 @@
 .layout {
   height: 100vh;
   display: flex;
-
+  flex-direction: row-reverse;
 
   .content {
     width: calc(100vw - 275px);
@@ -15,10 +15,21 @@
 
 
 
-@media only screen and (min-width: 481px) and (max-width: 1024px) {
-  
-}
+@media only screen and (max-width: 1024px) {
+  .layout {
+    .content {
+      width: 100%;
+    }
+    .nav-container {
+      position: fixed;
+      width: 100%;
+      top: 80px;
+      z-index: 1;
 
-@media only screen and (max-width: 480px) {
-  
+      &.collapsed {
+        display: none;
+      }
+
+    }
+  }
 }

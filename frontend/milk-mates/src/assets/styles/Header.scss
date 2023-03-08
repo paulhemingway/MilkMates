@@ -4,7 +4,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 15px;
+  height: 80px;
+  border-bottom: 1px solid var(--light-pink);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 0 15px;
 
   .logo {
     position: relative;
@@ -52,11 +55,34 @@
     color: var(--dark-blue);
   }
 
-  .help-container {
+  .right {
     height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     a {
       font-size: 0.8rem;
+    }
+
+    svg {
+      font-size: 2em;
+      display: none;
+    }
+  }
+
+  & > div {
+    min-width: 70px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .top-bar {
+    .right {
+      svg {
+        display: block;
+        cursor: pointer;
+      }
     }
   }
 }
