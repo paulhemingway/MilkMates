@@ -16,13 +16,6 @@ import {
 export default function Sidebar(props) {
   const [collapsed, setCollapsed] = useState(false);
 
-  const navLinkStyles = ({ isActive }) => {
-    return {
-      
-    }
-  }
-
-
   return (
     <nav className="nav shadow">
       <div className="app-links">
