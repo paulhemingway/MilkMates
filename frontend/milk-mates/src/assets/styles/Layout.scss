@@ -1,16 +1,23 @@
 .layout {
   height: 100vh;
-  display: flex;
-  flex-direction: row-reverse;
+  header {
+    position: relative;
+    z-index: 10;
 
+  }
   .content {
-    width: calc(100vw - 275px);
+    display: flex;
+    .nav-container {
+      width: 275px;
+      height: calc(100vh - 60px);
+    }
+
+    .outlet {
+      width: calc(100vw - 275px);
+    }
   }
 
-  .nav-container {
-    width: 275px;
-    height: 100vh;
-  }
+  
 }
 
 
@@ -19,17 +26,33 @@
   .layout {
     .content {
       width: 100%;
-    }
-    .nav-container {
-      position: fixed;
-      width: 100%;
-      top: 80px;
-      z-index: 1;
+      .nav-container {
+        position: absolute;    
+        width: 260px;
+        top: 60px;
+        right: 0;
+        z-index: 1;
+        transition: top 0.3s ease;
 
-      &.collapsed {
-        display: none;
+        .nav {
+          border-bottom-left-radius: 10px;
+        }
+        &.collapsed {
+          top: -100%;
+        }
       }
+    }
+    
+  }
+}
 
+@media only screen and (max-width: 480px) {
+  .layout {
+    .content {
+      .nav-container {
+        width: 100%;
+        height: calc(100vh - 60px);
+      }
     }
   }
 }

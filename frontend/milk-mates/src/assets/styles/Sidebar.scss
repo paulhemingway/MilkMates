@@ -37,7 +37,8 @@
     transition: all 0.2s ease;
     border-radius: 10px;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       background-image: linear-gradient(to right, var(--hover-blue), var(--blue));
       color: var(--light-blue);
     }
@@ -47,27 +48,43 @@
       width: 35px;
       filter: fill(white);
     }
+
+    &.logout {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
   }
 }
-
 
 @media only screen and (max-width: 1024px) {
   .nav {
     height: auto;
 
-    ul {
-      width: 50%;
-      margin: 0 auto;
-      min-width: 350px;
+    & > div {
+      ul {
+        margin: 0 auto;
+      }
+      .nav-link {
+        padding: 5px 8px;
+      }
     }
-
     .profile-links {
       hr {
         margin: 10px auto;
-        width: 50%;
-        min-width: 350px;
       }
     }
-    
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .nav {
+    height: 100%;
+
+    & > div {
+      ul {
+        width: 250px;
+      }
+    }
   }
 }
