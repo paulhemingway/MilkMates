@@ -11,7 +11,7 @@ import ForgotPassword from "components/landingPage/ForgotPassword";
 import { BiBarChartAlt2 } from "react-icons/bi";
 import { FaHandHoldingHeart } from "react-icons/fa";
 import { TbBottle, TbStar, TbMessageCircle, TbClipboardCheck } from "react-icons/tb";
-import Header from "components/Header";
+import Header from "components/global/Header";
 
 export default function Landing() {
   const [isLogin, setIsLogin] = useState(true);
