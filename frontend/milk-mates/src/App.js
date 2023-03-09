@@ -1,5 +1,5 @@
 import Landing from "pages/Landing";
-import Layout from "components/Layout";
+import Layout from "components/global/Layout";
 import Dashboard from "pages/Dashboard";
 import NoPage from "pages/NoPage";
 import Help from "pages/Help";
@@ -10,7 +10,7 @@ import Resources from "pages/Resources";
 import Find from "pages/Find";
 import Messages from "pages/Messages";
 
-import PrivateRoute from "./components/PrivateRoute";
+import PrivateRoute from "./components/global/PrivateRoute";
 
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";

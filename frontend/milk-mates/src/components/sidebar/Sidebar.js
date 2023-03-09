@@ -3,6 +3,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../../assets/styles/Sidebar.scss";
 
+import { AiOutlineUser, AiOutlineHome } from "react-icons/ai"
 import { BiBarChartAlt2, BiLogOut } from "react-icons/bi";
 import { FaHandHoldingHeart, FaHome, FaUser } from "react-icons/fa";
 import {
@@ -10,33 +11,30 @@ import {
   TbStar,
   TbMessageCircle,
   TbClipboardCheck,
+  TbSearch
 } from "react-icons/tb";
 
 // props will need the logout function and user info (name)
 export default function Sidebar(props) {
-  const [collapsed, setCollapsed] = useState(false);
 
-  const navLinkStyles = ({ isActive }) => {
-    return {
-      
-    }
+  const clicked = () => {
+    props.clicked();
   }
-
 
   return (
     <nav className="nav shadow">
       <div className="app-links">
         <ul>
           <li>
-            <NavLink to="/dashboard">
+            <NavLink to="/dashboard" onClick={clicked}>
               <div className="nav-link">
-                <FaHome />
+                <AiOutlineHome />
                 <span>Dashboard</span>
               </div>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/log">
+            <NavLink to="/log" onClick={clicked}>
               <div className="nav-link">
                 <BiBarChartAlt2 />
                 <span>Milk Log</span>
@@ -44,23 +42,23 @@ export default function Sidebar(props) {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/share">
+            <NavLink to="/share" onClick={clicked}>
               <div className="nav-link">
-                <FaHandHoldingHeart />
+                <TbBottle />
                 <span>Share Milk</span>
               </div>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/find">
+            <NavLink to="/find" onClick={clicked}>
               <div className="nav-link">
-                <TbBottle />
+                <TbSearch />
                 <span>Find Milk</span>
               </div>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/messages">
+            <NavLink to="/messages" onClick={clicked}>
               <div className="nav-link">
                 <TbMessageCircle />
                 <span>Messages</span>
@@ -68,7 +66,7 @@ export default function Sidebar(props) {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/resources">
+            <NavLink to="/resources" onClick={clicked}>
               <div className="nav-link">
                 <TbClipboardCheck />
                 <span>Resources</span>
@@ -81,16 +79,16 @@ export default function Sidebar(props) {
         <hr></hr>
         <ul>
           <li>
-            <NavLink to="/profile/phemingway">
+            <NavLink to="/profile/phemingway" onClick={clicked}>
               <div className="nav-link">
-                <FaUser />
+                <AiOutlineUser />
                 <span>phemingway</span>
               </div>
             </NavLink>
           </li>
           <li>
             <NavLink to="/" onClick={props.logout}>
-              <div className="nav-link">
+              <div className="nav-link logout">
                 <BiLogOut />
                 <span>Log out</span>
               </div>
