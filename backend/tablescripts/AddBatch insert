@@ -1,0 +1,13 @@
+INSERT INTO batches (userId, productionDate, volume, freezeDate, diet, sickness, medications, caffeine, vaccines, status)
+VALUES (
+  user_id_value,
+  'yyyy-mm-dd', -- replace with the actual production date in yyyy-mm-dd format
+  volume_value,
+  'yyyy-mm-dd', -- replace with the actual freeze date in yyyy-mm-dd format
+  'diet_value',
+  'sickness_value',
+  'medications_value',
+  caffeine_value,
+  'vaccines_value',
+  'status_value'
+);
