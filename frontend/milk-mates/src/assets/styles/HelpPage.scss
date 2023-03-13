@@ -1,3 +1,62 @@
-.accordion {
-  border: 2px solid red;
+* {
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+
 }
+
+
+.accordion {
+  margin: 15px;
+  padding: 15px;
+  background-color: #c5eafa;
+  border: 2px solid #142a40;
+  color: #142a40;
+  border-radius: 8px;
+  transition: all 0.4s ease;
+}
+
+.question {
+  position: relative;
+  font-size: 20px; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+
+  svg {
+    font-size:30px;
+    
+  
+  }
+}
+
+.answer {
+  padding-right: 80px;
+  max-height: 1000px; 
+  overflow-y: hidden;
+  transition: all 0.4s ease-out; 
+
+}
+
+
+
+.question.open svg,
+.answer.open {
+  transition: all 0.4s ease;
+}
+
+.question.open svg {
+  transform: rotate(180deg);
+}
+
+.answer.open {
+  max-height: 1000px;
+}
+
+.answer:not(.open) {
+
+  max-height: 0;
+}
+
+

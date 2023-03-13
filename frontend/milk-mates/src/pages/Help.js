@@ -14,7 +14,6 @@ import MilkMatesLogo from "assets/images/logo/logo-pink.png";
 export default function Help() {
 
 
-
   return (
     <>
       <div className="landing">
