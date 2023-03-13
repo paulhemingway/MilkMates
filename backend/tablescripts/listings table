@@ -13,6 +13,7 @@ CREATE TABLE listings (
   viewsCount INT NOT NULL DEFAULT 0, -- added column
   PRIMARY KEY (listingId),
   FOREIGN KEY (userId) REFERENCES users(userid)
+  FOREIGN KEY (batchListingId) REFERENCES batchListings(batchListingId)
 );
 
 //isActive: This column stores a boolean value that indicates whether the listing is still active or not. 
