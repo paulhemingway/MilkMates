@@ -1,29 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { FiChevronDown } from "react-icons/fi" 
+import { FiChevronDown } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 export default function Accordion(props) {
-    useEffect(() => {
-        console.log(props)
-      }) 
-    
-      const [open, setOpen] = useState(false)
+  useEffect(() => {
+    console.log(props);
+  });
 
-      const toggleOpen = () => {
-        setOpen(!open)
+  const [open, setOpen] = useState(false);
 
-      }
-    return (
-        <div className = "accordion" onClick = {toggleOpen}>
-            <div className={open ? 'question open' : 'question'} >
-                <h3>{props.question.Question}</h3>
-                <FiChevronDown />
-            </div>
-            <div className = {open ? 'answer open' : 'answer'} >
-                <p>{props.question.Answer}</p>
-
-            </div>
+  const toggleOpen = () => {
+    setOpen(!open);
+  };
+  return (
+    <div className={open ? "accordion open" : "accordion"} onClick={toggleOpen}>
+      <div className="question">
+        <h3>{props.question.question}</h3>
+        <FiChevronDown />
+      </div>
+      <div className="answer">
+        <p>{props.question.answer}</p>
+        <div className="answer-links">
+        {props.question.links.map((link) => {
+          return <div className="answer-link">
+            <Link to={link.url} target="_blank">{link.title}</Link>
+          </div>
+        })}
         </div>
-    )
-
-    
+      </div>
+    </div>
+  );
 }
