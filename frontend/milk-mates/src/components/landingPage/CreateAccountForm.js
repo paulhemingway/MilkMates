@@ -26,7 +26,7 @@ export default function CreateAccountForm({ login }) {
 
   return (
     <form onSubmit={handleSubmit} className="create-account-form shadow">
-      <h2>Join MilkMates today</h2>
+      <h2>Join MilkMates Today</h2>
 
       <div className="two-col">
         <div className="input-container">
