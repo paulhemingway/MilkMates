@@ -1,0 +1,16 @@
+CREATE TABLE statTracking (
+statId INT NOT NULL AUTO_INCREMENT,
+numUsers INT NOT NULL DEFAULT 0,
+numActiveUsers INT NOT NULL DEFAULT 0,
+numListings INT NOT NULL DEFAULT 0,
+numActiveListings INT NOT NULL DEFAULT 0,
+lastPostDateTime DATETIME NOT NULL,
+postRatePerDay DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
+userAccessRatePerDay DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
+userAccessRatePerWeek DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
+userAccessRatePerMonth DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
+listingId INT NOT NULL,
+numViews INT NOT NULL DEFAULT 0,
+PRIMARY KEY (statId),
+FOREIGN KEY (listingId) REFERENCES listings(listingId)
+);

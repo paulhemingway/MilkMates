@@ -1,0 +1,25 @@
+CREATE TABLE listings (
+  listingId INT NOT NULL AUTO_INCREMENT,
+  userId INT NOT NULL,
+  batchListingId INT NOT NULL,
+  isGiving BOOLEAN NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  description TEXT NOT NULL,
+  price DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
+  isActive BOOLEAN NOT NULL DEFAULT TRUE,
+  isFulfilled BOOLEAN NOT NULL DEFAULT FALSE,
+  createdDateTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  lastActiveDateTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  viewsCount INT NOT NULL DEFAULT 0, -- added column
+  PRIMARY KEY (listingId),
+  FOREIGN KEY (userId) REFERENCES users(userid),
+  FOREIGN KEY (batchListingId) REFERENCES batchListings(batchListingId)
+);
+
+//isActive: This column stores a boolean value that indicates whether the listing is still active or not. 
+//The default value is set to TRUE, which means that a new listing is active by default.
+//If the listing has not been updated or viewed for 30 days, we can use a scheduled task to update the isActive column to FALSE.
+//lastActiveDateTime: This column stores the date and time when the listing was last active.
+//The default value is set to CURRENT_TIMESTAMP, which means that the current date and time will be used as the default value if no value is provided when a new row is inserted.
+//With these two columns, we can track the activity status of each listing and automatically toggle the isActive column to FALSE if the listing has been inactive for 30 days.
+//This information can be useful for various purposes, such as filtering out inactive listings from search results or displaying a warning message to the users when they view an inactive listing.
