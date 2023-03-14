@@ -1,0 +1,58 @@
+.layout {
+  height: 100vh;
+  header {
+    position: relative;
+    z-index: 10;
+
+  }
+  .content {
+    display: flex;
+    .nav-container {
+      width: 275px;
+      height: calc(100vh - 60px);
+    }
+
+    .outlet {
+      width: calc(100vw - 275px);
+    }
+  }
+
+  
+}
+
+
+
+@media only screen and (max-width: 1024px) {
+  .layout {
+    .content {
+      width: 100%;
+      .nav-container {
+        position: absolute;    
+        width: 260px;
+        top: 60px;
+        right: 0;
+        z-index: 1;
+        transition: top 0.3s ease;
+
+        .nav {
+          border-bottom-left-radius: 10px;
+        }
+        &.collapsed {
+          top: -100%;
+        }
+      }
+    }
+    
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .layout {
+    .content {
+      .nav-container {
+        width: 100%;
+        height: calc(100vh - 60px);
+      }
+    }
+  }
+}

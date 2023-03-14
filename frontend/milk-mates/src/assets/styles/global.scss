@@ -1,0 +1,38 @@
+:root {
+  --white: #fff;
+  --light-blue: #c5eafa;
+  --blue: #376fa3;
+  --dark-blue: #142a40;
+  --pink: #dd6794;
+
+  --light-pink: #fbb7d1;
+
+  --hover-pink: #b75279;
+  --hover-blue: #4a8bc8;
+}
+
+.link {
+  color: var(--blue);
+  cursor: pointer;
+  text-decoration: none;
+  
+  &:hover,
+  &:focus {
+    outline: none;
+    text-decoration: underline;
+  }
+}
+
+.two-col {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+
+  & > div {
+    flex: 50%;
+  }
+}
+
+.shadow {
+  box-shadow: 2px 7px 9px 0 rgba(100, 100, 111, 0.2);
+}
