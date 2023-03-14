@@ -31,7 +31,7 @@ export default function LoginForm({ forgotPassword, signUp }) {
 
   return (
     <form onSubmit={handleSubmit} className="login-form shadow">
-      <h2>Welcome back!</h2>
+      <h2>Welcome Back!</h2>
       <div className="input-container">
         <label>
           Username
