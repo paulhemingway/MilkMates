@@ -1,0 +1,3 @@
+UPDATE users
+SET email = 'new_email', fName = 'new_first_name', IName = 'new_last_name', phone = 'new_phone', zipCode = 'new_zip_code'
+WHERE userid = desired_userid;
