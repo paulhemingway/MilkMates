@@ -1,1 +1,5 @@
-//
+SELECT *
+FROM users
+LEFT JOIN listings ON users.userid = listings.userId
+WHERE users.userid = desired_userid
+ORDER BY listings.isActive DESC, listings.lastActiveDateTime DESC;
