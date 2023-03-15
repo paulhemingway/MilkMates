@@ -2,6 +2,7 @@ CREATE TABLE batchListings (
   batchListingId INT NOT NULL AUTO_INCREMENT,
   listingId INT NOT NULL,
   batchId INT NOT NULL,
+  isActive BOOLEAN DEFAULT FALSE,
   PRIMARY KEY (batchListingId),
   FOREIGN KEY (listingId) REFERENCES listings(listingId),
   FOREIGN KEY (batchId) REFERENCES batches(batchId)
