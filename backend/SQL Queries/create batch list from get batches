@@ -1,0 +1,12 @@
+SELECT b.batchId, b.productionDate, b.volume, b.freezeDate, b.diet, b.sickness, b.medications, b.caffeine, b.vaccines
+FROM batches b
+JOIN users u ON u.userid = b.userId
+WHERE u.username = 'desired_username';
+
+-- Use the batch info to create a batch listing:
+INSERT INTO batchListings (listingId, batchId)
+VALUES (desired_listingId, desired_batchId);
+
+
+
+//this one needs work
