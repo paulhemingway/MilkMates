@@ -1,14 +1,36 @@
 UPDATE batches
-SET productionDate = '2022-01-01',
-    volume = 1000,
-    freezeDate = '2022-01-15',
-    diet = 'low fat',
-    sickness = NULL,
-    medications = 'aspirin',
-    caffeine = 1,
-    vaccines = 'COVID-19',
-    status = 'completed'
-WHERE batchId = 1;
+SET productionDate = COALESCE(?, productionDate),
+    volume = COALESCE(?, volume),
+    freezeDate = COALESCE(?, freezeDate),
+    diet = COALESCE(?, diet),
+    sickness = COALESCE(?, sickness),
+    medications = COALESCE(?, medications),
+    caffeine = COALESCE(?, caffeine),
+    vaccines = COALESCE(?, vaccines),
+    status = COALESCE(?, status),
+    isActive = COALESCE(?, isActive)
+WHERE batchId = ?;
+
+
+
+or
+
+
+UPDATE batches
+SET 
+  userId = [new user ID],
+  productionDate = [new production date],
+  volume = [new volume],
+  freezeDate = [new freeze date],
+  diet = [new diet],
+  sickness = [new sickness],
+  medications = [new medications],
+  caffeine = [new caffeine value],
+  vaccines = [new vaccines],
+  status = [new status],
+  isActive = [new isActive flag value]
+WHERE batchId = [batch ID];
+
 
 
 //needs work
