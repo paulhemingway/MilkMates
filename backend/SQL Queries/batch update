@@ -1,0 +1,14 @@
+UPDATE batches
+SET productionDate = '2022-01-01',
+    volume = 1000,
+    freezeDate = '2022-01-15',
+    diet = 'low fat',
+    sickness = NULL,
+    medications = 'aspirin',
+    caffeine = 1,
+    vaccines = 'COVID-19',
+    status = 'completed'
+WHERE batchId = 1;
+
+
+//needs work
