@@ -1,0 +1,55 @@
+.log {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  .add-btn {
+    cursor: pointer;
+    padding: 10px 50px;
+    background-color: var(--pink);
+    color: white;
+    transition: all 0.2s ease;
+    border-radius: 10px;
+    font-size: 20px;
+    box-shadow: var(--shadow);
+    border: 2px solid rgba(0,0,0,0);
+    font-weight: 600;
+    background-image: var(--pink-btn-gradient);
+    box-sizing: border-box;
+
+    &:hover, &:focus {
+      background-image: none;
+      background-color: white;
+      border: 2px solid var(--pink);
+      color: var(--pink);
+    }
+
+    &:active {
+
+    }
+  }
+
+  .log-table {
+    .table {
+      table {
+        border: 1px solid black;
+        padding: 5px;
+        width: 100%;
+
+        th {
+          text-align: left;
+          padding: 5px;
+
+          &.clickable {
+            cursor: pointer;
+          }
+        }
+
+        td {
+          padding: 5px;
+        }
+        
+      }
+    }
+  }
+}

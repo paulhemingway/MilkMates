@@ -92,18 +92,20 @@
         padding: 7px 5px;
         border-radius: 5px;
         cursor: pointer;
-        border: 2px solid var(--pink);
+        border: 2px solid rgba(0,0,0,0);
         text-transform: uppercase;
         font-weight: 700;
-        transition: background-color 0.2s ease;
+        transition: all 0.2s ease;
         color: white;
-        background-color: var(--pink);
+        background-image: var(--pink-btn-gradient);
         font-size: 16px;
 
         &:hover,
         &:focus {
           color: var(--pink);
-          background-color: rgba(0, 0, 0, 0);
+          background-image: none;
+          background-color: rgba(0,0,0,0);
+          border: 2px solid var(--pink);
           outline: none;
         }
       }

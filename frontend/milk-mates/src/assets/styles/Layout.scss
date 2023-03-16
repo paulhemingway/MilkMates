@@ -12,15 +12,17 @@
       height: calc(100vh - 60px);
     }
 
-    .outlet {
+    .outlet-container {
       width: calc(100vw - 275px);
+
+      .outlet {
+        margin: 0 auto;
+        max-width: 1000px;
+        padding: 45px;
+      }
     }
   }
-
-  
 }
-
-
 
 @media only screen and (max-width: 1024px) {
   .layout {
@@ -40,6 +42,9 @@
         &.collapsed {
           top: -100%;
         }
+      }
+      .outlet-container {
+        width: 100%;
       }
     }
     

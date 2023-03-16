@@ -1,0 +1,104 @@
+[
+  {
+    "batchId": 0,
+    "productionDate": 1678638324000,
+    "volume": 3.8,
+    "events": [
+      {
+        "batchEventId": 0,
+        "event": "refrigerated",
+        "eventDate": 1678641924000,
+        "notes": "This milk was green for some reason. idk"
+      },
+      {
+        "batchEventId": 1,
+        "event": "frozen",
+        "eventDate": 1678814724000,
+        "notes": "Okay the green went away"
+      },
+      {
+        "batchEventId": 2,
+        "event": "discarded",
+        "eventDate": 1678901124000,
+        "notes": "It came back. Throwing away."
+      }
+    ],
+    "diet": "vegan",
+    "sickness": null,
+    "medications": null,
+    "caffeine": true,
+    "vaccines": "Pfizer COVID"
+  },
+  {
+    "batchId": 1,
+    "productionDate": 1679505924000,
+    "volume": 4.1,
+    "events": [
+      {
+        "batchEventId": 0,
+        "event": "refrigerated",
+        "eventDate": 1679507724000,
+        "notes": ""
+      },
+      {
+        "batchEventId": 1,
+        "event": "frozen",
+        "eventDate": 1679680524000,
+        "notes": ""
+      }
+    ],
+    "diet": "vegan",
+    "sickness": null,
+    "medications": null,
+    "caffeine": true,
+    "vaccines": "Pfizer COVID"
+  },
+  {
+    "batchId": 2,
+    "productionDate": 1679766924000,
+    "volume": 4.0,
+    "events": [
+      {
+        "batchEventId": 0,
+        "event": "refrigerated",
+        "eventDate": 1679766924000,
+        "notes": ""
+      },
+      {
+        "batchEventId": 1,
+        "event": "consumed",
+        "eventDate": 1679856924000,
+        "notes": "Little Timmy enjoyed the milk."
+      }
+    ],
+    "diet": "vegan",
+    "sickness": null,
+    "medications": null,
+    "caffeine": false,
+    "vaccines": "Pfizer COVID"
+  },
+  {
+    "batchId": 3,
+    "productionDate": 1679666924000,
+    "volume": 4.0,
+    "events": [
+      {
+        "batchEventId": 0,
+        "event": "refrigerated",
+        "eventDate": 1679766924000,
+        "notes": ""
+      },
+      {
+        "batchEventId": 1,
+        "event": "consumed",
+        "eventDate": 1679856924000,
+        "notes": "Little Timmy enjoyed the milk."
+      }
+    ],
+    "diet": "vegan",
+    "sickness": null,
+    "medications": null,
+    "caffeine": false,
+    "vaccines": "Pfizer COVID"
+  }
+]
