@@ -20,6 +20,7 @@ export default function LoginForm({ forgotPassword, signUp }) {
     "Please enter a username.",
     "Please enter a password.",
     "Your account is inactive. Please contact support to reactivate your account.",
+    "Error communicating with the server. Please contact support.",
   ];
 
   useEffect(() => {
@@ -27,7 +28,7 @@ export default function LoginForm({ forgotPassword, signUp }) {
   }, [errorCode]);
 
   useEffect(() => {
-    if(loggedIn) {
+    if (loggedIn) {
       // redirect
     }
   }, [loggedIn]);
@@ -70,7 +71,6 @@ export default function LoginForm({ forgotPassword, signUp }) {
   return (
     <form onSubmit={handleSubmit} className="login-form shadow">
       <h2>Welcome Back!</h2>
-      <p className="error-msg">{errorMsg}</p>
       <div className="input-container">
         <label>
           Username
@@ -79,6 +79,7 @@ export default function LoginForm({ forgotPassword, signUp }) {
               type="text"
               placeholder="Username"
               onChange={usernameChanged}
+              required
             ></input>
           </div>
         </label>
@@ -92,6 +93,7 @@ export default function LoginForm({ forgotPassword, signUp }) {
               type={passwordVisible ? "text" : "password"}
               placeholder="Password"
               onChange={passwordChanged}
+              required
             ></input>
             <span onClick={togglePasswordVisible} tabIndex="0">
               {passwordVisible ? <BiShow /> : <BiHide />}
@@ -105,6 +107,10 @@ export default function LoginForm({ forgotPassword, signUp }) {
         >
           Forgot Password?
         </span>
+      </div>
+
+      <div className="error-msg">
+        <p>{errorMsg}</p>
       </div>
 
       <input type="submit" value="Login" className="submit-btn" />

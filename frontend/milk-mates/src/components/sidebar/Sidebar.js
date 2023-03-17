@@ -1,14 +1,11 @@
 import React from "react";
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import "../../assets/styles/Sidebar.scss";
+import "assets/styles/Sidebar.scss";
 
 import { AiOutlineUser, AiOutlineHome } from "react-icons/ai"
 import { BiBarChartAlt2, BiLogOut } from "react-icons/bi";
-import { FaHandHoldingHeart, FaHome, FaUser } from "react-icons/fa";
 import {
   TbBottle,
-  TbStar,
   TbMessageCircle,
   TbClipboardCheck,
   TbSearch
@@ -16,6 +13,7 @@ import {
 
 // props will need the logout function and user info (name)
 export default function Sidebar(props) {
+
 
   const clicked = () => {
     props.clicked();
@@ -87,12 +85,12 @@ export default function Sidebar(props) {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/" onClick={props.logout}>
+            <div onClick={props.logout} className="logout-cont">
               <div className="nav-link logout">
                 <BiLogOut />
                 <span>Log out</span>
               </div>
-            </NavLink>
+            </div>
           </li>
         </ul>
       </div>
