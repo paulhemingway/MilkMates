@@ -1,3 +1,7 @@
+import React, { useContext } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider } from "contexts/AuthProvider";
+import { useAuth } from "contexts/AuthProvider";
 import Landing from "pages/Landing";
 import Layout from "components/global/Layout";
 import Dashboard from "pages/Dashboard";
@@ -9,67 +13,58 @@ import Share from "pages/Share";
 import Resources from "pages/Resources";
 import Find from "pages/Find";
 import Messages from "pages/Messages";
-
-import PrivateRoute from "./components/global/PrivateRoute";
-
-import { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./assets/styles/global.scss";
 import Profile from "pages/Profile";
-
+import PrivateRoute from "./components/global/PrivateRoute";
+import "assets/styles/global.scss";
 
 function App() {
-  // this will eventually have to get the authentication token somewhere
-  const [loggedIn, setLoggedIn] = useState(true);
+  // must get token on load eventually and redirect if it's valid
 
+
+  const { loggedIn } = useAuth();
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" exact element={<Landing />} />
+      <Route
+            path="/"
+            element={
+              loggedIn ? (
+                <Navigate to="/dashboard" replace />
+              ) : (
+                <Landing />
+              )
+            }
+          />
 
         {/* everything within here will have the navbar */}
         <Route element={<Layout />}>
           <Route
             path="dashboard"
-            element={
-              <PrivateRoute loggedIn={loggedIn} component={<Dashboard />} />
-            }
+            element={<PrivateRoute component={<Dashboard />} loggedIn={loggedIn} />}
           />
           <Route
             path="log"
-            element={
-              <PrivateRoute loggedIn={loggedIn} component={<Log />} />
-            }
+            element={<PrivateRoute component={<Log />} loggedIn={loggedIn} />}
           />
           <Route
             path="share"
-            element={
-              <PrivateRoute loggedIn={loggedIn} component={<Share />} />
-            }
+            element={<PrivateRoute component={<Share />} loggedIn={loggedIn} />}
           />
           <Route
             path="find"
-            element={
-              <PrivateRoute loggedIn={loggedIn} component={<Find />} />
-            }
+            element={<PrivateRoute component={<Find />} loggedIn={loggedIn} />}
           />
           <Route
             path="messages"
-            element={
-              <PrivateRoute loggedIn={loggedIn} component={<Messages />} />
-            }
+            element={<PrivateRoute component={<Messages />} loggedIn={loggedIn} />}
           />
           <Route
             path="resources"
-            element={
-              <PrivateRoute loggedIn={loggedIn} component={<Resources />} />
-            }
+            element={<PrivateRoute component={<Resources />} loggedIn={loggedIn} />}
           />
           <Route
             path="/profile/:id"
-            element={
-              <PrivateRoute loggedIn={loggedIn} component={<Profile />} />
-            }
+            element={<PrivateRoute component={<Profile />} loggedIn={loggedIn} />}
           />
         </Route>
 

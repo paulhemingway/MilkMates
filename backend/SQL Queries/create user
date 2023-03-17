@@ -1,0 +1,2 @@
+INSERT INTO users (username, password, email, fName, IName, phone, zipCode)
+VALUES ('JohnDoe', 'mysecretpassword', 'johndoe@example.com', 'John', 'Doe', '1234567890', '12345');

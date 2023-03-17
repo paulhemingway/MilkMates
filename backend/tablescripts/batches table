@@ -10,6 +10,7 @@ CREATE TABLE batches (
   caffeine BOOLEAN NOT NULL,
   vaccines VARCHAR(255),
   status ENUM('created', 'submitted', 'in progress', 'completed') NOT NULL DEFAULT 'created',
+  isActive BOOLEAN DEFAULT FALSE, -- Added active flag with default value of FALSE
   PRIMARY KEY (batchId),
   FOREIGN KEY (userId) REFERENCES users(userid)
 );

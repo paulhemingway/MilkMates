@@ -1,14 +1,44 @@
 /* es-lint disable */
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { BiHide, BiShow } from "react-icons/bi";
+import { useAuth } from "contexts/AuthProvider";
 
 export default function LoginForm({ forgotPassword, signUp }) {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const handleSubmit = (event) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const { login, errorCode, loggedIn } = useAuth();
+
+  const errorMessages = [
+    "",
+    "The username you entered does not exist. Please try again.",
+    "The password you entered was incorrect. Please try again.",
+    "Please enter a username.",
+    "Please enter a password.",
+    "Your account is inactive. Please contact support to reactivate your account.",
+  ];
+
+  useEffect(() => {
+    setErrorMsg(errorMessages[errorCode]);
+  }, [errorCode]);
+
+  useEffect(() => {
+    if(loggedIn) {
+      // redirect
+    }
+  }, [loggedIn]);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("submitted");
+    try {
+      await login(username, password);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const togglePasswordVisible = () => {
@@ -29,14 +59,27 @@ export default function LoginForm({ forgotPassword, signUp }) {
     }
   };
 
+  const usernameChanged = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const passwordChanged = (event) => {
+    setPassword(event.target.value);
+  };
+
   return (
     <form onSubmit={handleSubmit} className="login-form shadow">
       <h2>Welcome Back!</h2>
+      <p className="error-msg">{errorMsg}</p>
       <div className="input-container">
         <label>
           Username
           <div className="field">
-            <input type="text" placeholder="Username"></input>
+            <input
+              type="text"
+              placeholder="Username"
+              onChange={usernameChanged}
+            ></input>
           </div>
         </label>
       </div>
@@ -48,6 +91,7 @@ export default function LoginForm({ forgotPassword, signUp }) {
             <input
               type={passwordVisible ? "text" : "password"}
               placeholder="Password"
+              onChange={passwordChanged}
             ></input>
             <span onClick={togglePasswordVisible} tabIndex="0">
               {passwordVisible ? <BiShow /> : <BiHide />}

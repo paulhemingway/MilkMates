@@ -1,0 +1,6 @@
+SELECT *
+FROM listings
+INNER JOIN users ON listings.userId = users.userid
+WHERE users.zipCode = desired_zipcode
+  AND listings.isActive = TRUE
+ORDER BY listings.lastActiveDateTime DESC;
