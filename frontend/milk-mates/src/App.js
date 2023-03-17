@@ -9,6 +9,7 @@ import Share from "pages/Share";
 import Resources from "pages/Resources";
 import Find from "pages/Find";
 import Messages from "pages/Messages";
+import Batch from "pages/Batch";
 
 import PrivateRoute from "./components/global/PrivateRoute";
 
@@ -66,9 +67,15 @@ function App() {
             }
           />
           <Route
-            path="/profile/:id"
+            path="/profile/:userId"
             element={
               <PrivateRoute loggedIn={loggedIn} component={<Profile />} />
+            }
+          />
+          <Route
+            path="/batch/:batchId"
+            element={
+              <PrivateRoute loggedIn={loggedIn} component={<Batch />} />
             }
           />
         </Route>

@@ -1,25 +1,25 @@
 [
   {
     "batchId": 0,
-    "productionDate": 1678638324000,
+    "productionDate": 1676638324000,
     "volume": 3.8,
     "events": [
       {
         "batchEventId": 0,
         "event": "refrigerated",
-        "eventDate": 1678641924000,
+        "eventDate": 1676637000000,
         "notes": "This milk was green for some reason. idk"
       },
       {
         "batchEventId": 1,
         "event": "frozen",
-        "eventDate": 1678814724000,
+        "eventDate": 1676723400000,
         "notes": "Okay the green went away"
       },
       {
         "batchEventId": 2,
         "event": "discarded",
-        "eventDate": 1678901124000,
+        "eventDate": 1676982600000,
         "notes": "It came back. Throwing away."
       }
     ],
@@ -31,19 +31,19 @@
   },
   {
     "batchId": 1,
-    "productionDate": 1679505924000,
+    "productionDate": 1677075300000,
     "volume": 4.1,
     "events": [
       {
         "batchEventId": 0,
         "event": "refrigerated",
-        "eventDate": 1679507724000,
+        "eventDate": 1677075600000,
         "notes": ""
       },
       {
         "batchEventId": 1,
         "event": "frozen",
-        "eventDate": 1679680524000,
+        "eventDate": 1677162000000,
         "notes": ""
       }
     ],
@@ -55,19 +55,19 @@
   },
   {
     "batchId": 2,
-    "productionDate": 1679766924000,
+    "productionDate": 1677745202000,
     "volume": 4.0,
     "events": [
       {
         "batchEventId": 0,
         "event": "refrigerated",
-        "eventDate": 1679766924000,
+        "eventDate": 1677745502000,
         "notes": ""
       },
       {
         "batchEventId": 1,
         "event": "consumed",
-        "eventDate": 1679856924000,
+        "eventDate": 1677759902000,
         "notes": "Little Timmy enjoyed the milk."
       }
     ],
@@ -79,20 +79,14 @@
   },
   {
     "batchId": 3,
-    "productionDate": 1679666924000,
+    "productionDate": 1678019102000,
     "volume": 4.0,
     "events": [
       {
         "batchEventId": 0,
         "event": "refrigerated",
-        "eventDate": 1679766924000,
+        "eventDate": 1678019402000,
         "notes": ""
-      },
-      {
-        "batchEventId": 1,
-        "event": "consumed",
-        "eventDate": 1679856924000,
-        "notes": "Little Timmy enjoyed the milk."
       }
     ],
     "diet": "vegan",
