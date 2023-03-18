@@ -1,0 +1,106 @@
+.log {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  .add-btn {
+    cursor: pointer;
+    padding: 10px 25px;
+    background-color: var(--pink);
+    color: white;
+    transition: all 0.2s ease;
+    border-radius: 10px;
+    font-size: 20px;
+    box-shadow: var(--shadow);
+    border: 2px solid rgba(0, 0, 0, 0);
+    font-weight: 600;
+    background-image: var(--pink-gradient);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    &:hover,
+    &:focus {
+      background-image: none;
+      background-color: white;
+      border: 2px solid var(--pink);
+      color: var(--pink);
+    }
+
+    &:active {
+    }
+  }
+
+  .log-table {
+    .table {
+      table {
+        margin-top: 20px;
+        width: 100%;
+        border-collapse: collapse;
+        box-shadow: var(--shadow);
+
+        tbody {
+          td {
+            padding: 10px;
+
+            &.status-cell {
+              text-transform: capitalize;
+            }
+            &.link-cell {
+              
+              
+              svg {
+                background-image: var(--pink-gradient);
+                padding: 2px;
+                border-radius: 100px;
+                font-size: 1.5em;
+                box-shadow: 2px 3px 3px rgba(0,0,0,0.15);
+                cursor: pointer;
+                color: white;
+                transition: transform 0.3s ease;
+
+                &:hover {
+                  transform: scale(1.1);
+                }
+              }
+            }
+
+          }
+
+          tr {
+            &:nth-child(2n) {
+              background-color: rgba(0,0,0,0.07);
+            }
+
+            &.empty-row {
+              text-align: center;
+            }
+          }
+        }
+
+        thead {
+          background-image: var(--blue-gradient);
+          color: white;
+
+          th {
+            text-align: left;
+            padding: 10px;
+
+            &.clickable {
+              cursor: pointer;
+            }
+
+            &:first-child {
+              border-top-left-radius: 10px;
+            }
+
+            &:last-child {
+              border-top-right-radius: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

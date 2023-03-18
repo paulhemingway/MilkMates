@@ -9,13 +9,18 @@
 
   --hover-pink: #b75279;
   --hover-blue: #4a8bc8;
+
+  --shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+
+  --pink-gradient: linear-gradient(160deg, #fa90b9, #b75279);
+  --blue-gradient: linear-gradient(130deg, #5da4e6, #2d5e8b);
 }
 
 .link {
   color: var(--blue);
   cursor: pointer;
   text-decoration: none;
-  
+
   &:hover,
   &:focus {
     outline: none;
@@ -35,4 +40,10 @@
 
 .shadow {
   box-shadow: 2px 7px 9px 0 rgba(100, 100, 111, 0.2);
+}
+
+.wrapper {
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }

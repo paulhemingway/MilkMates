@@ -3,7 +3,7 @@ import React from "react";
 import Sidebar from "components/sidebar/Sidebar";
 import { useState } from "react";
 
-import "../../assets/styles/Layout.scss";
+import "assets/styles/Layout.scss";
 import Header from "./Header";
 
 export default function Layout() {
@@ -16,15 +16,17 @@ export default function Layout() {
   return (
     <div className="layout">
       <header>
-      <Header collapsed={collapsed} toggleCollapse={toggleCollapse} />
+        <Header collapsed={collapsed} toggleCollapse={toggleCollapse} />
       </header>
-     
+
       <div className="content">
         <div className={`nav-container ${collapsed ? "collapsed" : ""}`}>
           <Sidebar clicked={toggleCollapse} />
         </div>
-        <div className="outlet">
-          <Outlet />
+        <div className="outlet-container">
+          <div className="outlet">
+            <Outlet />
+          </div>
         </div>
       </div>
     </div>
