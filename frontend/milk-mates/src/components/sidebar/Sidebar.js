@@ -1,14 +1,11 @@
 import React from "react";
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import "../../assets/styles/Sidebar.scss";
+import "assets/styles/Sidebar.scss";
 
 import { AiOutlineUser, AiOutlineHome } from "react-icons/ai"
 import { BiBarChartAlt2, BiLogOut } from "react-icons/bi";
-import { FaHandHoldingHeart, FaHome, FaUser } from "react-icons/fa";
 import {
   TbBottle,
-  TbStar,
   TbMessageCircle,
   TbClipboardCheck,
   TbSearch
