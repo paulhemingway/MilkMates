@@ -4,7 +4,7 @@ import Sidebar from "components/sidebar/Sidebar";
 import { useState } from "react";
 import { useAuth } from "contexts/AuthProvider";
 
-import "../../assets/styles/Layout.scss";
+import "assets/styles/Layout.scss";
 import Header from "./Header";
 
 export default function Layout() {
@@ -25,8 +25,10 @@ export default function Layout() {
         <div className={`nav-container ${collapsed ? "collapsed" : ""}`}>
           <Sidebar clicked={toggleCollapse} logout={logout}/>
         </div>
-        <div className="outlet">
-          <Outlet />
+        <div className="outlet-container">
+          <div className="outlet">
+            <Outlet />
+          </div>
         </div>
       </div>
     </div>
