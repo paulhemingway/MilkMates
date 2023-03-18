@@ -1,0 +1,4 @@
+SELECT l.listingId, l.userId, l.batchListingId, l.isGiving, l.title, l.description, l.price, l.isActive, l.isFulfilled, l.createdDateTime, l.lastActiveDateTime, l.viewsCount, b.batchId, b.productionDate, b.volume, b.freezeDate, b.diet, b.sickness, b.medications, b.caffeine, b.vaccines, b.status
+FROM listings l
+INNER JOIN batches b ON l.batchListingId = b.batchId
+WHERE l.userId = <user_id>

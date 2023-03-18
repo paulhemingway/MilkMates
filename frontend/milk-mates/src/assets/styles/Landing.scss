@@ -100,8 +100,7 @@
         background-image: var(--pink-gradient);
         font-size: 16px;
 
-        &:hover,
-        &:focus {
+        &:hover {
           color: var(--pink);
           background-image: none;
           background-color: rgba(0,0,0,0);
