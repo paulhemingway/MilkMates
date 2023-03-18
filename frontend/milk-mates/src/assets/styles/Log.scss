@@ -43,19 +43,27 @@
         tbody {
           td {
             padding: 10px;
+            align-items: center;
+            vertical-align: middle;
 
             &.status-cell {
               text-transform: capitalize;
+              span {
+                // display: flex;
+                svg {
+                  font-size: calc(100% + 1em);
+                  position: relative;
+                  top: 2px;
+                }
+              }
             }
             &.link-cell {
-              
-              
               svg {
                 background-image: var(--pink-gradient);
                 padding: 2px;
                 border-radius: 100px;
                 font-size: 1.5em;
-                box-shadow: 2px 3px 3px rgba(0,0,0,0.15);
+                box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.15);
                 cursor: pointer;
                 color: white;
                 transition: transform 0.3s ease;
@@ -65,12 +73,11 @@
                 }
               }
             }
-
           }
 
           tr {
             &:nth-child(2n) {
-              background-color: rgba(0,0,0,0.07);
+              background-color: rgba(0, 0, 0, 0.07);
             }
 
             &.empty-row {

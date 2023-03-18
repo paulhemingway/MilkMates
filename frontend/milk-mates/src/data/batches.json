@@ -80,12 +80,30 @@
   {
     "batchId": 3,
     "productionDate": 1678019102000,
-    "volume": 4.0,
+    "volume": 3.2,
     "events": [
       {
         "batchEventId": 0,
         "event": "refrigerated",
         "eventDate": 1678019402000,
+        "notes": ""
+      }
+    ],
+    "diet": "vegan",
+    "sickness": null,
+    "medications": null,
+    "caffeine": false,
+    "vaccines": "Pfizer COVID"
+  },
+  {
+    "batchId": 4,
+    "productionDate": 1678219102000,
+    "volume": 4.3,
+    "events": [
+      {
+        "batchEventId": 0,
+        "event": "thawed",
+        "eventDate": 1678319402000,
         "notes": ""
       }
     ],

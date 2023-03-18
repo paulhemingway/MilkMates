@@ -1,4 +1,4 @@
-/* es-lint disable */
+/* eslint-disable */
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { BiHide, BiShow } from "react-icons/bi";

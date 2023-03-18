@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import { useEffect, useState } from "react";
 
@@ -28,7 +29,7 @@ export default function LogTable({ data }) {
     if (data) {
       setDisplayedBatches(data);
     }
-  }, []);
+  }, [data]);
 
   useEffect(() => {
     sortBatches();
@@ -51,6 +52,8 @@ export default function LogTable({ data }) {
         return <FaSortDown />;
       case 2:
         return <FaSortUp />;
+      default:
+        return <></>;
     }
   }
 
@@ -78,12 +81,10 @@ export default function LogTable({ data }) {
     if (sortValues.status !== 0) {
       let sorted = displayedBatches.slice().sort(
         (a, b) => {
-          console.log(a)
-          console.log(b)
           return statusOrder[b.events[b.events.length - 1].event] - statusOrder[a.events[a.events.length - 1].event]
         }
       );
-      setDisplayedBatches(sortValues.status == 1 ? sorted : sorted.reverse());
+      setDisplayedBatches(sortValues.status === 1 ? sorted : sorted.reverse());
       return;
     }
     setDisplayedBatches(data);
@@ -114,7 +115,7 @@ export default function LogTable({ data }) {
             {displayedBatches.length > 0 && displayedBatches.map((batch) => (
               <LogTableRow batch={batch} key={batch.batchId} />
             ))}
-            {displayedBatches.length == 0 && 
+            {displayedBatches.length === 0 && 
               <tr className="empty-row">
                 <td colSpan="5">There are no batches to display.</td>
               </tr> 
