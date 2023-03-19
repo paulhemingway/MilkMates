@@ -9,7 +9,7 @@ export const AuthContext = createContext();
 // Define a function component that wraps its children with the AuthContext.Provider component
 export const AuthProvider = ({ children }) => {
   // set back to false when done
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [errorCode, setErrorCode] = useState(0);
 
@@ -31,10 +31,13 @@ export const AuthProvider = ({ children }) => {
   // }, []);
 
   const login = async (username, password) => {
+    setErrorCode(0)
     try {
       const response = await axios.post(`${apiURL}/login/CheckForUser`, {
         username,
         password,
+      }, {
+        timeout: 5000, // Timeout after 3 seconds
       });
 
       if (response.data[0].errorCode !== 0) {
@@ -46,7 +49,7 @@ export const AuthProvider = ({ children }) => {
         setUser(response.data[1][0][0]);
       }
     } catch (error) {
-      setErrorCode(6);
+      setErrorCode(6);  
     }
   };
 

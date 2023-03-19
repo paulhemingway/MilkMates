@@ -87,17 +87,18 @@
         margin-bottom: 20px;
       }
 
-      .error-msg {
+      .error-loading {
         font-size: 12px;
         color: red;
         height: 40px;
         display: flex;
         align-items: center;
         margin: -5px 0 10px;
-        
+        justify-content: center;
         p {
           text-align: center;
         }
+
       }
 
       .submit-btn {

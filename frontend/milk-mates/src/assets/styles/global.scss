@@ -24,8 +24,11 @@
 
   &:hover,
   &:focus {
-    outline: none;
     text-decoration: underline;
+  }
+
+  &:focus {
+    outline: 3px solid black;
   }
 }
 
@@ -90,7 +93,12 @@
 
     &::before {
       opacity: 1;
-      
     }
   }
 }
+
+.loading {
+  height: 30px;
+  width: 30px;
+}
+

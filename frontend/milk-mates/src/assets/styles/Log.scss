@@ -8,7 +8,7 @@
     padding: 10px 25px;
     background-color: var(--pink);
     color: white;
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease, border 0.2s ease, color 0.2s ease;
     border-radius: 10px;
     font-size: 20px;
     box-shadow: var(--shadow);
@@ -20,13 +20,14 @@
     align-items: center;
     gap: 5px;
 
-    &:hover,
-    &:focus {
+    &:hover {
       background-image: none;
       background-color: white;
       border: 2px solid var(--pink);
       color: var(--pink);
     }
+
+    
 
     &:active {
     }

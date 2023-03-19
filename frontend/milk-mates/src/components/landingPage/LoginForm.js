@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { BiHide, BiShow } from "react-icons/bi";
 import { useAuth } from "contexts/AuthProvider";
+import Loading from "components/global/Loading";
 
 export default function LoginForm({ forgotPassword, signUp }) {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -10,6 +11,7 @@ export default function LoginForm({ forgotPassword, signUp }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { login, errorCode, loggedIn } = useAuth();
 
@@ -35,11 +37,20 @@ export default function LoginForm({ forgotPassword, signUp }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      await login(username, password);
-    } catch (error) {
-      console.error(error);
-    }
+
+    setLoading(true);
+    setErrorMsg("");
+
+    setTimeout(async () => {
+      try {
+        await login(username, password);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+        
+      }
+    }, 1000);
   };
 
   const togglePasswordVisible = () => {
@@ -109,8 +120,9 @@ export default function LoginForm({ forgotPassword, signUp }) {
         </span>
       </div>
 
-      <div className="error-msg">
-        <p>{errorMsg}</p>
+      <div className="error-loading">
+        {errorMsg != "" && <p>{errorMsg}</p>}
+        {loading && <Loading />}
       </div>
 
       <input type="submit" value="Login" className="submit-btn" />
