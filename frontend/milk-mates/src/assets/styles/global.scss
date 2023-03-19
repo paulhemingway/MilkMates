@@ -11,7 +11,7 @@
   --hover-blue: #4a8bc8;
 
   --shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-  --dark-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  --dark-shadow: 0 3px 4px rgba(0, 0, 0, 0.35);
 
   --pink-gradient: linear-gradient(160deg, #fa90b9, #b75279);
   --blue-gradient: linear-gradient(130deg, #5da4e6, #2d5e8b);
@@ -51,12 +51,10 @@
 
 .tooltip {
   position: relative;
-  
 
   &-text {
     position: absolute;
     left: 50%;
-    top: 0;
     transform: translateX(-50%);
     background-color: white;
     white-space: nowrap;
@@ -64,16 +62,35 @@
     border-radius: 8px 8px 0 0;
     visibility: hidden;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.5s ease;
     font-size: 11px;
     box-shadow: var(--dark-shadow);
     border-bottom: 3px solid var(--pink);
     z-index: 3;
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: -10px; /* Adjust this value to control the height of the pointer */
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 10px solid transparent; /* Adjust this value to control the width of the pointer */
+      border-right: 10px solid transparent;
+      border-top: 10px solid var(--pink); /* Adjust this value to control the color and size of the pointer */
+      // opacity: 0;
+    }
   }
 
-  &:hover .tooltip-text {
-    top: -220%;
-    opacity: 1;
-    visibility: visible;
+  &:hover {
+    .tooltip-text {
+      bottom: calc(110% + 20px);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    &::before {
+      opacity: 1;
+      
+    }
   }
 }

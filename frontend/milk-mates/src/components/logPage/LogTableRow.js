@@ -42,7 +42,7 @@ export default function LogTableRow(props) {
       <td>{props.batch.volume} oz</td>
       <td className="status-cell">
         <span className="tooltip">
-          <span className="tooltip-text">Sample tool tip</span>
+          <span className="tooltip-text">{status}</span>
           <span><StatusIcon /></span> 
         </span>
       </td>
