@@ -11,7 +11,8 @@ CREATE TABLE users (
   isActive BOOLEAN DEFAULT FALSE,
   isAdmin BOOLEAN DEFAULT FALSE,
   addedDateTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (userid)
+  PRIMARY KEY (userid),
+  UNIQUE (username)
 );
 
 //lastActiveTime: This column stores the date and time of the user's last activity. The default value is NULL, indicating that the user 
