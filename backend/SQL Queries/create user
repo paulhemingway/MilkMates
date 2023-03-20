@@ -1,4 +1,22 @@
+BEGIN;
+UPDATE users SET username = 'JohnDoe'
+WHERE username = 'JohnDoe' OR email = 'johndoe@example.com';
+
 INSERT INTO users (username, password, email, fName, IName, phone, zipCode)
-VALUES ('JohnDoe', 'mysecretpassword', 'johndoe@example.com', 'John', 'Doe', '1234567890', '12345')
-ON CONFLICT (username) DO UPDATE SET username = excluded.username
-RETURNING RAISE_EXCEPTION('Username already exists');
+SELECT 'JohnDoe', 'mysecretpassword', 'johndoe@example.com', 'John', 'Doe', '1234567890', '12345'
+WHERE NOT EXISTS (SELECT 1 FROM users WHERE username = 'JohnDoe' OR email = 'johndoe@example.com');
+
+IF NOT FOUND THEN
+  RAISE EXCEPTION 'Username or email already exists';
+END IF;
+
+COMMIT;
+
+
+
+
+
+//script first attempts to update any existing row in the users table with the given username and email. 
+//If no rows are updated, it proceeds to insert a new row. 
+//However, before inserting the new row, it checks whether there are any existing rows with the same username or email.
+//If there are, it throws an exception with a custom message.
