@@ -1,7 +1,7 @@
 CREATE TABLE users (
   userid INT NOT NULL AUTO_INCREMENT,
   username VARCHAR(50) NOT NULL,
-  password CHAR(64) NOT NULL,
+  password CHAR(64) NOT NULL, -- changed from VARCHAR(50)
   email VARCHAR(100) NOT NULL,
   fName VARCHAR(50) NOT NULL,
   IName VARCHAR(50) NOT NULL,
@@ -12,7 +12,8 @@ CREATE TABLE users (
   isAdmin BOOLEAN DEFAULT FALSE,
   addedDateTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (userid),
-  UNIQUE (username)
+  UNIQUE (username),
+  UNIQUE (email)
 );
 
 //lastActiveTime: This column stores the date and time of the user's last activity. The default value is NULL, indicating that the user 
