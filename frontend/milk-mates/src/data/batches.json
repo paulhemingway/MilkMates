@@ -27,7 +27,8 @@
     "sickness": null,
     "medications": null,
     "caffeine": true,
-    "vaccines": "Pfizer COVID"
+    "vaccines": "Pfizer COVID",
+    "isListed": false
   },
   {
     "batchId": 1,
@@ -51,7 +52,8 @@
     "sickness": null,
     "medications": null,
     "caffeine": true,
-    "vaccines": "Pfizer COVID"
+    "vaccines": "Pfizer COVID",
+    "isListed": true
   },
   {
     "batchId": 2,
@@ -75,7 +77,8 @@
     "sickness": null,
     "medications": null,
     "caffeine": false,
-    "vaccines": "Pfizer COVID"
+    "vaccines": "Pfizer COVID",
+    "isListed": false
   },
   {
     "batchId": 3,
@@ -93,7 +96,8 @@
     "sickness": null,
     "medications": null,
     "caffeine": false,
-    "vaccines": "Pfizer COVID"
+    "vaccines": "Pfizer COVID",
+    "isListed": true
   },
   {
     "batchId": 4,
@@ -111,6 +115,7 @@
     "sickness": null,
     "medications": null,
     "caffeine": false,
-    "vaccines": "Pfizer COVID"
+    "vaccines": "Pfizer COVID",
+    "isListed": false
   }
 ]

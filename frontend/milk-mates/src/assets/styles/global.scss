@@ -4,8 +4,9 @@
   --blue: #376fa3;
   --dark-blue: #142a40;
   --pink: #dd6794;
+  --grey: #757575;
 
-  --light-pink: #fbb7d1;
+  --light-pink: #ffc2da;
 
   --hover-pink: #b75279;
   --hover-blue: #4a8bc8;
@@ -37,7 +38,7 @@
   width: 100%;
   gap: 20px;
 
-  & > div {
+  &>div {
     flex: 50%;
   }
 }
@@ -74,13 +75,12 @@
     &::before {
       content: "";
       position: absolute;
-      bottom: -10px; /* Adjust this value to control the height of the pointer */
+      bottom: -10px;
       left: 50%;
       transform: translateX(-50%);
-      border-left: 10px solid transparent; /* Adjust this value to control the width of the pointer */
+      border-left: 10px solid transparent;
       border-right: 10px solid transparent;
-      border-top: 10px solid var(--pink); /* Adjust this value to control the color and size of the pointer */
-      // opacity: 0;
+      border-top: 10px solid var(--pink);
     }
   }
 
@@ -102,3 +102,37 @@
   width: 30px;
 }
 
+.button {
+  cursor: pointer;
+  padding: 10px 15px;
+  transition: background-color 0.2s ease, border 0.2s ease, color 0.2s ease;
+  border-radius: 10px;
+  font-size: 0.9em;
+  box-shadow: var(--shadow);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  &.primary-button {
+    background-image: var(--pink-gradient);
+    color: white;
+    border: 2px solid rgba(0, 0, 0, 0);
+  }
+
+  &.secondary-button {
+    background-color: white;
+    border: 2px solid var(--pink);
+    color: var(--pink);
+  }
+
+  &:hover {
+    background-color: wwite;
+    background-image: none;
+    background-color: var(--light-pink);
+    border: 2px solid var(--pink);
+    color: var(--hover-pink);
+
+  }
+
+}

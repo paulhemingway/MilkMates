@@ -12,7 +12,7 @@
     justify-content: center;
     align-items: center;
 
-    & > * {
+    &>* {
       background-color: rgba(255, 255, 255, 0.9);
       padding: 30px;
       border-radius: 20px;
@@ -83,7 +83,7 @@
         }
       }
 
-      & > *:not(p) {
+      &>*:not(p) {
         margin-bottom: 20px;
       }
 
@@ -95,6 +95,7 @@
         align-items: center;
         margin: -5px 0 10px;
         justify-content: center;
+
         p {
           text-align: center;
         }
@@ -106,7 +107,7 @@
         padding: 7px 5px;
         border-radius: 5px;
         cursor: pointer;
-        border: 2px solid rgba(0,0,0,0);
+        border: 2px solid rgba(0, 0, 0, 0);
         text-transform: uppercase;
         font-weight: 700;
         transition: all 0.2s ease;
@@ -117,7 +118,7 @@
         &:hover {
           color: var(--pink);
           background-image: none;
-          background-color: rgba(0,0,0,0);
+          background-color: rgba(0, 0, 0, 0);
           border: 2px solid var(--pink);
           outline: none;
         }
@@ -161,7 +162,7 @@
         flex-direction: column;
         width: 175px;
         text-align: center;
-        
+
 
         svg {
           font-size: 5em;

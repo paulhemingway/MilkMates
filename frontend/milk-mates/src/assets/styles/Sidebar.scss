@@ -41,12 +41,12 @@
     transition: all 0.2s ease;
     border-radius: 10px;
 
-    &:hover{
+    &:hover {
       background-image: linear-gradient(to right, var(--hover-blue), var(--blue));
       color: var(--light-blue);
     }
 
-    
+
 
     svg {
       font-size: 2em;
@@ -66,14 +66,16 @@
   .nav {
     height: auto;
 
-    & > div {
+    &>div {
       ul {
         margin: 0 auto;
       }
+
       .nav-link {
         padding: 5px 8px;
       }
     }
+
     .profile-links {
       hr {
         margin: 10px auto;
@@ -86,7 +88,7 @@
   .nav {
     height: 100%;
 
-    & > div {
+    &>div {
       ul {
         width: 250px;
       }

@@ -36,12 +36,13 @@
       transition: all 0.3s ease;
     }
 
-    &:hover > img {
+    &:hover>img {
       height: 90%;
       -webkit-filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.2));
       filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.2));
     }
-    &:hover > .logo-circle {
+
+    &:hover>.logo-circle {
       height: 10px;
       width: 10px;
       box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
@@ -71,7 +72,7 @@
     }
   }
 
-  & > div {
+  &>div {
     min-width: 70px;
   }
 }
