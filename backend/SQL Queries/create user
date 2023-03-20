@@ -1,2 +1,4 @@
 INSERT INTO users (username, password, email, fName, IName, phone, zipCode)
-VALUES ('JohnDoe', 'mysecretpassword', 'johndoe@example.com', 'John', 'Doe', '1234567890', '12345');
+VALUES ('JohnDoe', 'mysecretpassword', 'johndoe@example.com', 'John', 'Doe', '1234567890', '12345')
+ON CONFLICT (username) DO UPDATE SET username = excluded.username
+RETURNING RAISE_EXCEPTION('Username already exists');
