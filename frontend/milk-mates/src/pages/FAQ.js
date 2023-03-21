@@ -1,21 +1,19 @@
 import React from "react";
 import Accordion from "components/helpPage/Accordion";
-import Header from "components/global/Header";
-
 import FAQ from "data/FAQ.json";
 import "assets/styles/FAQ.scss";
+import PublicWrapper from "components/global/PublicWrapper";
 
 export default function Help() {
   return (
-    <div className="faq">
-      <Header showMenu={false} />
-      <main>
+    <PublicWrapper header="Frequently Asked Questions">
+      <div className="faq">
         <div className="accordions">
           {FAQ.map((q, index) => (
             <Accordion question={q} key={index} />
           ))}
         </div>
-      </main>
-    </div>
+      </div>
+    </PublicWrapper>
   );
 }

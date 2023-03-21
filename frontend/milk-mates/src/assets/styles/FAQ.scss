@@ -1,66 +1,81 @@
 .faq {
-  main {
-    .accordions {
-      .accordion {
-        margin: 15px;
-        padding: 15px;
-        background-color: #c5eafa;
-        box-shadow: var(--shadow);
-        color: #142a40;
-        border-radius: 8px;
 
-        .question {
-          position: relative;
-          font-size: 18px;
+
+  .accordions {
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    .accordion {
+      cursor: pointer;
+      padding: 15px;
+      background-color: #c5eafa;
+      box-shadow: var(--shadow);
+      color: #142a40;
+      border-radius: 8px;
+
+      .question {
+        position: relative;
+        font-size: 1.2em;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        svg {
+          font-size: 30px;
+        }
+      }
+
+      .answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.4s ease;
+
+        &-links {
+          margin-top: 10px;
           display: flex;
-          justify-content: space-between;
-          align-items: center;
+          gap: 15px;
 
+          .answer-link {
+            a {
+              text-decoration: none;
+            }
+          }
+        }
+      }
+
+      &.open {
+        .question {
           svg {
-            font-size: 30px;
+            transform: rotate(180deg);
           }
         }
 
         .answer {
-          max-height: 0;
-          overflow: hidden;
-          transition: all 0.4s ease;
+          max-height: 250px;
+        }
+      }
+    }
 
-          &-links {
-            margin-top: 10px;
-            display: flex;
-            gap: 15px;
+  }
+}
 
-            .answer-link {
-              background-color: var(--pink);
-              padding: 5px 10px;
-              border-radius: 50px;
+@media only screen and (max-width: 1024px) {
+  .faq {
+    .accordions {
+      .accordion {
+        padding: 10px;
 
-              a {
-                color: white;
-                text-decoration: none;
-              }
-
-              &:hover {
-                background-color: var(--hover-pink);
-              }
-            }
-          }
+        .question {
+          font-size: 0.9em;
         }
 
-        &.open {
-          .question {
-            svg {
-              transform: rotate(180deg);
-            }
-          }
-
-          .answer {
-            max-height: 200px;
-            padding: 30px;
-          }
+        .answer {
+          font-size: 0.8em;
         }
       }
     }
   }
+
 }

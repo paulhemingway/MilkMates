@@ -1,12 +1,11 @@
 import React from 'react'
 
-export default function Wrapper({ component: Component, data, header }) {
+export default function Wrapper(props) {
   return (
     <div className='wrapper'>
-      <h2>{header}</h2>
+      <h2>{props.header}</h2>
       {/* if there's data being passed, render the component with data */}
-      {data && <Component data={data} />}
-      {!data && <Component />}
+      {props.children}
     </div>
   )
 }

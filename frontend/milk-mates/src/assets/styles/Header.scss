@@ -52,50 +52,53 @@
           opacity: 0.5;
         }
       }
+    }
+  }
 
-      a {
-        text-decoration: none;
+  a {
+    text-decoration: none;
 
-        .title {
-          font-family: PatuaOne, sans-serif;
-          font-size: 2em;
-          color: var(--dark-blue);
-        }
-      }
+    .title {
+      font-family: 'PatuaOne', sans-serif;
+      font-size: 2em;
+      color: var(--dark-blue);
+    }
+  }
 
 
-      .right {
-        height: 70px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+  .right {
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-        a {
-          font-size: 0.8rem;
-        }
-
-        svg {
-          font-size: 2em;
-          display: none;
-        }
-      }
-
-      &>div {
-        min-width: 70px;
-      }
+    a {
+      font-size: 0.8rem;
     }
 
-    @media only screen and (max-width: 1024px) {
-      .top-bar {
-        .right {
-          svg {
-            display: block;
-            cursor: pointer;
-          }
-        }
+    svg {
+      font-size: 2em;
+      display: none;
+    }
+  }
+
+  &>div {
+    min-width: 70px;
+  }
+}
+
+
+
+
+
+@media only screen and (max-width: 1024px) {
+  .top-bar {
+    .right {
+      svg {
+        display: block;
+        cursor: pointer;
       }
     }
-
   }
 }
 
