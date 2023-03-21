@@ -1,0 +1,9 @@
+CREATE TABLE batchEvents (
+  batchEventId INT NOT NULL AUTO_INCREMENT,
+  batchId INT NOT NULL,
+  event VARCHAR(100) NOT NULL,
+  eventDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  notes VARCHAR(255) NOT NULL,
+  PRIMARY KEY (batchEventId),
+  FOREIGN KEY (batchId) REFERENCES batches(batchId)
+);
