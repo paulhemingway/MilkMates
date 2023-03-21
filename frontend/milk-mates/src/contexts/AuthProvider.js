@@ -54,6 +54,10 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  const checkToken = () => {
+    
+  }
+
   // Pass the authentication state and methods to the AuthContext.Provider component
   return (
     <AuthContext.Provider value={{ loggedIn, user, login, logout, errorCode }}>

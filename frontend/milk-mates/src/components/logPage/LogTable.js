@@ -78,8 +78,6 @@ export default function LogTable({ data }) {
     if (sortValues.status !== 0) {
       let sorted = displayedBatches.slice().sort(
         (a, b) => {
-          console.log(a)
-          console.log(b)
           return statusOrder[b.events[b.events.length - 1].event] - statusOrder[a.events[a.events.length - 1].event]
         }
       );
