@@ -104,6 +104,10 @@ export default function CreateAccountForm({ login }) {
         <a target="_blank" className="link" alt="Terms of service" href="/tos">
           Terms of Service
         </a>
+        <> and </>
+        <a target="_blank" className="link" alt="Privacy Policy" href="/privacyPolicy">
+           Privacy Policy
+        </a>
         .
       </p>
       <p className="bottom-txt">
