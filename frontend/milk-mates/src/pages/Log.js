@@ -21,7 +21,7 @@ export default function Log() {
   return (
     <div className="log">
       <div>
-        <button className="add-btn" onClick={addButtonClicked}>
+        <button className="button primary-button add-btn" onClick={addButtonClicked}>
           <HiPlus />
           Add Milk
         </button>

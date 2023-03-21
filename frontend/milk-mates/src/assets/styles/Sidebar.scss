@@ -41,11 +41,12 @@
     transition: all 0.2s ease;
     border-radius: 10px;
 
-    &:hover,
-    &:focus {
+    &:hover {
       background-image: linear-gradient(to right, var(--hover-blue), var(--blue));
       color: var(--light-blue);
     }
+
+
 
     svg {
       font-size: 2em;
@@ -65,14 +66,16 @@
   .nav {
     height: auto;
 
-    & > div {
+    &>div {
       ul {
         margin: 0 auto;
       }
+
       .nav-link {
         padding: 5px 8px;
       }
     }
+
     .profile-links {
       hr {
         margin: 10px auto;
@@ -83,9 +86,10 @@
 
 @media only screen and (max-width: 480px) {
   .nav {
-    height: 100%;
+    height: calc(100vh - 60px);
+    justify-content: start;
 
-    & > div {
+    &>div {
       ul {
         width: 250px;
       }

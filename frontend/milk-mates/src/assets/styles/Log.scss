@@ -4,58 +4,152 @@
   gap: 30px;
 
   .add-btn {
-    cursor: pointer;
-    padding: 10px 25px;
-    background-color: var(--pink);
-    color: white;
-    transition: all 0.2s ease;
-    border-radius: 10px;
-    font-size: 20px;
-    box-shadow: var(--shadow);
-    border: 2px solid rgba(0, 0, 0, 0);
-    font-weight: 600;
-    background-image: var(--pink-gradient);
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-
-    &:hover,
-    &:focus {
-      background-image: none;
-      background-color: white;
-      border: 2px solid var(--pink);
-      color: var(--pink);
-    }
-
-    &:active {
-    }
+    font-size: 1.2em;
   }
 
   .log-table {
+    .inputs {
+      margin-top: 1em;
+      display: flex;
+      gap: 1.2em;
+
+      .input {
+        width: 9em;
+        display: flex;
+        flex-direction: column;
+
+        .option {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          font-size: 0.9em;
+        }
+
+        &.filter-input {
+          position: relative;
+
+          .add-filters-btn {
+            font-size: 0.9em;
+            text-align: left;
+            padding: 0 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 5px;
+            height: 2.605em;
+            border: 1px solid hsl(0, 0%, 80%);
+            border-radius: 4px;
+            background-color: white;
+            cursor: pointer;
+
+            svg {
+              color: hsl(0, 0%, 80%);
+            }
+
+            &.active {
+              border: 2px solid var(--blue);
+
+              svg {
+                color: hsl(0, 0%, 40%);
+              }
+            }
+          }
+
+          .filter-menu {
+            padding: 20px;
+            box-shadow: var(--shadow);
+            background-color: white;
+            position: absolute;
+            top: 110%;
+            z-index: 2;
+            border-radius: 15px;
+            width: 18em;
+
+            &>div {
+              margin-top: 1em;
+            }
+
+            &__option {
+
+              .checkboxes {
+                display: flex;
+                gap: 1.2em;
+
+                .status-option {
+                  display: flex;
+
+                  input[type=checkbox] {
+                    margin-right: 0.5em;
+
+                    &:checked {
+                      background-color: var(--blue);
+                    }
+                  }
+
+                  label {
+                    color: var(--dark-blue);
+                    font-weight: normal;
+                  }
+                }
+              }
+
+              .start-date-select {
+                width: 10em;
+              }
+            }
+
+            &__buttons {
+              display: flex;
+              gap: 15px;
+              justify-content: right;
+            }
+
+
+          }
+        }
+      }
+
+      label,
+      .status-header {
+        font-weight: bold;
+        font-size: 0.8em;
+        color: var(--grey);
+      }
+    }
+
     .table {
+      overflow-x: auto;
+      overflow-y: hidden;
+
       table {
-        margin-top: 20px;
+        margin-top: 1em;
         width: 100%;
         border-collapse: collapse;
         box-shadow: var(--shadow);
 
         tbody {
           td {
-            padding: 10px;
+            padding: 0.5em;
+            align-items: center;
+            vertical-align: middle;
+
+            svg {
+              font-size: calc(100% + 1em);
+              position: relative;
+              top: 0.1em;
+            }
 
             &.status-cell {
               text-transform: capitalize;
             }
+
             &.link-cell {
-              
-              
               svg {
                 background-image: var(--pink-gradient);
                 padding: 2px;
                 border-radius: 100px;
-                font-size: 1.5em;
-                box-shadow: 2px 3px 3px rgba(0,0,0,0.15);
+                font-size: 2em;
+                box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.15);
                 cursor: pointer;
                 color: white;
                 transition: transform 0.3s ease;
@@ -65,16 +159,19 @@
                 }
               }
             }
-
           }
 
           tr {
             &:nth-child(2n) {
-              background-color: rgba(0,0,0,0.07);
+              background-color: rgba(0, 0, 0, 0.07);
             }
 
             &.empty-row {
               text-align: center;
+            }
+
+            .time {
+              font-size: 0.75em;
             }
           }
         }
@@ -86,10 +183,6 @@
           th {
             text-align: left;
             padding: 10px;
-
-            &.clickable {
-              cursor: pointer;
-            }
 
             &:first-child {
               border-top-left-radius: 10px;
@@ -103,4 +196,50 @@
       }
     }
   }
+}
+
+@media only screen and (max-width: 520px) {
+  .log {
+    .log-table {
+      .inputs {
+        gap: 10px;
+
+        .input {
+          width: 7em;
+          .option {
+            font-size: 0.7em;
+          }
+
+          &.filter-input {
+            .add-filters-btn {
+              font-size: 0.7em;
+              height: 38px;
+            }
+          }
+
+          .select-dropdown__value-container {
+
+          }
+        }
+
+      }
+
+      .table {
+        table {
+          tbody {
+            td {
+              font-size: .7em;
+            }
+          }
+
+          thead {
+            th {
+              font-size: .8em;
+            }
+          }
+        }
+      }
+    }
+  }
+
 }
