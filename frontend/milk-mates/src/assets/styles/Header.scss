@@ -37,10 +37,13 @@
     }
 
     &:hover>img {
+    &:hover>img {
       height: 90%;
       -webkit-filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.2));
       filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.2));
     }
+
+    &:hover>.logo-circle {
 
     &:hover>.logo-circle {
       height: 10px;
@@ -50,11 +53,15 @@
     }
   }
 
-  h1 {
-    font-family: PatuaOne, sans-serif;
-    font-size: 2em;
-    color: var(--dark-blue);
+  a {
+    text-decoration: none;
+    .title {
+      font-family: PatuaOne, sans-serif;
+      font-size: 2em;
+      color: var(--dark-blue);
+    }
   }
+
 
   .right {
     height: 70px;

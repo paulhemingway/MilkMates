@@ -3,12 +3,15 @@ import MilkMatesLogo from "assets/images/logo/logo-pink.png";
 import { Link } from "react-router-dom";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 
-import "../../assets/styles/Header.scss";
+import "assets/styles/Header.scss";
 
 export default function Header(props) {
   const isAtLanding = window.location.pathname === "/";
 
   function NavButton() {
+    if (!props.showMenu) {
+      return <></>;
+    }
     const Icon = props.collapsed ? IoMdMenu : IoMdClose;
 
     return (
@@ -29,7 +32,7 @@ export default function Header(props) {
   };
 
   return (
-    <div className="top-bar">
+    <headder className="top-bar">
       <Link to="/dashboard">
         <div className="logo">
           <div className="logo-circle"></div>
@@ -37,7 +40,10 @@ export default function Header(props) {
         </div>
       </Link>
 
-      <h1>MilkMates</h1>
+      <Link to="/dashboard">
+        <span className="title">MilkMates</span>
+      </Link>
+
       <div className="right">
         {isAtLanding ? (
           <Link to="/help" className="link">
@@ -47,6 +53,6 @@ export default function Header(props) {
           <NavButton onClick={toggleCollapse} />
         )}
       </div>
-    </div>
+    </headder>
   );
 }
