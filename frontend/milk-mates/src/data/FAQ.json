@@ -1,12 +1,12 @@
 [
   {
     "question": "What is MilkMates?",
-    "answer": "MilkMates is a breastmilk sharing app. Whether you are a parent who overproduces or underproduces breastmilk, this app can benefit you! MilkMates connects those who need milk with those who are selling milk within a certain distance. Other features on top of the breastmilk marketplace  include pump tracking, experience tracking, batch status, and more!",
+    "answer": "MilkMates is a breastmilk sharing app that connects those who need milk with those who are selling milk within a certain distance.",
     "links": []
   },
   {
     "question": "Is it safe?",
-    "answer": "Breastmilk can be shared safely amongst parents. The organization, Eats on Feets, developed the Four Pillars of Safe Breast MilkSharing, which highlights what is important to consider when buying and selling breastmilk. It is important for our MilkMates users to uphold those four pillars in order to keep the milk in our community safe to drink.",
+    "answer": "Breastmilk can be shared safely amongst parents by upholding the Four Pillars of Safe Breast Milk Sharing developed by Eats on Feets organization.",
     "links": [
       {
         "url": "http://eatsonfeets.org/",
@@ -20,12 +20,12 @@
   },
   {
     "question": "Is there a fee to use MilkMates?",
-    "answer": "There is no fee to use the MilkMates platform. We believe that breastmilk should be available to all people. However, some people may charge for their breastmilk, while others might give it away for free.",
+    "answer": "There is no fee to use the MilkMates platform, although some people may charge for their breastmilk while others might give it away for free.",
     "links": []
   },
   {
     "question": "How do I store the breastmilk?",
-    "answer": "Breastmilk can be stored at different temperatures, but each have a different time frame. For freshly pumped breastmilk, it can last up to 4 hours at room temperature, up to 4 days in the fridge, and up to 12 months in the freezer although using within 6 months is best. For thawed, previously frozen breastmilk, it can last at room temperature for 1-2 hours, in the fridge for 1 day and it should never be refrozen. Finally for breastmilk that is leftover from a feeding, the milk must be finished within 2 hours after the baby is finished, or else it must be pitched.",
+    "answer": "Breastmilk has varying storage times depending on the temperature. Freshly pumped breastmilk lasts up to 4 hours at room temperature, up to 4 days in the fridge, and up to 12 months in the freezer. Thawed breastmilk can last at room temperature for 1-2 hours and in the fridge for 1 day. Leftover breastmilk must be used within 2 hours or discarded.",
     "links": [
       {
         "url": "https://www.cdc.gov/breastfeeding/recommendations/handling_breastmilk.htm",
@@ -35,11 +35,11 @@
   },
   {
     "question": "What are the benefits of breastmilk?",
-    "answer": "Breastmilk has many benefits for the baby. The first benefit of breastfeeding is that breastmilk is the best source of nutrition for most babies. The second benefit of breastfeeding is that it can help protect babies against some different illnesses and diseases. According to the CDC, breastfed babies have a lower risk of asthma, obesity, type 1 diabetes, and SIDS. They are also less likely to have ear infections and stomach bugs. The third benefit to breastfeeding is that breastmilk shares antibodies from the mother to her baby, which help the baby develop a stronger immune system.",
+    "answer": "Breastmilk is the best source of nutrition for most babies, protects against some illnesses and diseases, and helps develop a stronger immune system for the baby by sharing antibodies from the mother.",
     "links": []
   },
   {
-    "question": "What are the rules in my state regarding the buying/selling of breastmilk?",
+    "question": "Are there any laws regarding breastmilk trade?",
     "answer": "Laws regarding the buying and selling of breastmilk vary between each state.",
     "links": [
       {

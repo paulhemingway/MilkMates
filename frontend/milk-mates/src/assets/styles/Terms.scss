@@ -1,0 +1,81 @@
+.intro {
+  font-size: 0.9em;
+  margin-top: 2.5em;
+}
+
+hr {
+  margin: 2.5em 0;
+}
+
+.tos {
+  margin-top: 1em;
+  display: flex;
+
+  .scroll-links {
+    min-width: 200px;
+
+    .sticky-div {
+      position: sticky;
+      top: 2.5em;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      a {
+        color: var(--dark-blue);
+        text-decoration: none;
+        font-size: 0.7em;
+        font-weight: bold;
+
+        &:hover, &:focus {
+          text-decoration: underline;
+          outline: none;
+        }
+      }
+    }
+
+
+  }
+
+  .terms {
+    padding: 0 50px;
+
+    .term {
+
+      font-size: 0.8em;
+
+      h2 {
+        font-size: 2.5em;
+        margin: 1.5em 0;
+
+      }
+
+      ul,
+      ol {
+        padding: 0px 30px;
+      }
+
+      &:first-child h2 {
+        margin-top: 0;
+      }
+    }
+  }
+
+}
+
+@media only screen and (max-width: 1024px) {
+  .tos {
+    .terms {
+      .term {
+        h2 {
+          font-size: 1.8em;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .scroll-links {
+    display: none;
+  }
+}
