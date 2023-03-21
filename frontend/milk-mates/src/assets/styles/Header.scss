@@ -7,7 +7,7 @@
   height: 70px;
   border-bottom: 1px solid var(--dark-blue);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 0 0 0 15px;
+  padding: 0 15px;
 
   .logo {
     position: relative;
@@ -36,21 +36,17 @@
       transition: all 0.3s ease;
     }
 
-    &:hover>img {
-      &:hover>img {
+    &:hover {
+      &>img {
         height: 90%;
         -webkit-filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.2));
         filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.2));
       }
-
-      &:hover>.logo-circle {
-
-        &:hover>.logo-circle {
-          height: 10px;
-          width: 10px;
-          box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
-          opacity: 0.5;
-        }
+      &>.logo-circle {
+        height: 10px;
+        width: 10px;
+        box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
+        opacity: 0.5;
       }
     }
   }

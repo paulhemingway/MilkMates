@@ -1,7 +1,6 @@
 import React from "react";
 import "assets/styles/Terms.scss";
 import PublicWrapper from "components/global/PublicWrapper";
-import SmoothScrollLink from "components/global/SmoothScrollLink";
 
 export default function Terms() {
   return (
