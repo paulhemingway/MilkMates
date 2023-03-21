@@ -1,23 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "contexts/AuthProvider";
 import "assets/styles/Sidebar.scss";
 
-import { AiOutlineUser, AiOutlineHome } from "react-icons/ai"
+import { AiOutlineUser, AiOutlineHome } from "react-icons/ai";
 import { BiBarChartAlt2, BiLogOut } from "react-icons/bi";
 import {
   TbBottle,
   TbMessageCircle,
   TbClipboardCheck,
-  TbSearch
+  TbSearch,
 } from "react-icons/tb";
 
 // props will need the logout function and user info (name)
 export default function Sidebar(props) {
-
+  const { user } = useAuth();
 
   const clicked = () => {
     props.clicked();
-  }
+  };
+
+  // useEffect(() => {
+  //   console.log(user);
+  // }, [user]);
 
   return (
     <nav className="nav shadow">
@@ -76,14 +81,16 @@ export default function Sidebar(props) {
       <div className="profile-links">
         <hr></hr>
         <ul>
-          <li>
-            <NavLink to="/profile/phemingway" onClick={clicked}>
-              <div className="nav-link">
-                <AiOutlineUser />
-                <span>phemingway</span>
-              </div>
-            </NavLink>
-          </li>
+          {user &&
+            <li>
+              <NavLink to={`/profile/${user.username}`} onClick={clicked}>
+                <div className="nav-link">
+                  <AiOutlineUser />
+                  <span>{user.username}</span>
+                </div>
+              </NavLink>
+            </li>
+}
           <li>
             <div onClick={props.logout} className="logout-cont">
               <div className="nav-link logout">
