@@ -23,7 +23,7 @@ export default function Accordion(props) {
         <div className="answer-links">
         {props.question.links.map((link) => {
           return <div className="answer-link">
-            <Link to={link.url} target="_blank">{link.title}</Link>
+            <Link to={link.url} target="_blank" className="button primary-button">{link.title}</Link>
           </div>
         })}
         </div>

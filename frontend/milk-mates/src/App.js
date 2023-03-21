@@ -6,7 +6,7 @@ import Landing from "pages/Landing";
 import Layout from "components/global/Layout";
 import Dashboard from "pages/Dashboard";
 import NoPage from "pages/NoPage";
-import Help from "pages/Help";
+import Help from "pages/FAQ";
 import Terms from "pages/Terms";
 import Log from "pages/Log";
 import Share from "pages/Share";
