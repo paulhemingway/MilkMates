@@ -12,7 +12,7 @@ export default function Terms() {
         service, which govern your access to and use of MilkMates. These terms
         include eligibility requirements, user conduct guidelines, disclaimers,
         and limitations of liability. If you do not agree to these terms, you
-        should not use our MilkMates.
+        should not use MilkMates.
       </p>
       <hr></hr>
       <div className="tos">
