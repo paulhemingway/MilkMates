@@ -65,7 +65,7 @@
   .right {
     height: 70px;
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
 
     a {
@@ -109,9 +109,10 @@
         height: 35px;
       }
     }
-
-    h1 {
-      font-size: 1.6em;
+    a {
+      .title {
+        font-size: 1.4em;
+      }
     }
   }
 }
