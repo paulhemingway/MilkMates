@@ -18,6 +18,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     svg {
       font-size: 30px;
     }
@@ -37,10 +38,12 @@
         background-color: var(--pink);
         padding: 5px 10px;
         border-radius: 50px;
+
         a {
           color: white;
           text-decoration: none;
         }
+
         &:hover {
           background-color: var(--hover-pink);
         }

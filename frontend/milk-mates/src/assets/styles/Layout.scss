@@ -1,12 +1,15 @@
 .layout {
   height: 100vh;
+
   header {
     position: relative;
     z-index: 10;
 
   }
+
   .content {
     display: flex;
+
     .nav-container {
       width: 275px;
       height: calc(100vh - 70px);
@@ -17,7 +20,7 @@
 
       .outlet {
         margin: 0 auto;
-        max-width: 1000px;
+        max-width: 1200px;
         padding: 45px;
       }
     }
@@ -28,8 +31,9 @@
   .layout {
     .content {
       width: 100%;
+
       .nav-container {
-        position: absolute;    
+        position: absolute;
         width: 260px;
         top: 60px;
         right: 0;
@@ -39,15 +43,21 @@
         .nav {
           border-bottom-left-radius: 10px;
         }
+
         &.collapsed {
           top: -100%;
         }
       }
+
       .outlet-container {
         width: 100%;
+
+        .outlet {
+          padding: 15px;
+        }
       }
     }
-    
+
   }
 }
 
