@@ -1,0 +1,4 @@
+UPDATE batches
+SET isActive = FALSE
+WHERE batchId = desired_batchId
+  AND status = 'completed';

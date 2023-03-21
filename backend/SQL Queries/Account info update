@@ -1,3 +1,9 @@
 UPDATE users
 SET email = 'new_email', fName = 'new_first_name', IName = 'new_last_name', phone = 'new_phone', zipCode = 'new_zip_code'
-WHERE userid = desired_userid;
+WHERE username = 'desired_username'
+  AND username = current_user
+  AND session_id = current_session_id;
+
+IF NOT FOUND THEN
+  RAISE EXCEPTION 'User not found or not authorized to update this user''s information';
+END IF;
