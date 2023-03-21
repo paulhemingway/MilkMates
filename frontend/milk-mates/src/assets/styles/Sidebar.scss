@@ -86,7 +86,8 @@
 
 @media only screen and (max-width: 480px) {
   .nav {
-    height: 100%;
+    height: calc(100vh - 60px);
+    justify-content: start;
 
     &>div {
       ul {

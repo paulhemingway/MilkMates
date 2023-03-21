@@ -22,8 +22,9 @@ export default function LoginForm({ forgotPassword, signUp }) {
     "Please enter a username.",
     "Please enter a password.",
     "Your account is inactive. Please contact support to reactivate your account.",
-    "Error communicating with the server. Please contact support.",
+    "Timeout limit exceeded. Please contact support.",
   ];
+
 
   useEffect(() => {
     setErrorMsg(errorMessages[errorCode]);

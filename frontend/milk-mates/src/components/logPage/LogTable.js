@@ -2,8 +2,6 @@
 import React from "react";
 import Select from "react-select";
 import { useEffect, useState } from "react";
-
-import { FaSortDown, FaSortUp, FaSort } from "react-icons/fa";
 import { TbSortAscending, TbSortDescending } from "react-icons/tb";
 import { HiPlus } from "react-icons/hi";
 
@@ -15,8 +13,7 @@ export default function LogTable({ data }) {
   const [filterMenuShowing, setFilterMenuShowing] = useState(false);
 
   const [filters, setFilters] = useState({
-    startDate: null,
-    endDate: null,
+    dateRange: null,
     status: [],
     listed: null,
   });
@@ -80,23 +77,35 @@ export default function LogTable({ data }) {
     discarded: 6,
   };
 
-  const changeSort = (property) => {
-
-  };
+  const changeSort = (property) => {};
 
   // sort the array
-  const sortBatches = () => {
-    
-  };
+  const sortBatches = () => {};
 
   // filter the array
-  const filterBatches = () => {
-
-  }
+  const filterBatches = () => {};
 
   return (
     <div className="log-table">
       <div className="inputs">
+        <div className="input filter-input">
+          <label htmlFor="filters">Filter</label>
+          <button
+            id="filters"
+            onClick={toggleFilterMenuShowing}
+            className={`add-filters-btn ${filterMenuShowing ? "active" : ""}`}
+          >
+            Add Filters
+            <HiPlus />
+          </button>
+          {filterMenuShowing && (
+            <FilterMenu
+              toggle={toggleFilterMenuShowing}
+              filters={filters}
+              setFilters={setFilters}
+            />
+          )}
+        </div>
         <div className="input sort-input">
           <label htmlFor="sort-select">Sort</label>
           <Select
@@ -106,7 +115,7 @@ export default function LogTable({ data }) {
             }}
             defaultValue={sortOptions[0]}
             inputId="sort-select"
-            className="select-dropdown"
+            classNamePrefix="select-dropdown"
             theme={(theme) => ({
               ...theme,
               colors: {
@@ -119,33 +128,16 @@ export default function LogTable({ data }) {
             isSearchable={false}
           />
         </div>
-        <div className="input filter-input">
-          <label htmlFor="filters">Filter</label>
-          <button
-            id="filters"
-            onClick={toggleFilterMenuShowing}
-            className={`add-filters-btn ${filterMenuShowing ? "active" : ""}`}
-          >
-            Add Filters
-            <HiPlus />
-          </button>
-          {filterMenuShowing && <FilterMenu />}
-        </div>
-        <div className="set-filters">
 
-        </div>
+        <div className="set-filters"></div>
       </div>
       <div className="table">
         <table>
           <thead>
             <tr>
-              <th onClick={() => changeSort("date")}>
-                Date Produced
-              </th>
+              <th onClick={() => changeSort("date")}>Date Produced</th>
               <th>Volume</th>
-              <th onClick={() => changeSort("status")}>
-                Status
-              </th>
+              <th onClick={() => changeSort("status")}>Status</th>
               <th>Listed</th>
               <th></th>
             </tr>

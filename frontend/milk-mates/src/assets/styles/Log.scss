@@ -63,12 +63,35 @@
             top: 110%;
             z-index: 2;
             border-radius: 15px;
+            width: 18em;
 
-            & > div {
+            &>div {
               margin-top: 1em;
             }
 
             &__option {
+
+              .checkboxes {
+                display: flex;
+                gap: 1.2em;
+
+                .status-option {
+                  display: flex;
+
+                  input[type=checkbox] {
+                    margin-right: 0.5em;
+
+                    &:checked {
+                      background-color: var(--blue);
+                    }
+                  }
+
+                  label {
+                    color: var(--dark-blue);
+                    font-weight: normal;
+                  }
+                }
+              }
 
               .start-date-select {
                 width: 10em;
@@ -76,17 +99,18 @@
             }
 
             &__buttons {
-              display: flex; 
+              display: flex;
               gap: 15px;
               justify-content: right;
             }
 
-            
+
           }
         }
       }
 
-      label {
+      label,
+      .status-header {
         font-weight: bold;
         font-size: 0.8em;
         color: var(--grey);
@@ -94,6 +118,9 @@
     }
 
     .table {
+      overflow-x: auto;
+      overflow-y: hidden;
+
       table {
         margin-top: 1em;
         width: 100%;
@@ -169,4 +196,50 @@
       }
     }
   }
+}
+
+@media only screen and (max-width: 520px) {
+  .log {
+    .log-table {
+      .inputs {
+        gap: 10px;
+
+        .input {
+          width: 7em;
+          .option {
+            font-size: 0.7em;
+          }
+
+          &.filter-input {
+            .add-filters-btn {
+              font-size: 0.7em;
+              height: 38px;
+            }
+          }
+
+          .select-dropdown__value-container {
+
+          }
+        }
+
+      }
+
+      .table {
+        table {
+          tbody {
+            td {
+              font-size: .7em;
+            }
+          }
+
+          thead {
+            th {
+              font-size: .8em;
+            }
+          }
+        }
+      }
+    }
+  }
+
 }

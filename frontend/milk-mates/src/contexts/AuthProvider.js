@@ -49,6 +49,7 @@ export const AuthProvider = ({ children }) => {
         setUser(response.data[1][0][0]);
       }
     } catch (error) {
+      console.log(error)
       setErrorCode(6);  
     }
   };
