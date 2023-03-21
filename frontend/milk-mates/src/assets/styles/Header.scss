@@ -37,61 +37,65 @@
     }
 
     &:hover>img {
-    &:hover>img {
-      height: 90%;
-      -webkit-filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.2));
-      filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.2));
-    }
+      &:hover>img {
+        height: 90%;
+        -webkit-filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.2));
+        filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.2));
+      }
 
-    &:hover>.logo-circle {
+      &:hover>.logo-circle {
 
-    &:hover>.logo-circle {
-      height: 10px;
-      width: 10px;
-      box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
-      opacity: 0.5;
-    }
-  }
+        &:hover>.logo-circle {
+          height: 10px;
+          width: 10px;
+          box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
+          opacity: 0.5;
+        }
+      }
 
-  a {
-    text-decoration: none;
-    .title {
-      font-family: PatuaOne, sans-serif;
-      font-size: 2em;
-      color: var(--dark-blue);
-    }
-  }
+      a {
+        text-decoration: none;
+
+        .title {
+          font-family: PatuaOne, sans-serif;
+          font-size: 2em;
+          color: var(--dark-blue);
+        }
+      }
 
 
-  .right {
-    height: 70px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+      .right {
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-    a {
-      font-size: 0.8rem;
-    }
+        a {
+          font-size: 0.8rem;
+        }
 
-    svg {
-      font-size: 2em;
-      display: none;
-    }
-  }
+        svg {
+          font-size: 2em;
+          display: none;
+        }
+      }
 
-  &>div {
-    min-width: 70px;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .top-bar {
-    .right {
-      svg {
-        display: block;
-        cursor: pointer;
+      &>div {
+        min-width: 70px;
       }
     }
+
+    @media only screen and (max-width: 1024px) {
+      .top-bar {
+        .right {
+          svg {
+            display: block;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
   }
 }
 
