@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { BiHide, BiShow } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 export default function CreateAccountForm({ login }) {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -101,13 +102,13 @@ export default function CreateAccountForm({ login }) {
       <input type="submit" value="Create Account" className="submit-btn" />
       <p className="bottom-txt">
         By signing up, you agree to the{" "}
-        <a target="_blank" className="link" alt="Terms of service" href="/tos">
+        <Link target="_blank" className="link" alt="Terms of service" to="/tos">
           Terms of Service
-        </a>
+        </Link>
         <> and </>
-        <a target="_blank" className="link" alt="Privacy Policy" href="/privacyPolicy">
+        <Link target="_blank" className="link" alt="Privacy Policy" to="/privacy">
            Privacy Policy
-        </a>
+        </Link>
         .
       </p>
       <p className="bottom-txt">

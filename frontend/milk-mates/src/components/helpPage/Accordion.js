@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 export default function Accordion(props) {
-  useEffect(() => {
-    console.log(props);
-  });
 
   const [open, setOpen] = useState(false);
 
