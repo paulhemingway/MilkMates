@@ -87,6 +87,19 @@
         margin-bottom: 20px;
       }
 
+      .error-msg {
+        font-size: 12px;
+        color: red;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        margin: -5px 0 10px;
+        
+        p {
+          text-align: center;
+        }
+      }
+
       .submit-btn {
         width: 100%;
         padding: 7px 5px;

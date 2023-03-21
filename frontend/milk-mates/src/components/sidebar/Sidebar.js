@@ -14,6 +14,7 @@ import {
 // props will need the logout function and user info (name)
 export default function Sidebar(props) {
 
+
   const clicked = () => {
     props.clicked();
   }
@@ -84,12 +85,12 @@ export default function Sidebar(props) {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/" onClick={props.logout}>
+            <div onClick={props.logout} className="logout-cont">
               <div className="nav-link logout">
                 <BiLogOut />
                 <span>Log out</span>
               </div>
-            </NavLink>
+            </div>
           </li>
         </ul>
       </div>
