@@ -20,50 +20,78 @@ import "assets/styles/global.scss";
 function App() {
   // must get token on load eventually and redirect if it's valid
 
-  useEffect(() => {
-
-  }, [])
+  useEffect(() => {}, []);
 
   const { loggedIn } = useAuth();
   return (
     <BrowserRouter>
       <Routes>
-      <Route
-            path="/"
-            element={
-              loggedIn ? (
-                <Navigate to="/dashboard" replace />
-              ) : (
-                <Landing />
-              )
-            }
-          />
+        <Route
+          path="/"
+          element={
+            loggedIn ? (
+              <Navigate to="/dashboard" replace />
+            ) : (
+              <Landing title="Welcome" />
+            )
+          }
+        />
 
         {/* everything within here will have the navbar */}
         <Route element={<Layout />}>
           <Route
             path="dashboard"
-            element={<PrivateRoute component={<Dashboard />} loggedIn={loggedIn} />}
+            element={
+              <PrivateRoute
+                component={<Dashboard title="Dashboard" />}
+                loggedIn={loggedIn}
+              />
+            }
           />
           <Route
             path="log"
-            element={<PrivateRoute component={<Log />} loggedIn={loggedIn} />}
+            element={
+              <PrivateRoute
+                component={<Log title="Milk Log" />}
+                loggedIn={loggedIn}
+              />
+            }
           />
           <Route
             path="share"
-            element={<PrivateRoute component={<Share />} loggedIn={loggedIn} />}
+            element={
+              <PrivateRoute
+                component={<Share title="Milk Share" />}
+                loggedIn={loggedIn}
+              />
+            }
           />
           <Route
             path="find"
-            element={<PrivateRoute component={<Find />} loggedIn={loggedIn} />}
+            element={
+              <PrivateRoute
+                component={<Find title="Find Milk" />}
+                loggedIn={loggedIn}
+              />
+            }
           />
           <Route
             path="messages"
-            element={<PrivateRoute component={<Messages />} loggedIn={loggedIn} />}
+            element={
+              <PrivateRoute
+                component={<Messages title="Messages" />}
+                loggedIn={loggedIn}
+              />
+            }
           />
           <Route
             path="resources"
-            element={<PrivateRoute component={<Resources />} loggedIn={loggedIn} />}
+            element={
+              <PrivateRoute
+                component={<Resources title="Resources" />}
+                loggedIn={loggedIn}
+              />
+            }
           />
           <Route
             path="/profile/:userId"
@@ -73,16 +101,14 @@ function App() {
           />
           <Route
             path="/batch/:batchId"
-            element={
-              <PrivateRoute loggedIn={loggedIn} component={<Batch />} />
-            }
+            element={<PrivateRoute loggedIn={loggedIn} component={<Batch/>} />}
           />
         </Route>
 
-        <Route path="help" element={<Help />} />
-        <Route path="tos" element={<Terms />} />
+        <Route path="help" element={<Help title="FAQ"/>} />
+        <Route path="tos" element={<Terms title="Terms of Service"/>} />
         {/* this path value points to all other paths. It's for the 404 not found page */}
-        <Route path="*" element={<NoPage />} />
+        <Route path="*" element={<NoPage title="Page Not Found"/>} />
       </Routes>
     </BrowserRouter>
   );

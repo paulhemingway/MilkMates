@@ -10,8 +10,10 @@ import { HiPlus } from "react-icons/hi";
 import batches from "data/batches.json";
 
 import "assets/styles/Log.scss";
+import useDocumentTitle from "contexts/DocumentTitle";
 
-export default function Log() {
+export default function Log(props) {
+  useDocumentTitle(props.title)
   useEffect(() => {
     // this is where the batches data will be pulled from the API
   }, []);
