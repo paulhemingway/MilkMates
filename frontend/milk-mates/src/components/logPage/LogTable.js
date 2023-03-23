@@ -7,10 +7,17 @@ import { HiPlus } from "react-icons/hi";
 
 import LogTableRow from "./LogTableRow";
 import FilterMenu from "./FilterMenu";
+import Pagination from "components/global/Pagination";
 
 export default function LogTable({ data }) {
+  // state after applying sort and filters
+  const [sortedAndFiltered, setSortedAndFiltered] = useState([]);
+
+  // state for pagination
   const [displayedBatches, setDisplayedBatches] = useState([]);
   const [filterMenuShowing, setFilterMenuShowing] = useState(false);
+
+  const [perPage, setPerPage] = useState(3)
 
   const [filters, setFilters] = useState({
     dateRange: null,
@@ -18,26 +25,31 @@ export default function LogTable({ data }) {
     listed: null,
   });
 
-  const toggleFilterMenuShowing = () => {
-    setFilterMenuShowing(!filterMenuShowing);
+  const hideFilterMenu = () => {
+    setFilterMenuShowing(false);
   };
+
+  const showFilterMenu = () => {
+    setFilterMenuShowing(true)
+  }
 
   const sortOptions = [
     {
       value: "0",
       label: (
         <div className="option">
-          <span>Date</span>
-          <TbSortDescending />
+          <span aria-label="Date Ascending">Date</span>
+          <TbSortAscending />
         </div>
       ),
     },
     {
       value: "1",
+
       label: (
         <div className="option">
-          <span>Date</span>
-          <TbSortAscending />
+          <span aria-label="Date Descending">Date</span>
+          <TbSortDescending />
         </div>
       ),
     },
@@ -45,45 +57,110 @@ export default function LogTable({ data }) {
       value: "2",
       label: (
         <div className="option">
-          <span>Volume</span>
-          <TbSortDescending />
+          <span aria-label="Volume Ascending">Volume</span>
+          <TbSortAscending />
         </div>
       ),
     },
     {
       value: "3",
+
       label: (
         <div className="option">
-          <span>Volume</span>
-          <TbSortAscending />
+          <span aria-label="Volume Descending">Volume</span>
+          <TbSortDescending />
         </div>
       ),
     },
   ];
 
+  const perPageOptions = [
+    {
+      value: 3,
+      label: (
+        <div className="option">
+          <span>3</span>
+        </div>
+      )
+    },
+    {
+      value: 5,
+      label: (
+        <div className="option">
+          <span>5</span>
+        </div>
+      )
+    },
+    {
+      value: 10,
+      label: (
+        <div className="option">
+          <span>10</span>
+        </div>
+      )
+    },
+    {
+      value: 15,
+      label: (
+        <div className="option">
+          <span>15</span>
+        </div>
+      )
+    },
+  ]
+
   // set data
   useEffect(() => {
     if (data) {
-      setDisplayedBatches(data);
+      setSortedAndFiltered(data);
     }
   }, [data]);
 
-  const statusOrder = {
-    refrigerated: 1,
-    frozen: 2,
-    thawed: 3,
-    consumed: 4,
-    shared: 5,
-    discarded: 6,
-  };
+  useEffect(() => {
+    updateDisplayedBatches(0, perPage)
+  }, [sortedAndFiltered, perPage])
 
-  const changeSort = (property) => {};
+  const updateDisplayedBatches = (start, end) => {
+    setDisplayedBatches([...sortedAndFiltered].slice(start, end))
+  }
 
   // sort the array
-  const sortBatches = () => {};
+  const sortBatches = (selected) => {
+    let newBatches = [...sortedAndFiltered];
+    switch (selected.value) {
+      // date desc
+      case "0":
+        newBatches.sort(
+          (a, b) => new Date(a.productionDate) - new Date(b.productionDate)
+        );
+        break;
+      // date asc
+      case "1":
+        newBatches.sort(
+          (a, b) => new Date(b.productionDate) - new Date(a.productionDate)
+        );
+        break;
+      // volume desc
+      case "2":
+        newBatches.sort((a, b) => a.volume - b.volume);
+        break;
+      // volume asc
+      case "3":
+        newBatches.sort((a, b) => b.volume - a.volume);
+        break;
+      default:
+        break;
+    }
+    console.log(newBatches);
+    setSortedAndFiltered(newBatches);
+  };
 
   // filter the array
   const filterBatches = () => {};
+
+  const perPageSelected = (selected) => {
+    setPerPage(selected.value)
+  }
 
   return (
     <div className="log-table">
@@ -92,7 +169,7 @@ export default function LogTable({ data }) {
           <label htmlFor="filters">Filter</label>
           <button
             id="filters"
-            onClick={toggleFilterMenuShowing}
+            onClick={showFilterMenu}
             className={`add-filters-btn ${filterMenuShowing ? "active" : ""}`}
           >
             Add Filters
@@ -100,7 +177,7 @@ export default function LogTable({ data }) {
           </button>
           {filterMenuShowing && (
             <FilterMenu
-              toggle={toggleFilterMenuShowing}
+              close={hideFilterMenu}
               filters={filters}
               setFilters={setFilters}
             />
@@ -120,18 +197,41 @@ export default function LogTable({ data }) {
               ...theme,
               colors: {
                 ...theme.colors,
-                text: "orangered",
                 primary25: "var(--light-pink)",
                 primary: "var(--blue)",
               },
             })}
             isSearchable={false}
+            onChange={sortBatches}
+          />
+        </div>
+        <div className="input perpage-input">
+          <label htmlFor="perpage-select">Per Page</label>
+          <Select
+            options={perPageOptions}
+            components={{
+              IndicatorSeparator: () => null,
+            }}
+            defaultValue={perPageOptions[0]}
+            inputId="perpage-select"
+            classNamePrefix="perpage-dropdown"
+            theme={(theme) => ({
+              ...theme,
+              colors: {
+                ...theme.colors,
+                primary25: "var(--light-pink)",
+                primary: "var(--blue)",
+              },
+            })}
+            isSearchable={false}
+            onChange={perPageSelected}
           />
         </div>
 
         <div className="set-filters"></div>
       </div>
       <div className="table">
+        <Pagination length={sortedAndFiltered.length} perPage={perPage}/>
         <table>
           <thead>
             <tr>
