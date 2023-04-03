@@ -61,7 +61,7 @@ function App() {
             path="share"
             element={
               <PrivateRoute
-                component={<Share title="Milk Share" />}
+                component={<Share title="Share Milk" />}
                 loggedIn={loggedIn}
               />
             }

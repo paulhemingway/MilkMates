@@ -19,7 +19,6 @@
       .input {
         display: flex;
         flex-direction: column;
-        width: 7.5em;
 
         label {
           color: white;
@@ -120,25 +119,14 @@
               gap: 15px;
               justify-content: right;
             }
-
-
           }
         }
       }
-
-
     }
 
     .table {
       overflow-x: auto;
       overflow-y: hidden;
-      
-      .pagination {
-        display: flex;
-        justify-content: end;
-        margin: 1em 1em 0;
-      }
-
       table {
         width: 100%;
         border-collapse: collapse;
@@ -180,7 +168,7 @@
 
           tr {
             &:nth-child(2n) {
-              background-color: rgba(0, 0, 0, 0.07);
+              background-image: linear-gradient(rgba(0,0,0,0.04), rgba(0,0,0,0.15));
             }
 
             &.empty-row {
@@ -222,7 +210,6 @@
         gap: 10px;
 
         .input {
-          width: auto;
           .option {
             font-size: 0.7em;
           }
@@ -233,10 +220,7 @@
               height: 38px;
             }
           }
-
-          .select-dropdown__value-container {}
         }
-
       }
 
       .table {

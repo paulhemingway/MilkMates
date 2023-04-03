@@ -7,12 +7,15 @@
   --grey: #757575;
   --light-pink: #ffd6e7;
   --hover-pink: #b75279;
+  --disabled-pink: #dcbfca;
   --hover-blue: #4a8bc8;
 
   --shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
   --dark-shadow: 0 3px 4px rgba(0, 0, 0, 0.35);
 
   --pink-gradient: linear-gradient(160deg, #fa90b9, #b75279);
+  --active-pink-gradient: linear-gradient(160deg, #d77c9f, #994364);
+  --disabled-pink-gradient: linear-gradient(160deg, #f6bcd2, #b98397);
   --blue-gradient: linear-gradient(130deg, #5da4e6, #2d5e8b);
 }
 
@@ -124,7 +127,7 @@
     color: var(--pink);
   }
 
-  &:hover {
+  &:not(:disabled):hover {
     background-color: wwite;
     background-image: none;
     background-color: var(--light-pink);
@@ -133,4 +136,54 @@
 
   }
 
+  &:active {
+    background-image: var(--active-pink-gradient);
+  }
+
+  &:disabled {
+    background-image: var(--disabled-pink-gradient);
+    cursor: not-allowed;
+  }
+
 }
+
+
+  .pagination {
+    display: flex;
+    width: 15em;
+
+    border-radius: 27px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.1));
+    justify-content: space-between;
+    align-items: center;
+    margin: 1em auto;
+    gap: 10px;
+
+    .pag-input-cont {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+
+      .page-input {
+        width: 2em;
+        height: 2em;
+        text-align: center;
+      }
+    }
+
+    .button {
+      padding: 10px 15px;
+
+      &.next {
+        border-radius: 0 25px 10px 0px;
+        padding-left: 10px;
+      }
+
+      &.prev {
+        border-radius: 25px 0 0 10px;
+        padding-right: 10px;
+      }
+    }
+
+    
+  }

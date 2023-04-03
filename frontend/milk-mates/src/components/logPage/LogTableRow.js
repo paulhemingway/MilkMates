@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 
 import { BiChevronRightCircle } from "react-icons/bi";
-import { TbTrash, TbLineDashed } from "react-icons/tb";
+import { TbTrash } from "react-icons/tb";
 import { CgSmartHomeRefrigerator } from "react-icons/cg";
 import { FaRegSnowflake } from "react-icons/fa";
 import { TbDroplet, TbBottle, TbCircleCheck } from "react-icons/tb";
@@ -54,7 +54,7 @@ export default function LogTableRow(props) {
         className="listed-cell"
         aria-label={props.batch.isListed ? "Yes" : "No"}
       >
-        {props.batch.isListed ? <HiOutlineCheck /> : <TbLineDashed />}
+        {props.batch.isListed ? <HiOutlineCheck /> : <></>}
       </td>
       <td className="link-cell">
         <Link

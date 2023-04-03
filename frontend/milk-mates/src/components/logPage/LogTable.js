@@ -17,7 +17,7 @@ export default function LogTable({ data }) {
   const [displayedBatches, setDisplayedBatches] = useState([]);
   const [filterMenuShowing, setFilterMenuShowing] = useState(false);
 
-  const [perPage, setPerPage] = useState(3)
+  const [perPage, setPerPage] = useState(3);
 
   const [filters, setFilters] = useState({
     dateRange: null,
@@ -30,8 +30,8 @@ export default function LogTable({ data }) {
   };
 
   const showFilterMenu = () => {
-    setFilterMenuShowing(true)
-  }
+    setFilterMenuShowing(true);
+  };
 
   const sortOptions = [
     {
@@ -81,7 +81,7 @@ export default function LogTable({ data }) {
         <div className="option">
           <span>3</span>
         </div>
-      )
+      ),
     },
     {
       value: 5,
@@ -89,7 +89,7 @@ export default function LogTable({ data }) {
         <div className="option">
           <span>5</span>
         </div>
-      )
+      ),
     },
     {
       value: 10,
@@ -97,7 +97,7 @@ export default function LogTable({ data }) {
         <div className="option">
           <span>10</span>
         </div>
-      )
+      ),
     },
     {
       value: 15,
@@ -105,9 +105,9 @@ export default function LogTable({ data }) {
         <div className="option">
           <span>15</span>
         </div>
-      )
+      ),
     },
-  ]
+  ];
 
   // set data
   useEffect(() => {
@@ -117,11 +117,11 @@ export default function LogTable({ data }) {
   }, [data]);
 
   useEffect(() => {
-    updateDisplayedBatches(0, perPage)
-  }, [sortedAndFiltered, perPage])
+    updateDisplayedBatches(0, perPage);
+  }, [sortedAndFiltered, perPage]);
 
-  const updateDisplayedBatches = (start, end) => {
-    setDisplayedBatches([...sortedAndFiltered].slice(start, end))
+  function updateDisplayedBatches(start, end) {
+    setDisplayedBatches([...sortedAndFiltered].slice(start, end));
   }
 
   // sort the array
@@ -151,7 +151,6 @@ export default function LogTable({ data }) {
       default:
         break;
     }
-    console.log(newBatches);
     setSortedAndFiltered(newBatches);
   };
 
@@ -159,8 +158,8 @@ export default function LogTable({ data }) {
   const filterBatches = () => {};
 
   const perPageSelected = (selected) => {
-    setPerPage(selected.value)
-  }
+    setPerPage(selected.value);
+  };
 
   return (
     <div className="log-table">
@@ -230,8 +229,12 @@ export default function LogTable({ data }) {
 
         <div className="set-filters"></div>
       </div>
+      <Pagination
+        length={sortedAndFiltered.length}
+        perPage={perPage}
+        update={updateDisplayedBatches}
+      />
       <div className="table">
-        <Pagination length={sortedAndFiltered.length} perPage={perPage}/>
         <table>
           <thead>
             <tr>
