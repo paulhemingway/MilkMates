@@ -70,36 +70,34 @@ export default function Pagination(props) {
   };
 
   return (
-    amount > 0 && (
-      <span className="pagination">
-        <button
-          className="button primary-button prev"
-          disabled={pageNumber === 1}
-          onClick={prev}
-        >
-          Prev
-        </button>
-        <span className="pag-input-cont">
-          <input
-            type="text"
-            defaultValue="1"
-            onPaste={handlePaste}
-            onBlur={handleBlur}
-            onInput={handleInput}
-            aria-label="Page Number"
-            className="page-input"
-            id="pageNumber"
-          />
-          <span>of {amount}</span>
-        </span>
-        <button
-          className="button primary-button next"
-          disabled={pageNumber === amount}
-          onClick={next}
-        >
-          Next
-        </button>
+    <span className="pagination">
+      <button
+        className="button primary-button prev"
+        disabled={pageNumber === 1}
+        onClick={prev}
+      >
+        Prev
+      </button>
+      <span className="pag-input-cont">
+        <input
+          type="text"
+          defaultValue="1"
+          onPaste={handlePaste}
+          onBlur={handleBlur}
+          onInput={handleInput}
+          aria-label="Page Number"
+          className="page-input"
+          id="pageNumber"
+        />
+        <span>of {amount}</span>
       </span>
-    )
+      <button
+        className="button primary-button next"
+        disabled={pageNumber === amount}
+        onClick={next}
+      >
+        Next
+      </button>
+    </span>
   );
 }

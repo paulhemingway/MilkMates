@@ -1,9 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import FocusTrap from "focus-trap-react";
 
 export default function FilterMenu(props) {
+  const [dateRange, setDateRange] = useState(null)
+  const [status, setStatus] = useState([])
+  const [listed, setListed] = useState(null)
+
   const startDateOptions = [
+    {
+      value: null,
+      label: (
+        <div className="option">
+          <span>None</span>
+        </div>
+      ),
+    },
     {
       value: "today",
       label: (
@@ -13,42 +25,34 @@ export default function FilterMenu(props) {
       ),
     },
     {
-      value: "yesterday",
+      value: "pastWeek",
       label: (
         <div className="option">
-          <span>Yesterday</span>
+          <span>Past week</span>
         </div>
       ),
     },
     {
-      value: "7days",
+      value: "pastMonth",
       label: (
         <div className="option">
-          <span>Last 7 days</span>
+          <span>Past month</span>
         </div>
       ),
     },
     {
-      value: "30days",
+      value: "past3months",
       label: (
         <div className="option">
-          <span>Last 30 days</span>
+          <span>Past 3 months</span>
         </div>
       ),
     },
     {
-      value: "3months",
+      value: "pastYear",
       label: (
         <div className="option">
-          <span>Last 3 months</span>
-        </div>
-      ),
-    },
-    {
-      value: "12months",
-      label: (
-        <div className="option">
-          <span>Last 12 months</span>
+          <span>Past year</span>
         </div>
       ),
     },
@@ -63,88 +67,167 @@ export default function FilterMenu(props) {
     "Discarded",
   ];
 
+  const listedOptions = [
+    {
+      value: null,
+      label: (
+        <div className="option">
+          <span>All</span>
+        </div>
+      ),
+    },
+    {
+      value: true,
+      label: (
+        <div className="option">
+          <span>Listed</span>
+        </div>
+      ),
+    },
+    {
+      value: false,
+      label: (
+        <div className="option">
+          <span>Not Listed</span>
+        </div>
+      ),
+    },
+  ];
+  const populateInputs = () => {};
+
   const cancel = () => {
     props.close();
   };
 
   const apply = () => {
-    console.log("apply");
+    const filters = {
+      dateRange: dateRange,
+      status: status,
+      listed: listed
+    }
+
+    props.updateFilters(filters)
   };
 
-  const onStatusChange = () => {};
+  const dateRangeChanged = (selected) => {
+    setDateRange(selected.value)
+  }
+
+  const onStatusChange = (e) => {
+    let newStatus = [...status]
+    if(e.target.checked) {
+      newStatus.push(e.target.value.toLowerCase())
+    } else {
+      newStatus = newStatus.filter(item => item !== e.target.value.toLowerCase())
+    }
+
+    setStatus(newStatus)
+  };
+
+  const onListedChange = (selected) => {
+    setListed(selected.value)
+  }
 
   return (
-    <FocusTrap>
-      <div className="filter-menu">
-        <h3>Add Filters</h3>
-        <div className="filter-menu__option date">
-          <label htmlFor="date-range">Date Range</label>
-          <Select
-            options={startDateOptions}
-            className="date-range-select"
-            id="date-range"
-            components={{
-              IndicatorSeparator: () => null,
-            }}
-            placeholder="Date Range"
-            isSearchable={false}
-            theme={(theme) => ({
-              ...theme,
-              colors: {
-                ...theme.colors,
-                text: "orangered",
-                primary25: "var(--light-pink)",
-                primary: "var(--blue)",
-              },
-            })}
-          />
-        </div>
-        <div className="filter-menu__option status">
-          <h4 className="status-header">Status</h4>
-          <div className="checkboxes">
-            <div className="col">
-              {statusOptions.slice(0, 3).map((status, index) => {
-                return (
-                  <div className="status-option" key={index}>
-                    <input
-                      type="checkbox"
-                      name="status"
-                      id={status}
-                      value={status}
-                      onChange={onStatusChange}
-                    />
-                    <label htmlFor={status}>{status}</label>
-                  </div>
-                );
+    <div>
+      <FocusTrap>
+        <div className="filter-menu">
+          <h3>Filters</h3>
+          <div className="filter-menu__option date">
+            <label htmlFor="date-range">Date Range</label>
+            <Select
+              options={startDateOptions}
+              defaultValue={startDateOptions[0]}
+              className="date-range-select"
+              id="date-range"
+              components={{
+                IndicatorSeparator: () => null,
+              }}
+              placeholder="Date Range"
+              isSearchable={false}
+              theme={(theme) => ({
+                ...theme,
+                colors: {
+                  ...theme.colors,
+                  text: "orangered",
+                  primary25: "var(--light-pink)",
+                  primary: "var(--blue)",
+                },
               })}
-            </div>
-            <div className="col">
-              {statusOptions.slice(3, 6).map((status, index) => {
-                return (
-                  <div className="status-option" key={index}>
-                    <input
-                      type="checkbox"
-                      name="status"
-                      id={status}
-                      value={status}
-                      onChange={onStatusChange}
-                    />
-                    <label htmlFor={status}>{status}</label>
-                  </div>
-                );
-              })}
+              onChange={dateRangeChanged}
+            />
+          </div>
+          <div className="filter-menu__option status">
+            <h4 className="options-header">Status</h4>
+            <div className="checkboxes">
+              <div className="col">
+                {statusOptions.slice(0, 3).map((status, index) => {
+                  return (
+                    <div className="status-option" key={index}>
+                      <input
+                        type="checkbox"
+                        name="status"
+                        id={status}
+                        value={status}
+                        onChange={onStatusChange}
+                      />
+                      <label htmlFor={status}>{status}</label>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="col">
+                {statusOptions.slice(3, 6).map((status, index) => {
+                  return (
+                    <div className="status-option" key={index}>
+                      <input
+                        type="checkbox"
+                        name="status"
+                        id={status}
+                        value={status}
+                        onChange={onStatusChange}
+                      />
+                      <label htmlFor={status}>{status}</label>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
+          <div className="filter-menu__option">
+            <label htmlFor="listed">Listed</label>
+            <Select
+              options={listedOptions}
+              defaultValue={listedOptions[0]}
+              className="listed-select"
+              id="listed"
+              components={{
+                IndicatorSeparator: () => null,
+              }}
+              placeholder="Listed"
+              isSearchable={false}
+              theme={(theme) => ({
+                ...theme,
+                colors: {
+                  ...theme.colors,
+                  text: "orangered",
+                  primary25: "var(--light-pink)",
+                  primary: "var(--blue)",
+                },
+              })}
+              onChange={onListedChange}
+            />
+          </div>
+          <div className="filter-menu__buttons">
+            <button onClick={cancel} className="button secondary-button">
+              Cancel
+            </button>
+            <button onClick={apply} className="button primary-button">
+              Apply
+            </button>
+          </div>
         </div>
-        <div className="filter-menu__buttons">
-          <button onClick={cancel} className="button secondary-button">
-            Cancel
-          </button>
-          <button onClick={apply} className="button primary-button">
-            Apply
-          </button>
-        </div>
-      </div>
-    </FocusTrap>
+      </FocusTrap>
+    </div>
   );
 }
