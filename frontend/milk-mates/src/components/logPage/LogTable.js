@@ -8,6 +8,7 @@ import { HiPlus } from "react-icons/hi";
 import LogTableRow from "./LogTableRow";
 import FilterMenu from "./FilterMenu";
 import Pagination from "components/global/Pagination";
+import ClearableFilter from "./ClearableFilter";
 
 export default function LogTable({ data }) {
   // state after applying sort and filters
@@ -19,6 +20,7 @@ export default function LogTable({ data }) {
   const [displayedBatches, setDisplayedBatches] = useState([]);
   const [filterMenuShowing, setFilterMenuShowing] = useState(false);
   const [perPage, setPerPage] = useState(3);
+
   const [filters, setFilters] = useState({
     dateRange: null,
     status: [],
@@ -35,26 +37,27 @@ export default function LogTable({ data }) {
 
   const updateFilters = (newFilters) => {
     setFilters(newFilters);
+    applyFilters(newFilters)
   };
 
-  const applyFilters = () => {
+  const applyFilters = (newFilters) => {
     let newArray = [...data];
 
-    if (filters.dateRange) {
+    if (newFilters.dateRange) {
       let startDate = new Date();
-      switch (filters.dateRange) {
-        case "today":
+      switch (newFilters.dateRange) {
+        case "Today":
           break;
-        case "pastWeek":
+        case "Past week":
           startDate.setDate(startDate.getDate() - 7);
           break;
-        case "pastMonth":
+        case "Past month":
           startDate.setMonth(startDate.getMonth() - 1);
           break;
-        case "past3Months":
+        case "Past 3 months":
           startDate.setMonth(startDate.getMonth() - 3);
           break;
-        case "pastYear":
+        case "Past year":
           startDate.setFullYear(startDate.getFullYear() - 1);
           break;
         default:
@@ -63,29 +66,48 @@ export default function LogTable({ data }) {
       newArray = newArray.filter((batch) => {
         return new Date(batch.productionDate) >= startDate;
       });
+      
     }
 
-    if (filters.status.length > 0) {
-      console.log(filters.status);
+    if (newFilters.status.length > 0) {
       newArray = newArray.filter((batch) => {
         const n = batch.events.length;
-        console.log(batch.events[n - 1].event);
-        return filters.status.includes(batch.events[n - 1].event);
+        return newFilters.status.includes(batch.events[n - 1].event);
       });
     }
 
-    if(filters.listed) {
+    if(newFilters.listed !== null) {
       newArray = newArray.filter((batch) => {
-        return filters.listed === batch.isListed
+        return newFilters.listed === batch.isListed
       })
     }
 
     setFilteredBatches(newArray);
+    hideFilterMenu()
   };
 
-  useEffect(() => {
-    applyFilters();
-  }, [filters]);
+  const clearFilter = (type, value) => {
+    let newFilters = {...filters}
+    value = value.toLowerCase()
+    type = type.toLowerCase()
+
+    switch(type) {
+      case "date":
+        newFilters.dateRange = null;
+        break;
+      case "status":
+        let index = newFilters.status.indexOf(value)
+        if(index !== -1) {
+          newFilters.status.splice(index, 1)
+        }
+        break;
+      case "listed":
+        newFilters.listed = null;
+        break;
+    }
+
+    updateFilters(newFilters)
+  }
 
   const sortOptions = [
     {
@@ -184,6 +206,7 @@ export default function LogTable({ data }) {
   const onSortChanged = (selected) => {
     setSortCode(selected.value);
   };
+
   useEffect(() => {
     sortBatches();
   }, [filteredBatches, sortCode]);
@@ -288,9 +311,25 @@ export default function LogTable({ data }) {
             onChange={perPageSelected}
           />
         </div>
-        <div className="set-filters"></div>
+        
       </div>
+      <div className="set-filters">
+          {
+            filters.dateRange && 
+            <ClearableFilter type="Date" value={filters.dateRange} clear={clearFilter}/>
+          }
+          {
+            filters.status.length > 0 &&
+            filters.status.map((stat) => {
+              return <ClearableFilter type="Status" value={stat.charAt(0).toUpperCase() + stat.slice(1)} clear={clearFilter} key={stat}/>
+            })
+          }
+          {
+            filters.listed !== null &&
+            <ClearableFilter type="Listed" value={filters.listed ? 'Yes' : 'No'} clear={clearFilter} />
+          }
 
+      </div>
       <div className="table">
         <table>
           <thead>

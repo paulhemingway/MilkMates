@@ -5,7 +5,7 @@ import { BiChevronRightCircle } from "react-icons/bi";
 import { TbTrash } from "react-icons/tb";
 import { CgSmartHomeRefrigerator } from "react-icons/cg";
 import { FaRegSnowflake } from "react-icons/fa";
-import { TbDroplet, TbBottle, TbCircleCheck } from "react-icons/tb";
+import { TbDroplet, TbBottle, TbCircleCheck, TbClipboardCheck } from "react-icons/tb";
 import { HiOutlineCheck } from "react-icons/hi";
 
 import { Link } from "react-router-dom";
@@ -19,6 +19,8 @@ export default function LogTableRow(props) {
 
   function StatusIcon() {
     switch (status.toLowerCase()) {
+      case "logged":
+        return <TbClipboardCheck />
       case "refrigerated":
         return <CgSmartHomeRefrigerator />;
       case "frozen":

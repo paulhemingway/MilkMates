@@ -3,9 +3,13 @@ import Select from "react-select";
 import FocusTrap from "focus-trap-react";
 
 export default function FilterMenu(props) {
-  const [dateRange, setDateRange] = useState(null)
-  const [status, setStatus] = useState([])
-  const [listed, setListed] = useState(null)
+  const [dateRange, setDateRange] = useState(props.filters.dateRange);
+  const [status, setStatus] = useState(props.filters.status);
+  const [listed, setListed] = useState(props.filters.listed);
+
+  useEffect(() => {
+    populateInputs();
+  }, []);
 
   const startDateOptions = [
     {
@@ -17,7 +21,7 @@ export default function FilterMenu(props) {
       ),
     },
     {
-      value: "today",
+      value: "Today",
       label: (
         <div className="option">
           <span>Today</span>
@@ -25,7 +29,7 @@ export default function FilterMenu(props) {
       ),
     },
     {
-      value: "pastWeek",
+      value: "Past week",
       label: (
         <div className="option">
           <span>Past week</span>
@@ -33,7 +37,7 @@ export default function FilterMenu(props) {
       ),
     },
     {
-      value: "pastMonth",
+      value: "Past month",
       label: (
         <div className="option">
           <span>Past month</span>
@@ -41,7 +45,7 @@ export default function FilterMenu(props) {
       ),
     },
     {
-      value: "past3months",
+      value: "Past 3 months",
       label: (
         <div className="option">
           <span>Past 3 months</span>
@@ -49,7 +53,7 @@ export default function FilterMenu(props) {
       ),
     },
     {
-      value: "pastYear",
+      value: "Past year",
       label: (
         <div className="option">
           <span>Past year</span>
@@ -59,6 +63,7 @@ export default function FilterMenu(props) {
   ];
 
   const statusOptions = [
+    "Logged",
     "Refrigerated",
     "Frozen",
     "Thawed",
@@ -93,7 +98,25 @@ export default function FilterMenu(props) {
       ),
     },
   ];
-  const populateInputs = () => {};
+
+  const dateDefaultIndex = startDateOptions.findIndex(
+    (option) => option.value === props.filters.dateRange
+  );
+  const listedDefaultIndex = listedOptions.findIndex(
+    (option) => option.value === props.filters.listed
+  );
+
+  const populateInputs = () => {
+    props.filters.status.map((stat) => {
+      console.log(stat);
+      let statusCheck = document.getElementById(
+        stat.charAt(0).toUpperCase() + stat.slice(1)
+      );
+      if (statusCheck) {
+        statusCheck.checked = true;
+      }
+    });
+  };
 
   const cancel = () => {
     props.close();
@@ -103,30 +126,32 @@ export default function FilterMenu(props) {
     const filters = {
       dateRange: dateRange,
       status: status,
-      listed: listed
-    }
+      listed: listed,
+    };
 
-    props.updateFilters(filters)
+    props.updateFilters(filters);
   };
 
   const dateRangeChanged = (selected) => {
-    setDateRange(selected.value)
-  }
+    setDateRange(selected.value);
+  };
 
   const onStatusChange = (e) => {
-    let newStatus = [...status]
-    if(e.target.checked) {
-      newStatus.push(e.target.value.toLowerCase())
+    let newStatus = [...status];
+    if (e.target.checked) {
+      newStatus.push(e.target.value.toLowerCase());
     } else {
-      newStatus = newStatus.filter(item => item !== e.target.value.toLowerCase())
+      newStatus = newStatus.filter(
+        (item) => item !== e.target.value.toLowerCase()
+      );
     }
 
-    setStatus(newStatus)
+    setStatus(newStatus);
   };
 
   const onListedChange = (selected) => {
-    setListed(selected.value)
-  }
+    setListed(selected.value);
+  };
 
   return (
     <div>
@@ -137,7 +162,7 @@ export default function FilterMenu(props) {
             <label htmlFor="date-range">Date Range</label>
             <Select
               options={startDateOptions}
-              defaultValue={startDateOptions[0]}
+              defaultValue={startDateOptions[dateDefaultIndex]}
               className="date-range-select"
               id="date-range"
               components={{
@@ -161,7 +186,7 @@ export default function FilterMenu(props) {
             <h4 className="options-header">Status</h4>
             <div className="checkboxes">
               <div className="col">
-                {statusOptions.slice(0, 3).map((status, index) => {
+                {statusOptions.slice(0, 4).map((status, index) => {
                   return (
                     <div className="status-option" key={index}>
                       <input
@@ -177,7 +202,7 @@ export default function FilterMenu(props) {
                 })}
               </div>
               <div className="col">
-                {statusOptions.slice(3, 6).map((status, index) => {
+                {statusOptions.slice(4, 7).map((status, index) => {
                   return (
                     <div className="status-option" key={index}>
                       <input
@@ -198,7 +223,7 @@ export default function FilterMenu(props) {
             <label htmlFor="listed">Listed</label>
             <Select
               options={listedOptions}
-              defaultValue={listedOptions[0]}
+              defaultValue={listedOptions[listedDefaultIndex]}
               className="listed-select"
               id="listed"
               components={{
