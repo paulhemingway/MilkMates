@@ -117,5 +117,416 @@
     "caffeine": false,
     "vaccines": "Pfizer COVID",
     "isListed": false
+  },
+  {
+    "batchId": 5,
+    "productionDate": 1678519102000,
+    "volume": 4.5,
+    "events": [
+      {
+        "batchEventId": 0,
+        "event": "refrigerated",
+        "eventDate": 1678519402000,
+        "notes": ""
+      },
+      {
+        "batchEventId": 1,
+        "event": "shared",
+        "eventDate": 1678589402000,
+        "notes": "Shared with neighbor"
+      }
+    ],
+    "diet": "lactose-free",
+    "sickness": null,
+    "medications": null,
+    "caffeine": true,
+    "vaccines": "Moderna COVID",
+    "isListed": false
+  },
+  {
+    "batchId": 6,
+    "productionDate": 1678819102000,
+    "volume": 3.7,
+    "events": [
+      {
+        "batchEventId": 0,
+        "event": "refrigerated",
+        "eventDate": 1678819402000,
+        "notes": ""
+      },
+      {
+        "batchEventId": 1,
+        "event": "frozen",
+        "eventDate": 1678989402000,
+        "notes": "Frozen."
+      }
+    ],
+    "diet": "vegan",
+    "sickness": null,
+    "medications": "Antibiotics",
+    "caffeine": false,
+    "vaccines": "Johnson & Johnson COVID",
+    "isListed": true
+  },
+  {
+    "batchId": 7,
+    "productionDate": 1679199102000,
+    "volume": 4.8,
+    "events": [
+      {
+        "batchEventId": 0,
+        "event": "refrigerated",
+        "eventDate": 1679199402000,
+        "notes": ""
+      }
+    ],
+    "diet": "gluten-free",
+    "sickness": "Allergy",
+    "medications": null,
+    "caffeine": true,
+    "vaccines": "Pfizer COVID",
+    "isListed": true
+  },
+  {
+    "batchId": 8,
+    "productionDate": 1679489102000,
+    "volume": 4.2,
+    "events": [
+      {
+        "batchEventId": 0,
+        "event": "frozen",
+        "eventDate": 1679589402000,
+        "notes": ""
+      },
+      {
+        "batchEventId": 1,
+        "event": "thawed",
+        "eventDate": 1679629402000,
+        "notes": ""
+      },
+      {
+        "batchEventId": 2,
+        "event": "consumed",
+        "eventDate": 1679659402000,
+        "notes": "Smoothie recipe"
+      }
+    ],
+    "diet": "vegan",
+    "sickness": null,
+    "medications": null,
+    "caffeine": false,
+    "vaccines": "Moderna COVID",
+    "isListed": false
+  },
+  {
+    "batchId": 9,
+    "productionDate": 1679651902000,
+    "volume": 3.9,
+    "events": [
+      {
+        "batchEventId": 0,
+        "event": "refrigerated",
+        "eventDate": 1679652202000,
+        "notes": ""
+      },
+      {
+        "batchEventId": 1,
+        "event": "shared",
+        "eventDate": 1679709402000,
+        "notes": "Shared with friends at a party"
+      }
+    ],
+    "diet": "vegetarian",
+    "sickness": null,
+    "medications": null,
+    "caffeine": true,
+    "vaccines": "Moderna COVID",
+    "isListed": true
+  },
+  {
+    "batchId": 10,
+    "productionDate": 1679832702000,
+    "volume": 4.2,
+    "events": [
+      {
+        "batchEventId": 0,
+        "event": "refrigerated",
+        "eventDate": 1679833002000,
+        "notes": ""
+      },
+      {
+        "batchEventId": 1,
+        "event": "consumed",
+        "eventDate": 1679865002000,
+        "notes": "Used to make a delicious cake"
+      }
+    ],
+    "diet": "vegan",
+    "sickness": null,
+    "medications": null,
+    "caffeine": false,
+    "vaccines": "Moderna COVID",
+    "isListed": true
+  },
+  {
+    "batchId": 11,
+    "productionDate": 1680021902000,
+    "volume": 3.4,
+    "events": [
+      {
+        "batchEventId": 0,
+        "event": "refrigerated",
+        "eventDate": 1680022202000,
+        "notes": ""
+      },
+      {
+        "batchEventId": 1,
+        "event": "thawed",
+        "eventDate": 1680054202000,
+        "notes": ""
+      },
+      {
+        "batchEventId": 2,
+        "event": "discarded",
+        "eventDate": 1680111402000,
+        "notes": "Had a sour smell"
+      }
+    ],
+    "diet": "vegetarian",
+    "sickness": null,
+    "medications": null,
+    "caffeine": false,
+    "vaccines": "Moderna COVID",
+    "isListed": true
+  },
+  {
+    "batchId": 12,
+    "productionDate": 1680230702000,
+    "volume": 4.5,
+    "events": [
+      {
+        "batchEventId": 0,
+        "event": "refrigerated",
+        "eventDate": 1680231002000,
+        "notes": "Milk was slightly sour upon arrival"
+      },
+      {
+        "batchEventId": 1,
+        "event": "discarded",
+        "eventDate": 1680289402000,
+        "notes": "Milk was too sour to use"
+      }
+    ],
+    "diet": "lactose-free",
+    "sickness": null,
+    "medications": "none",
+    "caffeine": false,
+    "vaccines": "Moderna COVID",
+    "isListed": true
+  },
+  {
+    "batchId": 13,
+    "productionDate": 1680377102000,
+    "volume": 4.2,
+    "events": [
+      {
+        "batchEventId": 0,
+        "event": "refrigerated",
+        "eventDate": 1680377402000,
+        "notes": ""
+      },
+      {
+        "batchEventId": 1,
+        "event": "consumed",
+        "eventDate": 1680453802000,
+        "notes": "Used for coffee at local cafe"
+      }
+    ],
+    "diet": "vegetarian",
+    "sickness": null,
+    "medications": null,
+    "caffeine": true,
+    "vaccines": "Moderna COVID",
+    "isListed": true
+  },
+  {
+    "batchId": 14,
+    "productionDate": 1680528302000,
+    "volume": 4.1,
+    "events": [
+      {
+        "batchEventId": 0,
+        "event": "refrigerated",
+        "eventDate": 1680528602000,
+        "notes": "Milk was frothy upon arrival"
+      },
+      {
+        "batchEventId": 1,
+        "event": "thawed",
+        "eventDate": 1680731002000,
+        "notes": "Used for smoothies"
+      },
+      {
+        "batchEventId": 2,
+        "event": "consumed",
+        "eventDate": 1680799402000,
+        "notes": "Smoothies were delicious"
+      }
+    ],
+    "diet": "vegan",
+    "sickness": null,
+    "medications": null,
+    "caffeine": false,
+    "vaccines": "Moderna COVID",
+    "isListed": true
+  },
+  {
+    "batchId": 15,
+    "productionDate": 1680961102000,
+    "volume": 4.3,
+    "events": [
+      {
+        "batchEventId": 0,
+        "event": "refrigerated",
+        "eventDate": 1680961402000,
+        "notes": "Milk was slightly sour upon arrival"
+      },
+      {
+        "batchEventId": 1,
+        "event": "discarded",
+        "eventDate": 1681047802000,
+        "notes": "Milk was too sour to use"
+      }
+    ],
+    "diet": "lactose-free",
+    "sickness": null,
+    "medications": "none",
+    "caffeine": true,
+    "vaccines": null,
+    "isListed": false
+  },
+  {
+    "batchId": 16,
+    "productionDate": 1681047502000,
+    "volume": 4.5,
+    "events": [
+      {
+        "batchEventId": 0,
+        "event": "refrigerated",
+        "eventDate": 1681047802000,
+        "notes": ""
+      },
+      {
+        "batchEventId": 1,
+        "event": "consumed",
+        "eventDate": 1681115502000,
+        "notes": "Great taste, smooth texture"
+      },
+      {
+        "batchEventId": 2,
+        "event": "discarded",
+        "eventDate": 1681153102000,
+        "notes": "Expiry date reached"
+      }
+    ],
+    "diet": "vegetarian",
+    "sickness": null,
+    "medications": null,
+    "caffeine": false,
+    "vaccines": "Moderna COVID-19",
+    "isListed": false
+  },
+  {
+    "batchId": 17,
+    "productionDate": 1681314702000,
+    "volume": 4.2,
+    "events": [
+      {
+        "batchEventId": 0,
+        "event": "refrigerated",
+        "eventDate": 1681315002000,
+        "notes": "Milk was slightly sour"
+      },
+      {
+        "batchEventId": 1,
+        "event": "thawed",
+        "eventDate": 1681401402000,
+        "notes": "Used milk to make yogurt"
+      },
+      {
+        "batchEventId": 2,
+        "event": "shared",
+        "eventDate": 1681487802000,
+        "notes": "Shared with friends"
+      },
+      {
+        "batchEventId": 3,
+        "event": "discarded",
+        "eventDate": 1681574202000,
+        "notes": "Yogurt had gone bad"
+      }
+    ],
+    "diet": "vegan",
+    "sickness": null,
+    "medications": null,
+    "caffeine": true,
+    "vaccines": "Pfizer COVID-19",
+    "isListed": true
+  },
+  {
+    "batchId": 18,
+    "productionDate": 1681657102000,
+    "volume": 3.9,
+    "events": [
+      {
+        "batchEventId": 0,
+        "event": "refrigerated",
+        "eventDate": 1681657402000,
+        "notes": ""
+      },
+      {
+        "batchEventId": 1,
+        "event": "shared",
+        "eventDate": 1681830202000,
+        "notes": "Used for baking"
+      }
+    ],
+    "diet": "vegetarian",
+    "sickness": null,
+    "medications": null,
+    "caffeine": false,
+    "vaccines": "Moderna COVID-19",
+    "isListed": false
+  },
+  {
+    "batchId": 19,
+    "productionDate": 1682016302000,
+    "volume": 3.7,
+    "events": [
+      {
+        "batchEventId": 0,
+        "event": "refrigerated",
+        "eventDate": 1682016602000,
+        "notes": "Milk had a weird smell"
+      },
+      {
+        "batchEventId": 1,
+        "event": "thawed",
+        "eventDate": 1682103002000,
+        "notes": "Smell gone after thawing"
+      },
+      {
+        "batchEventId": 2,
+        "event": "consumed",
+        "eventDate": 1682117402000,
+        "notes": "Baby liked it"
+      }
+    ],
+    "diet": "lactose-free",
+    "sickness": null,
+    "medications": null,
+    "caffeine": true,
+    "vaccines": "Moderna COVID",
+    "isListed": false
   }
 ]

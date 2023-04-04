@@ -12,11 +12,19 @@
       margin-top: 1em;
       display: flex;
       gap: 1.2em;
+      background-image: var(--blue-gradient);
+      border-radius: 20px;
+      padding: 15px;
 
       .input {
-        width: 9em;
         display: flex;
         flex-direction: column;
+
+        label {
+          color: white;
+          font-size: 0.8em;
+          font-weight: bold;
+        }
 
         .option {
           display: flex;
@@ -60,13 +68,20 @@
             box-shadow: var(--shadow);
             background-color: white;
             position: absolute;
-            top: 110%;
+            top: 63px;
             z-index: 2;
             border-radius: 15px;
             width: 18em;
 
             &>div {
               margin-top: 1em;
+            }
+
+            label,
+            .options-header {
+              font-weight: bold;
+              font-size: 0.8em;
+              color: var(--grey);
             }
 
             &__option {
@@ -93,8 +108,10 @@
                 }
               }
 
-              .start-date-select {
+              .date-range-select,
+              .listed-select {
                 width: 10em;
+                font-size: 0.9em;
               }
             }
 
@@ -103,33 +120,63 @@
               gap: 15px;
               justify-content: right;
             }
-
-
           }
         }
       }
+    }
 
-      label,
-      .status-header {
-        font-weight: bold;
-        font-size: 0.8em;
-        color: var(--grey);
+    .set-filters {
+      min-height: 1em;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 0.75em;
+      padding: 20px 0;
+      
+
+      .clear-filter {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        background-color: #EEE;
+        border-radius: 100px;
+        overflow: hidden;
+        padding-right: 10px;
+        button {
+          all: unset;
+          cursor: pointer;
+          display: flex;
+          padding: 6px 3px 6px 6px;
+          align-items: center;
+          background-color: #DDD;
+
+          &:hover {
+            background-color: #CCC;
+          }
+
+          svg {
+            align-self: center;
+          }
+        }
+       
       }
     }
 
     .table {
       overflow-x: auto;
       overflow-y: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
 
       table {
-        margin-top: 1em;
         width: 100%;
         border-collapse: collapse;
         box-shadow: var(--shadow);
 
         tbody {
           td {
-            padding: 0.5em;
+            padding: 5px 15px;
             align-items: center;
             vertical-align: middle;
 
@@ -163,7 +210,7 @@
 
           tr {
             &:nth-child(2n) {
-              background-color: rgba(0, 0, 0, 0.07);
+              background-image: linear-gradient(rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.15));
             }
 
             &.empty-row {
@@ -182,7 +229,7 @@
 
           th {
             text-align: left;
-            padding: 10px;
+            padding: 15px;
 
             &:first-child {
               border-top-left-radius: 10px;
@@ -205,7 +252,6 @@
         gap: 10px;
 
         .input {
-          width: 7em;
           .option {
             font-size: 0.7em;
           }
@@ -216,12 +262,7 @@
               height: 38px;
             }
           }
-
-          .select-dropdown__value-container {
-
-          }
         }
-
       }
 
       .table {
@@ -241,5 +282,4 @@
       }
     }
   }
-
 }
