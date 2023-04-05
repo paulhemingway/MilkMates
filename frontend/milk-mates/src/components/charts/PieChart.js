@@ -22,15 +22,16 @@ export default function PieChart({ data }) {
     data.shared ?? 0,
     data.discarded ?? 0,
   ];
+  
 
   const colors = [
-    "rgba(255, 99, 132, 0.8)", // Logged
-    "rgba(54, 162, 235, 0.8)", // Refrigerated
-    "rgba(255, 206, 86, 0.8)", // Frozen
-    "rgba(75, 192, 192, 0.8)", // Thawed
-    "rgba(153, 102, 255, 0.8)", // Consumed
-    "rgba(255, 159, 64, 0.8)", // Shared
-    "rgba(220, 53, 69, 0.8)", // Discarded
+    "rgba(255, 99, 132, 0.9)", // Logged
+    "rgba(54, 162, 235, 0.9)", // Refrigerated
+    "rgba(255, 206, 86, 0.9)", // Frozen
+    "rgba(75, 192, 192, 0.9)", // Thawed
+    "rgba(153, 102, 255, 0.9)", // Consumed
+    "rgba(255, 159, 64, 0.9)", // Shared
+    "rgba(220, 53, 69, 0.9)", // Discarded
   ];
 
   const chartData = {

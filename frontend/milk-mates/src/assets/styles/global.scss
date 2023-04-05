@@ -13,8 +13,8 @@
   --shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
   --dark-shadow: 0 3px 4px rgba(0, 0, 0, 0.35);
 
-  --pink-gradient: linear-gradient(160deg, #fa90b9, #b75279);
-  --active-pink-gradient: linear-gradient(160deg, #d77c9f, #994364);
+  --pink-gradient: linear-gradient(160deg, #b75279, #fa90b9);
+  --active-pink-gradient: linear-gradient(160deg, #994364, #d77c9f);
   --disabled-pink-gradient: linear-gradient(160deg, #f6bcd2, #b98397);
   --blue-gradient: linear-gradient(130deg, #5da4e6, #2d5e8b);
 }
@@ -148,51 +148,51 @@
 }
 
 
-  .pagination {
+.pagination {
+  display: flex;
+  width: 15em;
+
+  border-radius: 27px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.1));
+  justify-content: space-between;
+  align-items: center;
+  margin: 1em auto 0;
+  gap: 10px;
+
+  .pag-input-cont {
     display: flex;
-    width: 15em;
-
-    border-radius: 27px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.1));
-    justify-content: space-between;
+    gap: 7px;
     align-items: center;
-    margin: 1em auto 0;
-    gap: 10px;
 
-    .pag-input-cont {
-      display: flex;
-      gap: 7px;
-      align-items: center;
-
-      .page-input {
-        width: 2em;
-        height: 2em;
-        text-align: center;
-      }
+    .page-input {
+      width: 2em;
+      height: 2em;
+      text-align: center;
     }
-
-    .button {
-      padding: 10px 15px;
-
-      &.next {
-        border-radius: 0 10px 25px 0px;
-        padding-left: 10px;
-      }
-
-      &.prev {
-        border-radius: 10px 0 0 25px;
-        padding-right: 10px;
-      }
-    }
-
-    
   }
 
-  .unselectable {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  .button {
+    padding: 10px 15px;
+
+    &.next {
+      border-radius: 0 10px 25px 0px;
+      padding-left: 10px;
+    }
+
+    &.prev {
+      border-radius: 10px 0 0 25px;
+      padding-right: 10px;
+    }
+  }
+
+
+}
+
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

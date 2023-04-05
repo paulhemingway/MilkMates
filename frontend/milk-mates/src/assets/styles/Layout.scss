@@ -37,6 +37,7 @@
   .layout {
     .content {
       width: 100%;
+      height: calc(100vh - 70px);
 
       .nav-container {
         position: absolute;

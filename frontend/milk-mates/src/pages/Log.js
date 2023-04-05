@@ -3,6 +3,7 @@ import Wrapper from "components/global/Wrapper";
 import LogCharts from "components/logPage/LogCharts";
 import LogTable from "components/logPage/LogTable";
 import { useEffect } from "react";
+import AddBatch from "components/logPage/AddBatch";
 
 import { HiPlus } from "react-icons/hi";
 
@@ -18,18 +19,12 @@ export default function Log(props) {
     // this is where the batches data will be pulled from the API
   }, []);
 
-  const addButtonClicked = () => {};
+  const addBatchClicked = () => {};
 
   return (
     <div className="log">
       <div>
-        <button
-          className="button primary-button add-btn"
-          onClick={addButtonClicked}
-        >
-          <HiPlus />
-          Add Milk
-        </button>
+        <AddBatch />
       </div>
       <div>
         <Wrapper header="Milk Production Stats">

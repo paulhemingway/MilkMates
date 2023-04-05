@@ -9,7 +9,7 @@ export default function LogCharts({data}) {
   }, {});
   
   return (
-    <div>
+    <div className='log-charts'>
       <PieChart data={statusCount} />
     </div>
   )
