@@ -1,5 +1,6 @@
 .layout {
   height: 100vh;
+  overflow: hidden;
 
   header {
     position: relative;
@@ -19,7 +20,9 @@
     }
 
     .outlet-container {
+      overflow-y: auto;
       width: calc(100vw - 275px);
+      max-height: calc(100vh - 70px);
 
       .outlet {
         margin: 0 auto;
