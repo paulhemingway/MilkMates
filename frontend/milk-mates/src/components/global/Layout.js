@@ -17,11 +17,15 @@ export default function Layout() {
 
   return (
     <div className="layout">
-        <Header collapsed={collapsed} toggleCollapse={toggleCollapse} />
+      <Header collapsed={collapsed} toggleCollapse={toggleCollapse} />
 
       <div className="content">
         <nav className={`nav-container ${collapsed ? "collapsed" : ""}`}>
-          <Sidebar clicked={toggleCollapse} logout={logout}/>
+          <Sidebar
+            clicked={toggleCollapse}
+            collapsed={collapsed}
+            logout={logout}
+          />
         </nav>
         <main className="outlet-container">
           <div className="outlet">

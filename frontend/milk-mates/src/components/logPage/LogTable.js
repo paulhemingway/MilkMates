@@ -19,7 +19,7 @@ export default function LogTable({ data }) {
   // state for pagination
   const [displayedBatches, setDisplayedBatches] = useState([]);
   const [filterMenuShowing, setFilterMenuShowing] = useState(false);
-  const [perPage, setPerPage] = useState(3);
+  const [perPage, setPerPage] = useState(5);
 
   const [filters, setFilters] = useState({
     dateRange: null,
@@ -296,7 +296,7 @@ export default function LogTable({ data }) {
             components={{
               IndicatorSeparator: () => null,
             }}
-            defaultValue={perPageOptions[0]}
+            defaultValue={perPageOptions[1]}
             inputId="perpage-select"
             classNamePrefix="perpage-dropdown"
             theme={(theme) => ({
