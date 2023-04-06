@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FiChevronDown } from "react-icons/fi";
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 export default function AddBatch() {
   const [collapsed, setCollapsed] = useState(true);
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const expandClickRef = useRef(null);
 
   useEffect(() => {
@@ -13,14 +15,22 @@ export default function AddBatch() {
       }
     };
 
-    expandClickRef.current.addEventListener("keypress", handleKeyDown);
-
-    return () => {
-      expandClickRef.current.removeEventListener("keypress", handleKeyDown);
-    };
+    const ref = expandClickRef.current;
+    if (ref) {
+      ref.addEventListener("keypress", handleKeyDown);
+      return () => {
+        ref.removeEventListener("keypress", handleKeyDown);
+      };
+    }
   }, [collapsed]);
 
-  const handleSubmit = () => {};
+  const handleChange = (date) => {
+    console.log(date);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   const toggleCollapse = () => {
     setCollapsed(!collapsed);
@@ -38,7 +48,8 @@ export default function AddBatch() {
         <FiChevronDown className={collapsed ? "" : "flipped"} />
       </div>
       <div className="add-form">
-        <form>
+        <form onSubmit={handleSubmit}>
+        <DateTimePicker label="Basic date time picker" />
           <input type="submit" tabIndex={collapsed ? "-1" : "0"} />
         </form>
       </div>
