@@ -1,12 +1,9 @@
-CREATE TABLE notifications (
-  notificationId INT NOT NULL AUTO_INCREMENT,
-  senderId INT NOT NULL,
-  receiverId INT NOT NULL,
-  message VARCHAR(255) NOT NULL,
-  listingId INT NOT NULL,
-  sentDateTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (notificationId),
-  FOREIGN KEY (senderId) REFERENCES users(userid),
-  FOREIGN KEY (receiverId) REFERENCES users(userid),
-  FOREIGN KEY (listingId) REFERENCES listings(listingId)
+CREATE TABLE batchEvents (
+  batchEventId INT NOT NULL AUTO_INCREMENT,
+  batchId INT NOT NULL,
+  event ENUM('refrigerated', 'frozen', 'thawed', 'consumed', 'shared', 'discarded') NOT NULL,
+  eventDate DATE NOT NULL,
+  notes TEXT,
+  PRIMARY KEY (batchEventId),
+  FOREIGN KEY (batchId) REFERENCES batches(batchId)
 );
