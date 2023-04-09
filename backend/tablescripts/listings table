@@ -12,9 +12,16 @@ CREATE TABLE listings (
   lastActiveDateTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   viewsCount INT NOT NULL DEFAULT 0, -- added column
   PRIMARY KEY (listingId),
-  FOREIGN KEY (userId) REFERENCES users(userid),
-  FOREIGN KEY (batchListingId) REFERENCES batchListings(batchListingId)
+  FOREIGN KEY (userId) REFERENCES users(userid)
 );
+
+
+ALTER TABLE listings
+ADD CONSTRAINT fk_batchListings
+FOREIGN KEY (batchListingId) REFERENCES batchListings(batchListingId);
+
+
+//cant create the table with the batchlistings reference, create base table first and then batch listing table and then come back and alter listings table.
 
 //isActive: This column stores a boolean value that indicates whether the listing is still active or not. 
 //The default value is set to TRUE, which means that a new listing is active by default.
