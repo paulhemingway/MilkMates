@@ -44,12 +44,11 @@ export const AuthProvider = ({ children }) => {
           timeout: 5000, // Timeout after 5 seconds
         }
       );
-
-      if (response.data[0].loginErrorCode !== 0) {
-        await setLoginErrorCode(response.data[0].loginErrorCode);
+      if (response.data[0].errorCode !== 0) {
+        await setLoginErrorCode(response.data[0].errorCode);
         setUser(null);
       } else {
-        setLoginErrorCode(0);
+        await setLoginErrorCode(0);
         setLoggedIn(true);
         setUser(response.data[1][0]);
       }
@@ -64,7 +63,15 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  const register = async () => {
+  const register = async (
+    firstName,
+    lastName,
+    username,
+    email,
+    phoneNumber,
+    zipCode,
+    password
+  ) => {
     setRegisterErrorCode(0);
     try {
       const response = await axios.post(
@@ -76,14 +83,14 @@ export const AuthProvider = ({ children }) => {
           email,
           phoneNumber,
           zipCode,
-          password
+          password,
         },
         {
           timeout: 5000, // Timeout after 5 seconds
         }
       );
 
-      setRegisterErrorCode(response.data[0].errorCode)
+      setRegisterErrorCode(response.data[0].errorCode);
     } catch (error) {
       console.log(error);
       setLoginErrorCode(4);
@@ -95,7 +102,15 @@ export const AuthProvider = ({ children }) => {
   // Pass the authentication state and methods to the AuthContext.Provider component
   return (
     <AuthContext.Provider
-      value={{ loggedIn, user, login, logout, loginErrorCode, registerErrorCode, register }}
+      value={{
+        loggedIn,
+        user,
+        login,
+        logout,
+        loginErrorCode,
+        registerErrorCode,
+        register,
+      }}
     >
       {children}
     </AuthContext.Provider>

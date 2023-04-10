@@ -13,7 +13,7 @@ export default function LoginForm({ forgotPassword, switchToSignUp }) {
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { login, loginErrorCode, loggedIn } = useAuth();
+  const { login, loginErrorCode } = useAuth();
 
   const errorMessages = [
     "",
@@ -24,7 +24,6 @@ export default function LoginForm({ forgotPassword, switchToSignUp }) {
     "Your account is inactive. Please contact support to reactivate your account.",
     "Timeout limit exceeded. Please contact support.",
   ];
-
 
   useEffect(() => {
     setErrorMsg(errorMessages[loginErrorCode]);
@@ -43,7 +42,6 @@ export default function LoginForm({ forgotPassword, switchToSignUp }) {
         console.error(error);
       } finally {
         setLoading(false);
-        
       }
     }, 1000);
   };

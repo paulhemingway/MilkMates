@@ -131,6 +131,8 @@ export default function CreateAccountForm({ switchToLogin }) {
       return;
     }
 
+    
+
     setTimeout(async () => {
       try {
         await register(fName, lName, user, email, phone, zip, pass);
