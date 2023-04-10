@@ -33,7 +33,7 @@
         margin-bottom: 5px;
 
         label {
-          font-size: 0.8em;
+          font-size: 0.75em;
         }
 
         .field {
@@ -44,6 +44,10 @@
           align-items: center;
           border-radius: 5px;
 
+          &.error-field {
+            background-color: rgba(255, 0, 0, 0.05);
+          }
+
           &:focus-within {
             border: 1px solid var(--blue);
           }
@@ -53,6 +57,9 @@
             outline: none;
             width: 100%;
             background-color: rgba(0, 0, 0, 0);
+            font-size: 0.9em;
+
+
           }
 
           span {
@@ -68,7 +75,7 @@
             svg {
               cursor: pointer;
               height: 100%;
-              font-size: 18px;
+              font-size: 1.14em;
 
               &:hover {
                 fill: var(--blue);
@@ -83,6 +90,7 @@
           display: inline-block;
           width: auto;
         }
+
         .error {
           color: red;
           font-size: 10px;
@@ -133,6 +141,18 @@
       text-align: center;
       font-size: 0.8em;
 
+    }
+    .success-msg {
+      p {
+        font-size: 0.9em;
+        margin: 20px 0;
+      }
+      .success-login {
+        width: 50%;
+        margin: 0 auto;
+        justify-content: center;
+        padding: 5px;
+      }
     }
   }
 

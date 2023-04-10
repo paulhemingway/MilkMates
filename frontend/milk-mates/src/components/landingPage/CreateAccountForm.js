@@ -4,12 +4,18 @@ import { BiHide, BiShow } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import Loading from "components/global/Loading";
 
+import { useAuth } from "contexts/AuthProvider";
+
 import { InputMask } from "primereact/inputmask";
 
 export default function CreateAccountForm({ switchToLogin }) {
+  const { register, registerErrorCode } = useAuth();
+
   const [passVisible, setPassVisible] = useState(false);
   const [confPassVisible, setConfPassVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const [fName, setFName] = useState("");
   const [lName, setLName] = useState("");
@@ -34,6 +40,42 @@ export default function CreateAccountForm({ switchToLogin }) {
   const nameRegex = /^[a-zA-Z]+(['-][a-zA-Z]+)*$/;
   const userRegex = /^[a-zA-Z][a-zA-Z0-9]*$/;
   const passRegex = /^([a-zA-Z0-9!@#$%^&*()_+-=[;':",.?<>`~]{8,})$/;
+
+  useEffect(() => {
+    switch (registerErrorCode) {
+      case -1:
+        //default code. nothing happened yet.
+        break;
+      case 0:
+        // success. replace form with success message and link back to login.
+        setSuccess(true);
+        break;
+      case 1:
+        // blank field received (this won't happen but just in case)
+        setErrorMsg("Please make sure all fields are filled out.");
+        break;
+      case 2:
+        // username already exists
+        setErrors({
+          ...errors,
+          user: "Username already exists. Please enter a different one.",
+        });
+        break;
+      case 3:
+        // email already exists
+        setErrors({
+          ...errors,
+          user: "Email already exists. Please enter a different one or try logging in.",
+        });
+        break;
+      default:
+        // something with the backend
+        setErrorMsg(
+          "We're sorry, something went wrong on our end. Please try again later."
+        );
+        break;
+    }
+  }, [registerErrorCode]);
 
   const togglePassVisible = () => {
     setPassVisible(!passVisible);
@@ -81,12 +123,23 @@ export default function CreateAccountForm({ switchToLogin }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setErrorMsg("");
     setLoading(true);
     clearErrors();
     if (!valid()) {
       setLoading(false);
       return;
     }
+
+    setTimeout(async () => {
+      try {
+        await register(fName, lName, user, email, phone, zip, pass);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    }, 1000);
 
     setLoading(false);
   };
@@ -190,177 +243,240 @@ export default function CreateAccountForm({ switchToLogin }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="create-account-form shadow">
-      <h2>Join MilkMates Today</h2>
+    <div className="create-account-form shadow">
+      {!success && (
+        <form onSubmit={handleSubmit}>
+          <h2>Join MilkMates Today</h2>
 
-      <div className="two-col">
-        <div className="input-container">
-          <label>
-            First Name*
-            <div className="field">
-              <input
-                type="text"
-                onChange={(e) => setFName(e.target.value)}
-                placeholder="First Name"
-                maxLength="50"
-              ></input>
+          <div className="two-col">
+            <div className="input-container">
+              <label>
+                First Name*
+                <div
+                  className={
+                    errors.fName.length > 0 ? "field error-field" : "field"
+                  }
+                >
+                  <input
+                    type="text"
+                    onChange={(e) => setFName(e.target.value)}
+                    placeholder="First Name"
+                    maxLength="50"
+                  ></input>
+                </div>
+              </label>
+              <p className="error">{errors.fName}</p>
             </div>
-          </label>
-          <p className="error">{errors.fName}</p>
-        </div>
 
-        <div className="input-container">
-          <label>
-            Last Name*
-            <div className="field">
-              <input
-                type="text"
-                onChange={(e) => setLName(e.target.value)}
-                placeholder="Last Name"
-                maxLength="50"
-              ></input>
+            <div className="input-container">
+              <label>
+                Last Name*
+                <div
+                  className={
+                    errors.lName.length > 0 ? "field error-field" : "field"
+                  }
+                >
+                  <input
+                    type="text"
+                    onChange={(e) => setLName(e.target.value)}
+                    placeholder="Last Name"
+                    maxLength="50"
+                  ></input>
+                </div>
+              </label>
+              <p className="error">{errors.lName}</p>
             </div>
-          </label>
-          <p className="error">{errors.lName}</p>
-        </div>
-      </div>
+          </div>
 
-      <div className="two-col">
-        <div className="input-container">
-          <label>
-            Username*
-            <div className="field">
-              <input
-                type="text"
-                onChange={(e) => setUser(e.target.value)}
-                placeholder="Username"
-                maxLength="16"
-              ></input>
+          <div className="two-col">
+            <div className="input-container">
+              <label>
+                Username*
+                <div
+                  className={
+                    errors.user.length > 0 ? "field error-field" : "field"
+                  }
+                >
+                  <input
+                    type="text"
+                    onChange={(e) => setUser(e.target.value)}
+                    placeholder="Username"
+                    maxLength="16"
+                  ></input>
+                </div>
+              </label>
+              <p className="error">{errors.user}</p>
             </div>
-          </label>
-          <p className="error">{errors.user}</p>
-        </div>
 
-        <div className="input-container">
-          <label>
-            Email*
-            <div className="field">
-              <input
-                type="email"
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
-                maxLength="100"
-              ></input>
+            <div className="input-container">
+              <label>
+                Email*
+                <div
+                  className={
+                    errors.email.length > 0 ? "field error-field" : "field"
+                  }
+                >
+                  <input
+                    type="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email"
+                    maxLength="100"
+                  ></input>
+                </div>
+              </label>
+              <p className="error">{errors.email}</p>
             </div>
-          </label>
-          <p className="error">{errors.email}</p>
-        </div>
-      </div>
+          </div>
 
-      <div className="two-col">
-        <div className="input-container">
-          <label>
-            Phone Number*
-            <div className="field">
-              <InputMask
-                placeholder="Phone Number"
-                onChange={handlePhoneChange}
-                mask="+1 (999) 999-9999"
-              />
+          <div className="two-col">
+            <div className="input-container">
+              <label>
+                Phone Number*
+                <div
+                  className={
+                    errors.phone.length > 0 ? "field error-field" : "field"
+                  }
+                >
+                  <InputMask
+                    placeholder="Phone Number"
+                    onChange={handlePhoneChange}
+                    mask="+1 (999) 999-9999"
+                  />
+                </div>
+              </label>
+              <p className="error">{errors.phone}</p>
             </div>
-          </label>
-          <p className="error">{errors.phone}</p>
-        </div>
 
-        <div className="input-container">
-          <label>
-            Zip Code*
-            <div className="field">
-              <InputMask
-                placeholder="Zip Code"
-                onChange={handleZipChange}
-                mask="99999"
-              />
+            <div className="input-container">
+              <label>
+                Zip Code*
+                <div
+                  className={
+                    errors.zip.length > 0 ? "field error-field" : "field"
+                  }
+                >
+                  <InputMask
+                    placeholder="Zip Code"
+                    onChange={handleZipChange}
+                    mask="99999"
+                  />
+                </div>
+              </label>
+              <p className="error">{errors.zip}</p>
             </div>
-          </label>
-          <p className="error">{errors.zip}</p>
-        </div>
-      </div>
+          </div>
 
-      <div className="two-col">
-        <div className="input-container">
-          <label>
-            Password*
-            <div className="field">
-              <input
-                type={passVisible ? "text" : "password"}
-                placeholder="Password"
-                onChange={handlePassChange}
-              ></input>
-              <span onClick={togglePassVisible} tabIndex="0">
-                {passVisible ? (
-                  <BiShow aria-label="Hide Password" />
-                ) : (
-                  <BiHide aria-label="Show password" />
-                )}
-              </span>
+          <div className="two-col">
+            <div className="input-container">
+              <label>
+                Password*
+                <div
+                  className={
+                    errors.pass.length > 0 ? "field error-field" : "field"
+                  }
+                >
+                  <input
+                    type={passVisible ? "text" : "password"}
+                    placeholder="Password"
+                    onChange={handlePassChange}
+                  ></input>
+                  <span onClick={togglePassVisible} tabIndex="0">
+                    {passVisible ? (
+                      <BiShow aria-label="Hide Password" />
+                    ) : (
+                      <BiHide aria-label="Show password" />
+                    )}
+                  </span>
+                </div>
+              </label>
+              <p className="error">{errors.pass}</p>
             </div>
-          </label>
-          <p className="error">{errors.pass}</p>
-        </div>
 
-        <div className="input-container">
-          <label>
-            Re-enter Password*
-            <div className="field">
-              <input
-                type={confPassVisible ? "text" : "password"}
-                onChange={handleConfPassChange}
-                placeholder="Re-enter Password"
-              ></input>
-              <span onClick={toggleConfPassVisible} tabIndex="0">
-                {confPassVisible ? (
-                  <BiShow aria-label="Hide Password" />
-                ) : (
-                  <BiHide aria-label="Show password" />
-                )}
-              </span>
+            <div className="input-container">
+              <label>
+                Re-enter Password*
+                <div
+                  className={
+                    errors.confPass.length > 0 ? "field error-field" : "field"
+                  }
+                >
+                  <input
+                    type={confPassVisible ? "text" : "password"}
+                    onChange={handleConfPassChange}
+                    placeholder="Re-enter Password"
+                  ></input>
+                  <span onClick={toggleConfPassVisible} tabIndex="0">
+                    {confPassVisible ? (
+                      <BiShow aria-label="Hide Password" />
+                    ) : (
+                      <BiHide aria-label="Show password" />
+                    )}
+                  </span>
+                </div>
+              </label>
+              <p className="error">{errors.confPass}</p>
             </div>
-          </label>
-          <p className="error">{errors.confPass}</p>
+          </div>
+
+          <div className="error-loading">
+            {errorMsg != "" && <p>{errorMsg}</p>}
+            {loading && <Loading />}
+          </div>
+
+          <input type="submit" value="Create Account" className="submit-btn" />
+          <p className="bottom-txt">
+            By signing up, you agree to the{" "}
+            <Link
+              target="_blank"
+              className="link"
+              alt="Terms of service"
+              to="/tos"
+            >
+              Terms of Service
+            </Link>
+            <> and </>
+            <Link
+              target="_blank"
+              className="link"
+              alt="Privacy Policy"
+              to="/privacy"
+            >
+              Privacy Policy
+            </Link>
+            .
+          </p>
+          <p className="bottom-txt">
+            Already have an account?{" "}
+            <span
+              className="link"
+              onClick={loginClicked}
+              onKeyDown={loginKeyPress}
+              tabIndex="0"
+            >
+              Login
+            </span>
+          </p>
+        </form>
+      )}
+      {success && (
+        <div className="success-msg">
+          <h2>Welcome to MilkMates!</h2>
+          <p>
+            Congratulations! You're now part of the MilkMates community. Start
+            tracking your breastmilk production and connect with other moms to
+            share or receive breastmilk. If you have any questions, don't
+            hesitate to reach out to us. Happy MilkMating!
+          </p>
+          <span
+            className="success-login link button primary-button"
+            onClick={loginClicked}
+            onKeyDown={loginKeyPress}
+            tabIndex="0"
+          >
+            Login
+          </span>
         </div>
-      </div>
-
-      <div className="error-loading">{loading && <Loading />}</div>
-
-      <input type="submit" value="Create Account" className="submit-btn" />
-      <p className="bottom-txt">
-        By signing up, you agree to the{" "}
-        <Link target="_blank" className="link" alt="Terms of service" to="/tos">
-          Terms of Service
-        </Link>
-        <> and </>
-        <Link
-          target="_blank"
-          className="link"
-          alt="Privacy Policy"
-          to="/privacy"
-        >
-          Privacy Policy
-        </Link>
-        .
-      </p>
-      <p className="bottom-txt">
-        Already have an account?{" "}
-        <span
-          className="link"
-          onClick={loginClicked}
-          onKeyDown={loginKeyPress}
-          tabIndex="0"
-        >
-          Login
-        </span>
-      </p>
-    </form>
+      )}
+    </div>
   );
 }

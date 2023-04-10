@@ -13,7 +13,7 @@ export default function LoginForm({ forgotPassword, switchToSignUp }) {
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { login, errorCode, loggedIn } = useAuth();
+  const { login, loginErrorCode, loggedIn } = useAuth();
 
   const errorMessages = [
     "",
@@ -27,8 +27,8 @@ export default function LoginForm({ forgotPassword, switchToSignUp }) {
 
 
   useEffect(() => {
-    setErrorMsg(errorMessages[errorCode]);
-  }, [errorCode]);
+    setErrorMsg(errorMessages[loginErrorCode]);
+  }, [loginErrorCode]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
