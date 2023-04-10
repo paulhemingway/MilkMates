@@ -5,7 +5,7 @@ import { BiHide, BiShow } from "react-icons/bi";
 import { useAuth } from "contexts/AuthProvider";
 import Loading from "components/global/Loading";
 
-export default function LoginForm({ forgotPassword, signUp }) {
+export default function LoginForm({ forgotPassword, switchToSignUp }) {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const [username, setUsername] = useState("");
@@ -29,12 +29,6 @@ export default function LoginForm({ forgotPassword, signUp }) {
   useEffect(() => {
     setErrorMsg(errorMessages[errorCode]);
   }, [errorCode]);
-
-  useEffect(() => {
-    if (loggedIn) {
-      // redirect
-    }
-  }, [loggedIn]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -63,12 +57,12 @@ export default function LoginForm({ forgotPassword, signUp }) {
   };
 
   const signUpClicked = () => {
-    signUp();
+    switchToSignUp();
   };
 
   const signUpKeyPress = (e) => {
     if (e.keyCode === 13) {
-      signUp();
+      switchToSignUp();
     }
   };
 
@@ -96,7 +90,7 @@ export default function LoginForm({ forgotPassword, signUp }) {
           </div>
         </label>
       </div>
-
+      <br></br>
       <div className="input-container">
         <label>
           Password

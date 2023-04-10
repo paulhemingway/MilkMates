@@ -9,7 +9,7 @@ export const AuthContext = createContext();
 // Define a function component that wraps its children with the AuthContext.Provider component
 export const AuthProvider = ({ children }) => {
   // set back to false when done
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [errorCode, setErrorCode] = useState(0);
 
@@ -59,6 +59,10 @@ export const AuthProvider = ({ children }) => {
     setLoggedIn(false);
     setUser(null);
   };
+
+  const createAccount = async () => {
+    
+  }
 
   const checkToken = () => {
     

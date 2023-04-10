@@ -1,28 +1,192 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BiHide, BiShow } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import Loading from "components/global/Loading";
 
-export default function CreateAccountForm({ login }) {
-  const [passwordVisible, setPasswordVisible] = useState(false);
+import { InputMask } from "primereact/inputmask";
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("submitted");
+export default function CreateAccountForm({ switchToLogin }) {
+  const [passVisible, setPassVisible] = useState(false);
+  const [confPassVisible, setConfPassVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const [fName, setFName] = useState("");
+  const [lName, setLName] = useState("");
+  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [zip, setZip] = useState("");
+  const [pass, setPass] = useState("");
+  const [confPass, setConfPass] = useState("");
+
+  const [errors, setErrors] = useState({
+    fName: "",
+    lName: "",
+    user: "",
+    email: "",
+    phone: "",
+    zip: "",
+    pass: "",
+    confPass: "",
+  });
+
+  const nameRegex = /^[a-zA-Z]+(['-][a-zA-Z]+)*$/;
+  const userRegex = /^[a-zA-Z][a-zA-Z0-9]*$/;
+  const passRegex = /^([a-zA-Z0-9!@#$%^&*()_+-=[;':",.?<>`~]{8,})$/;
+
+  const togglePassVisible = () => {
+    setPassVisible(!passVisible);
   };
 
-  const togglePasswordVisible = () => {
-    setPasswordVisible(!passwordVisible);
+  const toggleConfPassVisible = () => {
+    setConfPassVisible(!confPassVisible);
   };
 
   const loginClicked = () => {
-    login();
+    switchToLogin();
   };
 
   const loginKeyPress = (e) => {
     if (e.keyCode === 13) {
-      login();
+      switchToLogin();
     }
+  };
+
+  const handlePhoneChange = (e) => {
+    let newPhone = e.value.replace(/[\s()_-]/g, "").replace("+1", "");
+    setPhone(newPhone);
+  };
+
+  const handleZipChange = (e) => {
+    let newZip = e.value.replace("_", "");
+    setZip(newZip);
+  };
+
+  const handlePassChange = (e) => {
+    if (confPass.length > 0 && e.target.value !== confPass) {
+      setErrors({ ...errors, confPass: "Passwords do not match." });
+    }
+    setPass(e.target.value);
+  };
+
+  const handleConfPassChange = (e) => {
+    if (e.target.value !== pass) {
+      setErrors({ ...errors, confPass: "Passwords do not match." });
+    } else {
+      setErrors({ ...errors, confPass: "" });
+    }
+    setConfPass(e.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setLoading(true);
+    clearErrors();
+    if (!valid()) {
+      setLoading(false);
+      return;
+    }
+
+    setLoading(false);
+  };
+
+  const clearErrors = () => {
+    const newErrors = {
+      fName: "",
+      lName: "",
+      user: "",
+      email: "",
+      phone: "",
+      zip: "",
+      pass: "",
+      confPass: "",
+    };
+    setErrors(newErrors);
+  };
+
+  const valid = () => {
+    const newErrors = {
+      fName: validateName(fName, true),
+      lName: validateName(lName, false),
+      user: validateUser(user),
+      email: validateEmail(email),
+      phone: validatePhone(phone),
+      zip: validateZip(zip),
+      pass: validatePass(pass),
+      confPass: validateConfPass(confPass),
+    };
+    setErrors(newErrors);
+
+    const firstError = Object.keys(newErrors).find(
+      (error) => newErrors[error].length > 0
+    );
+    console.log(firstError);
+    return !Object.values(newErrors).some((value) => value.length > 0);
+  };
+
+  const validateName = (value, isFirst) => {
+    let msg = "";
+    if (value === "") {
+      msg = `Please enter a ${isFirst ? "first" : "last"} name.`;
+    } else if (!nameRegex.test(value)) {
+      msg = `Names can only contain letters, hyphens (-), apostrophes ('), and spaces.`;
+    }
+    return msg;
+  };
+
+  const validateUser = (value) => {
+    let msg = "";
+    if (value === "") {
+      msg = "Please enter a username.";
+    } else if (!userRegex.test(value)) {
+      msg =
+        "Username can only contain alphanumeric characters and must start with a letter.";
+    }
+    return msg;
+  };
+
+  const validateEmail = (value) => {
+    let msg = "";
+    if (value === "") {
+      msg = "Please enter an email address.";
+    }
+    return msg;
+  };
+
+  const validatePhone = (value) => {
+    let msg = "";
+    if (value.length < 10) {
+      msg = "Please enter a 10-digit phone number.";
+    }
+    return msg;
+  };
+
+  const validateZip = (value) => {
+    let msg = "";
+    if (value.length < 5) {
+      msg = "Please enter a 5-digit zip code.";
+    }
+    return msg;
+  };
+
+  const validatePass = (value) => {
+    let msg = "";
+    if (value.length === 0) {
+      msg = "Please enter a password.";
+    } else if (!passRegex.test(value)) {
+      msg =
+        "Password must be at least 8 characters with at least one uppercase, one lowercase, one number, and one special character.";
+    }
+    return msg;
+  };
+
+  const validateConfPass = (value) => {
+    let msg = "";
+    if (value.length === 0 && pass.length > 0) {
+      msg = "Passwords do not match.";
+    }
+    return msg;
   };
 
   return (
@@ -32,54 +196,109 @@ export default function CreateAccountForm({ login }) {
       <div className="two-col">
         <div className="input-container">
           <label>
-            First name
-            <div className="field">
-              <input type="text" placeholder="First name"></input>
-            </div>
-          </label>
-        </div>
-
-        <div className="input-container">
-          <label>
-            Last name
-            <div className="field">
-              <input type="text" placeholder="Last name"></input>
-            </div>
-          </label>
-        </div>
-      </div>
-
-      <div className="two-col">
-        <div className="input-container">
-          <label>
-            Username
-            <div className="field">
-              <input type="text" placeholder="Username"></input>
-            </div>
-          </label>
-        </div>
-
-        <div className="input-container">
-          <label>
-            Email
-            <div className="field">
-              <input type="email" placeholder="Email"></input>
-            </div>
-          </label>
-        </div>
-      </div>
-
-      <div className="two-col">
-        <div className="input-container">
-          <label>
-            Password
+            First Name*
             <div className="field">
               <input
-                type={passwordVisible ? "text" : "password"}
-                placeholder="Password"
+                type="text"
+                onChange={(e) => setFName(e.target.value)}
+                placeholder="First Name"
+                maxLength="50"
               ></input>
-              <span onClick={togglePasswordVisible} tabIndex="0">
-                {passwordVisible ? (
+            </div>
+          </label>
+          <p className="error">{errors.fName}</p>
+        </div>
+
+        <div className="input-container">
+          <label>
+            Last Name*
+            <div className="field">
+              <input
+                type="text"
+                onChange={(e) => setLName(e.target.value)}
+                placeholder="Last Name"
+                maxLength="50"
+              ></input>
+            </div>
+          </label>
+          <p className="error">{errors.lName}</p>
+        </div>
+      </div>
+
+      <div className="two-col">
+        <div className="input-container">
+          <label>
+            Username*
+            <div className="field">
+              <input
+                type="text"
+                onChange={(e) => setUser(e.target.value)}
+                placeholder="Username"
+                maxLength="16"
+              ></input>
+            </div>
+          </label>
+          <p className="error">{errors.user}</p>
+        </div>
+
+        <div className="input-container">
+          <label>
+            Email*
+            <div className="field">
+              <input
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+                maxLength="100"
+              ></input>
+            </div>
+          </label>
+          <p className="error">{errors.email}</p>
+        </div>
+      </div>
+
+      <div className="two-col">
+        <div className="input-container">
+          <label>
+            Phone Number*
+            <div className="field">
+              <InputMask
+                placeholder="Phone Number"
+                onChange={handlePhoneChange}
+                mask="+1 (999) 999-9999"
+              />
+            </div>
+          </label>
+          <p className="error">{errors.phone}</p>
+        </div>
+
+        <div className="input-container">
+          <label>
+            Zip Code*
+            <div className="field">
+              <InputMask
+                placeholder="Zip Code"
+                onChange={handleZipChange}
+                mask="99999"
+              />
+            </div>
+          </label>
+          <p className="error">{errors.zip}</p>
+        </div>
+      </div>
+
+      <div className="two-col">
+        <div className="input-container">
+          <label>
+            Password*
+            <div className="field">
+              <input
+                type={passVisible ? "text" : "password"}
+                placeholder="Password"
+                onChange={handlePassChange}
+              ></input>
+              <span onClick={togglePassVisible} tabIndex="0">
+                {passVisible ? (
                   <BiShow aria-label="Hide Password" />
                 ) : (
                   <BiHide aria-label="Show password" />
@@ -87,17 +306,32 @@ export default function CreateAccountForm({ login }) {
               </span>
             </div>
           </label>
+          <p className="error">{errors.pass}</p>
         </div>
 
         <div className="input-container">
           <label>
-            Re-enter password
+            Re-enter Password*
             <div className="field">
-              <input type="password" placeholder="Re-enter password"></input>
+              <input
+                type={confPassVisible ? "text" : "password"}
+                onChange={handleConfPassChange}
+                placeholder="Re-enter Password"
+              ></input>
+              <span onClick={toggleConfPassVisible} tabIndex="0">
+                {confPassVisible ? (
+                  <BiShow aria-label="Hide Password" />
+                ) : (
+                  <BiHide aria-label="Show password" />
+                )}
+              </span>
             </div>
           </label>
+          <p className="error">{errors.confPass}</p>
         </div>
       </div>
+
+      <div className="error-loading">{loading && <Loading />}</div>
 
       <input type="submit" value="Create Account" className="submit-btn" />
       <p className="bottom-txt">
@@ -106,8 +340,13 @@ export default function CreateAccountForm({ login }) {
           Terms of Service
         </Link>
         <> and </>
-        <Link target="_blank" className="link" alt="Privacy Policy" to="/privacy">
-           Privacy Policy
+        <Link
+          target="_blank"
+          className="link"
+          alt="Privacy Policy"
+          to="/privacy"
+        >
+          Privacy Policy
         </Link>
         .
       </p>
