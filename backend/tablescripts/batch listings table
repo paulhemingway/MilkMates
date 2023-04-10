@@ -4,6 +4,8 @@ CREATE TABLE batchListings (
   quantity INT NOT NULL DEFAULT 1,
   availableDate DATE NOT NULL,
   expiryDate DATE NOT NULL,
+  batchId INT NOT NULL, -- Added column
   PRIMARY KEY (batchListingId),
-  FOREIGN KEY (listingId) REFERENCES listings(listingId)
+  FOREIGN KEY (listingId) REFERENCES listings(listingId),
+  FOREIGN KEY (batchId) REFERENCES batches(batchId) -- Added foreign key constraint
 );
