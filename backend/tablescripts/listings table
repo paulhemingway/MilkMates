@@ -10,8 +10,10 @@ CREATE TABLE listings (
   createdDateTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   lastActiveDateTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   viewsCount INT NOT NULL DEFAULT 0,
+  batchId INT NOT NULL, -- Added column
   PRIMARY KEY (listingId),
-  FOREIGN KEY (userId) REFERENCES users(userId)
+  FOREIGN KEY (userId) REFERENCES users(userId),
+  FOREIGN KEY (batchId) REFERENCES batches(batchId) -- Added foreign key constraint
 );
 
 
