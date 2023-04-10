@@ -3,7 +3,7 @@
   background: white;
 
   .form-container {
-    min-height: 500px;
+    min-height: 600px;
     height: 60vh;
     background: linear-gradient(0deg, rgba(197, 234, 250, 0.8), rgba(197, 234, 250, 0.5)), url("../images/mother.jpg");
     background-size: cover;
@@ -24,14 +24,16 @@
 
       h2 {
         text-align: center;
+        margin-bottom: 10px;
       }
 
       .input-container {
         display: flex;
         flex-direction: column;
+        margin-bottom: 5px;
 
         label {
-          font-size: 0.8em;
+          font-size: 0.75em;
         }
 
         .field {
@@ -42,8 +44,12 @@
           align-items: center;
           border-radius: 5px;
 
+          &.error-field {
+            background-color: rgba(255, 0, 0, 0.05);
+          }
+
           &:focus-within {
-            border: 1px solid var(--pink);
+            border: 1px solid var(--blue);
           }
 
           input {
@@ -51,6 +57,9 @@
             outline: none;
             width: 100%;
             background-color: rgba(0, 0, 0, 0);
+            font-size: 0.9em;
+
+
           }
 
           span {
@@ -66,7 +75,7 @@
             svg {
               cursor: pointer;
               height: 100%;
-              font-size: 18px;
+              font-size: 1.14em;
 
               &:hover {
                 fill: var(--blue);
@@ -81,10 +90,12 @@
           display: inline-block;
           width: auto;
         }
-      }
 
-      &>*:not(p) {
-        margin-bottom: 20px;
+        .error {
+          color: red;
+          font-size: 10px;
+          min-height: 27px;
+        }
       }
 
       .error-loading {
@@ -93,7 +104,7 @@
         height: 40px;
         display: flex;
         align-items: center;
-        margin: -5px 0 10px;
+        margin: -5px 0 0;
         justify-content: center;
 
         p {
@@ -114,6 +125,7 @@
         color: white;
         background-image: var(--pink-gradient);
         font-size: 16px;
+        margin-bottom: 10px;
 
         &:hover {
           color: var(--pink);
@@ -129,6 +141,18 @@
       text-align: center;
       font-size: 0.8em;
 
+    }
+    .success-msg {
+      p {
+        font-size: 0.9em;
+        margin: 20px 0;
+      }
+      .success-login {
+        width: 50%;
+        margin: 0 auto;
+        justify-content: center;
+        padding: 5px;
+      }
     }
   }
 

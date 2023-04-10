@@ -37,9 +37,9 @@ export default function Landing(props) {
       return <ForgotPassword />;
     }
     return isLogin ? (
-      <LoginForm forgotPassword={forgotPasswordClicked} signUp={toggleForm} />
+      <LoginForm forgotPassword={forgotPasswordClicked} switchToSignUp={toggleForm} />
     ) : (
-      <CreateAccountForm login={toggleForm} />
+      <CreateAccountForm switchToLogin={toggleForm} />
     );
   }
 
