@@ -9,9 +9,10 @@ export const AuthContext = createContext();
 // Define a function component that wraps its children with the AuthContext.Provider component
 export const AuthProvider = ({ children }) => {
   // set back to false when done
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
-  const [errorCode, setErrorCode] = useState(0);
+  const [loginErrorCode, setLoginErrorCode] = useState(0);
+  const [registerErrorCode, setRegisterErrorCode] = useState(-1);
 
   // useEffect(() => {
   //   // Check if the user is already logged in
@@ -31,27 +32,29 @@ export const AuthProvider = ({ children }) => {
   // }, []);
 
   const login = async (username, password) => {
-    setErrorCode(0)
+    setLoginErrorCode(0);
     try {
-      const response = await axios.post(`${apiURL}/login/CheckForUser`, {
-        username,
-        password,
-      }, {
-        timeout: 5000, // Timeout after 3 seconds
-      });
-
+      const response = await axios.post(
+        `${apiURL}/login/CheckForUser`,
+        {
+          username,
+          password,
+        },
+        {
+          timeout: 5000, // Timeout after 5 seconds
+        }
+      );
       if (response.data[0].errorCode !== 0) {
-        await setErrorCode(response.data[0].errorCode);
+        await setLoginErrorCode(response.data[0].errorCode);
         setUser(null);
       } else {
-        setErrorCode(0);
+        await setLoginErrorCode(0);
         setLoggedIn(true);
         setUser(response.data[1][0]);
-        
       }
     } catch (error) {
-      console.log(error)
-      setErrorCode(6);  
+      console.log(error);
+      setLoginErrorCode(6);
     }
   };
 
@@ -60,13 +63,55 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  const checkToken = () => {
-    
-  }
+  const register = async (
+    firstName,
+    lastName,
+    username,
+    email,
+    phoneNumber,
+    zipCode,
+    password
+  ) => {
+    setRegisterErrorCode(0);
+    try {
+      const response = await axios.post(
+        `${apiURL}/login/RegisterUser`,
+        {
+          firstName,
+          lastName,
+          username,
+          email,
+          phoneNumber,
+          zipCode,
+          password,
+        },
+        {
+          timeout: 5000, // Timeout after 5 seconds
+        }
+      );
+
+      setRegisterErrorCode(response.data[0].errorCode);
+    } catch (error) {
+      console.log(error);
+      setLoginErrorCode(4);
+    }
+  };
+
+  const checkToken = () => {};
 
   // Pass the authentication state and methods to the AuthContext.Provider component
   return (
-    <AuthContext.Provider value={{ loggedIn, user, login, logout, errorCode }}>
+    <AuthContext.Provider
+      value={{
+        loggedIn,
+        user,
+        login,
+        logout,
+        loginErrorCode,
+        registerErrorCode,
+        register,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
