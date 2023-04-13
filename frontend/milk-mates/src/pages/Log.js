@@ -11,7 +11,7 @@ import { HiPlus } from "react-icons/hi";
 import batches from "data/batches.json";
 
 import "assets/styles/Log.scss";
-import useDocumentTitle from "contexts/DocumentTitle";
+import useDocumentTitle from "services/DocumentTitle";
 
 export default function Log(props) {
   useDocumentTitle(props.title)

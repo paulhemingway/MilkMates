@@ -2,7 +2,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "assets/styles/Landing.scss";
-import useDocumentTitle from "contexts/DocumentTitle";
+import useDocumentTitle from "services/DocumentTitle";
 
 import LoginForm from "components/landingPage/LoginForm";
 import CreateAccountForm from "components/landingPage/CreateAccountForm";
