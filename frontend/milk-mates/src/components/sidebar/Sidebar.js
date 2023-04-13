@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useAuth } from "contexts/AuthProvider";
+import { useAuth } from "services/AuthService";
 import "assets/styles/Sidebar.scss";
 
 import { AiOutlineUser, AiOutlineHome } from "react-icons/ai";
