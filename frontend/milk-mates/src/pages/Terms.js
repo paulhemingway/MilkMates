@@ -1,8 +1,11 @@
 import React from "react";
 import "assets/styles/Terms.scss";
 import PublicWrapper from "components/global/PublicWrapper";
+import useDocumentTitle from "services/DocumentTitle";
 
-export default function Terms() {
+export default function Terms(props) {
+  useDocumentTitle(props.title)
+
   return (
     <PublicWrapper header="Terms of Service">
       <p className="intro">

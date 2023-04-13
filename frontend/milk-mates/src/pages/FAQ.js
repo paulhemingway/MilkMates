@@ -3,8 +3,10 @@ import Accordion from "components/helpPage/Accordion";
 import FAQ from "data/FAQ.json";
 import "assets/styles/FAQ.scss";
 import PublicWrapper from "components/global/PublicWrapper";
+import useDocumentTitle from "services/DocumentTitle";
 
-export default function Help() {
+export default function Help(props) {
+  useDocumentTitle(props.title)
   return (
     <PublicWrapper header="Frequently Asked Questions">
       <div className="faq">

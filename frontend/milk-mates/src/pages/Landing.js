@@ -1,8 +1,8 @@
 /* eslint-disable */
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "assets/styles/Landing.scss";
-
+import useDocumentTitle from "services/DocumentTitle";
 
 import LoginForm from "components/landingPage/LoginForm";
 import CreateAccountForm from "components/landingPage/CreateAccountForm";
@@ -10,12 +10,18 @@ import ForgotPassword from "components/landingPage/ForgotPassword";
 
 import { BiBarChartAlt2 } from "react-icons/bi";
 import { FaHandHoldingHeart } from "react-icons/fa";
-import { TbBottle, TbStar, TbMessageCircle, TbClipboardCheck } from "react-icons/tb";
+import {
+  TbBottle,
+  TbStar,
+  TbMessageCircle,
+  TbClipboardCheck,
+} from "react-icons/tb";
 import Header from "components/global/Header";
 
-export default function Landing() {
+export default function Landing(props) {
   const [isLogin, setIsLogin] = useState(true);
   const [forgotPasswordShowing, setForgotPasswordShowing] = useState(false);
+  useDocumentTitle(props.title);
 
 
   const forgotPasswordClicked = () => {
@@ -31,9 +37,9 @@ export default function Landing() {
       return <ForgotPassword />;
     }
     return isLogin ? (
-      <LoginForm forgotPassword={forgotPasswordClicked} signUp={toggleForm} />
+      <LoginForm forgotPassword={forgotPasswordClicked} switchToSignUp={toggleForm} />
     ) : (
-      <CreateAccountForm login={toggleForm} />
+      <CreateAccountForm switchToLogin={toggleForm} />
     );
   }
 

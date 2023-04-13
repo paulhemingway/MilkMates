@@ -2,10 +2,10 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { BiHide, BiShow } from "react-icons/bi";
-import { useAuth } from "contexts/AuthProvider";
+import { useAuth } from "services/AuthService";
 import Loading from "components/global/Loading";
 
-export default function LoginForm({ forgotPassword, signUp }) {
+export default function LoginForm({ forgotPassword, switchToSignUp }) {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const [username, setUsername] = useState("");
@@ -13,7 +13,7 @@ export default function LoginForm({ forgotPassword, signUp }) {
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { login, errorCode, loggedIn } = useAuth();
+  const { login, loginErrorCode } = useAuth();
 
   const errorMessages = [
     "",
@@ -25,16 +25,9 @@ export default function LoginForm({ forgotPassword, signUp }) {
     "Timeout limit exceeded. Please contact support.",
   ];
 
-
   useEffect(() => {
-    setErrorMsg(errorMessages[errorCode]);
-  }, [errorCode]);
-
-  useEffect(() => {
-    if (loggedIn) {
-      // redirect
-    }
-  }, [loggedIn]);
+    setErrorMsg(errorMessages[loginErrorCode]);
+  }, [loginErrorCode]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -49,7 +42,6 @@ export default function LoginForm({ forgotPassword, signUp }) {
         console.error(error);
       } finally {
         setLoading(false);
-        
       }
     }, 1000);
   };
@@ -63,12 +55,12 @@ export default function LoginForm({ forgotPassword, signUp }) {
   };
 
   const signUpClicked = () => {
-    signUp();
+    switchToSignUp();
   };
 
   const signUpKeyPress = (e) => {
     if (e.keyCode === 13) {
-      signUp();
+      switchToSignUp();
     }
   };
 
@@ -96,7 +88,7 @@ export default function LoginForm({ forgotPassword, signUp }) {
           </div>
         </label>
       </div>
-
+      <br></br>
       <div className="input-container">
         <label>
           Password

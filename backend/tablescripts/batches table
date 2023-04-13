@@ -3,14 +3,13 @@ CREATE TABLE batches (
   userId INT NOT NULL,
   productionDate DATE NOT NULL,
   volume INT NOT NULL,
-  freezeDate DATE NOT NULL,
   diet VARCHAR(255),
   sickness VARCHAR(255),
   medications VARCHAR(255),
   caffeine BOOLEAN NOT NULL,
   vaccines VARCHAR(255),
-  status ENUM('created', 'submitted', 'in progress', 'completed') NOT NULL DEFAULT 'created',
   isActive BOOLEAN DEFAULT FALSE,
+  isListed BOOLEAN NOT NULL DEFAULT FALSE, -- added column
   PRIMARY KEY (batchId),
   FOREIGN KEY (userId) REFERENCES users(userid)
 );

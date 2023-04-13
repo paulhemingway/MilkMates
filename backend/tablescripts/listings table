@@ -1,7 +1,6 @@
 CREATE TABLE listings (
   listingId INT NOT NULL AUTO_INCREMENT,
   userId INT NOT NULL,
-  batchListingId INT NOT NULL,
   isGiving BOOLEAN NOT NULL,
   title VARCHAR(255) NOT NULL,
   description TEXT NOT NULL,
@@ -10,11 +9,15 @@ CREATE TABLE listings (
   isFulfilled BOOLEAN NOT NULL DEFAULT FALSE,
   createdDateTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   lastActiveDateTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  viewsCount INT NOT NULL DEFAULT 0, -- added column
+  viewsCount INT NOT NULL DEFAULT 0,
+  batchId INT NOT NULL, -- Added column
   PRIMARY KEY (listingId),
-  FOREIGN KEY (userId) REFERENCES users(userid),
-  FOREIGN KEY (batchListingId) REFERENCES batchListings(batchListingId)
+  FOREIGN KEY (userId) REFERENCES users(userId),
+  FOREIGN KEY (batchId) REFERENCES batches(batchId) -- Added foreign key constraint
 );
+
+
+//cant create the table with the batchlistings reference, create base table first and then batch listing table and then come back and alter listings table.
 
 //isActive: This column stores a boolean value that indicates whether the listing is still active or not. 
 //The default value is set to TRUE, which means that a new listing is active by default.
