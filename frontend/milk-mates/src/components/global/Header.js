@@ -2,7 +2,7 @@ import React from "react";
 import MilkMatesLogo from "assets/images/logo/logo-pink.png";
 import { Link } from "react-router-dom";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
-import { useAuth } from "contexts/AuthProvider";
+import { useAuth } from "services/AuthService";
 
 import "assets/styles/Header.scss";
 

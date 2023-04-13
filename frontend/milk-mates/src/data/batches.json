@@ -6,6 +6,12 @@
     "events": [
       {
         "batchEventId": 0,
+        "event": "logged",
+        "eventDate": 1676637000000,
+        "notes": "Batch was logged."
+      },
+      {
+        "batchEventId": 0,
         "event": "refrigerated",
         "eventDate": 1676637000000,
         "notes": "This milk was green for some reason. idk"

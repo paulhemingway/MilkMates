@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import FocusTrap from "focus-trap-react";
+import options from "data/options";
 
 export default function FilterMenu(props) {
   const [dateRange, setDateRange] = useState(props.filters.dateRange);
@@ -11,98 +12,10 @@ export default function FilterMenu(props) {
     populateInputs();
   }, []);
 
-  const startDateOptions = [
-    {
-      value: null,
-      label: (
-        <div className="option">
-          <span>None</span>
-        </div>
-      ),
-    },
-    {
-      value: "Today",
-      label: (
-        <div className="option">
-          <span>Today</span>
-        </div>
-      ),
-    },
-    {
-      value: "Past week",
-      label: (
-        <div className="option">
-          <span>Past week</span>
-        </div>
-      ),
-    },
-    {
-      value: "Past month",
-      label: (
-        <div className="option">
-          <span>Past month</span>
-        </div>
-      ),
-    },
-    {
-      value: "Past 3 months",
-      label: (
-        <div className="option">
-          <span>Past 3 months</span>
-        </div>
-      ),
-    },
-    {
-      value: "Past year",
-      label: (
-        <div className="option">
-          <span>Past year</span>
-        </div>
-      ),
-    },
-  ];
-
-  const statusOptions = [
-    "Logged",
-    "Refrigerated",
-    "Frozen",
-    "Thawed",
-    "Consumed",
-    "Shared",
-    "Discarded",
-  ];
-
-  const listedOptions = [
-    {
-      value: null,
-      label: (
-        <div className="option">
-          <span>All</span>
-        </div>
-      ),
-    },
-    {
-      value: true,
-      label: (
-        <div className="option">
-          <span>Listed</span>
-        </div>
-      ),
-    },
-    {
-      value: false,
-      label: (
-        <div className="option">
-          <span>Not Listed</span>
-        </div>
-      ),
-    },
-  ];
-
-  const dateDefaultIndex = startDateOptions.findIndex(
+  const dateDefaultIndex = options.startDate.findIndex(
     (option) => option.value === props.filters.dateRange
   );
-  const listedDefaultIndex = listedOptions.findIndex(
+  const listedDefaultIndex = options.listed.findIndex(
     (option) => option.value === props.filters.listed
   );
 
@@ -161,8 +74,8 @@ export default function FilterMenu(props) {
           <div className="filter-menu__option date">
             <label htmlFor="date-range">Date Range</label>
             <Select
-              options={startDateOptions}
-              defaultValue={startDateOptions[dateDefaultIndex]}
+              options={options.startDate}
+              defaultValue={options.startDate[dateDefaultIndex]}
               className="date-range-select"
               id="date-range"
               components={{
@@ -186,7 +99,7 @@ export default function FilterMenu(props) {
             <h4 className="options-header">Status</h4>
             <div className="checkboxes">
               <div className="col">
-                {statusOptions.slice(0, 4).map((status, index) => {
+                {options.status.slice(0, 4).map((status, index) => {
                   return (
                     <div className="status-option" key={index}>
                       <input
@@ -202,7 +115,7 @@ export default function FilterMenu(props) {
                 })}
               </div>
               <div className="col">
-                {statusOptions.slice(4, 7).map((status, index) => {
+                {options.status.slice(4, 7).map((status, index) => {
                   return (
                     <div className="status-option" key={index}>
                       <input
@@ -222,8 +135,8 @@ export default function FilterMenu(props) {
           <div className="filter-menu__option">
             <label htmlFor="listed">Listed</label>
             <Select
-              options={listedOptions}
-              defaultValue={listedOptions[listedDefaultIndex]}
+              options={options.listed}
+              defaultValue={options.listed[listedDefaultIndex]}
               className="listed-select"
               id="listed"
               components={{

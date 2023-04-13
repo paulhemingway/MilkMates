@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import React from "react";
 import Sidebar from "components/sidebar/Sidebar";
 import { useState } from "react";
-import { useAuth } from "contexts/AuthProvider";
+import { useAuth } from "services/AuthService";
 
 import "assets/styles/Layout.scss";
 import Header from "./Header";

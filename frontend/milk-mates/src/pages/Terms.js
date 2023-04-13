@@ -1,7 +1,7 @@
 import React from "react";
 import "assets/styles/Terms.scss";
 import PublicWrapper from "components/global/PublicWrapper";
-import useDocumentTitle from "contexts/DocumentTitle";
+import useDocumentTitle from "services/DocumentTitle";
 
 export default function Terms(props) {
   useDocumentTitle(props.title)
