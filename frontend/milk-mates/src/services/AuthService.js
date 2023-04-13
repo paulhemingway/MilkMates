@@ -51,6 +51,7 @@ export const AuthProvider = ({ children }) => {
         await setLoginErrorCode(0);
         setLoggedIn(true);
         setUser(response.data[1][0]);
+        console.log(response.data[1][0])
       }
     } catch (error) {
       console.log(error);
