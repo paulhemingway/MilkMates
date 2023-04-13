@@ -114,6 +114,8 @@ function App() {
 
           <Route path="help" element={<Help title="FAQ" />} />
           <Route path="tos" element={<Terms title="Terms of Service" />} />
+          <Route path="privacy" element={<Privacy title="Privacy Policy" />} />
+
           {/* this path value points to all other paths. It's for the 404 not found page */}
           <Route path="*" element={<NoPage title="Page Not Found" />} />
         </Routes>
