@@ -4,7 +4,7 @@ import { BiHide, BiShow } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import Loading from "components/global/Loading";
 
-import { useAuth } from "contexts/AuthProvider";
+import { useAuth } from "services/AuthService";
 
 import { InputMask } from "primereact/inputmask";
 

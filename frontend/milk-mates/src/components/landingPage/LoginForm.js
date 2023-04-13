@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { BiHide, BiShow } from "react-icons/bi";
-import { useAuth } from "contexts/AuthProvider";
+import { useAuth } from "services/AuthService";
 import Loading from "components/global/Loading";
 
 export default function LoginForm({ forgotPassword, switchToSignUp }) {

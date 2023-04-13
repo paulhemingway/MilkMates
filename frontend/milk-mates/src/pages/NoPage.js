@@ -1,4 +1,4 @@
-import useDocumentTitle from "contexts/DocumentTitle";
+import useDocumentTitle from "services/DocumentTitle";
 import React from "react";
 import { Link } from "react-router-dom";
 

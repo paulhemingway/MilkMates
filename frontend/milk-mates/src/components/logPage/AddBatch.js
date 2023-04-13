@@ -2,12 +2,66 @@ import React, { useState, useRef, useEffect } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import Select from "react-select";
+import dayjs, { Dayjs } from "dayjs";
+
+import { useAuth } from "services/AuthService";
+import { addBatch } from "services/BatchService";
 
 import options from "data/options.js";
 
 export default function AddBatch() {
   const [collapsed, setCollapsed] = useState(true);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const { user } = useAuth();
+
+  const [selectedDate, setSelectedDate] = useState(dayjs(Date.now()));
+  const [volume, setVolume] = useState("");
+  const [conditions, setConditions] = useState([]);
+  const [medications, setMedications] = useState([]);
+  const [vaccines, setVaccines] = useState([]);
+  const [diets, setDiets] = useState([]);
+  const [caffeine, setCaffeine] = useState(false);
+
+  const [errorCode, setErrorCode] = useState(-1);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  useEffect(() => {
+    switch (errorCode) {
+      case -1:
+        setErrorMsg("");
+        break;
+      case 0:
+        setErrorMsg("");
+        //modal?
+        break;
+      case 7:
+        setErrorMsg("Server timed out. Please try again.");
+        break;
+      default:
+        setErrorMsg("Something went wrong on our end. Please try again.");
+        break;
+    }
+    console.log(errorCode);
+  }, [errorCode]);
+
+  //ERROR CODES:
+  // 0 - success
+  // 1 - SQL get userId query error
+  // 2 - No user with that username
+  // 3 - SQL add batch query error
+  // 4 - SQL select batchid error
+  // 5 - no batches returned
+  // 6 - SQL add batchEvent query error
+
+  const volumeType = (e) => {
+    if (e.keyCode === 69) {
+      e.preventDefault();
+    }
+  };
+
+  const volumePaste = (e) => {
+    e.preventDefault();
+  };
+
   const expandClickRef = useRef(null);
 
   useEffect(() => {
@@ -27,25 +81,63 @@ export default function AddBatch() {
     }
   }, [collapsed]);
 
-  const handleChange = (date) => {
-    console.log(date);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!valid()) return;
+    const conditionsCSV = conditions.map((item) => item.value).join(",");
+    const medicationsCSV = medications.map((item) => item.value).join(",");
+    const vaccinesCSV = vaccines.map((item) => item.value).join(",");
+    const dietsCSV = diets.map((item) => item.value).join(",");
+
+    const response = await addBatch(
+      user.username,
+      selectedDate,
+      volume,
+      conditionsCSV,
+      medicationsCSV,
+      vaccinesCSV,
+      dietsCSV,
+      caffeine
+    );
+
+    setErrorCode(response);
+
+    if (response === 0) {
+      clearClicked();
+    }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const valid = () => {
+    return true;
   };
 
   const toggleCollapse = () => {
     setCollapsed(!collapsed);
   };
+  const dateChanged = (date) => {
+    setSelectedDate(dayjs(date));
+  };
 
-  const conditionsChanged = () => {};
-  const medicationsChanged = () => {};
-  const vaccinesChanged = () => {};
-  const dietsChanged = () => {};
+  const volumeChanged = (e) => {
+    setVolume(e.target.value);
+  };
 
-  const clearClicked = () => {};
-  const submitClicked = () => {};
+  const caffeineChanged = (e) => {
+    setCaffeine(e.target.checked);
+  };
+
+  const clearClicked = () => {
+    setSelectedDate(dayjs(Date.now()));
+    setVolume("");
+    setConditions([]);
+    setMedications([]);
+    setVaccines([]);
+    setDiets([]);
+    setCaffeine(false);
+    setErrorMsg("");
+    setErrorCode(-1);
+  };
 
   return (
     <div className={collapsed ? "add-batch" : "expanded add-batch"}>
@@ -61,34 +153,32 @@ export default function AddBatch() {
       {!collapsed && (
         <div className="add-form">
           <form onSubmit={handleSubmit}>
-            <div className="input-cont">
-              <label>
-                Batch Title
-                <input
-                  type="text"
-                  maxLength="32"
-                  tabIndex={collapsed ? "-1" : "0"}
-                  placeholder="Batch Title"
-                />
-              </label>
-            </div>
             <div className="two-col">
               <div className="input-cont">
                 <label>
                   Production Date
-                  <DateTimePicker disabled={collapsed ? true : false} />
+                  <DateTimePicker
+                    disabled={collapsed ? true : false}
+                    onChange={dateChanged}
+                    value={selectedDate}
+                    maxDate={dayjs(Date.now())}
+                  />
                 </label>
               </div>
               <div className="input-cont">
                 <label>
-                  Volume
+                  Volume (ounces)
                   <input
                     type="number"
                     step="0.1"
-                    min="0"
+                    min="0.5"
                     max="12"
                     tabIndex={collapsed ? "-1" : "0"}
                     placeholder="Volume"
+                    onChange={volumeChanged}
+                    value={volume}
+                    onKeyDown={volumeType}
+                    onPaste={volumePaste}
                   />
                 </label>
               </div>
@@ -113,7 +203,8 @@ export default function AddBatch() {
                         primary: "var(--blue)",
                       },
                     })}
-                    onChange={conditionsChanged}
+                    value={conditions}
+                    onChange={setConditions}
                   />
                 </label>
               </div>
@@ -136,7 +227,8 @@ export default function AddBatch() {
                         primary: "var(--blue)",
                       },
                     })}
-                    onChange={medicationsChanged}
+                    value={medications}
+                    onChange={setMedications}
                   />
                 </label>
               </div>
@@ -161,7 +253,8 @@ export default function AddBatch() {
                         primary: "var(--blue)",
                       },
                     })}
-                    onChange={vaccinesChanged}
+                    value={vaccines}
+                    onChange={setVaccines}
                   />
                 </label>
               </div>
@@ -184,28 +277,41 @@ export default function AddBatch() {
                         primary: "var(--blue)",
                       },
                     })}
-                    onChange={dietsChanged}
+                    value={diets}
+                    onChange={setDiets}
                   />
                 </label>
               </div>
             </div>
+            <div className="input-cont">
+              <div className="caffeine">
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={caffeine}
+                    onChange={caffeineChanged}
+                  />
+                  Have you consumed caffeine within the last 24 hours prior to
+                  producing this batch?
+                </label>
+              </div>
+            </div>
+            <div className="error-msg">{errorMsg}</div>
             <div className="buttons">
               <button
-                value="Clear"
+                type="button"
                 className="button secondary-button"
                 tabIndex={collapsed ? "-1" : "0"}
                 onClick={clearClicked}
               >
                 Clear
               </button>
-              <button
-                value="Clear"
+              <input
+                type="submit"
+                value="Add Batch"
                 className="button primary-button"
                 tabIndex={collapsed ? "-1" : "0"}
-                onClick={submitClicked}
-              >
-                Submit
-              </button>
+              />
             </div>
           </form>
         </div>
