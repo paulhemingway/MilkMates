@@ -1,10 +1,14 @@
 .profile {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 15px;
 
   .header {
     display: flex;
     align-items: center;
     gap: 2em;
-    justify-content: center;
+    justify-content: start;
+
 
     svg {
       font-size: 5em;
@@ -15,7 +19,7 @@
     }
 
     h1 {
-      font-size: 2em;
+      font-size: 1.8em;
     }
   }
 
@@ -25,28 +29,148 @@
     .tabs {
       display: flex;
       justify-content: center;
-      overflow: hidden;
+
       list-style: none;
       gap: 10px;
+      flex-wrap: wrap;
+      box-sizing: border-box;
 
       .tab {
-        padding: 10px 20px;
-        background-image: var(--blue-gradient);
-        color: white;
+        padding: 10px 15px;
+        border: 1px solid var(--blue);
+        border-radius: 4px;
+        color: var(--blue);
         font-weight: bold;
+        font-size: 0.9em;
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+        user-select: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
 
         &.active {
-          background-image: var(--pink-gradient);
+          background-image: var(--blue-gradient);
+          color: white;
+          border-color: white;
+        }
+
+        &:hover {
+          transform: scale(1.05);
+          box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        &:focus {
+          outline: none;
+          box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+
         }
       }
 
-      & > li:first-child .tab {
-        border-radius: 50px 0 0 50px;
+      // & > li:first-child .tab {
+      //   border-radius: 50px 0 0 50px;
+      // }
+
+      // & > li:last-child .tab {
+      //   border-radius: 0 50px 50px 0;
+      // }
+    }
+  }
+
+  .profile-content {
+    h2 {
+      margin-bottom: 1em;
+    }
+
+    .edit-profile {
+
+      .inputs {
+        display: flex;
+        flex-direction: column;
+
+        &>div {
+          margin-bottom: 1.5em;
+        }
+
+        .input-cont {
+          label {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.9em;
+
+            input {
+              padding: 5px;
+              width: 100%;
+            }
+          }
+        }
       }
 
-      & > li:last-child .tab {
-        border-radius: 0 50px 50px 0;
+      .buttons {
+        display: flex;
+        gap: 2em;
+        flex-direction: column;
+        justify-content: center;
+        width: 50%;
+        min-width: 300px;
+        margin: 1em auto;
+
+
+        button {
+          padding: 10px;
+          cursor: pointer;
+          border-radius: 5px;
+          font-size: 1em;
+
+          &.save {
+            background-color: white;
+            border: 2px solid var(--green);
+            color: var(--green);
+
+            &:disabled {
+              border: 2px solid var(--light-grey);
+              color: var(--light-grey);
+              background-color: rgb(238, 238, 238);
+              cursor: default;
+            }
+
+            &:hover:not(:disabled) {
+              background-color: var(--green);
+              color: white;
+            }
+          }
+
+          &.delete {
+            border: 2px solid var(--red);
+            background-color: white;
+            color: var(--red);
+
+            &:hover {
+              background-color: var(--red);
+              color: white;
+            }
+          }
+        }
+
+
       }
     }
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .header {
+    h1 {
+      font-size: 1.5em !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .two-col {
+    flex-direction: column !important;
+  }
+
+  .tab {
+    font-size: 0.7em !important;
+    padding: 5px 10px;
   }
 }

@@ -1,63 +1,123 @@
 import useDocumentTitle from "services/DocumentTitle";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { AiOutlineUser } from "react-icons/ai";
+import { useAuth } from "services/AuthService";
 
 import "assets/styles/Profile.scss";
 
+import EditProfile from "components/profile/EditProfile";
+import SellerRating from "components/profile/SellerRating";
+import ChangePassword from "components/profile/ChangePassword";
+
 export default function Profile() {
   // 1: edit profile
-  // 2: health info
-  // 3: Seller rating
-  // 4: Change password
+  // 2: Seller rating
+  // 3: Change password
   const [tab, setTab] = useState(1);
+  const [user, setUser] = useState(null)
   const { userId } = useParams();
 
   useDocumentTitle(`${userId}'s Profile`);
 
-  const user = {
-    LName: "Hemingway",
-    addedDateTime: "2023-04-10T20:47:07.000Z",
-    email: "paul@paul.com",
-    fName: "Paul",
-    isActive: 1,
-    isAdmin: 0,
-    lastActiveTime: null,
-    password:
-      "444ac1a9fe1f282503e82a73765095c407a35f68c1afc78e27c710161412e4b2",
-    phone: "8166543348",
-    userid: 7,
-    username: "pshfmg",
-    zipCode: "65203",
+  const { logout, getUserInfo } = useAuth();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await getUserInfo(userId);
+      setUser(user);
+    };
+    fetchUser();
+  }, [userId, getUserInfo]);
+
+  // Define a new function that wraps tabKeyDown
+  const tabKeyDown = (tabIndex) => (event) => {
+    if (tabIndex === 4) {
+      logout();
+      return;
+    }
+    if (event.key === ' ' || event.key === 'Enter') {
+      // Your code for handling the key press here
+      changeTab(tabIndex);
+    }
   };
+
+  const changeTab = (tabIndex) => {
+    setTab(tabIndex);
+  };
+
+  function Content() {
+    switch (tab) {
+      case 1:
+        return <EditProfile user={user} />;
+      case 2:
+        return <SellerRating />;
+      case 3:
+        return <ChangePassword />;
+      default:
+        return <></>;
+    }
+  }
 
   return (
     <div className="profile">
-      <div className="header">
-        <AiOutlineUser />
-        <h1>
-          {user.fName} {user.LName}'s Profile
-        </h1>
-      </div>
-      <div className="tabs-cont">
-        <ul className="tabs">
-          <li>
-            <div className="tab active" tabIndex="0">Edit Profile</div>
-          </li>
-          <li>
-            <div className="tab" tabIndex="0">Health Info</div>
-          </li>
-          <li>
-            <div className="tab" tabIndex="0">Seller Rating</div>
-          </li>
-          <li>
-            <div className="tab" tabIndex="0">Change Password</div>
-          </li>
-          <li>
-            <div className="tab" tabIndex="0">Logout</div>
-          </li>
-        </ul>
-      </div>
+      {user !== null && (
+        <>
+          <div className="header">
+            <AiOutlineUser />
+            <h1>
+              {user.fName} {user.LName}'s Profile
+            </h1>
+          </div>
+          <div className="tabs-cont">
+            <ul className="tabs">
+              <li>
+                <div
+                  className={tab === 1 ? "tab active" : "tab"}
+                  tabIndex="0"
+                  onKeyDown={tabKeyDown(1)}
+                  onClick={() => changeTab(1)}
+                >
+                  Edit Profile
+                </div>
+              </li>
+              <li>
+                <div
+                  className={tab === 2 ? "tab active" : "tab"}
+                  tabIndex="0"
+                  onKeyDown={tabKeyDown(2)}
+                  onClick={() => changeTab(2)}
+                >
+                  Seller Rating
+                </div>
+              </li>
+              <li>
+                <div
+                  className={tab === 3 ? "tab active" : "tab"}
+                  tabIndex="0"
+                  onKeyDown={tabKeyDown(3)}
+                  onClick={() => changeTab(3)}
+                >
+                  Change Password
+                </div>
+              </li>
+              <li>
+                <div
+                  className="tab"
+                  tabIndex="0"
+                  onKeyDown={tabKeyDown(4)}
+                  onClick={logout}
+                >
+                  Logout
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div className="profile-content">
+            <Content />
+          </div>
+        </>
+      )}
     </div>
   );
 }
