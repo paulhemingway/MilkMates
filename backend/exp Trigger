@@ -1,0 +1,40 @@
+CREATE EVENT batch_notification_event
+ON SCHEDULE
+  EVERY 1 DAY -- modify this interval to meet your needs
+DO
+  BEGIN
+    DECLARE notification_text VARCHAR(255);
+    
+    -- loop through all batches in the table
+    DECLARE cur CURSOR FOR SELECT * FROM batches;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET @done = TRUE;
+    SET @done = FALSE;
+    
+    OPEN cur;
+    read_loop: LOOP
+      FETCH cur INTO batchId, userId, productionDate, volume, diet, sickness, medications, caffeine, vaccines, isActive, isListed;
+      IF @done THEN
+        LEAVE read_loop;
+      END IF;
+      
+      -- check if the batch meets the condition and insert a new row into the "notifications" table
+      IF isActive = TRUE AND isListed = TRUE THEN 
+        IF productionDate + INTERVAL 3 DAY <= NOW() THEN 
+          SET notification_text = '3 days from production';
+        ELSEIF productionDate + INTERVAL 6 MONTH <= NOW() THEN 
+          SET notification_text = '6 months from production';
+        ELSEIF productionDate + INTERVAL 1 YEAR <= NOW() THEN 
+          SET notification_text = '1 year from production';
+        END IF;
+        
+        IF notification_text IS NOT NULL THEN 
+          INSERT INTO notifications (batchId, userId, notification) 
+          VALUES (batchId, userId, notification_text);
+        END IF;
+      END IF;
+      
+      SET notification_text = NULL;
+    END LOOP;
+    
+    CLOSE cur;
+  END;
