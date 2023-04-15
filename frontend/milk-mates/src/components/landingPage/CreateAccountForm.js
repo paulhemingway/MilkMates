@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import { useState, useEffect } from "react";
 import { BiHide, BiShow } from "react-icons/bi";
@@ -39,10 +40,14 @@ export default function CreateAccountForm({ switchToLogin }) {
 
   const nameRegex = /^[a-zA-Z]+(['-][a-zA-Z]+)*$/;
   const userRegex = /^[a-zA-Z][a-zA-Z0-9]*$/;
-  const passRegex = /^([a-zA-Z0-9!@#$%^&*()_+-=[;':",.?<>`~]{8,})$/;
+  const passRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
   useEffect(() => {
-    switch (registerErrorCode) {
+    errorCodeChanged(registerErrorCode);
+  }, [registerErrorCode]);
+
+  const errorCodeChanged = (code) => {
+    switch (code) {
       case -1:
         //default code. nothing happened yet.
         break;
@@ -75,7 +80,7 @@ export default function CreateAccountForm({ switchToLogin }) {
         );
         break;
     }
-  }, [registerErrorCode]);
+  };
 
   const togglePassVisible = () => {
     setPassVisible(!passVisible);
@@ -130,8 +135,6 @@ export default function CreateAccountForm({ switchToLogin }) {
       setLoading(false);
       return;
     }
-
-    
 
     setTimeout(async () => {
       try {

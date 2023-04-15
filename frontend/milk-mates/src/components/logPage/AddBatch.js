@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import Select from "react-select";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 
 import { useAuth } from "services/AuthService";
 import { addBatch } from "services/BatchService";
