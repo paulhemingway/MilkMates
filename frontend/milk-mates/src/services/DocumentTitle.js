@@ -1,4 +1,5 @@
-import { useRef, useEffect } from 'react'
+/* eslint-disable */
+import { useRef, useEffect } from "react";
 
 function useDocumentTitle(title, prevailOnUnmount = false) {
   const defaultTitle = useRef(document.title);
@@ -7,11 +8,15 @@ function useDocumentTitle(title, prevailOnUnmount = false) {
     document.title = title + " | MilkMates";
   }, [title]);
 
-  useEffect(() => () => {
+  useEffect(() => {
+    setTitle()
+  }, []);
+
+  const setTitle = () => {
     if (!prevailOnUnmount) {
       document.title = defaultTitle.current;
     }
-  }, [])
+  };
 }
 
-export default useDocumentTitle
+export default useDocumentTitle;
