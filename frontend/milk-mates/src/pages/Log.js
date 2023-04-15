@@ -5,8 +5,6 @@ import LogTable from "components/logPage/LogTable";
 import { useEffect } from "react";
 import AddBatch from "components/logPage/AddBatch";
 
-import { HiPlus } from "react-icons/hi";
-
 // dummy data
 import batches from "data/batches.json";
 
@@ -18,8 +16,6 @@ export default function Log(props) {
   useEffect(() => {
     // this is where the batches data will be pulled from the API
   }, []);
-
-  const addBatchClicked = () => {};
 
   return (
     <div className="log">

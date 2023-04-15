@@ -50,7 +50,8 @@ export const AuthProvider = ({ children }) => {
       } else {
         await setLoginErrorCode(0);
         setLoggedIn(true);
-        setUser(response.data[1][0]);
+        console.log(response.data[1]);
+        setUser(response.data[1]);
       }
     } catch (error) {
       console.log(error);
@@ -99,6 +100,48 @@ export const AuthProvider = ({ children }) => {
 
   const checkToken = () => {};
 
+  const getUserInfo = async (username) => {
+    try {
+      const response = await axios.post(
+        `${apiURL}/login/GetUserInfo`,
+        { username },
+        {
+          timeout: 5000, // Timeout after 5 seconds
+        }
+      );
+      return response.data[1][0]
+      
+    } catch (error) {
+      console.log(error);
+      return null
+    }
+  };
+
+  /*
+  0 success
+  1 no user with that username
+  2 query error
+  3 wrong old password
+  */
+  const changePassword = async (username, oldPassword, newPassword) => {
+    try {
+      const response = await axios.put(
+        `${apiURL}/login/UpdateUserPassword`,
+        { username, newPassword, oldPassword },
+        {
+          timeout: 5000, // Timeout after 5 seconds
+        }
+      );
+      return response.data[0].errorCode
+      
+    } catch (error) {
+      console.log(error);
+      return 4
+    }
+  };
+
+ 
+
   // Pass the authentication state and methods to the AuthContext.Provider component
   return (
     <AuthContext.Provider
@@ -110,6 +153,8 @@ export const AuthProvider = ({ children }) => {
         loginErrorCode,
         registerErrorCode,
         register,
+        getUserInfo,
+        changePassword
       }}
     >
       {children}
