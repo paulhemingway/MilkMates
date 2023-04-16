@@ -1,5 +1,5 @@
 import React from "react";
-import "assets/styles/Terms.scss";
+import "assets/styles/pages/Terms.scss";
 import PublicWrapper from "components/global/PublicWrapper";
 import useDocumentTitle from "services/DocumentTitle";
 

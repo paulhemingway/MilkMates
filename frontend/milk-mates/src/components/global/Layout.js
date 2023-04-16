@@ -4,7 +4,7 @@ import Sidebar from "components/sidebar/Sidebar";
 import { useState } from "react";
 import { useAuth } from "services/AuthService";
 
-import "assets/styles/Layout.scss";
+import "assets/styles/global/Layout.scss";
 import Header from "./Header";
 
 export default function Layout() {

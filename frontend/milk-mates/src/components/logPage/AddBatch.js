@@ -4,14 +4,15 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import Select from "react-select";
 import dayjs from "dayjs";
 
+import { useBatch } from "services/BatchService";
 import { useAuth } from "services/AuthService";
-import { addBatch } from "services/BatchService";
 
 import options from "data/options.js";
 
 export default function AddBatch() {
   const [collapsed, setCollapsed] = useState(true);
   const { user } = useAuth();
+  const { addBatch } = useBatch();
 
   const [selectedDate, setSelectedDate] = useState(dayjs(Date.now()));
   const [volume, setVolume] = useState("");
@@ -40,7 +41,6 @@ export default function AddBatch() {
         setErrorMsg("Something went wrong on our end. Please try again.");
         break;
     }
-    console.log(errorCode);
   }, [errorCode]);
 
   //ERROR CODES:
