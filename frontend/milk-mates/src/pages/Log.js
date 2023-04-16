@@ -8,7 +8,7 @@ import AddBatch from "components/logPage/AddBatch";
 // dummy data
 import batches from "data/batches.json";
 
-import "assets/styles/Log.scss";
+import "assets/styles/pages/Log.scss";
 import useDocumentTitle from "services/DocumentTitle";
 
 export default function Log(props) {

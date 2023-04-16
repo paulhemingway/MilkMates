@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 import { useAuth } from "services/AuthService";
 
-import "assets/styles/Header.scss";
+import "assets/styles/global/Header.scss";
 
 export default function Header(props) {
   const isAtLanding = window.location.pathname === "/";
