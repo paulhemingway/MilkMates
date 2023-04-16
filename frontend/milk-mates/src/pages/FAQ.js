@@ -1,7 +1,7 @@
 import React from "react";
 import Accordion from "components/helpPage/Accordion";
 import FAQ from "data/FAQ.json";
-import "assets/styles/FAQ.scss";
+import "assets/styles/pages/FAQ.scss";
 import PublicWrapper from "components/global/PublicWrapper";
 import useDocumentTitle from "services/DocumentTitle";
 

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { AiOutlineUser } from "react-icons/ai";
 import { useAuth } from "services/AuthService";
 
-import "assets/styles/Profile.scss";
+import "assets/styles/pages/Profile.scss";
 
 import EditProfile from "components/profile/EditProfile";
 import SellerRating from "components/profile/SellerRating";

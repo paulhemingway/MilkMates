@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "services/AuthService";
-import "assets/styles/Sidebar.scss";
+import "assets/styles/global/Sidebar.scss";
 
 import { AiOutlineUser, AiOutlineHome } from "react-icons/ai";
 import { BiBarChartAlt2, BiLogOut } from "react-icons/bi";

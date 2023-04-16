@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from "react";
 import { useState, useEffect } from "react";
-import "assets/styles/Landing.scss";
+import "assets/styles/pages/Landing.scss";
 import useDocumentTitle from "services/DocumentTitle";
 
 import LoginForm from "components/landingPage/LoginForm";

@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./Header";
-import "assets/styles/PublicWrapper.scss";
+import "assets/styles/global/PublicWrapper.scss";
 
 export default function PublicWrapper(props) {
   return (
