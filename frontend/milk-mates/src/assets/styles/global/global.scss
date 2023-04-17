@@ -22,6 +22,16 @@
   --active-pink-gradient: linear-gradient(160deg, #994364, #d77c9f);
   --disabled-pink-gradient: linear-gradient(160deg, #f6bcd2, #b98397);
   --blue-gradient: linear-gradient(130deg, #5da4e6, #2d5e8b);
+  --disabled-blue-gradient: linear-gradient(130deg, #9fc9ef, #7d9cb8);
+  --red-gradient: linear-gradient(160deg, #d84444, #da6b6b);
+
+  --logged: rgba(255, 99, 132, 0.9);
+  --refrigerated: rgba(54, 162, 235, 0.9);
+  --frozen: rgba(255, 206, 86, 0.9);
+  --thawed: rgba(75, 192, 192, 0.9);
+  --consumed: rgba(153, 102, 255, 0.9);
+  --shared: rgba(255, 159, 64, 0.9);
+  --discarded: rgba(220, 53, 69, 0.9);
 }
 
 .link {
@@ -49,6 +59,16 @@
   }
 }
 
+.three-col {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+
+  &>div {
+    flex: 33%;
+  }
+}
+
 .shadow {
   box-shadow: 2px 7px 9px 0 rgba(100, 100, 111, 0.2);
 }
@@ -57,6 +77,9 @@
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  h2 {
+    margin-bottom: 20px;
+  }
 }
 
 .tooltip {
@@ -126,14 +149,62 @@
     border: 2px solid rgba(0, 0, 0, 0);
   }
 
+  &.primary-button-blue {
+    background-image: var(--blue-gradient);
+    color: white;
+    border: 2px solid rgba(0, 0, 0, 0);
+
+    &:not(:disabled):hover {
+      background-color: white !important;
+      color: var(--blue) !important;
+      border : 2px solid var(--blue) !important;
+    }
+
+    &:disabled {
+      background-image: var(--disabled-blue-gradient);
+    }
+  }
+
+  &.primary-button-red {
+    background-image: var(--red-gradient);
+    color: white;
+    border: 2px solid rgba(0, 0, 0, 0);
+
+    &:not(:disabled):hover {
+      background-color: white !important;
+      color: var(--red) !important;
+      border : 2px solid var(--red) !important;
+    }
+
+    
+  }
+
   &.secondary-button {
     background-color: white;
     border: 2px solid var(--pink);
     color: var(--pink);
   }
 
+  &.secondary-button-blue {
+    background-color: white;
+    border: 2px solid var(--blue);
+    color: var(--blue);
+
+    &:not(:disabled):hover {
+      background-color: var(--light-blue) !important;
+      color: var(--blue);
+      border-color: var(--blue);
+    }
+
+    &:disabled {
+      background-image: var(--disabled-blue-gradient);
+    }
+
+    
+  }
+
   &:not(:disabled):hover {
-    background-color: wwite;
+    background-color: white;
     background-image: none;
     background-color: var(--light-pink);
     border: 2px solid var(--pink);
@@ -148,6 +219,9 @@
   &:disabled {
     background-image: var(--disabled-pink-gradient);
     cursor: not-allowed;
+  }
+  &:focus-visible {
+    outline: 2px dashed black;
   }
 
 }
@@ -201,3 +275,4 @@
   -ms-user-select: none;
   user-select: none;
 }
+

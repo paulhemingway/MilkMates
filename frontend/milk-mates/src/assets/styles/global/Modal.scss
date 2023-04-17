@@ -1,0 +1,62 @@
+.modal-cont {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 70px);
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  backdrop-filter: blur(2px);
+
+  .modal {
+    background-color: white;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.4);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h1 {
+        font-size: 1.4em;
+      }
+
+      svg {
+        font-size: 2em;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover,
+        &:focus-visible {
+          transform: translate(-3px, -3px);
+          filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
+          outline: none;
+        }
+      }
+
+    }
+
+    .modal-content {
+      margin: 20px 0;
+    }
+
+    .buttons{
+      display: flex;
+      justify-content: flex-end;
+      gap: 15px;
+    }
+
+  }
+}
+
+.delete-batch-event {
+  .event-card {
+    .event {
+      margin: 0 auto;
+    }
+  }
+}
