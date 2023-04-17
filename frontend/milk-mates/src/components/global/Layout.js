@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
 import React from "react";
 import Sidebar from "components/sidebar/Sidebar";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useAuth } from "services/AuthService";
-import { ModalProvider, useModalService } from "services/ModalService";
+import { useModalService } from "services/ModalService";
 import Modal from "./Modal";
 
 import "assets/styles/global/Layout.scss";

@@ -25,12 +25,12 @@ export default function Log(props) {
       </div>
       <div>
         <Wrapper header="Milk Production Stats">
-          <LogCharts data={batches} />
+          <LogCharts batches={batches} />
         </Wrapper>
       </div>
       <div>
         <Wrapper header="Milk Log">
-          <LogTable data={batches} />
+          <LogTable batches={batches} />
         </Wrapper>
       </div>
     </div>

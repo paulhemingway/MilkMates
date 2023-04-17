@@ -10,7 +10,7 @@ import FilterMenu from "./FilterMenu";
 import Pagination from "components/global/Pagination";
 import ClearableFilter from "./ClearableFilter";
 
-export default function LogTable({ data }) {
+export default function LogTable({ batches }) {
   // state after applying sort and filters
   const [sortedBatches, setSortedBatches] = useState([]);
   const [filteredBatches, setFilteredBatches] = useState([]);
@@ -41,7 +41,7 @@ export default function LogTable({ data }) {
   };
 
   const applyFilters = (newFilters) => {
-    let newArray = [...data];
+    let newArray = [...batches];
 
     if (newFilters.dateRange) {
       let startDate = new Date();
@@ -182,13 +182,13 @@ export default function LogTable({ data }) {
     },
   ];
 
-  // set data
+  // set batches
   useEffect(() => {
-    if (data) {
-      setSortedBatches(data);
-      setFilteredBatches(data);
+    if (batches) {
+      setSortedBatches(batches);
+      setFilteredBatches(batches);
     }
-  }, [data]);
+  }, [batches]);
 
   useEffect(() => {
     updateDisplayedBatches(0, perPage);
@@ -198,7 +198,7 @@ export default function LogTable({ data }) {
     if (sortedBatches.length > 0) {
       setDisplayedBatches([...sortedBatches].slice(start, end));
     } else {
-      setDisplayedBatches([...data].slice(start, end));
+      setDisplayedBatches([...batches].slice(start, end));
     }
   }
 

@@ -59,6 +59,7 @@ export default function PieChart({ data }) {
         
       },
       legend: {
+        display: false,
         position: "bottom",
         labels: {
           boxWidth: 11,
@@ -66,7 +67,7 @@ export default function PieChart({ data }) {
             size: 11,
           }
         }
-      }
+      },
     }
     
   };
