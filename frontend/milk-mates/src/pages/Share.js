@@ -1,11 +1,25 @@
-import useDocumentTitle from 'services/DocumentTitle'
-import React from 'react'
+import useDocumentTitle from "services/DocumentTitle";
+import React, {useState, useEffect} from "react";
+import Wrapper from "components/global/Wrapper";
+import { useBatchService } from "services/BatchService";
 
 export default function Share(props) {
-  useDocumentTitle(props.title)
+  const [notListed, setNotListed] = useState([]);
+
+  useDocumentTitle(props.title);
+  const { batches } = useBatchService();
+  
+  useEffect(() => {
+    const batchesNotListed = batches.filter((batch) => {
+      return batch.isListed === 0
+    })
+    setNotListed(batchesNotListed)
+  }, [batches])
   return (
-    <div>
-      Share milk
+    <div className="share">
+      <h1>Share Milk</h1>
+      <Wrapper header="Create A Listing"></Wrapper>
+      <Wrapper header="My Listings"></Wrapper>
     </div>
-  )
+  );
 }

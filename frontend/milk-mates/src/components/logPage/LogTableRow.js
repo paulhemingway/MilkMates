@@ -12,7 +12,8 @@ import { Link } from "react-router-dom";
 
 export default function LogTableRow(props) {
   const date = new Date(props.batch.productionDate);
-  const formattedDate = moment(date).format("MMM D, YYYY");
+  const formattedDate = moment(date).format("MMM D");
+  const formattedYear = moment(date).format(", YYYY")
   const formattedTime = moment(date).format("h:mm A");
 
   const status = props.batch.events[props.batch.events.length - 1].event;
@@ -40,8 +41,9 @@ export default function LogTableRow(props) {
 
   return (
     <tr>
+      <td>{props.batch.batchId}</td>
       <td>
-        {formattedDate} <span className="time">{formattedTime}</span>
+        {formattedDate}<span className="disappear">{formattedYear}</span> <span className="time">{formattedTime}</span>
       </td>
       <td>{props.batch.volume} oz</td>
       <td className="status-cell">
