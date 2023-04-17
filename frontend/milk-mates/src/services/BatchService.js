@@ -57,13 +57,23 @@ export const BatchProvider = ({ children }) => {
       if(response.data.length > 1) {
         let newBatches = response.data.slice(1)
         setBatches(newBatches)
+        console.log(newBatches)
       }
-
+      
       return response.data[0].errorCode
     } catch (error) {
       console.log(error);
     }
   };
+
+  const getBatch = (batchId) => {
+    const batch = batches.find((batch) => batch.batchId == batchId)
+    return batch
+  }
+
+  const deleteBatchEvent = async (batchEventId) => {
+    console.log("Deleting " + batchEventId)
+  }
 
   return (
     <BatchContext.Provider
@@ -71,6 +81,8 @@ export const BatchProvider = ({ children }) => {
         batches,
         addBatch,
         getBatchesByUser,
+        getBatch,
+        deleteBatchEvent
       }}
     >
       {children}
@@ -78,6 +90,6 @@ export const BatchProvider = ({ children }) => {
   );
 };
 
-export const useBatch = () => {
+export const batchService = () => {
   return useContext(BatchContext);
 };

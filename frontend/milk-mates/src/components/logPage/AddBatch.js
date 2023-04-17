@@ -4,7 +4,7 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import Select from "react-select";
 import dayjs from "dayjs";
 
-import { useBatch } from "services/BatchService";
+import { batchService } from "services/BatchService";
 import { useAuth } from "services/AuthService";
 
 import options from "data/options.js";
@@ -12,7 +12,7 @@ import options from "data/options.js";
 export default function AddBatch() {
   const [collapsed, setCollapsed] = useState(true);
   const { user } = useAuth();
-  const { addBatch } = useBatch();
+  const { addBatch } = batchService();
 
   const [selectedDate, setSelectedDate] = useState(dayjs(Date.now()));
   const [volume, setVolume] = useState("");
@@ -183,7 +183,7 @@ export default function AddBatch() {
                 </label>
               </div>
             </div>
-            <div className="two-col">
+            
               <div className="input-cont">
                 <label>
                   Conditions
@@ -232,8 +232,6 @@ export default function AddBatch() {
                   />
                 </label>
               </div>
-            </div>
-            <div className="two-col">
               <div className="input-cont">
                 <label>
                   Vaccines
@@ -257,7 +255,7 @@ export default function AddBatch() {
                     onChange={setVaccines}
                   />
                 </label>
-              </div>
+              
               <div className="input-cont">
                 <label>
                   Diets
@@ -291,8 +289,7 @@ export default function AddBatch() {
                     checked={caffeine}
                     onChange={caffeineChanged}
                   />
-                  Have you consumed caffeine within the last 24 hours prior to
-                  producing this batch?
+                  Did you consume caffeine less than 8 hours before producing this batch?
                 </label>
               </div>
             </div>
