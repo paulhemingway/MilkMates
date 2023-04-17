@@ -90,6 +90,6 @@ export const BatchProvider = ({ children }) => {
   );
 };
 
-export const batchService = () => {
+export const useBatchService = () => {
   return useContext(BatchContext);
 };

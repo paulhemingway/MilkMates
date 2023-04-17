@@ -4,14 +4,14 @@ import LogCharts from "components/logPage/LogCharts";
 import LogTable from "components/logPage/LogTable";
 import { useEffect } from "react";
 import AddBatch from "components/logPage/AddBatch";
-import { batchService } from "services/BatchService";
+import { useBatchService } from "services/BatchService";
 
 import "assets/styles/pages/Log.scss";
 import useDocumentTitle from "services/DocumentTitle";
 
 export default function Log(props) {
 
-  const {batches} = batchService();
+  const {batches} = useBatchService();
   useDocumentTitle(props.title)
   useEffect(() => {
     // this is where the batches data will be pulled from the API

@@ -1,7 +1,7 @@
 import useDocumentTitle from "services/DocumentTitle";
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { batchService } from "services/BatchService";
+import { useBatchService } from "services/BatchService";
 import { TiArrowBack } from "react-icons/ti";
 import Loading from "components/global/Loading";
 
@@ -14,7 +14,7 @@ export default function Batch() {
   const [editing, setEditing] = useState(false);
 
   const { batchId } = useParams();
-  const { getBatch } = batchService();
+  const { getBatch } = useBatchService();
 
   useEffect(() => {
     fetchBatch(batchId);
