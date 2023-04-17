@@ -4,8 +4,8 @@ import React from 'react'
 export default function Dashboard(props) {
   useDocumentTitle(props.title)
   return (
-    <div>
-      Dashboard page
+    <div className='dashboard'>
+      <h1>Dashboard</h1>
     </div>
   )
 }

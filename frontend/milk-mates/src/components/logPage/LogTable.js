@@ -37,7 +37,7 @@ export default function LogTable({ data }) {
 
   const updateFilters = (newFilters) => {
     setFilters(newFilters);
-    applyFilters(newFilters)
+    applyFilters(newFilters);
   };
 
   const applyFilters = (newFilters) => {
@@ -66,7 +66,6 @@ export default function LogTable({ data }) {
       newArray = newArray.filter((batch) => {
         return new Date(batch.productionDate) >= startDate;
       });
-      
     }
 
     if (newFilters.status.length > 0) {
@@ -76,29 +75,29 @@ export default function LogTable({ data }) {
       });
     }
 
-    if(newFilters.listed !== null) {
+    if (newFilters.listed !== null) {
       newArray = newArray.filter((batch) => {
-        return newFilters.listed === batch.isListed
-      })
+        return newFilters.listed === batch.isListed;
+      });
     }
 
     setFilteredBatches(newArray);
-    hideFilterMenu()
+    hideFilterMenu();
   };
 
   const clearFilter = (type, value) => {
-    let newFilters = {...filters}
-    value = value.toLowerCase()
-    type = type.toLowerCase()
+    let newFilters = { ...filters };
+    value = value.toLowerCase();
+    type = type.toLowerCase();
 
-    switch(type) {
+    switch (type) {
       case "date":
         newFilters.dateRange = null;
         break;
       case "status":
-        let index = newFilters.status.indexOf(value)
-        if(index !== -1) {
-          newFilters.status.splice(index, 1)
+        let index = newFilters.status.indexOf(value);
+        if (index !== -1) {
+          newFilters.status.splice(index, 1);
         }
         break;
       case "listed":
@@ -106,8 +105,8 @@ export default function LogTable({ data }) {
         break;
     }
 
-    updateFilters(newFilters)
-  }
+    updateFilters(newFilters);
+  };
 
   const sortOptions = [
     {
@@ -311,30 +310,44 @@ export default function LogTable({ data }) {
             onChange={perPageSelected}
           />
         </div>
-        
       </div>
       <div className="set-filters">
-          {
-            filters.dateRange && 
-            <ClearableFilter type="Date" value={filters.dateRange} clear={clearFilter}/>
-          }
-          {
-            filters.status.length > 0 &&
-            filters.status.map((stat) => {
-              return <ClearableFilter type="Status" value={stat.charAt(0).toUpperCase() + stat.slice(1)} clear={clearFilter} key={stat}/>
-            })
-          }
-          {
-            filters.listed !== null &&
-            <ClearableFilter type="Listed" value={filters.listed ? 'Yes' : 'No'} clear={clearFilter} />
-          }
-
+        {filters.dateRange && (
+          <ClearableFilter
+            type="Date"
+            value={filters.dateRange}
+            clear={clearFilter}
+          />
+        )}
+        {filters.status.length > 0 &&
+          filters.status.map((stat) => {
+            return (
+              <ClearableFilter
+                type="Status"
+                value={stat.charAt(0).toUpperCase() + stat.slice(1)}
+                clear={clearFilter}
+                key={stat}
+              />
+            );
+          })}
+        {filters.listed !== null && (
+          <ClearableFilter
+            type="Listed"
+            value={filters.listed ? "Yes" : "No"}
+            clear={clearFilter}
+          />
+        )}
       </div>
       <div className="table">
         <table>
           <thead>
             <tr>
-              <th>Date Produced</th>
+              <th>
+                <span className="disappear">Batch</span>ID
+              </th>
+              <th>
+                Date <span className="disappear">Produced</span>
+              </th>
               <th>Volume</th>
               <th>Status</th>
               <th>Listed</th>

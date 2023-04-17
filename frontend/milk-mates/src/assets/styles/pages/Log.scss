@@ -1,8 +1,6 @@
 .log {
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  padding: 10px;
 
   .add-batch {
     background-image: var(--pink-gradient);
@@ -29,6 +27,7 @@
       cursor: pointer;
       height: 60px;
       color: white;
+      margin-bottom: 2em;
 
       svg {
         font-size: 1.8em;
@@ -396,6 +395,9 @@
       }
     }
   }
+  .log-charts {
+    max-height: 600px;
+  }
 }
 
 @media only screen and (max-width: 520px) {
@@ -403,6 +405,11 @@
     .log-table {
       .inputs {
         gap: 10px;
+        padding: 10px;
+
+        *:not(svg) {
+          font-size: 0.8em !important;
+        }
 
         .input {
           .option {
@@ -419,20 +426,29 @@
       }
 
       .table {
+        border-radius: 10px;
         table {
+          
           tbody {
-            td {
+            td{
+              padding: 2px 5px !important;
               font-size: .7em;
             }
           }
 
           thead {
             th {
-              font-size: .8em;
+              font-size: .7em;
+              padding: 5px;
+              
             }
           }
         }
+        .disappear {
+          display: none;
+        }
       }
     }
+    
   }
 }
