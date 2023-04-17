@@ -6,13 +6,16 @@ import dayjs from "dayjs";
 
 import { batchService } from "services/BatchService";
 import { useAuth } from "services/AuthService";
+import { useModalService } from "services/ModalService";
 
 import options from "data/options.js";
+import AddBatchSuccessModal from "./AddBatchSuccessModal";
 
 export default function AddBatch() {
   const [collapsed, setCollapsed] = useState(true);
   const { user } = useAuth();
   const { addBatch } = batchService();
+  const { openModal } = useModalService();
 
   const [selectedDate, setSelectedDate] = useState(dayjs(Date.now()));
   const [volume, setVolume] = useState("");
@@ -31,8 +34,8 @@ export default function AddBatch() {
         setErrorMsg("");
         break;
       case 0:
+        console.log("success")
         setErrorMsg("");
-        //modal?
         break;
       case 7:
         setErrorMsg("Server timed out. Please try again.");
@@ -42,6 +45,10 @@ export default function AddBatch() {
         break;
     }
   }, [errorCode]);
+
+  const openSuccessModal = () => {
+    openModal("Batch Added!", <AddBatchSuccessModal />)
+  };
 
   //ERROR CODES:
   // 0 - success
@@ -105,10 +112,15 @@ export default function AddBatch() {
 
     if (response === 0) {
       clearClicked();
+      openSuccessModal()
     }
   };
 
   const valid = () => {
+    if(volume === "") {
+      setErrorMsg("Please provide a volume.")
+      return false
+    }
     return true;
   };
 
@@ -156,7 +168,7 @@ export default function AddBatch() {
             <div className="two-col">
               <div className="input-cont">
                 <label>
-                  Production Date
+                  Production Date*
                   <DateTimePicker
                     disabled={collapsed ? true : false}
                     onChange={dateChanged}
@@ -167,7 +179,7 @@ export default function AddBatch() {
               </div>
               <div className="input-cont">
                 <label>
-                  Volume (ounces)
+                  Volume (ounces)*
                   <input
                     type="number"
                     step="0.1"
@@ -183,104 +195,104 @@ export default function AddBatch() {
                 </label>
               </div>
             </div>
-            
-              <div className="input-cont">
-                <label>
-                  Conditions
-                  <Select
-                    options={options.conditions}
-                    isMulti
-                    className="conditions-select select"
-                    id="conditions"
-                    placeholder="Conditions"
-                    isSearchable={true}
-                    theme={(theme) => ({
-                      ...theme,
-                      colors: {
-                        ...theme.colors,
-                        text: "orangered",
-                        primary25: "var(--light-pink)",
-                        primary: "var(--blue)",
-                      },
-                    })}
-                    value={conditions}
-                    onChange={setConditions}
-                  />
-                </label>
-              </div>
-              <div className="input-cont">
-                <label>
-                  Medications
-                  <Select
-                    options={options.medications}
-                    isMulti
-                    className="medications-select select"
-                    id="medications"
-                    placeholder="Medications"
-                    isSearchable={true}
-                    theme={(theme) => ({
-                      ...theme,
-                      colors: {
-                        ...theme.colors,
-                        text: "orangered",
-                        primary25: "var(--light-pink)",
-                        primary: "var(--blue)",
-                      },
-                    })}
-                    value={medications}
-                    onChange={setMedications}
-                  />
-                </label>
-              </div>
-              <div className="input-cont">
-                <label>
-                  Vaccines
-                  <Select
-                    options={options.vaccines}
-                    isMulti
-                    className="vaccines-select select"
-                    id="vaccines"
-                    placeholder="Vaccines"
-                    isSearchable={true}
-                    theme={(theme) => ({
-                      ...theme,
-                      colors: {
-                        ...theme.colors,
-                        text: "orangered",
-                        primary25: "var(--light-pink)",
-                        primary: "var(--blue)",
-                      },
-                    })}
-                    value={vaccines}
-                    onChange={setVaccines}
-                  />
-                </label>
-              
-              <div className="input-cont">
-                <label>
-                  Diets
-                  <Select
-                    options={options.diets}
-                    isMulti
-                    className="diets-select select"
-                    id="diets"
-                    placeholder="Diets"
-                    isSearchable={true}
-                    theme={(theme) => ({
-                      ...theme,
-                      colors: {
-                        ...theme.colors,
-                        text: "orangered",
-                        primary25: "var(--light-pink)",
-                        primary: "var(--blue)",
-                      },
-                    })}
-                    value={diets}
-                    onChange={setDiets}
-                  />
-                </label>
-              </div>
+
+            <div className="input-cont">
+              <label>
+                Conditions
+                <Select
+                  options={options.conditions}
+                  isMulti
+                  className="conditions-select select"
+                  id="conditions"
+                  placeholder="Conditions"
+                  isSearchable={true}
+                  theme={(theme) => ({
+                    ...theme,
+                    colors: {
+                      ...theme.colors,
+                      text: "orangered",
+                      primary25: "var(--light-pink)",
+                      primary: "var(--blue)",
+                    },
+                  })}
+                  value={conditions}
+                  onChange={setConditions}
+                />
+              </label>
             </div>
+            <div className="input-cont">
+              <label>
+                Medications
+                <Select
+                  options={options.medications}
+                  isMulti
+                  className="medications-select select"
+                  id="medications"
+                  placeholder="Medications"
+                  isSearchable={true}
+                  theme={(theme) => ({
+                    ...theme,
+                    colors: {
+                      ...theme.colors,
+                      text: "orangered",
+                      primary25: "var(--light-pink)",
+                      primary: "var(--blue)",
+                    },
+                  })}
+                  value={medications}
+                  onChange={setMedications}
+                />
+              </label>
+            </div>
+            <div className="input-cont">
+              <label>
+                Vaccines
+                <Select
+                  options={options.vaccines}
+                  isMulti
+                  className="vaccines-select select"
+                  id="vaccines"
+                  placeholder="Vaccines"
+                  isSearchable={true}
+                  theme={(theme) => ({
+                    ...theme,
+                    colors: {
+                      ...theme.colors,
+                      text: "orangered",
+                      primary25: "var(--light-pink)",
+                      primary: "var(--blue)",
+                    },
+                  })}
+                  value={vaccines}
+                  onChange={setVaccines}
+                />
+              </label>
+            </div>
+            <div className="input-cont">
+              <label>
+                Diets
+                <Select
+                  options={options.diets}
+                  isMulti
+                  className="diets-select select"
+                  id="diets"
+                  placeholder="Diets"
+                  isSearchable={true}
+                  theme={(theme) => ({
+                    ...theme,
+                    colors: {
+                      ...theme.colors,
+                      text: "orangered",
+                      primary25: "var(--light-pink)",
+                      primary: "var(--blue)",
+                    },
+                  })}
+                  value={diets}
+                  onChange={setDiets}
+                />
+              </label>
+            </div>
+
             <div className="input-cont">
               <div className="caffeine">
                 <label>
@@ -289,7 +301,8 @@ export default function AddBatch() {
                     checked={caffeine}
                     onChange={caffeineChanged}
                   />
-                  Did you consume caffeine less than 8 hours before producing this batch?
+                  Did you consume caffeine less than 8 hours before producing
+                  this batch?
                 </label>
               </div>
             </div>
