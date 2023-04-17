@@ -4,7 +4,7 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import Select from "react-select";
 import dayjs from "dayjs";
 
-import { batchService } from "services/BatchService";
+import { useBatchService } from "services/BatchService";
 import { useAuth } from "services/AuthService";
 import { useModalService } from "services/ModalService";
 
@@ -14,7 +14,7 @@ import AddBatchSuccessModal from "./AddBatchSuccessModal";
 export default function AddBatch() {
   const [collapsed, setCollapsed] = useState(true);
   const { user } = useAuth();
-  const { addBatch } = batchService();
+  const { addBatch } = useBatchService();
   const { openModal } = useModalService();
 
   const [selectedDate, setSelectedDate] = useState(dayjs(Date.now()));

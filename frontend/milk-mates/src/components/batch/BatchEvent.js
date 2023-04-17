@@ -1,12 +1,12 @@
 import React from "react";
 import moment from "moment";
 import { HiOutlineTrash } from "react-icons/hi";
-import { batchService } from "services/BatchService";
+import { useBatchService } from "services/BatchService";
 import { useModalService } from "services/ModalService";
 import DeleteBatchModal from "./DeleteBatchEventModal";
 
 export default function BatchEvent({ event, deletable }) {
-  const { deleteBatchEvent } = batchService();
+  const { deleteBatchEvent } = useBatchService();
   const { openModal } = useModalService();
 
   const deleteConfirmed = () => {

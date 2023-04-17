@@ -24,10 +24,6 @@
   }
 
   .batch-content {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-
     .two-col, .three-col {
       gap: 4px;
     }
