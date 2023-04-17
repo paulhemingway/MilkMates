@@ -215,7 +215,29 @@ export default function Resources(props) {
 
           </div>
       </div>
+
       </div>
+
+      <br></br>
+        <br></br>
+        
+          <div className = "resourceLinks">
+
+
+          <a href = "https://www.cdc.gov/breastfeeding/recommendations/handling_breastmilk.htm">Storage Tips</a>
+          <a href = "https://www.cdc.gov/hygiene/childcare/clean-sanitize.html?CDC_AA_refVal=https%3A%2F%2Fwww.cdc.gov%2Fhealthywater%2Fhygiene%2Fhealthychildcare%2Finfantfeeding%2Fcleansanitize.html">Cleaning Tips</a>
+          <a href = "https://www.thebump.com/a/breast-milk-storage">Thawing Tips</a>
+          <a href = "https://www.onlythebreast.com/buy-sell-donate-breast-milk/buyer-tips/">Buyer Tips</a>
+          <a href = "https://www.onlythebreast.com/buy-sell-donate-breast-milk/sellers-tips/">Seller Tips</a>
+          <a href = "https://www.youtube.com/watch?v=rrNZwkrIOrM">YouTube Pasteurization Video</a>
+          <a href = "https://extension.oregonstate.edu/sites/default/files/documents/8836/.pdf">Pasteurization Tips</a>
+
+
+
+
+          </div>
+        
+
       </div>
 
   )
