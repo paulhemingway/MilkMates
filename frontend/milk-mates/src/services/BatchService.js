@@ -38,6 +38,7 @@ export const BatchProvider = ({ children }) => {
         }
       )
       .then((response) => {
+        setBatches([...batches, response.data[1][0]])
         return response.data[0].errorCode;
       })
       .catch((error) => {
@@ -57,7 +58,6 @@ export const BatchProvider = ({ children }) => {
       if(response.data.length > 1) {
         let newBatches = response.data.slice(1)
         setBatches(newBatches)
-        console.log(newBatches)
       }
       
       return response.data[0].errorCode

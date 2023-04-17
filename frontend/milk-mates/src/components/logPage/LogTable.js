@@ -14,7 +14,7 @@ export default function LogTable({ data }) {
   // state after applying sort and filters
   const [sortedBatches, setSortedBatches] = useState([]);
   const [filteredBatches, setFilteredBatches] = useState([]);
-  const [sortCode, setSortCode] = useState(0);
+  const [sortCode, setSortCode] = useState(1);
 
   // state for pagination
   const [displayedBatches, setDisplayedBatches] = useState([]);
@@ -274,7 +274,7 @@ export default function LogTable({ data }) {
             components={{
               IndicatorSeparator: () => null,
             }}
-            defaultValue={sortOptions[0]}
+            defaultValue={sortOptions[1]}
             inputId="sort-select"
             classNamePrefix="select-dropdown"
             theme={(theme) => ({
@@ -334,9 +334,9 @@ export default function LogTable({ data }) {
         <table>
           <thead>
             <tr>
-              <th onClick={() => changeSort("date")}>Date Produced</th>
+              <th>Date Produced</th>
               <th>Volume</th>
-              <th onClick={() => changeSort("status")}>Status</th>
+              <th>Status</th>
               <th>Listed</th>
               <th></th>
             </tr>
