@@ -105,7 +105,7 @@ function App() {
               }
             />
             <Route
-              path="/batch/:batchId"
+              path="/log/batch/:batchId"
               element={
                 <PrivateRoute loggedIn={loggedIn} component={<Batch />} />
               }

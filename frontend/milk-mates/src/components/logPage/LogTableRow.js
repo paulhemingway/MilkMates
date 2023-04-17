@@ -6,7 +6,7 @@ import { TbTrash } from "react-icons/tb";
 import { CgSmartHomeRefrigerator } from "react-icons/cg";
 import { FaRegSnowflake } from "react-icons/fa";
 import { TbDroplet, TbBottle, TbCircleCheck, TbClipboardCheck } from "react-icons/tb";
-import { HiOutlineCheck } from "react-icons/hi";
+import { HiOutlineCheckCircle, HiOutlineXCircle } from "react-icons/hi";
 
 import { Link } from "react-router-dom";
 
@@ -54,13 +54,17 @@ export default function LogTableRow(props) {
       </td>
       <td
         className="listed-cell"
-        aria-label={props.batch.isListed ? "Yes" : "No"}
+        aria-label={props.batch.isListed ? "Listed" : "Not Listed"}
       >
-        {props.batch.isListed ? <HiOutlineCheck /> : <></>}
+        <span className="tooltip">
+          <span className="tooltip-text">{props.batch.isListed ? "Listed" : "Not Listed"}</span>
+        {props.batch.isListed ? <HiOutlineCheckCircle /> : <HiOutlineXCircle/>}
+        </span>
+        
       </td>
       <td className="link-cell">
         <Link
-          to={`/batch/${props.batch.batchId}`}
+          to={`/log/batch/${props.batch.batchId}`}
           alt={`Go to batch ${props.batch.batchId}`}
         >
           <BiChevronRightCircle />

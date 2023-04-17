@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext } from "react";
 import axios from "axios";
-import { useBatch } from "./BatchService";
+import { batchService } from "./BatchService";
 
 const apiURL = "http://ec2-54-159-200-221.compute-1.amazonaws.com:3000";
 
@@ -9,7 +9,7 @@ export const AuthContext = createContext();
 
 // Define a function component that wraps its children with the AuthContext.Provider component
 export const AuthProvider = ({ children }) => {
-  const { getBatchesByUser } = useBatch()
+  const { getBatchesByUser } = batchService()
   // set back to false when done
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
         setLoggedIn(true);
         setUser(fetchedUser);
         
-        getBatchesByUser(fetchedUser.username)
+        await getBatchesByUser(fetchedUser.username)
       }
     } catch (error) {
       console.log(error);

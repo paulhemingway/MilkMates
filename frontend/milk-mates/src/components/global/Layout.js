@@ -1,8 +1,10 @@
 import { Outlet } from "react-router-dom";
 import React from "react";
 import Sidebar from "components/sidebar/Sidebar";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useAuth } from "services/AuthService";
+import { ModalProvider, useModalService } from "services/ModalService";
+import Modal from "./Modal";
 
 import "assets/styles/global/Layout.scss";
 import Header from "./Header";
@@ -10,6 +12,7 @@ import Header from "./Header";
 export default function Layout() {
   const [collapsed, setCollapsed] = useState(true);
   const { logout } = useAuth();
+  const { showModal } = useModalService();
 
   const toggleCollapse = () => {
     setCollapsed(!collapsed);
@@ -28,6 +31,7 @@ export default function Layout() {
           />
         </nav>
         <main className="outlet-container">
+          {showModal && <Modal />}
           <div className="outlet">
             <Outlet />
           </div>
