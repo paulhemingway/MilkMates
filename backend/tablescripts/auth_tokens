@@ -1,0 +1,7 @@
+CREATE TABLE auth_tokens (
+  userid INT NOT NULL,
+  auth_token VARCHAR(255) NOT NULL,
+  exp_date DATETIME NOT NULL,
+  PRIMARY KEY (auth_token),
+  FOREIGN KEY (userid) REFERENCES users(userid)
+);
