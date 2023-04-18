@@ -2,14 +2,15 @@ import React from "react";
 import { useEffect } from "react";
 import { useModalService } from "services/ModalService";
 import moment from "moment";
-import BatchEvent from "./BatchEvent";
+import BatchEvent from "../batch/BatchEvent";
+import { useBatchService } from "services/BatchService";
 
-export default function DeleteBatchModal({ confirmed, event }) {
+export default function DeleteBatchEventModal({  event }) {
   const { closeModal } = useModalService();
 
   const deleteClicked = () => {
-    confirmed();
     closeModal();
+    // call delete batch event function
   };
 
   return (

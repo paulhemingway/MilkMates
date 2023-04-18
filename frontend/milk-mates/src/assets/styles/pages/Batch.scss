@@ -4,7 +4,13 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 30px;
-    margin-bottom: 1em;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 2em;
+    gap: 10px;
 
     .back {
       display: flex;
@@ -24,7 +30,9 @@
   }
 
   .batch-content {
-    .two-col, .three-col {
+
+    .two-col,
+    .three-col {
       gap: 4px;
     }
 
@@ -35,10 +43,11 @@
         border-radius: 15px;
         border-spacing: 0;
         overflow: hidden;
-        box-shadow: 4px 4px 10px rgba(0,0,0,0.3);
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
         border: 4px inset var(--blue);
 
-        th, td {
+        th,
+        td {
           padding: 15px;
         }
 
@@ -48,7 +57,7 @@
         }
 
         tr:nth-child(2n) {
-          background-color: rgba(0,0,0,0.05);
+          background-color: rgba(0, 0, 0, 0.05);
         }
 
         td {
@@ -61,7 +70,7 @@
 
     .events {
       .add-btn {
-        margin-bottom: 1em;
+        margin-top: 1em;
         font-weight: bold;
       }
 
@@ -83,7 +92,6 @@
       }
     }
   }
-
 }
 
 .event {
@@ -167,6 +175,12 @@
   &.discarded {
     background-color: var(--discarded);
   }
-
 }
 
+@media only screen and (max-width: 480px) {
+  .batch-info {
+    th {
+      font-size: 0.7em !important;
+    }
+  }
+}
