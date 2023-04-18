@@ -4,6 +4,8 @@ import Select from "react-select";
 import { useEffect, useState } from "react";
 import { TbSortAscending, TbSortDescending } from "react-icons/tb";
 import { HiPlus } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
+
 
 import LogTableRow from "./LogTableRow";
 import FilterMenu from "./FilterMenu";
@@ -16,6 +18,8 @@ export default function LogTable({ batches }) {
   const [filteredBatches, setFilteredBatches] = useState([]);
   const [sortCode, setSortCode] = useState(1);
 
+  const navigate = useNavigate()
+
   // state for pagination
   const [displayedBatches, setDisplayedBatches] = useState([]);
   const [filterMenuShowing, setFilterMenuShowing] = useState(false);
@@ -26,6 +30,8 @@ export default function LogTable({ batches }) {
     status: [],
     listed: null,
   });
+
+
 
   const hideFilterMenu = () => {
     setFilterMenuShowing(false);
@@ -351,14 +357,13 @@ export default function LogTable({ batches }) {
               <th>Volume</th>
               <th>Status</th>
               <th>Listed</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
             {/* render a row for each batch */}
             {displayedBatches.length > 0 &&
               displayedBatches.map((batch) => (
-                <LogTableRow batch={batch} key={batch.batchId} />
+                <LogTableRow batch={batch} key={batch.batchId} tabIndex="0" />
               ))}
             {displayedBatches.length === 0 && (
               <tr className="empty-row">

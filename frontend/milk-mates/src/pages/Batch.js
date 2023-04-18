@@ -8,6 +8,8 @@ import Loading from "components/global/Loading";
 import "assets/styles/pages/Batch.scss";
 import BatchEvents from "components/batch/BatchEvents";
 import BatchInfo from "components/batch/BatchInfo";
+import { useModalService } from "services/ModalService";
+import DeleteBatchModal from "components/modal/DeleteBatchModal";
 
 export default function Batch() {
   const [batch, setBatch] = useState(null);
@@ -15,6 +17,13 @@ export default function Batch() {
 
   const { batchId } = useParams();
   const { getBatch } = useBatchService();
+  const { openModal } = useModalService();
+
+  const deleteBatchClicked = () => {
+    openModal(<DeleteBatchModal batchId={batch.batchId} />);
+  };
+
+  const editBatchClicked = () => {};
 
   useEffect(() => {
     fetchBatch(batchId);
@@ -22,8 +31,10 @@ export default function Batch() {
 
   const fetchBatch = async (batchId) => {
     const fetchedBatch = await getBatch(batchId);
-    
-    fetchedBatch.events = fetchedBatch.events.sort((a, b) => new Date(b.eventDate) - new Date(a.eventDate));
+
+    fetchedBatch.events = fetchedBatch.events.sort(
+      (a, b) => new Date(b.eventDate) - new Date(a.eventDate)
+    );
 
     setBatch(fetchedBatch);
   };
@@ -32,12 +43,26 @@ export default function Batch() {
   return (
     <div className="batch">
       <div className="top">
+        <h1>Batch Details</h1>
+      </div>
+
+      <div className="buttons">
         <Link to="/log" className="back button primary-button-blue">
           <TiArrowBack />
           <span>Milk Log</span>
         </Link>
-
-        <h1>Batch Details</h1>
+        <button
+          onClick={editBatchClicked}
+          className="button primary-button-blue"
+        >
+          Edit Batch
+        </button>
+        <button
+          onClick={deleteBatchClicked}
+          className="button primary-button-red"
+        >
+          Delete Batch
+        </button>
       </div>
 
       {batch === null && <Loading />}
@@ -45,7 +70,7 @@ export default function Batch() {
       {batch && (
         <div className="batch-content">
           <BatchInfo batch={batch} />
-          <BatchEvents events={batch.events} />
+          <BatchEvents events={batch.events} batchId={batch.batchId} />
         </div>
       )}
     </div>

@@ -4,7 +4,7 @@ import Sidebar from "components/sidebar/Sidebar";
 import { useState } from "react";
 import { useAuth } from "services/AuthService";
 import { useModalService } from "services/ModalService";
-import Modal from "./Modal";
+import Modal from "../modal/Modal";
 
 import "assets/styles/global/Layout.scss";
 import Header from "./Header";

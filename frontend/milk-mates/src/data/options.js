@@ -58,6 +58,64 @@ const options = {
     "Shared",
     "Discarded",
   ],
+  statusSelect: [
+    {
+      value: "",
+      label: (
+        <div className="option">
+          <span>Please Select</span>
+        </div>
+      ),
+    },
+    {
+      value: "refrigerated",
+      label: (
+        <div className="option">
+          <span>Refrigerated</span>
+        </div>
+      ),
+    },
+    {
+      value: "frozen",
+      label: (
+        <div className="option">
+          <span>Frozen</span>
+        </div>
+      ),
+    },
+    {
+      value: "thawed",
+      label: (
+        <div className="option">
+          <span>Thawed</span>
+        </div>
+      ),
+    },
+    {
+      value: "consumed",
+      label: (
+        <div className="option">
+          <span>Consumed</span>
+        </div>
+      ),
+    },
+    {
+      value: "shared",
+      label: (
+        <div className="option">
+          <span>Shared</span>
+        </div>
+      ),
+    },
+    {
+      value: "discarded",
+      label: (
+        <div className="option">
+          <span>Discarded</span>
+        </div>
+      ),
+    },
+  ],
   listed: [
     {
       value: null,
@@ -633,7 +691,7 @@ const options = {
         <div className="option">
           <span>Dairy-Free</span>
         </div>
-      )
+      ),
     },
     {
       value: "DASH",

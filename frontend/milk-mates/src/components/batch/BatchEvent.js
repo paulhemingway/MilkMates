@@ -3,9 +3,9 @@ import moment from "moment";
 import { HiOutlineTrash } from "react-icons/hi";
 import { useBatchService } from "services/BatchService";
 import { useModalService } from "services/ModalService";
-import DeleteBatchModal from "./DeleteBatchEventModal";
+import DeleteBatchEventModal from "../modal/DeleteBatchEventModal";
 
-export default function BatchEvent({ event, deletable }) {
+export default function BatchEvent({ event, deletable, batchId }) {
   const { deleteBatchEvent } = useBatchService();
   const { openModal } = useModalService();
 
@@ -14,7 +14,7 @@ export default function BatchEvent({ event, deletable }) {
   }
 
   const deleteEvent = () => {
-    openModal("Delete Batch Event?", <DeleteBatchModal confirmed={deleteConfirmed} event={event}/>);
+    openModal(<DeleteBatchEventModal confirmed={deleteConfirmed} event={event} batchId={batchId} />);
   };
   const trashKeyDown = (e) => {
     if (e.key === " " || e.key === "Enter") {

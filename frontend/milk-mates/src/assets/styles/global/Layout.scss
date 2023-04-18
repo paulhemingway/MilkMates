@@ -5,14 +5,13 @@
   header {
     position: relative;
     z-index: 10;
-
   }
 
   .content {
     display: flex;
     max-width: 1450px;
     margin: 0 auto;
-    box-shadow: 0 0 60px rgba(0,0,0,0.3);
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.3);
     background-color: white;
 
     .nav-container {
@@ -65,7 +64,6 @@
         }
       }
     }
-
   }
 }
 

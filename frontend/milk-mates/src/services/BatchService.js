@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext } from "react";
 import axios from "axios";
+import moment from "moment";
 
 const apiURL = "http://ec2-54-159-200-221.compute-1.amazonaws.com:3000";
 
@@ -20,6 +21,7 @@ export const BatchProvider = ({ children }) => {
     diet,
     caffeine
   ) => {
+    date = moment(date).format("YYYY-MM-DD HH:mm:ss");
     return axios
       .post(
         `${apiURL}/tracker/AddBatch`,
@@ -38,7 +40,10 @@ export const BatchProvider = ({ children }) => {
         }
       )
       .then((response) => {
-        setBatches([...batches, response.data[1][0]])
+        // add the new batch to the batches state so you don't have to call the api again
+        if (response.date[0].errorCode === 0) {
+          setBatches([...batches, response.data[1]]);
+        }
         return response.data[0].errorCode;
       })
       .catch((error) => {
@@ -46,43 +51,123 @@ export const BatchProvider = ({ children }) => {
       });
   };
 
+  //ERROR CODES:
+  // 0 - success
+  // 1 - No batch with that batchID exists
+  // 2 - SQL update query error
+  const deleteBatch = async (batchId) => {
+    return axios
+      .put(
+        `${apiURL}/tracker/DeleteBatch`,
+        {
+          batchId,
+        },
+        {
+          timeout: 5000, // Timeout after 5 seconds
+        }
+      )
+      .then(async (response) => {
+        if (response.data[0].errorCode === 0) {
+          // remove batch from the batches state
+          const updatedBatches = batches.filter(
+            (batch) => batch.batchId !== batchId
+          );
+          await setBatches(updatedBatches);
+          return true;
+        }
+        return false;
+      })
+      .catch((error) => {
+        return false;
+      });
+  };
+
   const getBatchesByUser = async (username) => {
     try {
       const response = await axios.get(
         `${apiURL}/tracker/GetAllBatchesByUser?username=${username}`,
-        
+
         {
           timeout: 5000, // Timeout after 5 seconds
         }
       );
-      if(response.data.length > 1) {
-        let newBatches = response.data.slice(1)
-        setBatches(newBatches)
+      if (response.data.length > 1) {
+        let newBatches = response.data.slice(1);
+        setBatches(newBatches);
       }
-      
-      return response.data[0].errorCode
+
+      return response.data[0].errorCode;
     } catch (error) {
       console.log(error);
     }
   };
 
   const getBatch = (batchId) => {
-    const batch = batches.find((batch) => batch.batchId == batchId)
-    return batch
-  }
+    const batch = batches.find((batch) => batch.batchId == batchId);
+    return batch;
+  };
+
+  const addBatchEvent = async (batchId, batchEventType, eventDate, notes) => {
+    eventDate = moment(date).format("YYYY-MM-DD HH:mm:ss");
+    return axios
+      .post(
+        `${apiURL}/tracker/AddBatchEvent`,
+        {
+          batchId,
+          batchEventType,
+          eventDate,
+          notes,
+        },
+        {
+          timeout: 5000, // Timeout after 5 seconds
+        }
+      )
+      .then((response) => {
+        if(response.data[0].errorCode === 0) {
+          // event object returned by api
+          const newEvent = response.data[1]
+
+          // get index of batch in batch array
+          const index = batches.findIndex(batch => batch.batchId === batchId)
+
+          // create a new event array with the new event added
+          const newEventsArray = [...batches[index].events, newEvent]
+
+          // copy the batch object with the events as the new events array
+          const newBatch = { ...batches[index], events: newEventsArray}
+          
+          // copy the batches array
+          const newBatches = [...batches]
+
+          // set the newBatch at the index
+          newBatches[index] = newBatch
+          
+          // update batches
+          setBatches(newBatches)
+
+          return true
+        }
+        return false;
+      })
+      .catch((error) => {
+        return 7;
+      });
+  };
 
   const deleteBatchEvent = async (batchEventId) => {
-    console.log("Deleting " + batchEventId)
-  }
+    console.log("Deleting " + batchEventId);
+  };
 
   return (
     <BatchContext.Provider
       value={{
         batches,
         addBatch,
+        deleteBatch,
         getBatchesByUser,
         getBatch,
-        deleteBatchEvent
+        addBatchEvent,
+        deleteBatchEvent,
       }}
     >
       {children}
