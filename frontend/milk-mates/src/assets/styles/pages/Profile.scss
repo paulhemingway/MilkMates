@@ -58,7 +58,6 @@
         &:focus {
           outline: none;
           box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
-
         }
       }
     }
@@ -119,8 +118,6 @@
             border: 1px solid var(--blue);
           }
 
-
-
           &.error-field {
             border-color: var(--red);
           }
@@ -154,24 +151,23 @@
         font-size: 0.7em;
         min-height: 15px;
       }
+
       .msg {
-        
-          display: flex;
-          align-items: center;
-          gap: 15px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
 
-          &-success {
-            color: var(--blue);
-          }
+        &-success {
+          color: var(--blue);
+        }
 
-          &-error {
-            color: var(--red);
-          }
+        &-error {
+          color: var(--red);
+        }
 
-          svg {
-            font-size: 1.5em;
-          }
-        
+        svg {
+          font-size: 1.5em;
+        }
       }
     }
 
@@ -225,7 +221,6 @@
         }
       }
     }
-
   }
 
   .other-user {
@@ -255,7 +250,6 @@
         &:active {
           transform: scale(0.97);
         }
-
       }
     }
   }

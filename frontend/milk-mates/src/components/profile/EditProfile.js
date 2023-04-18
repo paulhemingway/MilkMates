@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { InputMask } from "primereact/inputmask";
 import { useModalService } from "services/ModalService";
-import DeleteUserModal from "./DeleteUserModal";
+import DeleteUserModal from "../modal/DeleteUserModal";
 
 
 export default function EditProfile({ user }) {
@@ -112,7 +112,7 @@ export default function EditProfile({ user }) {
   };
 
   const deleteClicked = (e) => {
-    openModal("Are You Sure?", <DeleteUserModal username={user.username}/>)
+    openModal(<DeleteUserModal username={user.username}/>)
   };
 
   return (

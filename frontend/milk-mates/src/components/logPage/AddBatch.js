@@ -1,15 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import Select from "react-select";
 import dayjs from "dayjs";
+import Select from "react-select";
+
 
 import { useBatchService } from "services/BatchService";
 import { useAuth } from "services/AuthService";
 import { useModalService } from "services/ModalService";
 
 import options from "data/options.js";
-import AddBatchSuccessModal from "./AddBatchSuccessModal";
+import SuccessModal from "../modal/SuccessModal";
 
 export default function AddBatch() {
   const [collapsed, setCollapsed] = useState(true);
@@ -47,7 +48,7 @@ export default function AddBatch() {
   }, [errorCode]);
 
   const openSuccessModal = () => {
-    openModal("Batch Added!", <AddBatchSuccessModal />)
+    openModal(<SuccessModal message="Your new batch was successfully logged!" />)
   };
 
   //ERROR CODES:

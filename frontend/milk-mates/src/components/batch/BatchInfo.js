@@ -1,15 +1,24 @@
 import React from "react";
 import Wrapper from "components/global/Wrapper";
 import moment from "moment";
+import { useModalService } from "services/ModalService";
+import DeleteBatchModal from "components/modal/DeleteBatchModal";
 
 export default function BatchInfo({ batch }) {
   const status = batch.events[0].event;
+  
 
   return (
     <Wrapper header="Batch Info">
       <div className="info">
         <table className="info-table">
           <tbody>
+          <tr>
+              <th>Batch ID</th>
+              <td>
+                {batch.batchId}
+              </td>
+            </tr>
             <tr>
               <th>Production Date</th>
               <td>
@@ -57,6 +66,7 @@ export default function BatchInfo({ batch }) {
             </tr>
           </tbody>
         </table>
+        
       </div>
     </Wrapper>
   );

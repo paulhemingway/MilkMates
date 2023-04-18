@@ -6,25 +6,23 @@
   --pink: #dd6794;
   --grey: #757575;
   --light-grey: #b8b8b8;
+  --lighter-grey: #e7e7e7;
   --light-pink: #ffd6e7;
   --hover-pink: #b75279;
   --disabled-pink: #dcbfca;
   --hover-blue: #4a8bc8;
-
   --red: #d84444;
   --disabled-green: #AFE1AF;
   --green: #4b9b4b;
-
+  --lime-green: #1bd51b;
   --shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
   --dark-shadow: 0 3px 4px rgba(0, 0, 0, 0.35);
-
   --pink-gradient: linear-gradient(160deg, #b75279, #fa90b9);
   --active-pink-gradient: linear-gradient(160deg, #994364, #d77c9f);
   --disabled-pink-gradient: linear-gradient(160deg, #f6bcd2, #b98397);
   --blue-gradient: linear-gradient(130deg, #5da4e6, #2d5e8b);
   --disabled-blue-gradient: linear-gradient(130deg, #9fc9ef, #7d9cb8);
   --red-gradient: linear-gradient(160deg, #d84444, #da6b6b);
-
   --logged: rgba(255, 99, 132, 0.9);
   --refrigerated: rgba(54, 162, 235, 0.9);
   --frozen: rgba(255, 206, 86, 0.9);
@@ -85,9 +83,11 @@
   border-radius: 20px;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
   margin-bottom: 2em;
+
   h2 {
     position: relative;
     margin-bottom: 40px;
+
     &::before {
       content: "";
       height: 3px;
@@ -175,7 +175,7 @@
     &:not(:disabled):hover {
       background-color: white !important;
       color: var(--blue) !important;
-      border : 2px solid var(--blue) !important;
+      border: 2px solid var(--blue) !important;
     }
 
     &:disabled {
@@ -191,10 +191,8 @@
     &:not(:disabled):hover {
       background-color: white !important;
       color: var(--red) !important;
-      border : 2px solid var(--red) !important;
+      border: 2px solid var(--red) !important;
     }
-
-    
   }
 
   &.secondary-button {
@@ -217,8 +215,6 @@
     &:disabled {
       background-image: var(--disabled-blue-gradient);
     }
-
-    
   }
 
   &:not(:disabled):hover {
@@ -227,7 +223,6 @@
     background-color: var(--light-pink);
     border: 2px solid var(--pink);
     color: var(--hover-pink);
-
   }
 
   &:active {
@@ -238,17 +233,15 @@
     background-image: var(--disabled-pink-gradient);
     cursor: not-allowed;
   }
+
   &:focus-visible {
     outline: 2px dashed black;
   }
-
 }
-
 
 .pagination {
   display: flex;
   width: 15em;
-
   border-radius: 27px;
   background-image: linear-gradient(rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.1));
   justify-content: space-between;
@@ -281,8 +274,6 @@
       padding-right: 10px;
     }
   }
-
-
 }
 
 .unselectable {
@@ -293,6 +284,3 @@
   -ms-user-select: none;
   user-select: none;
 }
-
-
-
