@@ -63,7 +63,7 @@ function App() {
               }
             />
             <Route
-              path="share"
+              path="share/:batchId?"
               element={
                 <PrivateRoute
                   component={<Share title="Share Milk" />}

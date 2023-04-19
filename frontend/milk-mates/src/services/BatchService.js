@@ -106,6 +106,7 @@ export const BatchProvider = ({ children }) => {
     const batch = batches.find((batch) => batch.batchId == batchId);
     return batch;
   };
+  
 
   const addBatchEvent = async (batchId, batchEventType, eventDate, notes) => {
     eventDate = moment(date).format("YYYY-MM-DD HH:mm:ss");

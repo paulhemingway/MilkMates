@@ -11,7 +11,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const { getBatchesByUser } = useBatchService()
   // set back to false when done
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [user, setUser] = useState(null);
   const [loginErrorCode, setLoginErrorCode] = useState(0);
   const [registerErrorCode, setRegisterErrorCode] = useState(-1);

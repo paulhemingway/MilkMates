@@ -1,7 +1,7 @@
 import useDocumentTitle from "services/DocumentTitle";
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useBatchService } from "services/BatchService";
+import { useBatchService } from "services/BatchService"
 import { TiArrowBack } from "react-icons/ti";
 import Loading from "components/global/Loading";
 
@@ -18,6 +18,9 @@ export default function Batch() {
   const { batchId } = useParams();
   const { getBatch } = useBatchService();
   const { openModal } = useModalService();
+  const [disabled, setDisabled] = useState(false);
+
+  const notListableStatuses = ["discarded", "shared", "consumed"];
 
   const deleteBatchClicked = () => {
     openModal(<DeleteBatchModal batchId={batch.batchId} />);
@@ -28,9 +31,21 @@ export default function Batch() {
   useEffect(() => {
     fetchBatch(batchId);
   }, []);
+  
+
+  useEffect(() => {
+    if (batch) {
+      const isDisabled =
+        batch.isListed === 1 ||
+        notListableStatuses.includes(batch.events[batch.events.length - 1].event);
+      setDisabled(isDisabled)
+      console.log(isDisabled)
+    }
+  }, [batch]);
 
   const fetchBatch = async (batchId) => {
     const fetchedBatch = await getBatch(batchId);
+    console.log(fetchedBatch)
 
     fetchedBatch.events = fetchedBatch.events.sort(
       (a, b) => new Date(b.eventDate) - new Date(a.eventDate)
@@ -47,9 +62,15 @@ export default function Batch() {
       </div>
 
       <div className="buttons">
-        <Link to="/log" className="back button primary-button-blue">
+        <Link to="/log" className="back button secondary-button-blue">
           <TiArrowBack />
           <span>Milk Log</span>
+        </Link>
+        <Link
+          to={`/share/${batchId}`}
+          className={`back button primary-button ${disabled && 'disabled'}`}
+        >
+          <span>List This Batch</span>
         </Link>
         <button
           onClick={editBatchClicked}

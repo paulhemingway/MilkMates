@@ -59,9 +59,7 @@
       .outlet-container {
         width: 100%;
 
-        .outlet {
-          padding: 15px;
-        }
+        
       }
     }
   }
@@ -73,6 +71,9 @@
       .nav-container {
         width: 100%;
         height: calc(100vh - 70px);
+      }
+      .outlet {
+        padding: 15px !important;
       }
     }
   }
