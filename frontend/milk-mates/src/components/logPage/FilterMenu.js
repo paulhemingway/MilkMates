@@ -36,11 +36,13 @@ export default function FilterMenu(props) {
   };
 
   const apply = () => {
+    
     const filters = {
       dateRange: dateRange,
       status: status,
       listed: listed,
     };
+    console.log(filters)
 
     props.updateFilters(filters);
   };

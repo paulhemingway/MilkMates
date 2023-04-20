@@ -122,6 +122,7 @@
     box-shadow: var(--dark-shadow);
     border-bottom: 3px solid var(--pink);
     z-index: 3;
+    color: var(--dark-blue);
 
     &::before {
       content: "";
