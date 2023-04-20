@@ -78,11 +78,6 @@ export default function Resources(props) {
                 <ul><b>5. Drying Process:</b> Allow bottle, attachments, water basin, and brush to be air dried. This area needs to be protected from dirt and dust. Do not use a dish towel as it may transfer germs to the items. </ul>
                 <ul><b>6. Cleaning the Wash Basin and Brush:</b> It is important to clean the products used to clean the bottle as well. This is because dirt and germs can build up on these products which would allow easy transfer to the bottle and its parts. Make sure to wash them every few days with hot water or in a sanitization cycle in the dish washer. If your baby is less than 2 months old, was born prematurely, or has a weakened immune system due to illness or medical treatment, wash the basin and the brush after every use to ensure clean supplies. </ul>
 
-
-
-
-
-
             
           </div>
           <div className="term" id="t3">
@@ -166,10 +161,6 @@ export default function Resources(props) {
                 <ul><b>4. </b>Pasteurize any milk received from outside sellers.</ul>
                 <ul><b>5. </b>Rate the seller for future buyers to see.</ul>
               
-              
-
-
-          
             <br></br>
             
           </div>
@@ -208,9 +199,6 @@ export default function Resources(props) {
 
               <br></br>
               <p> Here is another general guideline for how much a baby needs based on weight: A baby will usually consume approximately 2.5 ounces of milk per pound of body weight in a 24-hour period, up to a total of 32 ounces. or example, a 12 lb. baby will need a total of about 30 oz. of milk in a 24-hours period, which equals about 3 to 3.75 oz. per feeding for 8-10 feedings. It's important to note that these are general guidelines and individual babies may require more or less breastmilk per feeding. It's also important to feed your baby on demand and look for signs of hunger and fullness, rather than strictly following a feeding schedule or amount. Additionally, if your baby is premature, has medical conditions, or is experiencing growth spurts, they may require more frequent or larger feedings.</p>
-
-
-
 
 
           </div>
