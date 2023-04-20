@@ -22,6 +22,7 @@ export const BatchProvider = ({ children }) => {
     caffeine
   ) => {
     date = moment(date).format("YYYY-MM-DD HH:mm:ss");
+    console.log(caffeine)
     return axios
       .post(
         `${apiURL}/tracker/AddBatch`,
@@ -41,12 +42,13 @@ export const BatchProvider = ({ children }) => {
       )
       .then((response) => {
         // add the new batch to the batches state so you don't have to call the api again
-        if (response.date[0].errorCode === 0) {
+        if (response.data[0].errorCode === 0) {
           setBatches([...batches, response.data[1]]);
         }
         return response.data[0].errorCode;
       })
       .catch((error) => {
+        console.log(error)
         return 7;
       });
   };
@@ -163,6 +165,7 @@ export const BatchProvider = ({ children }) => {
     <BatchContext.Provider
       value={{
         batches,
+        setBatches,
         addBatch,
         deleteBatch,
         getBatchesByUser,

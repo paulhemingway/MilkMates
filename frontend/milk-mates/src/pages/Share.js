@@ -4,6 +4,7 @@ import Wrapper from "components/global/Wrapper";
 import CreateListing from "components/listing/CreateListing";
 
 import "assets/styles/pages/Share.scss"
+import MyListings from "components/listing/MyListings";
 
 
 export default function Share(props) {
@@ -15,7 +16,9 @@ export default function Share(props) {
       <Wrapper header="Create A Listing">
         <CreateListing />
       </Wrapper>
-      <Wrapper header="My Listings"></Wrapper>
+      <Wrapper header="My Listings">
+        <MyListings />
+      </Wrapper>
     </div>
   );
 }

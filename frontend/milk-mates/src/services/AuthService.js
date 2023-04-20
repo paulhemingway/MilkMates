@@ -1,6 +1,7 @@
 import React, { createContext, useState, useContext } from "react";
 import axios from "axios";
 import { useBatchService } from "./BatchService";
+import { useListingService } from "./ListingService";
 
 const apiURL = "http://ec2-54-159-200-221.compute-1.amazonaws.com:3000";
 
@@ -9,9 +10,10 @@ export const AuthContext = createContext();
 
 // Define a function component that wraps its children with the AuthContext.Provider component
 export const AuthProvider = ({ children }) => {
-  const { getBatchesByUser } = useBatchService()
+  const { getBatchesByUser } = useBatchService();
+  const { getUserListings } = useListingService();
   // set back to false when done
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [loginErrorCode, setLoginErrorCode] = useState(0);
   const [registerErrorCode, setRegisterErrorCode] = useState(-1);
@@ -33,12 +35,13 @@ export const AuthProvider = ({ children }) => {
         await setLoginErrorCode(response.data[0].errorCode);
         setUser(null);
       } else {
-        const fetchedUser = response.data[1]
+        const fetchedUser = response.data[1];
         await setLoginErrorCode(0);
         setLoggedIn(true);
         setUser(fetchedUser);
-        
-        await getBatchesByUser(fetchedUser.username)
+
+        await getBatchesByUser(fetchedUser.username);
+        await getUserListings(fetchedUser.username);
       }
     } catch (error) {
       console.log(error);
@@ -96,11 +99,10 @@ export const AuthProvider = ({ children }) => {
           timeout: 5000, // Timeout after 5 seconds
         }
       );
-      return response.data[1][0]
-      
+      return response.data[1][0];
     } catch (error) {
       console.log(error);
-      return null
+      return null;
     }
   };
 
@@ -119,15 +121,12 @@ export const AuthProvider = ({ children }) => {
           timeout: 5000, // Timeout after 5 seconds
         }
       );
-      return response.data[0].errorCode
-      
+      return response.data[0].errorCode;
     } catch (error) {
       console.log(error);
-      return 4
+      return 4;
     }
   };
-
- 
 
   // Pass the authentication state and methods to the AuthContext.Provider component
   return (
@@ -141,7 +140,7 @@ export const AuthProvider = ({ children }) => {
         registerErrorCode,
         register,
         getUserInfo,
-        changePassword
+        changePassword,
       }}
     >
       {children}
