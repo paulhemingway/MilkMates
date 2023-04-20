@@ -5,7 +5,7 @@
   .form-container {
     min-height: 600px;
     height: 60vh;
-    background: linear-gradient(0deg, rgba(197, 234, 250, 0.8), rgba(197, 234, 250, 0.5)), url("../images/mother.jpg");
+    background: linear-gradient(0deg, rgba(197, 234, 250, 0.8), rgba(197, 234, 250, 0.5)), url("../../images/mother.jpg");
     background-size: cover;
     background-position: center;
     display: flex;
@@ -58,8 +58,6 @@
             width: 100%;
             background-color: rgba(0, 0, 0, 0);
             font-size: 0.9em;
-
-
           }
 
           span {
@@ -110,7 +108,6 @@
         p {
           text-align: center;
         }
-
       }
 
       .submit-btn {
@@ -140,13 +137,14 @@
     .bottom-txt {
       text-align: center;
       font-size: 0.8em;
-
     }
+
     .success-msg {
       p {
         font-size: 0.9em;
         margin: 20px 0;
       }
+
       .success-login {
         width: 50%;
         margin: 0 auto;
@@ -157,19 +155,18 @@
   }
 
   .info-container {
-
     h2 {
       text-align: center;
       margin: 20px 0;
       color: var(--pink);
-      font-size: 20px;
+      font-size: 1.3em;
     }
 
     .icons {
       background-color: var(--light-blue);
       width: 80%;
       max-width: 1000px;
-      min-width: 400px;
+      min-width: 250px;
       margin: 0 auto;
       padding: 20px 20px 30px;
       border-radius: 20px;
@@ -187,7 +184,6 @@
         width: 175px;
         text-align: center;
 
-
         svg {
           font-size: 5em;
           height: 100px;
@@ -203,5 +199,18 @@
         }
       }
     }
+  }
+}
+
+@media only screen and (max-width: 550px) {
+
+  .info-container {
+    h2 {
+      font-size: 1em !important;
+    }
+
+  }
+  form {
+    padding: 15px !important;
   }
 }

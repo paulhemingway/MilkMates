@@ -1,17 +1,22 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import dayjs from "dayjs";
 import Select from "react-select";
-import dayjs, { Dayjs } from "dayjs";
 
+
+import { useBatchService } from "services/BatchService";
 import { useAuth } from "services/AuthService";
-import { addBatch } from "services/BatchService";
+import { useModalService } from "services/ModalService";
 
 import options from "data/options.js";
+import SuccessModal from "../modal/SuccessModal";
 
 export default function AddBatch() {
   const [collapsed, setCollapsed] = useState(true);
   const { user } = useAuth();
+  const { addBatch } = useBatchService();
+  const { openModal } = useModalService();
 
   const [selectedDate, setSelectedDate] = useState(dayjs(Date.now()));
   const [volume, setVolume] = useState("");
@@ -30,8 +35,8 @@ export default function AddBatch() {
         setErrorMsg("");
         break;
       case 0:
+        console.log("success")
         setErrorMsg("");
-        //modal?
         break;
       case 7:
         setErrorMsg("Server timed out. Please try again.");
@@ -40,8 +45,11 @@ export default function AddBatch() {
         setErrorMsg("Something went wrong on our end. Please try again.");
         break;
     }
-    console.log(errorCode);
   }, [errorCode]);
+
+  const openSuccessModal = () => {
+    openModal(<SuccessModal message="Your new batch was successfully logged!" />)
+  };
 
   //ERROR CODES:
   // 0 - success
@@ -105,10 +113,15 @@ export default function AddBatch() {
 
     if (response === 0) {
       clearClicked();
+      openSuccessModal()
     }
   };
 
   const valid = () => {
+    if(volume === "") {
+      setErrorMsg("Please provide a volume.")
+      return false
+    }
     return true;
   };
 
@@ -156,7 +169,7 @@ export default function AddBatch() {
             <div className="two-col">
               <div className="input-cont">
                 <label>
-                  Production Date
+                  Production Date*
                   <DateTimePicker
                     disabled={collapsed ? true : false}
                     onChange={dateChanged}
@@ -167,7 +180,7 @@ export default function AddBatch() {
               </div>
               <div className="input-cont">
                 <label>
-                  Volume (ounces)
+                  Volume (ounces)*
                   <input
                     type="number"
                     step="0.1"
@@ -183,106 +196,104 @@ export default function AddBatch() {
                 </label>
               </div>
             </div>
-            <div className="two-col">
-              <div className="input-cont">
-                <label>
-                  Conditions
-                  <Select
-                    options={options.conditions}
-                    isMulti
-                    className="conditions-select select"
-                    id="conditions"
-                    placeholder="Conditions"
-                    isSearchable={true}
-                    theme={(theme) => ({
-                      ...theme,
-                      colors: {
-                        ...theme.colors,
-                        text: "orangered",
-                        primary25: "var(--light-pink)",
-                        primary: "var(--blue)",
-                      },
-                    })}
-                    value={conditions}
-                    onChange={setConditions}
-                  />
-                </label>
-              </div>
-              <div className="input-cont">
-                <label>
-                  Medications
-                  <Select
-                    options={options.medications}
-                    isMulti
-                    className="medications-select select"
-                    id="medications"
-                    placeholder="Medications"
-                    isSearchable={true}
-                    theme={(theme) => ({
-                      ...theme,
-                      colors: {
-                        ...theme.colors,
-                        text: "orangered",
-                        primary25: "var(--light-pink)",
-                        primary: "var(--blue)",
-                      },
-                    })}
-                    value={medications}
-                    onChange={setMedications}
-                  />
-                </label>
-              </div>
+
+            <div className="input-cont">
+              <label>
+                Conditions
+                <Select
+                  options={options.conditions}
+                  isMulti
+                  className="conditions-select select"
+                  id="conditions"
+                  placeholder="Conditions"
+                  isSearchable={true}
+                  theme={(theme) => ({
+                    ...theme,
+                    colors: {
+                      ...theme.colors,
+                      text: "orangered",
+                      primary25: "var(--light-pink)",
+                      primary: "var(--blue)",
+                    },
+                  })}
+                  value={conditions}
+                  onChange={setConditions}
+                />
+              </label>
             </div>
-            <div className="two-col">
-              <div className="input-cont">
-                <label>
-                  Vaccines
-                  <Select
-                    options={options.vaccines}
-                    isMulti
-                    className="vaccines-select select"
-                    id="vaccines"
-                    placeholder="Vaccines"
-                    isSearchable={true}
-                    theme={(theme) => ({
-                      ...theme,
-                      colors: {
-                        ...theme.colors,
-                        text: "orangered",
-                        primary25: "var(--light-pink)",
-                        primary: "var(--blue)",
-                      },
-                    })}
-                    value={vaccines}
-                    onChange={setVaccines}
-                  />
-                </label>
-              </div>
-              <div className="input-cont">
-                <label>
-                  Diets
-                  <Select
-                    options={options.diets}
-                    isMulti
-                    className="diets-select select"
-                    id="diets"
-                    placeholder="Diets"
-                    isSearchable={true}
-                    theme={(theme) => ({
-                      ...theme,
-                      colors: {
-                        ...theme.colors,
-                        text: "orangered",
-                        primary25: "var(--light-pink)",
-                        primary: "var(--blue)",
-                      },
-                    })}
-                    value={diets}
-                    onChange={setDiets}
-                  />
-                </label>
-              </div>
+            <div className="input-cont">
+              <label>
+                Medications
+                <Select
+                  options={options.medications}
+                  isMulti
+                  className="medications-select select"
+                  id="medications"
+                  placeholder="Medications"
+                  isSearchable={true}
+                  theme={(theme) => ({
+                    ...theme,
+                    colors: {
+                      ...theme.colors,
+                      text: "orangered",
+                      primary25: "var(--light-pink)",
+                      primary: "var(--blue)",
+                    },
+                  })}
+                  value={medications}
+                  onChange={setMedications}
+                />
+              </label>
             </div>
+            <div className="input-cont">
+              <label>
+                Vaccines
+                <Select
+                  options={options.vaccines}
+                  isMulti
+                  className="vaccines-select select"
+                  id="vaccines"
+                  placeholder="Vaccines"
+                  isSearchable={true}
+                  theme={(theme) => ({
+                    ...theme,
+                    colors: {
+                      ...theme.colors,
+                      text: "orangered",
+                      primary25: "var(--light-pink)",
+                      primary: "var(--blue)",
+                    },
+                  })}
+                  value={vaccines}
+                  onChange={setVaccines}
+                />
+              </label>
+            </div>
+            <div className="input-cont">
+              <label>
+                Diets
+                <Select
+                  options={options.diets}
+                  isMulti
+                  className="diets-select select"
+                  id="diets"
+                  placeholder="Diets"
+                  isSearchable={true}
+                  theme={(theme) => ({
+                    ...theme,
+                    colors: {
+                      ...theme.colors,
+                      text: "orangered",
+                      primary25: "var(--light-pink)",
+                      primary: "var(--blue)",
+                    },
+                  })}
+                  value={diets}
+                  onChange={setDiets}
+                />
+              </label>
+            </div>
+
             <div className="input-cont">
               <div className="caffeine">
                 <label>
@@ -291,8 +302,8 @@ export default function AddBatch() {
                     checked={caffeine}
                     onChange={caffeineChanged}
                   />
-                  Have you consumed caffeine within the last 24 hours prior to
-                  producing this batch?
+                  Did you consume caffeine less than 8 hours before producing
+                  this batch?
                 </label>
               </div>
             </div>

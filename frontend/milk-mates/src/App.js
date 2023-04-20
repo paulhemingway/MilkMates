@@ -19,7 +19,7 @@ import Profile from "pages/Profile";
 import Privacy from "pages/Privacy";
 import Batch from "pages/Batch";
 import PrivateRoute from "./components/global/PrivateRoute";
-import "assets/styles/global.scss";
+import "assets/styles/global/global.scss";
 
 function App() {
   // must get token on load eventually and redirect if it's valid
@@ -105,7 +105,7 @@ function App() {
               }
             />
             <Route
-              path="/batch/:batchId"
+              path="/log/batch/:batchId"
               element={
                 <PrivateRoute loggedIn={loggedIn} component={<Batch />} />
               }

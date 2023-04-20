@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext } from "react";
 import axios from "axios";
+import { useBatchService } from "./BatchService";
 
 const apiURL = "http://ec2-54-159-200-221.compute-1.amazonaws.com:3000";
 
@@ -8,28 +9,12 @@ export const AuthContext = createContext();
 
 // Define a function component that wraps its children with the AuthContext.Provider component
 export const AuthProvider = ({ children }) => {
+  const { getBatchesByUser } = useBatchService()
   // set back to false when done
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [loginErrorCode, setLoginErrorCode] = useState(0);
   const [registerErrorCode, setRegisterErrorCode] = useState(-1);
-
-  // useEffect(() => {
-  //   // Check if the user is already logged in
-  //   const checkLoggedIn = async () => {
-  //     try {
-  //       const response = await axios.get("/api/user");
-  //       if (response.status === 200) {
-  //         setLoggedIn(true);
-  //         setUser(response.data);
-  //       }
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-
-  //   checkLoggedIn();
-  // }, []);
 
   const login = async (username, password) => {
     setLoginErrorCode(0);
@@ -48,9 +33,12 @@ export const AuthProvider = ({ children }) => {
         await setLoginErrorCode(response.data[0].errorCode);
         setUser(null);
       } else {
+        const fetchedUser = response.data[1]
         await setLoginErrorCode(0);
         setLoggedIn(true);
-        setUser(response.data[1][0]);
+        setUser(fetchedUser);
+        
+        await getBatchesByUser(fetchedUser.username)
       }
     } catch (error) {
       console.log(error);
@@ -99,6 +87,48 @@ export const AuthProvider = ({ children }) => {
 
   const checkToken = () => {};
 
+  const getUserInfo = async (username) => {
+    try {
+      const response = await axios.post(
+        `${apiURL}/profile/GetUserInfo`,
+        { username },
+        {
+          timeout: 5000, // Timeout after 5 seconds
+        }
+      );
+      return response.data[1][0]
+      
+    } catch (error) {
+      console.log(error);
+      return null
+    }
+  };
+
+  /*
+  0 success
+  1 no user with that username
+  2 query error
+  3 wrong old password
+  */
+  const changePassword = async (username, oldPassword, newPassword) => {
+    try {
+      const response = await axios.put(
+        `${apiURL}/login/UpdateUserPassword`,
+        { username, newPassword, oldPassword },
+        {
+          timeout: 5000, // Timeout after 5 seconds
+        }
+      );
+      return response.data[0].errorCode
+      
+    } catch (error) {
+      console.log(error);
+      return 4
+    }
+  };
+
+ 
+
   // Pass the authentication state and methods to the AuthContext.Provider component
   return (
     <AuthContext.Provider
@@ -110,6 +140,8 @@ export const AuthProvider = ({ children }) => {
         loginErrorCode,
         registerErrorCode,
         register,
+        getUserInfo,
+        changePassword
       }}
     >
       {children}

@@ -27,6 +27,7 @@
 
   .active {
     color: var(--pink);
+    background-color: var(--blue);
   }
 
   .logout-cont {
@@ -45,8 +46,6 @@
       background-image: linear-gradient(to right, var(--hover-blue), var(--blue));
       color: var(--light-blue);
     }
-
-
 
     svg {
       font-size: 2em;
