@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, forwardRef, useImperativeHandle } from "react";
 
-export default function Pagination(props) {
+const Pagination = forwardRef((props, ref) => {
   const [amount, setAmount] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -64,10 +64,14 @@ export default function Pagination(props) {
     setPageNumber(pageNumber > 1 ? pageNumber - 1 : pageNumber);
   };
 
-  const resetPageNumber = () => {
-    setPageNumber(1);
-    pageNumberInput.value = 1;
-  };
+  useImperativeHandle(ref, () => ({
+    resetPageNumber: () => {
+      setPageNumber(1);
+      if (pageNumberInput) {
+        pageNumberInput.value = 1;
+      }
+    },
+  }));
 
   return (
     <span className="pagination">
@@ -100,4 +104,6 @@ export default function Pagination(props) {
       </button>
     </span>
   );
-}
+});
+
+export default Pagination;

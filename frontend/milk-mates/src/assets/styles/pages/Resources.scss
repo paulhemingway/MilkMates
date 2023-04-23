@@ -1,12 +1,34 @@
-.resourceTitle {
-  background-image: var(--active-pink-gradient);
-  outline: none;
-  box-shadow: inset 0 0 0 3px var(--blue);
-}
+.resources {
+  .resourceTitle {
+    background-image: var(--active-pink-gradient);
+    outline: none;
+    color: white;
+    padding: 10px;
+  }
 
-.video {
-  width: 100%;
-  height: 500px;
-  max-width: 1100px;
-  margin: 0 auto;
+  .resourceLinks {
+    background-image: var(--active-pink-gradient);
+    outline: none;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .video {
+    width: 100%;
+    height: 500px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  a {
+    color: white;
+  }
+
+  .resourceTitle {
+    text-align: center;
+  }
 }

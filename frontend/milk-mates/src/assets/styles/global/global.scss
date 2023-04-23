@@ -15,6 +15,9 @@
   --disabled-green: #AFE1AF;
   --green: #4b9b4b;
   --lime-green: #1bd51b;
+  --yellow: #d09e08;
+
+
   --shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
   --dark-shadow: 0 3px 4px rgba(0, 0, 0, 0.35);
   --pink-gradient: linear-gradient(160deg, #b75279, #fa90b9);
@@ -23,6 +26,7 @@
   --blue-gradient: linear-gradient(130deg, #5da4e6, #2d5e8b);
   --disabled-blue-gradient: linear-gradient(130deg, #9fc9ef, #7d9cb8);
   --red-gradient: linear-gradient(160deg, #d84444, #da6b6b);
+
   --logged: rgba(255, 99, 132, 0.9);
   --refrigerated: rgba(54, 162, 235, 0.9);
   --frozen: rgba(255, 206, 86, 0.9);
@@ -118,6 +122,7 @@
     box-shadow: var(--dark-shadow);
     border-bottom: 3px solid var(--pink);
     z-index: 3;
+    color: var(--dark-blue);
 
     &::before {
       content: "";
@@ -217,7 +222,7 @@
     }
   }
 
-  &:not(:disabled):hover {
+  &:not(:disabled, .disabled):hover {
     background-color: white;
     background-image: none;
     background-color: var(--light-pink);
@@ -229,9 +234,10 @@
     background-image: var(--active-pink-gradient);
   }
 
-  &:disabled {
+  &:disabled, &.disabled {
     background-image: var(--disabled-pink-gradient);
     cursor: not-allowed;
+    pointer-events: none;
   }
 
   &:focus-visible {
@@ -265,12 +271,12 @@
     padding: 10px 15px;
 
     &.next {
-      border-radius: 0 10px 25px 0px;
+      border-radius: 0 25px 25px 0px;
       padding-left: 10px;
     }
 
     &.prev {
-      border-radius: 10px 0 0 25px;
+      border-radius: 25px 0 0 25px;
       padding-right: 10px;
     }
   }
@@ -284,3 +290,25 @@
   -ms-user-select: none;
   user-select: none;
 }
+
+.input-cont {
+  .char-limit {
+    color: var(--grey);
+    text-align: end;
+    font-size: 0.8em;
+
+    &.yellow {
+      color: var(--yellow);
+    }
+
+    &.red {
+      color: var(--red) !important;
+    }
+  }
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+

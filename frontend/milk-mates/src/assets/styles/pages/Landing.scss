@@ -203,14 +203,18 @@
 }
 
 @media only screen and (max-width: 550px) {
+  .landing {
 
-  .info-container {
-    h2 {
-      font-size: 1em !important;
+    .info-container {
+      h2 {
+        font-size: 1em !important;
+      }
+
     }
 
-  }
-  form {
-    padding: 15px !important;
+
+    form {
+      padding: 15px !important;
+    }
   }
 }

@@ -98,6 +98,8 @@ export default function AddBatch() {
     const vaccinesCSV = vaccines.map((item) => item.value).join(",");
     const dietsCSV = diets.map((item) => item.value).join(",");
 
+    const caffeineVal = caffeine ? 1 : 0;
+
     const response = await addBatch(
       user.username,
       selectedDate,
@@ -106,7 +108,7 @@ export default function AddBatch() {
       medicationsCSV,
       vaccinesCSV,
       dietsCSV,
-      caffeine
+      caffeineVal
     );
 
     setErrorCode(response);
@@ -185,7 +187,7 @@ export default function AddBatch() {
                     type="number"
                     step="0.1"
                     min="0.5"
-                    max="12"
+                    max="25"
                     tabIndex={collapsed ? "-1" : "0"}
                     placeholder="Volume"
                     onChange={volumeChanged}

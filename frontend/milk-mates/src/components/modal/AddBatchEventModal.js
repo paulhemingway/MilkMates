@@ -53,7 +53,6 @@ export default function AddBatchEventModal({ events, batchId }) {
   };
 
   const eventTypeChanged = (selected) => {
-    console.log(selected.value);
     setEventType(selected.value);
   };
 

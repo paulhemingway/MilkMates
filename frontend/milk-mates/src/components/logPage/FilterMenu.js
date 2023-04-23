@@ -36,11 +36,13 @@ export default function FilterMenu(props) {
   };
 
   const apply = () => {
+    
     const filters = {
       dateRange: dateRange,
       status: status,
       listed: listed,
     };
+    console.log(filters)
 
     props.updateFilters(filters);
   };
@@ -76,7 +78,7 @@ export default function FilterMenu(props) {
             <Select
               options={options.startDate}
               defaultValue={options.startDate[dateDefaultIndex]}
-              className="date-range-select"
+              className="date-range-select select"
               id="date-range"
               components={{
                 IndicatorSeparator: () => null,
@@ -137,7 +139,7 @@ export default function FilterMenu(props) {
             <Select
               options={options.listed}
               defaultValue={options.listed[listedDefaultIndex]}
-              className="listed-select"
+              className="listed-select select"
               id="listed"
               components={{
                 IndicatorSeparator: () => null,

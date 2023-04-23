@@ -15,6 +15,7 @@ export default function DeleteBatchEventModal({  event }) {
 
   return (
     <div className="delete-batch-event">
+      <h2>Delete Batch Event?</h2>
       <div className="modal-content">
         <p>Are you sure you want to delete this batch event?</p>
         <div className="event-card">
