@@ -82,8 +82,9 @@ export default function LogTable({ batches }) {
     }
 
     if (newFilters.listed !== null) {
+      const value = newFilters.listed ? 1 : 0;
       newArray = newArray.filter((batch) => {
-        return newFilters.listed === batch.isListed;
+        return value === batch.isListed;
       });
     }
 
@@ -204,7 +205,7 @@ export default function LogTable({ batches }) {
     if (sortedBatches.length > 0) {
       setDisplayedBatches([...sortedBatches].slice(start, end));
     } else {
-      setDisplayedBatches([...batches].slice(start, end));
+      setDisplayedBatches([]);
     }
   }
 

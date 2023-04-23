@@ -5,9 +5,10 @@ import "assets/styles/pages/Terms.scss";
 import "assets/styles/global/PublicWrapper.scss";
 
 export default function Resources(props) {
+  
   useDocumentTitle(props.title);
   return (
-    <div className="public-wrapper">
+    <div className="public-wrapper resources">
       <h1>Resources</h1>
       <p className="intro">
         Welcome to our tips page. Buying, selling, and tracking breastmilk can
