@@ -164,9 +164,9 @@ export default function CreateListing() {
 
   return (
     <div className="create-listing">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="flex-column">
         <div className="input-cont">
-          <label>
+          <label className="flex-column">
             Batch
             <Select
               options={notListedOptions}
@@ -195,7 +195,7 @@ export default function CreateListing() {
         </div>
         <div className="two-col">
           <div className="input-cont">
-            <label>
+            <label className="flex-column">
               Title
               <input
                 type="text"
@@ -217,7 +217,7 @@ export default function CreateListing() {
             )}
           </div>
           <div className="input-cont">
-            <label>
+            <label className="flex-column">
               <span className="price-label">
                 Price <span className="optional">(optional)</span>
               </span>
@@ -236,7 +236,7 @@ export default function CreateListing() {
           </div>
         </div>
         <div className="input-cont">
-          <label>
+          <label className="flex-column">
             Description
             <textarea
               name="desc"

@@ -3,7 +3,7 @@ import React from "react";
 import Wrapper from "components/global/Wrapper";
 import CreateListing from "components/listing/CreateListing";
 
-import "assets/styles/pages/Share.scss"
+import "assets/styles/pages/Listing.scss"
 import MyListings from "components/listing/MyListings";
 
 

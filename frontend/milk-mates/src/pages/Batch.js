@@ -39,13 +39,11 @@ export default function Batch() {
         batch.isListed === 1 ||
         notListableStatuses.includes(batch.events[batch.events.length - 1].event);
       setDisabled(isDisabled)
-      console.log(isDisabled)
     }
   }, [batch]);
 
   const fetchBatch = async (batchId) => {
     const fetchedBatch = await getBatch(batchId);
-    console.log(fetchedBatch)
 
     fetchedBatch.events = fetchedBatch.events.sort(
       (a, b) => new Date(b.eventDate) - new Date(a.eventDate)

@@ -111,7 +111,7 @@ export const BatchProvider = ({ children }) => {
   
 
   const addBatchEvent = async (batchId, batchEventType, eventDate, notes) => {
-    eventDate = moment(date).format("YYYY-MM-DD HH:mm:ss");
+    eventDate = moment(eventDate).format("YYYY-MM-DD HH:mm:ss");
     return axios
       .post(
         `${apiURL}/tracker/AddBatchEvent`,
