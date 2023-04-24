@@ -88,7 +88,7 @@ export default function Batch() {
       {batch === undefined && <p>Batch {batchId} not found.</p>}
       {batch && (
         <div className="batch-content">
-          <BatchInfo batch={batch} />
+          <BatchInfo batch={batch} status={batch.events.reduce((prev, curr) => (new Date(curr.eventDate) > new Date(prev.eventDate) ? curr : prev)).event}/> 
           <BatchEvents events={batch.events} batchId={batch.batchId} />
         </div>
       )}

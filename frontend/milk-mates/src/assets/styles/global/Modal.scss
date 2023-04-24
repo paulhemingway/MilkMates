@@ -128,11 +128,22 @@
 
 .delete-user {
   .modal-content {
+    font-size: 0.9em;
     label {
       display: flex;
       flex-direction: column;
       gap: 5px;
+
+      input {
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid var(--light-grey);
+      }
     }
+  }
+  .success {
+    color: var(--green);
+    text-align: center;
   }
 }
 

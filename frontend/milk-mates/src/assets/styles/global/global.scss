@@ -312,3 +312,34 @@
   flex-direction: column;
 }
 
+.batch-info {
+  .info-table {
+    width: 100%;
+    border-collapse: separate;
+    border-radius: 15px;
+    border-spacing: 0;
+    overflow: hidden;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+    border: 4px inset var(--blue);
+
+    th,
+    td {
+      padding: 15px;
+    }
+
+    th {
+      width: 175px;
+      text-align: left;
+    }
+
+    tr:nth-child(2n) {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    td {
+      &.status {
+        text-transform: capitalize;
+      }
+    }
+  }
+}
