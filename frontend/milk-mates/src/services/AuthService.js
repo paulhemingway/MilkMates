@@ -130,6 +130,28 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const deleteAccount = async (username, password) => {
+    try {
+      const response = await axios.put(
+        `${apiURL}/login/DeleteUser`,
+        { username, password },
+        {
+          timeout: 5000, // Timeout after 5 seconds
+        }
+      );
+      return response.data[0].errorCode === 0;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+
+  const logoutWithDelay = async () => {
+    setTimeout(function() {
+      logout();
+    }, 3000); 
+  }
+
   // Pass the authentication state and methods to the AuthContext.Provider component
   return (
     <AuthContext.Provider
@@ -138,11 +160,13 @@ export const AuthProvider = ({ children }) => {
         user,
         login,
         logout,
+        logoutWithDelay,
         loginErrorCode,
         registerErrorCode,
         register,
         getUserInfo,
         changePassword,
+        deleteAccount
       }}
     >
       {children}

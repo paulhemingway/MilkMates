@@ -2,13 +2,10 @@ import React from "react";
 import Wrapper from "components/global/Wrapper";
 import moment from "moment";
 
-export default function BatchInfo({ batch }) {
-  const status = batch.events[0].event;
-  
-
+export default function BatchInfo({ batch, status }) {
   return (
     <Wrapper header="Batch Info">
-      <div className="info">
+      <div className="batch-info">
         <table className="info-table">
           <tbody>
           <tr>
