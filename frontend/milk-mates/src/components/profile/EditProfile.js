@@ -216,7 +216,7 @@ export default function EditProfile({ user }) {
             onClick={deleteClicked}
             className="delete shadow"
           >
-            Delete Account
+            Deactivate Account
           </button>
         </div>
       </form>
