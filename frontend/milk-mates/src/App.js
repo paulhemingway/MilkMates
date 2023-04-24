@@ -20,6 +20,7 @@ import Privacy from "pages/Privacy";
 import Batch from "pages/Batch";
 import PrivateRoute from "./components/global/PrivateRoute";
 import "assets/styles/global/global.scss";
+import Listing from "pages/Listing";
 
 function App() {
   // must get token on load eventually and redirect if it's valid
@@ -108,6 +109,18 @@ function App() {
               path="/log/batch/:batchId"
               element={
                 <PrivateRoute loggedIn={loggedIn} component={<Batch />} />
+              }
+            />
+            <Route
+              path="/share/listing/:listingId"
+              element={
+                <PrivateRoute loggedIn={loggedIn} component={<Listing />} />
+              }
+            />
+            <Route
+              path="/find/listing/:listingId"
+              element={
+                <PrivateRoute loggedIn={loggedIn} component={<Listing />} />
               }
             />
           </Route>

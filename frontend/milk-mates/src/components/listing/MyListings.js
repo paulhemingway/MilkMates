@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useListingService } from "services/ListingService";
 import ListingItem from "./ListingItem";
 import Pagination from "components/global/Pagination";
+import Loading from "components/global/Loading";
 
 export default function MyListings() {
   const { userListings } = useListingService();
@@ -12,7 +13,9 @@ export default function MyListings() {
 
   useEffect(() => {
     updatePage(0, perPage);
-    paginationRef.current.resetPageNumber();
+    if (paginationRef.current && paginationRef.current.resetPageNumber() !== undefined) {
+      paginationRef.current.resetPageNumber();
+    }
   }, [userListings]);
 
   const updatePage = (start, end) => {
@@ -21,17 +24,22 @@ export default function MyListings() {
 
   return (
     <div className="my-listings">
-      <div className="listings">
-        {displayedListings.map((listing, index) => {
-          return <ListingItem key={index} listing={listing} isOwn={true} />;
-        })}
-      </div>
-      <Pagination
-        length={userListings.length}
-        perPage={perPage}
-        update={updatePage}
-        ref={paginationRef}
-      />
+      {userListings.length > 0 && (
+        <>
+          <div className="listings">
+            {displayedListings.map((listing, index) => {
+              return <ListingItem key={index} listing={listing} isOwn={true} />;
+            })}
+          </div>
+          <Pagination
+            length={userListings.length}
+            perPage={perPage}
+            update={updatePage}
+            ref={paginationRef}
+          />
+        </>
+      )}
+      {userListings.length === 0 && <p>You do not have any listings. Create a listing using the form above.</p>}
     </div>
   );
 }

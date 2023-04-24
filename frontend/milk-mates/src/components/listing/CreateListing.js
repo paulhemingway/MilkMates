@@ -36,32 +36,32 @@ export default function CreateListing() {
   // if a batch has one of these statuses, it can't be listed.
   const notListableStatuses = ["discarded", "shared", "consumed"];
 
-  function mysql_real_escape_string (str) {
+  function mysql_real_escape_string(str) {
     return str.replace(/[\0\x08\x09\x1a\n\r"'\\\%]/g, function (char) {
-        switch (char) {
-            case "\0":
-                return "\\0";
-            case "\x08":
-                return "\\b";
-            case "\x09":
-                return "\\t";
-            case "\x1a":
-                return "\\z";
-            case "\n":
-                return "\\n";
-            case "\r":
-                return "\\r";
-            case "\"":
-            case "'":
-            case "\\":
-            case "%":
-                return "\\"+char; // prepends a backslash to backslash, percent,
-                                  // and double/single quotes
-            default:
-                return char;
-        }
+      switch (char) {
+        case "\0":
+          return "\\0";
+        case "\x08":
+          return "\\b";
+        case "\x09":
+          return "\\t";
+        case "\x1a":
+          return "\\z";
+        case "\n":
+          return "\\n";
+        case "\r":
+          return "\\r";
+        case '"':
+        case "'":
+        case "\\":
+        case "%":
+          return "\\" + char; // prepends a backslash to backslash, percent,
+        // and double/single quotes
+        default:
+          return char;
+      }
     });
-}
+  }
 
   useEffect(() => {
     const batchesNotListed = batches.filter((batch) => {
@@ -122,7 +122,6 @@ export default function CreateListing() {
 
   const handleSubmit = async (e) => {
     let errorMessage = "";
-    console.log(price.toString())
 
     e.preventDefault();
 
@@ -139,8 +138,6 @@ export default function CreateListing() {
       price.toString(),
       mysql_real_escape_string(desc)
     );
-
-    
 
     switch (errorCode) {
       case 0:
@@ -262,7 +259,7 @@ export default function CreateListing() {
             </p>
           )}
         </div>
-        {loading && <Loading />}
+        {loading && <p className="loading"><Loading /></p>}
         <p className="error-msg center">{errorMsg}</p>
         <div className="buttons">
           <button

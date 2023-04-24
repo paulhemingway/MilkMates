@@ -15,6 +15,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    h2 {
+      text-align: center;
+    }
 
     .top {
       display: flex;
@@ -90,6 +93,13 @@
       justify-content: flex-end;
       gap: 15px;
     }
+
+    .error-msg {
+      font-size: 0.8em;
+      color: var(--red);
+      text-align: center;
+      margin: 1em 0;
+    }
   }
 }
 
@@ -128,6 +138,17 @@
 
 .add-batch-event {
   min-width: 300px;
+}
+
+.delete-listing {
+  .listing-info {
+    font-size: 0.9em;
+    text-align: center;
+  }
+  .loading-icon {
+    text-align: center;
+    margin-top: 1em;
+  }
 }
 
 @media only screen and (max-width: 1024px) {

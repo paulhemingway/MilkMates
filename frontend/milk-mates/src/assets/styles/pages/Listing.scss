@@ -45,6 +45,11 @@
         }
       }
 
+      .loading {
+        text-align: center;
+        width: 100%;
+      }
+
       .error-msg {
         &.center {
           text-align: center;
@@ -69,11 +74,8 @@
       flex-wrap: wrap;
       justify-content: space-between;
       gap: 2em;
-      padding: 2em;
       justify-content: center;
-      background-color: var(--blue);
       border-radius: 20px;
-      box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.3);
     }
   }
 }
@@ -83,7 +85,8 @@
 .listing-item {
   padding: 15px;
   border-radius: 15px;
-  box-shadow: 4px 8px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 8px 8px 0 var(--blue);
+  border: 2px solid var(--blue);
   width: calc(33.33% - 2em);
   height: 250px;
   background-color: white;
@@ -97,37 +100,52 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+
     h3 {
-      font-size: 1.1em;
+      font-size: 1.2em;
       overflow-wrap: break-word;
       max-width: 100%;
     }
   }
 
+  p {
+    overflow-wrap: break-word;
+    font-size: 0.8em;
+  }
+
   .second-row {
     display: flex;
     justify-content: space-between;
+
+    .author {
+      .profile-link {
+        color: var(--pink);
+        text-decoration: none;
+        font-weight: bold;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
   }
 
-
-  .description {
-    h4 {
-      font-size: 0.9em;
-    }
-
-    p {
-      overflow-wrap: break-word;
-      font-size: 0.8em;
-    }
-
+  h4 {
+    font-size: 0.9em;
   }
 
   .bottom {
     display: flex;
+    justify-content: flex-end;
   }
 
-  &:hover, &:focus-within {
-    
+  &:hover {
+    transform: scale(1.02) translateY(-5px);
+    box-shadow: 12px 12px 15px var(--blue);
+  }
+
+  &:focus-within {
+    outline: 2px solid var(--pink);
   }
 
 

@@ -40,7 +40,8 @@ export default function CreateAccountForm({ switchToLogin }) {
 
   const nameRegex = /^[a-zA-Z]+(['-][a-zA-Z]+)*$/;
   const userRegex = /^[a-zA-Z][a-zA-Z0-9]*$/;
-  const passRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+  const passRegex =
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
   useEffect(() => {
     errorCodeChanged(registerErrorCode);
@@ -111,9 +112,17 @@ export default function CreateAccountForm({ switchToLogin }) {
   };
 
   const handlePassChange = (e) => {
-    if (confPass.length > 0 && e.target.value !== confPass) {
-      setErrors({ ...errors, confPass: "Passwords do not match." });
+    let newErrors = { ...errors };
+    if (confPass.length > 0) {
+      if (e.target.value !== confPass) {
+        newErrors.confPass = "Passwords do not match.";
+      } else {
+        newErrors.confPass = "";
+      }
     }
+    newErrors.pass = "";
+
+    setErrors(newErrors);
     setPass(e.target.value);
   };
 
@@ -145,8 +154,6 @@ export default function CreateAccountForm({ switchToLogin }) {
         setLoading(false);
       }
     }, 1000);
-
-    setLoading(false);
   };
 
   const clearErrors = () => {

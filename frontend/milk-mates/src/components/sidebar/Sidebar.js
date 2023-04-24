@@ -89,7 +89,7 @@ export default function Sidebar(props) {
               </div>
             </NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink
               to="/messages"
               onClick={clicked}
@@ -100,7 +100,7 @@ export default function Sidebar(props) {
                 <span>Messages</span>
               </div>
             </NavLink>
-          </li>
+          </li> */}
           <li>
             <NavLink
               to="/resources"

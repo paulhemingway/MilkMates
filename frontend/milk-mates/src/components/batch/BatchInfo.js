@@ -1,8 +1,6 @@
 import React from "react";
 import Wrapper from "components/global/Wrapper";
 import moment from "moment";
-import { useModalService } from "services/ModalService";
-import DeleteBatchModal from "components/modal/DeleteBatchModal";
 
 export default function BatchInfo({ batch }) {
   const status = batch.events[0].event;
