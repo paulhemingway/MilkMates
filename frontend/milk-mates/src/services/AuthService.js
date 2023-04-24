@@ -10,8 +10,8 @@ export const AuthContext = createContext();
 
 // Define a function component that wraps its children with the AuthContext.Provider component
 export const AuthProvider = ({ children }) => {
-  const { getBatchesByUser } = useBatchService();
-  const { getUserListings } = useListingService();
+  const { getBatchesByUser, setBatches } = useBatchService();
+  const { getUserListings, setUserListings } = useListingService();
   // set back to false when done
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
@@ -50,6 +50,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async () => {
+    setBatches([]);
+    setUserListings([]);
     setLoggedIn(false);
     setUser(null);
   };

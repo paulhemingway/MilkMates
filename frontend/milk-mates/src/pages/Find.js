@@ -1,13 +1,17 @@
 import useDocumentTitle from 'services/DocumentTitle'
 import React from 'react'
 import Wrapper from 'components/global/Wrapper'
+import FindListings from 'components/listing/FindListings'
+
 
 export default function Find(props) {
   useDocumentTitle(props.title)
   return (
     <div className='find'>
       <h1>Find Milk</h1>
-      <Wrapper header="Listings"></Wrapper>
+      <Wrapper header="Listings">
+        <FindListings />
+      </Wrapper>
     </div>
   )
 }

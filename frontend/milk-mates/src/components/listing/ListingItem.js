@@ -1,14 +1,33 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "services/AuthService";
 import moment from "moment";
+import { useModalService } from "services/ModalService";
+import DeleteListing from "components/modal/DeleteListing";
 
 export default function ListingItem({ listing, isOwn }) {
+  const { user } = useAuth();
+  const { openModal } = useModalService();
+
+  const navigate = useNavigate();
+
+  const goToListing = () => {
+    navigate(`listing/${listing.listingId}`);
+  };
+
+  const removeClicked = (e) => {
+    e.stopPropagation();
+    openModal(<DeleteListing listing={listing} isAdmin={user.isAdmin} />)
+  };
+
   return (
-    <div className="listing-item flex-column" tabIndex="0">
+    <div
+      className="listing-item flex-column"
+      onClick={goToListing}
+      tabIndex="0"
+    >
       <div className="top">
-        <h3>
-          WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-        </h3>
+        <h3>{listing.title}</h3>
       </div>
 
       <div className="second-row">
@@ -18,7 +37,13 @@ export default function ListingItem({ listing, isOwn }) {
         </div>
         <div className="author">
           <h4>Author</h4>
-          <Link to={`/profile/${listing.username}`}>{listing.username}</Link>
+          <Link
+            className="profile-link"
+            to={`/profile/${listing.username}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {listing.username}
+          </Link>
         </div>
       </div>
 
@@ -30,7 +55,13 @@ export default function ListingItem({ listing, isOwn }) {
             : listing.description.slice(0, 150) + "..."}
         </p>
       </div>
-      <div className="bottom">hi</div>
+      <div className="bottom">
+        {(isOwn || user.isAdmin) && (
+          <button className="button primary-button-red" onClick={removeClicked}>
+            Remove Listing
+          </button>
+        )}
+      </div>
     </div>
   );
 }
