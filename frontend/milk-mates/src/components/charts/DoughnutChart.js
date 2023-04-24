@@ -2,7 +2,7 @@ import React from "react";
 import { Doughnut } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 
-export default function PieChart({ data }) {
+export default function DoughnutChart({ data }) {
   const labels = [
     "Logged",
     "Refrigerated",

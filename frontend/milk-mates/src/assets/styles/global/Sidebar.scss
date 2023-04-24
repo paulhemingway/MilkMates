@@ -28,6 +28,10 @@
   .active {
     color: var(--pink);
     background-color: var(--blue);
+    text-shadow: 2px 1px 4px rgba(255,255,255,1);
+    svg {
+      filter: drop-shadow(2px 1px 4px rgba(255,255,255,1));
+    }
   }
 
   .logout-cont {
@@ -45,6 +49,10 @@
     &:hover {
       background-image: linear-gradient(to right, var(--hover-blue), var(--blue));
       color: var(--light-blue);
+      text-shadow: none;
+      svg {
+        filter: none;
+      }
     }
 
     svg {
