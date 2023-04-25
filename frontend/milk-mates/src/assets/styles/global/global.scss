@@ -234,7 +234,8 @@
     background-image: var(--active-pink-gradient);
   }
 
-  &:disabled, &.disabled {
+  &:disabled,
+  &.disabled {
     background-image: var(--disabled-pink-gradient);
     cursor: not-allowed;
     pointer-events: none;
@@ -340,6 +341,136 @@
       &.status {
         text-transform: capitalize;
       }
+    }
+  }
+}
+
+.table {
+  overflow-x: auto;
+  overflow-y: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  text-align: center;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: var(--shadow);
+
+    tbody {
+      td {
+        padding: 5px 15px;
+        align-items: center;
+        vertical-align: middle;
+
+        svg {
+          font-size: calc(100% + 1em);
+          position: relative;
+          top: 0.1em;
+        }
+
+        &.status-cell {
+          text-transform: capitalize;
+        }
+
+        &.link-cell {
+          display: flex;
+          justify-content: center;
+
+          svg {
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--pink);
+            transition: transform 0.3s ease;
+
+            &:hover {
+              transform: scale(1.1);
+            }
+          }
+        }
+      }
+
+      tr {
+        &.log-table-row {
+          cursor: pointer;
+
+          &:hover,
+          &:focus-within,
+          :active {
+            background-color: var(--pink);
+            color: white;
+          }
+        }
+
+        &:nth-child(2n) {
+          background-image: linear-gradient(rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.15));
+        }
+
+        &.empty-row {
+          text-align: center;
+        }
+
+        .time {
+          font-size: 0.75em;
+        }
+      }
+    }
+
+    thead {
+      background-image: var(--blue-gradient);
+      color: white;
+
+      th {
+        text-align: center;
+        padding: 15px;
+
+        &:first-child {
+          border-top-left-radius: 10px;
+        }
+
+        &:last-child {
+          border-top-right-radius: 10px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  h1 {
+    font-size: 1.8em !important;
+  }
+  .wrapper, .dash-wrapper {
+    h2 {
+      font-size: 1.3em !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 675px) {
+  .table {
+    border-radius: 10px;
+    overflow-x: hidden !important;
+
+    table {
+
+      tbody {
+        td {
+          padding: 2px 5px !important;
+          font-size: .7em !important;
+        }
+      }
+
+      thead {
+        th {
+          font-size: .7em !important;
+          padding: 5px !important;
+        }
+      }
+    }
+
+    .disappear {
+      display: none !important;
     }
   }
 }

@@ -65,7 +65,7 @@ export const ListingProvider = ({ children }) => {
 
       if (response.data[0].errorCode === 0) {
         if (!isAdmin) {
-          await updateBatchListed(batchId, false);
+          await updateBatchListed(batchId, 0);
           await getUserListings(username);
         }
 
@@ -114,7 +114,7 @@ export const ListingProvider = ({ children }) => {
       );
       if (response.data[0].errorCode === 0) {
         await getUserListings(username);
-        await updateBatchListed(batchId, true);
+        await updateBatchListed(batchId, 1);
         return 0;
       }
       return response.data[0].errorCode;

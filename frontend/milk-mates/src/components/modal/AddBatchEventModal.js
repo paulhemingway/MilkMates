@@ -8,8 +8,15 @@ import Select from "react-select";
 import Loading from "components/global/Loading";
 import SuccessModal from "./SuccessModal";
 import { useBatchService } from "services/BatchService";
+import { useAuth } from "services/AuthService";
+import { useListingService } from "services/ListingService";
 
-export default function AddBatchEventModal({ events, batchId }) {
+export default function AddBatchEventModal({
+  events,
+  batchId,
+  isListed,
+  fetchBatch,
+}) {
   const { closeModal, openModal } = useModalService();
   const [selectedDate, setSelectedDate] = useState(dayjs(Date.now()));
   const [eventType, setEventType] = useState("");
@@ -18,7 +25,11 @@ export default function AddBatchEventModal({ events, batchId }) {
   const [loading, setLoading] = useState(false);
   const [notes, setNotes] = useState("");
 
-  const {addBatchEvent} = useBatchService();
+  const { addBatchEvent } = useBatchService();
+  const { user } = useAuth();
+  const { userListings, deleteListing } = useListingService();
+
+  const deleteListedTypes = ["consumed", "shared", "discarded"];
 
   useEffect(() => {
     const alreadyUsed = events.map((event) => event.event);
@@ -29,19 +40,51 @@ export default function AddBatchEventModal({ events, batchId }) {
   }, []);
 
   const addClicked = async () => {
-    await setLoading(true);
-    await setErrorMsg("");
-    // call delete batch function
-    if (!(await addBatchEvent(batchId, eventType, selectedDate, notes))) {
-      setErrorMsg("Something went wrong on our end. Please try again.");
-    } else {
-      openModal(
-        <SuccessModal
-          message={`Batch event has been added successfully.`}
-        />
+    try {
+      setLoading(true);
+      setErrorMsg("");
+      const added = await addBatchEvent(
+        batchId,
+        eventType,
+        selectedDate,
+        notes
       );
+      if (!added) {
+        throw new Error("Something went wrong on our end. Please try again.");
+      }
+      const deleteListing =
+        isListed && eventType && deleteListedTypes.includes(eventType);
+      if (deleteListing) {
+        const listing = userListings.find(
+          (listing) => batchId === listing.batchId
+        );
+        const deletedListing = await deleteListing(
+          listing.listingId,
+          false,
+          user.username,
+          batchId
+        );
+        if (!deletedListing) {
+          throw new Error("Something went wrong on our end. Please try again.");
+        }
+        fetchBatch(batchId);
+        successModal(deleteListing);
+      }
+    } catch (error) {
+      setErrorMsg(error.message);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
+  };
+
+  const successModal = (deleteListing) => {
+    openModal(
+      <SuccessModal
+        message={`Batch event has been added ${
+          deleteListing ? "and the listing for this batch has been removed" : ""
+        } successfully.`}
+      />
+    );
   };
 
   const handleSubmit = (e) => {
@@ -54,11 +97,12 @@ export default function AddBatchEventModal({ events, batchId }) {
 
   const eventTypeChanged = (selected) => {
     setEventType(selected.value);
+    console.log(selected.value);
   };
 
   const notesChanged = (e) => {
-    setNotes(e.target.value)
-  }
+    setNotes(e.target.value);
+  };
 
   return (
     <div className="add-batch-event">
@@ -115,10 +159,19 @@ export default function AddBatchEventModal({ events, batchId }) {
           </div>
         </form>
       </div>
-      <p className="modal-error-loading">
+
+      <div className="modal-error-loading">
         {loading && <Loading />}
-        {errorMsg}
-      </p>
+
+        {isListed && eventType && deleteListedTypes.includes(eventType) && (
+          <p>
+            WARNING: This batch is currently listed. Marking it as{" "}
+            <i>{eventType}</i> will remove the listing.
+          </p>
+        )}
+
+        {errorMsg && <p>{errorMsg}</p>}
+      </div>
       <div className="buttons">
         <button className="button secondary-button-blue" onClick={closeModal}>
           Cancel

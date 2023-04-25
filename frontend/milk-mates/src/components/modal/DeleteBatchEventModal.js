@@ -5,7 +5,7 @@ import moment from "moment";
 import BatchEvent from "../batch/BatchEvent";
 import { useBatchService } from "services/BatchService";
 
-export default function DeleteBatchEventModal({  event }) {
+export default function DeleteBatchEventModal({ event, batchId }) {
   const { closeModal } = useModalService();
 
   const deleteClicked = () => {

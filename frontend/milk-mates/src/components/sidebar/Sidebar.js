@@ -15,7 +15,7 @@ import {
 // props will need the logout function and user info (name)
 export default function Sidebar(props) {
   const [width, setWidth] = useState(window.innerWidth);
-  const [selectable, setSelectable] = useState(true)
+  const [selectable, setSelectable] = useState(true);
 
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
@@ -24,12 +24,12 @@ export default function Sidebar(props) {
   }, []);
 
   useEffect(() => {
-    if(props.collapsed) {
-      setSelectable(width >= 1024)
+    if (props.collapsed) {
+      setSelectable(width >= 1024);
     } else {
-      setSelectable(true)
+      setSelectable(true);
     }
-  }, [props.collapsed, width])
+  }, [props.collapsed, width]);
 
   const { user } = useAuth();
 
@@ -67,18 +67,6 @@ export default function Sidebar(props) {
           </li>
           <li>
             <NavLink
-              to="/share"
-              onClick={clicked}
-              tabIndex={selectable ? "0" : "-1"}
-            >
-              <div className="nav-link">
-                <TbBottle />
-                <span>Share Milk</span>
-              </div>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
               to="/find"
               onClick={clicked}
               tabIndex={selectable ? "0" : "-1"}
@@ -86,6 +74,18 @@ export default function Sidebar(props) {
               <div className="nav-link">
                 <TbSearch />
                 <span>Find Milk</span>
+              </div>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/share"
+              onClick={clicked}
+              tabIndex={selectable ? "0" : "-1"}
+            >
+              <div className="nav-link">
+                <TbBottle />
+                <span>Share Milk</span>
               </div>
             </NavLink>
           </li>
