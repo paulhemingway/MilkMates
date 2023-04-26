@@ -1,8 +1,8 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
 
-export default function PrivateRoute(props) {
-  return props.loggedIn 
+export default function AdminRoute(props) {
+  return props.isAdmin 
     ? props.component 
     : <Navigate to='/' /> 
 }

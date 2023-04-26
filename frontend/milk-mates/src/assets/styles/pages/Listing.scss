@@ -80,7 +80,12 @@
   }
 }
 
-.find {}
+.find {
+  .find-listings {
+    align-items: center;
+    gap: 2em;
+  }
+}
 
 .listing-item {
   padding: 15px;

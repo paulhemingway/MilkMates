@@ -20,6 +20,10 @@ export default function ListingItem({ listing, isOwn }) {
     openModal(<DeleteListing listing={listing} isAdmin={user.isAdmin} />)
   };
 
+  const interestedClicked = (e) => {
+    
+  }
+
   return (
     <div
       className="listing-item flex-column"
@@ -59,6 +63,11 @@ export default function ListingItem({ listing, isOwn }) {
         {(isOwn || user.isAdmin) && (
           <button className="button primary-button-red" onClick={removeClicked}>
             Remove Listing
+          </button>
+        )}
+        {(!isOwn) && (
+          <button className="button primary-button-blue" onClick={interestedClicked}>
+            I'm Interested
           </button>
         )}
       </div>
