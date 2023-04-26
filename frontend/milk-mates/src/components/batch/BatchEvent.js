@@ -5,7 +5,7 @@ import { useBatchService } from "services/BatchService";
 import { useModalService } from "services/ModalService";
 import DeleteBatchEventModal from "../modal/DeleteBatchEventModal";
 
-export default function BatchEvent({ event, deletable, batch }) {
+export default function BatchEvent({ event, deletable, batch, index }) {
   const { deleteBatchEvent } = useBatchService();
   const { openModal } = useModalService();
 
@@ -23,7 +23,7 @@ export default function BatchEvent({ event, deletable, batch }) {
   };
   return (
     <div className={`event shadow ${event.event}`}>
-      <p className="event-title">{event.event}</p>
+      <p className="event-title">{index}. {event.event}</p>
       <div className="event-info">
         <div className="date">
           <p>

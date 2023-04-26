@@ -25,6 +25,7 @@ export default function BatchEvents({ events, batch, fetchBatch }) {
                 key={index}
                 deletable={index === 0 && item.event !== "logged"}
                 batch={batch}
+                index={events.length - index}
               />
             );
           })}
