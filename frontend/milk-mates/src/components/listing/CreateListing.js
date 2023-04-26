@@ -243,7 +243,7 @@ export default function CreateListing() {
               rows="8"
               onChange={(e) => setDesc(e.target.value)}
               value={desc}
-              placeholder="200 oz of frozen breastmilk from a healthy, non-smoking, and drug-free mother. Milk was pumped between January and March of 2023 and stored in a deep freezer immediately after pumping. No alcohol or caffeine was consumed during this time. Milk has been screened and tested negative for any contamination..."
+              placeholder="12 oz of frozen breastmilk from a healthy, non-smoking, and drug-free mother. Milk was pumped between January and March of 2023 and stored in a deep freezer immediately after pumping. No alcohol or caffeine was consumed during this time. Milk has been screened and tested negative for any contamination..."
             ></textarea>
           </label>
           <p

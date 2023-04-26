@@ -23,8 +23,8 @@ export default function FindListings() {
   return (
     <div className="find-listings">
       <div className="listings">
-        {allListings.length > 0 && allListings.map(listing => {
-          return <ListingItem listing={listing} isOwn={false} />
+        {allListings.length > 0 && allListings.map((listing, index) => {
+          return <ListingItem listing={listing} isOwn={false} key={index} />
         })}
       </div>
     </div>

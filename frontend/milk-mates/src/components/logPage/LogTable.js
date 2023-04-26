@@ -4,8 +4,6 @@ import Select from "react-select";
 import { useEffect, useState } from "react";
 import { TbSortAscending, TbSortDescending } from "react-icons/tb";
 import { HiPlus } from "react-icons/hi";
-import { useNavigate } from "react-router-dom";
-
 
 import LogTableRow from "./LogTableRow";
 import FilterMenu from "./FilterMenu";
@@ -17,8 +15,6 @@ export default function LogTable({ batches }) {
   const [sortedBatches, setSortedBatches] = useState([]);
   const [filteredBatches, setFilteredBatches] = useState([]);
   const [sortCode, setSortCode] = useState(1);
-
-  const navigate = useNavigate()
 
   // state for pagination
   const [displayedBatches, setDisplayedBatches] = useState([]);
