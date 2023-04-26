@@ -23,7 +23,7 @@ export default function Batch() {
   const notListableStatuses = ["discarded", "shared", "consumed"];
 
   const deleteBatchClicked = () => {
-    openModal(<DeleteBatchModal batchId={batch.batchId} />);
+    openModal(<DeleteBatchModal batchId={batch.batchId} isListed={batch.isListed === 1} />);
   };
 
   const editBatchClicked = () => {};
@@ -89,7 +89,7 @@ export default function Batch() {
       {batch && (
         <div className="batch-content">
           <BatchInfo batch={batch} status={batch.events.reduce((prev, curr) => (new Date(curr.eventDate) > new Date(prev.eventDate) ? curr : prev)).event}/> 
-          <BatchEvents events={batch.events} batchId={batch.batchId} />
+          <BatchEvents events={batch.events} batch={batch} fetchBatch={fetchBatch}/>
         </div>
       )}
     </div>

@@ -5,13 +5,13 @@ import { HiPlus } from "react-icons/hi";
 import { useModalService } from "services/ModalService";
 import AddBatchEventModal from "../modal/AddBatchEventModal";
 
-export default function BatchEvents({ events, batchId }) {
+export default function BatchEvents({ events, batch, fetchBatch }) {
   const finishedEvents = ["discarded", "consumed", "shared"];
   const disabled = events.some((item) => finishedEvents.includes(item.event));
   const { openModal } = useModalService();
 
   const addBatchClicked = () => {
-    openModal(<AddBatchEventModal events={events} batchId={batchId} />);
+    openModal(<AddBatchEventModal events={events} batchId={batch.batchId} isListed={batch.isListed === 1} fetchBatch={fetchBatch} />);
   };
 
   return (
@@ -24,7 +24,8 @@ export default function BatchEvents({ events, batchId }) {
                 event={item}
                 key={index}
                 deletable={index === 0 && item.event !== "logged"}
-                batchId={batchId}
+                batch={batch}
+                index={events.length - index}
               />
             );
           })}

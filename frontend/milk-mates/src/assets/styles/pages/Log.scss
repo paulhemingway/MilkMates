@@ -428,29 +428,7 @@
         }
       }
 
-      .table {
-        border-radius: 10px;
-
-        table {
-          tbody {
-            td {
-              padding: 2px 5px !important;
-              font-size: .7em;
-            }
-          }
-
-          thead {
-            th {
-              font-size: .7em;
-              padding: 5px;
-            }
-          }
-        }
-
-        .disappear {
-          display: none;
-        }
-      }
+      
     }
   }
 }

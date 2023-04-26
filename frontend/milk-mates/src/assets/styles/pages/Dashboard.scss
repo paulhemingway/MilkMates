@@ -1,0 +1,71 @@
+.dashboard {
+  &-content {
+    .dash-wrapper {
+      padding: 0 1.5em 1.5em;
+      border-radius: 20px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+      margin-bottom: 2em;
+
+      .top-link {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--dark-blue);
+        text-decoration: none;
+
+        h2,
+        svg {
+          transition: all 0.2s ease;
+        }
+
+        h2 {
+          position: relative;
+          margin: 1em 0;
+        }
+
+        svg {
+          font-size: 2em;
+        }
+
+        &:hover {
+          background-image: linear-gradient(to right, white, rgb(244, 244, 244), white);
+
+          h2,
+          svg {
+            transform: scale(1.1) translate(0px, -4px);
+            text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+            filter: drop-shadow(3px 3px 0px rgba(0, 0, 0, 0.1));
+          }
+        }
+      }
+
+      .blue-line {
+        height: 3px;
+        width: 100%;
+        background-image: var(--blue-gradient);
+        border-radius: 5px;
+        margin-bottom: 1em;
+      }
+
+      .dash-share {
+        .listing-item {
+          margin: 0 auto;
+        }
+        .create-btn {
+          margin-top: 1.5em;
+          display: inline-block;
+          text-decoration: none;
+          text-align: center;
+        }
+      }
+
+      .error-msg {
+        color: var(--red);
+        text-align: center;
+      }
+      .loading {
+        text-align: center;
+      }
+    }
+  }
+}

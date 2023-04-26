@@ -2,30 +2,56 @@ import React from "react";
 import { useState } from "react";
 import { useModalService } from "services/ModalService";
 import { useBatchService } from "services/BatchService";
+import { useAuth } from "services/AuthService";
 import SuccessModal from "./SuccessModal";
 import Loading from "components/global/Loading";
+import { useListingService } from "services/ListingService";
 
-export default function DeleteBatchModal({ batchId }) {
+export default function DeleteBatchModal({ batchId, isListed }) {
   const { closeModal, openModal } = useModalService();
+  const { user } = useAuth();
   const { deleteBatch } = useBatchService();
+  const { deleteListing, userListings } = useListingService();
   const [errorMsg, setErrorMsg] = useState("");
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const deleteClicked = async () => {
-    await setLoading(true)
-    await setErrorMsg("")
-    // call delete batch function
-    if(!await deleteBatch(batchId)) {
-      setErrorMsg("Something went wrong on our end. Please try again.")
-    } else {
-      openModal(
-        <SuccessModal
-          message={`Batch ${batchId} has been deleted successfully.`}
-          redirectPath="/log"
-        />
-      );
+    try {
+      setLoading(true);
+      setErrorMsg("");
+      const deleted = await deleteBatch(batchId);
+      if (!deleted) {
+        throw new Error("Something went wrong on our end. Please try again.");
+      }
+      if (isListed) {
+        const listing = userListings.find(
+          (listing) => batchId === listing.batchId
+        );
+        const deletedListing = await deleteListing(
+          listing.listingId,
+          false,
+          user.username,
+          batchId
+        );
+        if (!deletedListing) {
+          throw new Error("Something went wrong on our end. Please try again.");
+        }
+      }
+      successModal();
+    } catch (error) {
+      setErrorMsg(error.message);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false)
+  };
+
+  const successModal = () => {
+    openModal(
+      <SuccessModal
+        message={`Batch ${batchId} ${isListed ? 'and its listing' : ''} has been deleted successfully.`}
+        redirectPath="/log"
+      />
+    );
   };
 
   return (
@@ -34,10 +60,16 @@ export default function DeleteBatchModal({ batchId }) {
       <div className="modal-content">
         <p>Are you sure you want to delete this batch?</p>
       </div>
-      <p className="modal-error-loading">
+      <div className="modal-error-loading">
+        {isListed && (
+          <p>
+            WARNING: This batch is currently listed. Deleting this batch will
+            also delete the listing.
+          </p>
+        )}
+        <p>{errorMsg}</p>
         {loading && <Loading />}
-        {errorMsg}
-      </p>
+      </div>
       <div className="buttons">
         <button className="button secondary-button-blue" onClick={closeModal}>
           Cancel

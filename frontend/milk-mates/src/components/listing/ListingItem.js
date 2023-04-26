@@ -12,7 +12,7 @@ export default function ListingItem({ listing, isOwn }) {
   const navigate = useNavigate();
 
   const goToListing = () => {
-    navigate(`listing/${listing.listingId}`);
+    navigate(`/${isOwn ? 'share' : 'find' }/listing/${listing.listingId}`);
   };
 
   const removeClicked = (e) => {
