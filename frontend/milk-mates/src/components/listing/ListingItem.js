@@ -60,7 +60,7 @@ export default function ListingItem({ listing, isOwn }) {
         </p>
       </div>
       <div className="bottom">
-        {(isOwn || user.isAdmin) && (
+        {(isOwn || user.isAdmin === 1) && (
           <button className="button primary-button-red" onClick={removeClicked}>
             Remove Listing
           </button>
