@@ -7,10 +7,11 @@ import { AiOutlineUser, AiOutlineHome } from "react-icons/ai";
 import { BiBarChartAlt2, BiLogOut } from "react-icons/bi";
 import {
   TbBottle,
-  TbMessageCircle,
   TbClipboardCheck,
   TbSearch,
 } from "react-icons/tb";
+
+import { FiUsers } from "react-icons/fi";
 
 // props will need the logout function and user info (name)
 export default function Sidebar(props) {
@@ -41,78 +42,100 @@ export default function Sidebar(props) {
     <nav className="nav shadow">
       <div className="app-links">
         <ul>
-          <li>
-            <NavLink
-              to="/dashboard"
-              onClick={clicked}
-              tabIndex={selectable ? "0" : "-1"}
-            >
-              <div className="nav-link">
-                <AiOutlineHome />
-                <span>Dashboard</span>
-              </div>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/log"
-              onClick={clicked}
-              tabIndex={selectable ? "0" : "-1"}
-            >
-              <div className="nav-link">
-                <BiBarChartAlt2 />
-                <span>Milk Log</span>
-              </div>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/find"
-              onClick={clicked}
-              tabIndex={selectable ? "0" : "-1"}
-            >
-              <div className="nav-link">
-                <TbSearch />
-                <span>Find Milk</span>
-              </div>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/share"
-              onClick={clicked}
-              tabIndex={selectable ? "0" : "-1"}
-            >
-              <div className="nav-link">
-                <TbBottle />
-                <span>Share Milk</span>
-              </div>
-            </NavLink>
-          </li>
-          {/* <li>
-            <NavLink
-              to="/messages"
-              onClick={clicked}
-              tabIndex={selectable ? "0" : "-1"}
-            >
-              <div className="nav-link">
-                <TbMessageCircle />
-                <span>Messages</span>
-              </div>
-            </NavLink>
-          </li> */}
-          <li>
-            <NavLink
-              to="/resources"
-              onClick={clicked}
-              tabIndex={selectable ? "0" : "-1"}
-            >
-              <div className="nav-link">
-                <TbClipboardCheck />
-                <span>Resources</span>
-              </div>
-            </NavLink>
-          </li>
+          {/* user */}
+          {true && (
+            <>
+              <li>
+                <NavLink
+                  to="/dashboard"
+                  onClick={clicked}
+                  tabIndex={selectable ? "0" : "-1"}
+                >
+                  <div className="nav-link">
+                    <AiOutlineHome />
+                    <span>Dashboard</span>
+                  </div>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/log"
+                  onClick={clicked}
+                  tabIndex={selectable ? "0" : "-1"}
+                >
+                  <div className="nav-link">
+                    <BiBarChartAlt2 />
+                    <span>Milk Log</span>
+                  </div>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/find"
+                  onClick={clicked}
+                  tabIndex={selectable ? "0" : "-1"}
+                >
+                  <div className="nav-link">
+                    <TbSearch />
+                    <span>Find Milk</span>
+                  </div>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/share"
+                  onClick={clicked}
+                  tabIndex={selectable ? "0" : "-1"}
+                >
+                  <div className="nav-link">
+                    <TbBottle />
+                    <span>Share Milk</span>
+                  </div>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/resources"
+                  onClick={clicked}
+                  tabIndex={selectable ? "0" : "-1"}
+                >
+                  <div className="nav-link">
+                    <TbClipboardCheck />
+                    <span>Resources</span>
+                  </div>
+                </NavLink>
+              </li>
+            </>
+          )}
+          {/* admin */}
+          {false && (
+            <>
+              <li>
+                <NavLink
+                  to="/adminUsers"
+                  onClick={clicked}
+                  tabIndex={selectable ? "0" : "-1"}
+                >
+                  <div className="nav-link">
+                    <FiUsers />
+                    <span>Users</span>
+                  </div>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/adminListings"
+                  onClick={clicked}
+                  tabIndex={selectable ? "0" : "-1"}
+                >
+                  <div className="nav-link">
+                    <TbBottle />
+                    <span>Listings</span>
+                  </div>
+                </NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </div>
       <div className="profile-links">
