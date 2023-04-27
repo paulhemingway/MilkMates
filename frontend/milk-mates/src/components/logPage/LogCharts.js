@@ -1,5 +1,6 @@
 import React from 'react'
 import PieChart from 'components/charts/PieChart'
+import LineChart from 'components/charts/LineChart'
 
 export default function LogCharts({batches}) {
   const statusCount = batches.reduce((freq, batch) => {
@@ -10,8 +11,8 @@ export default function LogCharts({batches}) {
   
   return (
     <div className='log-charts'>
-      {batches.length > 0 ? <PieChart data={statusCount} /> : <p>There are no batches to display.</p>}
-      
+      {/* {batches.length > 0 ? <PieChart data={statusCount} /> : <p>There are no batches to display.</p>} */}
+      {batches.length > 0 ? <LineChart data={batches} /> : <p>There are no batches to display.</p>}
     </div>
   )
 }
