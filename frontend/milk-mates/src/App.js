@@ -18,16 +18,19 @@ import Messages from "pages/Messages";
 import Profile from "pages/Profile";
 import Privacy from "pages/Privacy";
 import Batch from "pages/Batch";
-import PrivateRoute from "./components/global/PrivateRoute";
+import PrivateRoute from "./router/PrivateRoute";
+import AdminRoute from "router/AdminRoute";
 import "assets/styles/global/global.scss";
 import Listing from "pages/Listing";
+import UsersAdmin from "pages/admin/UsersAdmin";
+import ListingsAdmin from "pages/admin/ListingsAdmin";
 
 function App() {
   // must get token on load eventually and redirect if it's valid
 
   useEffect(() => {}, []);
 
-  const { loggedIn } = useAuth();
+  const { loggedIn, user } = useAuth();
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <BrowserRouter>
@@ -50,7 +53,7 @@ function App() {
               element={
                 <PrivateRoute
                   component={<Dashboard title="Dashboard" />}
-                  loggedIn={loggedIn}
+                  loggedIn={loggedIn} user={user} 
                 />
               }
             />
@@ -59,7 +62,7 @@ function App() {
               element={
                 <PrivateRoute
                   component={<Log title="Milk Log" />}
-                  loggedIn={loggedIn}
+                  loggedIn={loggedIn} user={user} 
                 />
               }
             />
@@ -68,7 +71,7 @@ function App() {
               element={
                 <PrivateRoute
                   component={<Share title="Share Milk" />}
-                  loggedIn={loggedIn}
+                  loggedIn={loggedIn} user={user} 
                 />
               }
             />
@@ -77,7 +80,7 @@ function App() {
               element={
                 <PrivateRoute
                   component={<Find title="Find Milk" />}
-                  loggedIn={loggedIn}
+                  loggedIn={loggedIn} user={user} 
                 />
               }
             />
@@ -86,7 +89,7 @@ function App() {
               element={
                 <PrivateRoute
                   component={<Messages title="Messages" />}
-                  loggedIn={loggedIn}
+                  loggedIn={loggedIn} user={user} 
                 />
               }
             />
@@ -95,32 +98,50 @@ function App() {
               element={
                 <PrivateRoute
                   component={<Resources title="Resources" />}
-                  loggedIn={loggedIn}
+                  loggedIn={loggedIn} user={user} 
                 />
               }
             />
             <Route
               path="/profile/:userId"
               element={
-                <PrivateRoute loggedIn={loggedIn} component={<Profile />} />
+                <PrivateRoute loggedIn={loggedIn} user={user}  component={<Profile />} />
               }
             />
             <Route
               path="/log/batch/:batchId"
               element={
-                <PrivateRoute loggedIn={loggedIn} component={<Batch />} />
+                <PrivateRoute loggedIn={loggedIn} user={user}  component={<Batch />} />
               }
             />
             <Route
               path="/share/listing/:listingId"
               element={
-                <PrivateRoute loggedIn={loggedIn} component={<Listing />} />
+                <PrivateRoute loggedIn={loggedIn} user={user}  component={<Listing />} />
               }
             />
             <Route
               path="/find/listing/:listingId"
               element={
-                <PrivateRoute loggedIn={loggedIn} component={<Listing />} />
+                <PrivateRoute loggedIn={loggedIn} user={user}  component={<Listing />} />
+              }
+            />
+            <Route
+              path="/find/listing/:listingId"
+              element={
+                <PrivateRoute loggedIn={loggedIn} user={user}  component={<Listing />} />
+              }
+            />
+            <Route
+              path="/adminUsers"
+              element={
+                <AdminRoute user={user}  component={<UsersAdmin />} />
+              }
+            />
+            <Route
+              path="/adminListings"
+              element={
+                <AdminRoute user={user}  component={<ListingsAdmin />} />
               }
             />
           </Route>
