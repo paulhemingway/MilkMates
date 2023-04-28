@@ -23,6 +23,7 @@ export default function Layout() {
       <Header collapsed={collapsed} toggleCollapse={toggleCollapse} />
 
       <div className="content">
+      {showModal && <Modal />}
         <nav className={`nav-container ${collapsed ? "collapsed" : ""}`}>
           <Sidebar
             clicked={toggleCollapse}
@@ -31,7 +32,7 @@ export default function Layout() {
           />
         </nav>
         <main className="outlet-container">
-          {showModal && <Modal />}
+          
           <div className="outlet">
             <Outlet />
           </div>

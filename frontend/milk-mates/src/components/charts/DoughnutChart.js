@@ -3,6 +3,8 @@ import { Doughnut } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 
 export default function DoughnutChart({ data }) {
+  const total = Object.values(data).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
   const labels = [
     "Logged",
     "Refrigerated",
@@ -22,7 +24,6 @@ export default function DoughnutChart({ data }) {
     data.shared ?? 0,
     data.discarded ?? 0,
   ];
-  
 
   const colors = [
     "rgba(255, 99, 132, 0.9)", // Logged
@@ -47,6 +48,7 @@ export default function DoughnutChart({ data }) {
   };
 
   const options = {
+    responsive: true,
     plugins: {
       title: {
         display: true,
@@ -56,21 +58,26 @@ export default function DoughnutChart({ data }) {
         font: {
           size: 18,
         },
-        
       },
       legend: {
-        display: false,
-        position: "bottom",
+        display: true,
+        position: "left",
         labels: {
-          boxWidth: 11,
+          boxWidth: 10,
           font: {
-            size: 11,
-          }
-        }
+            size: 10,
+          },
+        },
       },
-    }
-    
+    },
   };
 
-  return <Doughnut data={chartData} options={options} />;
+  return (
+    <>
+      <Doughnut data={chartData} options={options} />
+      <p className="total">
+        Total Batches: <span className="total-amount">{total}</span>
+      </p>
+    </>
+  );
 }
