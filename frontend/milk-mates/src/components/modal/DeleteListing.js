@@ -51,7 +51,7 @@ export default function DeleteListing({ listing, isAdmin }) {
             <strong>Listing ID: </strong>
             {listing.listingId}
           </p>
-          {isAdmin && (
+          {isAdmin === 1 && (
             <p>
               <strong>User: </strong>
               {listing.username}

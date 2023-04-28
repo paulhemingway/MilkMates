@@ -36,8 +36,8 @@ export default function ListingItem({ listing, isOwn }) {
 
       <div className="second-row">
         <div className="date">
-          <h4>Date Created</h4>
-          <p>{moment(listing.createdDateTime).format("LLLL")}</p>
+          <h4>Posted</h4>
+          <p>{moment(listing.createdDateTime).fromNow()}</p>
         </div>
         <div className="author">
           <h4>Author</h4>

@@ -4,6 +4,7 @@ import { useListingService } from "services/ListingService";
 import BatchInfo from "components/batch/BatchInfo";
 import { useAuth } from "services/AuthService";
 import Loading from "components/global/Loading";
+import ListingInfo from "components/listing/ListingInfo";
 
 export default function Listing() {
   const { listingId } = useParams();
@@ -11,16 +12,17 @@ export default function Listing() {
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
   const [batch, setBatch] = useState(null);
+  const {getListing} = useListingService()
 
   useEffect(() => {
-    getListing();
+    retrieveListing();
   }, []);
 
-  const getListing = async () => {
+  const retrieveListing = async () => {
     // this will turn into pulling from the API
-    const newListing = dummyListing;
+    const newListing = await getListing(listingId);
 
-    await setListing(dummyListing);
+    await setListing(newListing);
 
     const newBatch = {
       batchId: newListing.batchId,
@@ -32,40 +34,23 @@ export default function Listing() {
       vaccines: newListing.vaccines,
       diet: newListing.diet,
     };
+
     setBatch(newBatch);
     setLoading(false);
   };
 
-  const dummyListing = {
-    listingId: 39,
-    userId: 7,
-    title: "Here is batch 48.",
-    description:
-      "Selling this batch to a mother in need. Healthy production, no sicknesses or medications. COVID-19 Pfizer Booster vaccine. Did drink caffeine within 8 hours of producing.",
-    price: 4.0,
-    createdDateTime: "2023-04-23 20:17:08",
-    batchId: 48,
-    productionDate: "2023-04-20 14:04:05",
-    volume: 5,
-    diet: "Ketogenic,Low-Carb",
-    sickness: "Common Cold,Flu",
-    medications: "",
-    caffeine: 1,
-    vaccines: "COVID-19,Chickenpox",
-    username: "pshfmg",
-    status: "frozen",
-  };
 
   return (
     <div className="listing">
+      <h1>Listing #{listingId}</h1>
       {loading && <Loading />}
       {listing !== null && (
         <>
-          {batch !== null && <BatchInfo batch={batch} status={listing.status} />}
-          
+          <ListingInfo listing={listing} />
+          <BatchInfo batch={batch} status={listing.status} />
         </>
       )}
-      {listing === null && !loading && <p>Couldn't retrieve listing.</p>}
+      {listing === null && !loading && <p>Error retrieving listing #{listingId}. Please refresh the page.</p>}
     </div>
   );
 }

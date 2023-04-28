@@ -13,7 +13,21 @@ export const ListingProvider = ({ children }) => {
   const [userListings, setUserListings] = useState([]);
   const { batches, setBatches } = useBatchService();
 
-  const getListing = async (listingId) => {};
+  const getListing = async (listingId) => {
+    try {
+      const response = await axios.get(
+        `${apiURL}/listing/GetListing?listingid=${listingId}`,
+        {
+          timeout: 5000, // Timeout after 5 seconds
+        }
+      );
+      if (response.data[1]) {
+        return response.data[1].listing[0];
+      } else return null;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const getUserListings = async (username) => {
     try {
@@ -46,9 +60,9 @@ export const ListingProvider = ({ children }) => {
         }
       );
       if (response.data[1]) {
-        return response.data[1]
+        return response.data[1];
       } else {
-        return null
+        return null;
       }
     } catch (error) {
       console.log(error);
@@ -127,6 +141,7 @@ export const ListingProvider = ({ children }) => {
     <ListingContext.Provider
       value={{
         userListings,
+        getListing,
         setUserListings,
         getUserListings,
         getAllListings,

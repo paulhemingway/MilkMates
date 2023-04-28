@@ -156,6 +156,85 @@
 
 }
 
+.listing {
+  .listing-info {
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2em;
+    .bottle {
+      font-size: 10em;
+      color: var(--pink);
+      filter: drop-shadow(8px 8px 0 rgba(0,0,0,0.2))
+    }
+    .listing-content {
+      & > div {
+        margin-bottom: 1.5em;
+      }
+      .posted {
+        a {
+          font-weight: bold;
+          font-size: 1.2em;
+          color: var(--pink);
+
+          &:hover {
+            color: var(--hover-pink);
+          }
+        }
+      }
+      .contact {
+        background-image: var(--blue-gradient);
+        color: white;
+        display: inline-block;
+        padding: 1em;
+        border-radius: 10px;
+        min-height: 145px;
+        .buttons {
+          display: flex;
+          justify-content: center;
+          gap: 15px;
+          margin-top: 15px;
+
+          & > div {
+            width: 200px;
+          }
+
+          button {
+            padding: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 5px;
+            width: 100%;
+            background-color: white;
+            color: var(--blue);
+            border: 1px solid white;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 2px 4px 8px rgba(0,0,0,0.2);
+            border-radius: 5px 5px 0 0;
+
+            svg {
+              font-size: 2em;
+            }
+          }
+          .contact-popup {
+            background-color: white;
+            color: var(--dark-blue);
+            padding: 5px;
+            font-size: 0.8em;
+            width: 100%;
+            text-align: center;
+            word-wrap: break-word;
+            border-radius: 0 0 5px 5px;
+            border-top: 2px solid var(--blue);
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+}
+
 
 // @media only screen and (max-width: 1380px) {
 //   .listing-item {
@@ -163,6 +242,11 @@
 //   }
 // }
 
+@media only screen and (max-width: 680px) {
+  .bottle {
+    display: none !important;
+  }
+}
 @media only screen and (max-width: 560px) {
   .two-col {
     flex-wrap: wrap !important;
