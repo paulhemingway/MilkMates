@@ -26,6 +26,7 @@ export default function Batch() {
     openModal(<DeleteBatchModal batchId={batch.batchId} isListed={batch.isListed === 1} />);
   };
 
+
   const editBatchClicked = () => {};
 
   useEffect(() => {
@@ -40,6 +41,7 @@ export default function Batch() {
         notListableStatuses.includes(batch.events[batch.events.length - 1].event);
       setDisabled(isDisabled)
     }
+    
   }, [batch]);
 
   const fetchBatch = async (batchId) => {
@@ -89,7 +91,7 @@ export default function Batch() {
       {batch && (
         <div className="batch-content">
           <BatchInfo batch={batch} status={batch.events.reduce((prev, curr) => (new Date(curr.eventDate) > new Date(prev.eventDate) ? curr : prev)).event}/> 
-          <BatchEvents events={batch.events} batch={batch} fetchBatch={fetchBatch}/>
+          <BatchEvents events={batch.events} batch={batch} fetchBatch={fetchBatch} />
         </div>
       )}
     </div>

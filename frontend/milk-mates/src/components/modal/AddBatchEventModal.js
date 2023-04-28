@@ -16,6 +16,7 @@ export default function AddBatchEventModal({
   batchId,
   isListed,
   fetchBatch,
+  addEvent
 }) {
   const { closeModal, openModal } = useModalService();
   const [selectedDate, setSelectedDate] = useState(dayjs(Date.now()));
@@ -39,7 +40,25 @@ export default function AddBatchEventModal({
     setEventOptions(newOptions);
   }, []);
 
+  // validation
+  const valid = () => {
+    let isValid = true
+    setErrorMsg("")
+
+    if(selectedDate < new Date(events[0].eventDate) || selectedDate > Date.now()) {
+      setErrorMsg("Event date must proceed the last event and cannot be in the future.")
+      return false;
+    }
+    if(eventType == "") {
+      setErrorMsg("Please choose an event type.")
+      return false;
+    }
+
+    return true;
+  }
+
   const addClicked = async () => {
+    if(!valid()) return
     try {
       setLoading(true);
       setErrorMsg("");
@@ -49,12 +68,13 @@ export default function AddBatchEventModal({
         selectedDate,
         notes
       );
-      if (!added) {
+      if (added === null) {
         throw new Error("Something went wrong on our end. Please try again.");
       }
-      const deleteListing =
+
+      const deletingListing =
         isListed && eventType && deleteListedTypes.includes(eventType);
-      if (deleteListing) {
+      if (deletingListing) {
         const listing = userListings.find(
           (listing) => batchId === listing.batchId
         );
@@ -67,9 +87,10 @@ export default function AddBatchEventModal({
         if (!deletedListing) {
           throw new Error("Something went wrong on our end. Please try again.");
         }
-        fetchBatch(batchId);
-        successModal(deleteListing);
       }
+      fetchBatch(batchId);
+      addEvent(added)
+      successModal(deletingListing);
     } catch (error) {
       setErrorMsg(error.message);
     } finally {
@@ -97,7 +118,6 @@ export default function AddBatchEventModal({
 
   const eventTypeChanged = (selected) => {
     setEventType(selected.value);
-    console.log(selected.value);
   };
 
   const notesChanged = (e) => {
@@ -116,7 +136,8 @@ export default function AddBatchEventModal({
                 onChange={dateChanged}
                 value={selectedDate}
                 maxDate={dayjs(Date.now())}
-                minDate={dayjs(events[0].eventDate)}
+                minDate={dayjs(new Date(events[0].eventDate))}
+                disableOpenPicker={true}
               />
             </label>
           </div>

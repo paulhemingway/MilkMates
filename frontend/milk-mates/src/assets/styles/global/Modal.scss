@@ -1,7 +1,9 @@
 .modal-cont {
   position: absolute;
-  width: calc(100% - 275px);
-  height: calc(100% - 70px);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 999;
   backdrop-filter: blur(2px);
@@ -153,6 +155,9 @@
 
 .add-batch-event {
   min-width: 300px;
+  .modal-error-loading {
+    width: 300px;
+  }
 }
 
 .delete-listing {

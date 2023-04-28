@@ -341,6 +341,11 @@ export default function LogTable({ batches }) {
           />
         )}
       </div>
+      <Pagination
+        length={filteredBatches.length}
+        perPage={perPage}
+        update={updateDisplayedBatches}
+      />
       <div className="table">
         <table>
           <thead>
@@ -370,11 +375,7 @@ export default function LogTable({ batches }) {
           </tbody>
         </table>
       </div>
-      <Pagination
-        length={filteredBatches.length}
-        perPage={perPage}
-        update={updateDisplayedBatches}
-      />
+      
     </div>
   );
 }

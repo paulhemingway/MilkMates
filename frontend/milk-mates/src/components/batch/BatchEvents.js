@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Wrapper from "components/global/Wrapper";
 import BatchEvent from "./BatchEvent";
 import { HiPlus } from "react-icons/hi";
@@ -10,15 +10,44 @@ export default function BatchEvents({ events, batch, fetchBatch }) {
   const disabled = events.some((item) => finishedEvents.includes(item.event));
   const { openModal } = useModalService();
 
+  const [batchEvents, setBatchEvents] = useState(events);
+
   const addBatchClicked = () => {
-    openModal(<AddBatchEventModal events={events} batchId={batch.batchId} isListed={batch.isListed === 1} fetchBatch={fetchBatch} />);
+    openModal(
+      <AddBatchEventModal
+        events={events}
+        batchId={batch.batchId}
+        isListed={batch.isListed === 1}
+        fetchBatch={fetchBatch}
+        addEvent={addEvent}
+      />
+    );
+  };
+
+  const addEvent = (newEvent) => {
+    let newEvents = [...batchEvents, newEvent];
+    sortAndSet(newEvents);
+  };
+
+  const removeEvent = (batchEventId) => {
+    let newEvents = [...batchEvents].filter((batchEvent) => {
+      return batchEvent.batchEventId !== batchEventId;
+    });
+    sortAndSet(newEvents);
+  };
+
+  const sortAndSet = (newEvents) => {
+    newEvents = newEvents.sort(
+      (a, b) => new Date(b.eventDate) - new Date(a.eventDate)
+    );
+    setBatchEvents(newEvents);
   };
 
   return (
     <Wrapper header="Batch Events">
       <div className="events">
         <div className="horizontal-scroll shadow">
-          {events.map((item, index) => {
+          {batchEvents.map((item, index) => {
             return (
               <BatchEvent
                 event={item}
@@ -26,6 +55,7 @@ export default function BatchEvents({ events, batch, fetchBatch }) {
                 deletable={index === 0 && item.event !== "logged"}
                 batch={batch}
                 index={events.length - index}
+                removeEvent={removeEvent}
               />
             );
           })}

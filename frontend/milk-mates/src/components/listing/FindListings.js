@@ -34,7 +34,7 @@ export default function FindListings() {
   const getListings = async () => {
     let listings = await getAllListings();
     listings = listings.filter((listing) => {
-      return listing.isActive === 1;
+      return listing.isActive === 1 && listing.username !== user.username;
     });
     setAllListings(listings);
   };
