@@ -1,7 +1,7 @@
 .dashboard {
   &-content {
     .dash-wrapper {
-      padding: 0 1.5em 1.5em;
+      padding: 0 2em 2em;
       border-radius: 20px;
       box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
       margin-bottom: 2em;
@@ -51,11 +51,14 @@
         .listing-item {
           margin: 0 auto;
         }
-        .create-btn {
-          margin-top: 1.5em;
-          display: inline-block;
-          text-decoration: none;
-          text-align: center;
+        
+      }
+
+      .dash-find {
+        .listings {
+          margin-top: 1em;
+          gap: 1.5em;
+          align-items: center;
         }
       }
 
@@ -64,6 +67,12 @@
         text-align: center;
       }
       .loading {
+        text-align: center;
+      }
+      .dash-btn {
+        margin-top: 1.5em;
+        display: inline-block;
+        text-decoration: none;
         text-align: center;
       }
     }

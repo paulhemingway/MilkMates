@@ -21,8 +21,9 @@ export const BatchProvider = ({ children }) => {
     diet,
     caffeine
   ) => {
-    date = moment(date).format("YYYY-MM-DD HH:mm:ss");
-    console.log(caffeine)
+    
+    date = moment(new Date(date)).format("YYYY-MM-DD HH:mm:ss");
+    console.log(date)
     return axios
       .post(
         `${apiURL}/tracker/AddBatch`,
@@ -111,14 +112,14 @@ export const BatchProvider = ({ children }) => {
   
 
   const addBatchEvent = async (batchId, batchEventType, eventDate, notes) => {
-    eventDate = moment(eventDate).format("YYYY-MM-DD HH:mm:ss");
+    const date = moment(new Date(eventDate)).format("YYYY-MM-DD HH:mm:ss");
     return axios
       .post(
         `${apiURL}/tracker/AddBatchEvent`,
         {
           batchId,
           batchEventType,
-          eventDate,
+          date,
           notes,
         },
         {
@@ -148,17 +149,58 @@ export const BatchProvider = ({ children }) => {
           // update batches
           setBatches(newBatches)
 
+          return response.data[1]
+        }
+        return null;
+      })
+      .catch((error) => {
+        console.log(error)
+        return null;
+      });
+  };
+
+  const deleteBatchEvent = async (batchId, batchEventId) => {
+    return axios
+      .put(
+        `${apiURL}/tracker/DeleteBatchEvent`,
+        {
+          batchEventId,
+        },
+        {
+          timeout: 5000, // Timeout after 5 seconds
+        }
+      )
+      .then((response) => {
+        if(response.data[0].errorCode === 0) {
+
+          // get index of batch in batch array
+          const index = batches.findIndex(batch => batch.batchId === batchId)
+
+          // create a new event array and remove the event
+          const newEventsArray = [...batches[index].events].filter(event => {
+            return event.batchEventId !== batchEventId
+          })
+
+          // copy the batch object with the events as the new events array
+          const newBatch = { ...batches[index], events: newEventsArray}
+          
+          // copy the batches array
+          const newBatches = [...batches]
+
+          // set the newBatch at the index
+          newBatches[index] = newBatch
+          
+          // update batches
+          setBatches(newBatches)
+
           return true
         }
         return false;
       })
       .catch((error) => {
-        return 7;
+        console.log(error)
+        return false;
       });
-  };
-
-  const deleteBatchEvent = async (batchEventId) => {
-    console.log("Deleting " + batchEventId);
   };
 
   return (

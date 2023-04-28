@@ -19,7 +19,7 @@ export default function DashShare() {
         <ListingItem listing={userListings[0]} isOwn={true} />
       )}
       {userListings.length === 0 && (<p>You do not have any active breastmilk listings.</p>)}
-      <Link to="/share" className="create-btn button primary-button-blue">Create A Listing</Link>
+      <Link to="/share" className="dash-btn button primary-button">Create A Listing</Link>
     </div>
   );
 }

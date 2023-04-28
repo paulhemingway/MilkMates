@@ -5,7 +5,7 @@ import { useBatchService } from "services/BatchService";
 import { useModalService } from "services/ModalService";
 import DeleteBatchEventModal from "../modal/DeleteBatchEventModal";
 
-export default function BatchEvent({ event, deletable, batch, index }) {
+export default function BatchEvent({ event, deletable, batch, index, removeEvent, inModal }) {
   const { deleteBatchEvent } = useBatchService();
   const { openModal } = useModalService();
 
@@ -14,7 +14,7 @@ export default function BatchEvent({ event, deletable, batch, index }) {
   }
 
   const deleteEvent = () => {
-    openModal(<DeleteBatchEventModal confirmed={deleteConfirmed} event={event} batchId={batch.batchId} />);
+    openModal(<DeleteBatchEventModal confirmed={deleteConfirmed} event={event} batchId={batch.batchId} removeEvent={removeEvent}/>);
   };
   const trashKeyDown = (e) => {
     if (e.key === " " || e.key === "Enter") {
@@ -23,7 +23,7 @@ export default function BatchEvent({ event, deletable, batch, index }) {
   };
   return (
     <div className={`event shadow ${event.event}`}>
-      <p className="event-title">{index}. {event.event}</p>
+      <p className="event-title">{!inModal ? index + '. ' : ''}{event.event}</p>
       <div className="event-info">
         <div className="date">
           <p>

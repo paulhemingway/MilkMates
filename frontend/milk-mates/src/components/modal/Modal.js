@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from "react";
+import React, { useRef, useEffect } from "react";
 import "assets/styles/global/Modal.scss";
 import { useModalService } from "services/ModalService";
 import { HiOutlineX } from "react-icons/hi";
@@ -11,18 +11,11 @@ export default function Modal() {
 
   useEffect(() => {
     function handleClickOutside(event) {
+      let close = true;
       if (modalRef.current && !modalRef.current.contains(event.target)) {
-        if(typeof event.target.className === "string") {
-          if(event.target.className.includes("Mui")) {
-            return
-          }
-        } else {
-          if(event.target.className.baseVal.includes("Mui") || typeof event.target.className === "object") {
-            return
-          }
-        }
-       
-        closeModal();
+        
+
+        if (close) closeModal();
       }
     }
 
@@ -50,7 +43,6 @@ export default function Modal() {
       <FocusTrap>
         <div className="modal" ref={modalRef}>
           <div className="top">
-            
             <HiOutlineX onClick={closeModal} tabIndex="0" />
           </div>
           {content}
