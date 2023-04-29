@@ -3,7 +3,7 @@ import axios from "axios";
 import moment from "moment";
 import { useBatchService } from "./BatchService";
 
-const apiURL = "http://ec2-54-159-200-221.compute-1.amazonaws.com:3000";
+const apiURL = "http://milkmates.org:3000";
 
 // Create a context for storing the batch state and related methods
 export const ListingContext = createContext();

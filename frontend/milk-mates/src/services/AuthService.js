@@ -3,7 +3,7 @@ import axios from "axios";
 import { useBatchService } from "./BatchService";
 import { useListingService } from "./ListingService";
 
-const apiURL = "http://ec2-54-159-200-221.compute-1.amazonaws.com:3000";
+const apiURL = "http://milkmates.org:3000";
 
 // Create a context for storing the authentication state and related methods
 export const AuthContext = createContext();
