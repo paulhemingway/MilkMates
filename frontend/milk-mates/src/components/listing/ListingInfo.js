@@ -1,5 +1,5 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
-import { TbBottle } from "react-icons/tb";
 import moment from "moment";
 import { HiOutlineMail, HiPhone } from "react-icons/hi";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
@@ -46,7 +46,6 @@ export default function ListingInfo({ listing }) {
     return null; // return null if the input string is invalid
   }
 
-  console.log(listing);
   return (
     <div className="listing-info two-col">
       <div className="listing-content">
@@ -55,14 +54,14 @@ export default function ListingInfo({ listing }) {
           <p>{moment(createdDate).format("LLLL")} - {moment(createdDate).fromNow()}</p>
         </div>
         <div className="title-desc">
-          <h2>{listing.title}</h2>
+          <h3>Description</h3>
           <p>{listing.description}</p>
         </div>
         <div className="two-col">
           <div className="price">
             <h3>Price</h3>
             <p>
-              {listing.price == 0.0 ? "Free!" : "$" + listing.price.toFixed(2)}
+              {listing.price === 0.0 ? "Free!" : "$" + listing.price}
             </p>
           </div>
           <div className="zip">
@@ -74,7 +73,7 @@ export default function ListingInfo({ listing }) {
           <div className="contact">
             <h3>Reply</h3>
             <div className="buttons">
-              {listing.showEmail && (
+              {listing.showEmail === 1 && (
                 <div className="email">
                   <button
                     aria-label="Toggle email address"
@@ -94,7 +93,7 @@ export default function ListingInfo({ listing }) {
                   )}
                 </div>
               )}
-              {listing.showPhone && (
+              {listing.showPhone === 1 && (
                 <div className="phone">
                   <button
                     aria-label="Toggle Phone number"
@@ -120,8 +119,6 @@ export default function ListingInfo({ listing }) {
           </button>
         )}
       </div>
-
-      <TbBottle className="bottle" />
     </div>
   );
 }

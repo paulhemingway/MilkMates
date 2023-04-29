@@ -21,9 +21,7 @@ export const BatchProvider = ({ children }) => {
     diet,
     caffeine
   ) => {
-    
     date = moment(new Date(date)).format("YYYY-MM-DD HH:mm:ss");
-    console.log(date)
     return axios
       .post(
         `${apiURL}/tracker/AddBatch`,

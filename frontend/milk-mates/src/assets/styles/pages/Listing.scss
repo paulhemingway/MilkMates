@@ -43,6 +43,21 @@
             resize: none;
           }
         }
+
+        &.contact {
+          .checkboxes {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+          }
+
+
+          label {
+            input {
+              margin-right: 5px;
+            }
+          }
+        }
       }
 
       .loading {
@@ -157,19 +172,34 @@
 }
 
 .listing {
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h1 {
+      font-size: 2em;
+    }
+    .bottle {
+      font-size: 7em;
+      color: var(--pink);
+      filter: drop-shadow(8px 8px 0 rgba(0, 0, 0, 0.2));
+      width: 20%;
+    }
+  }
+
   .listing-info {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2em;
-    .bottle {
-      font-size: 10em;
-      color: var(--pink);
-      filter: drop-shadow(8px 8px 0 rgba(0,0,0,0.2))
-    }
+
+
+
     .listing-content {
-      & > div {
+      &>div {
         margin-bottom: 1.5em;
       }
+
       .posted {
         a {
           font-weight: bold;
@@ -181,6 +211,7 @@
           }
         }
       }
+
       .contact {
         background-image: var(--blue-gradient);
         color: white;
@@ -188,13 +219,14 @@
         padding: 1em;
         border-radius: 10px;
         min-height: 145px;
+
         .buttons {
           display: flex;
           justify-content: center;
           gap: 15px;
           margin-top: 15px;
 
-          & > div {
+          &>div {
             width: 200px;
           }
 
@@ -210,13 +242,14 @@
             border: 1px solid white;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 2px 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
             border-radius: 5px 5px 0 0;
 
             svg {
               font-size: 2em;
             }
           }
+
           .contact-popup {
             background-color: white;
             color: var(--dark-blue);
@@ -247,6 +280,7 @@
     display: none !important;
   }
 }
+
 @media only screen and (max-width: 560px) {
   .two-col {
     flex-wrap: wrap !important;

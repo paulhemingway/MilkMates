@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import { useState, useEffect } from "react";
 import { useModalService } from "services/ModalService";
@@ -42,14 +43,13 @@ export default function AddBatchEventModal({
 
   // validation
   const valid = () => {
-    let isValid = true
     setErrorMsg("")
 
     if(selectedDate < new Date(events[0].eventDate) || selectedDate > Date.now()) {
       setErrorMsg("Event date must proceed the last event and cannot be in the future.")
       return false;
     }
-    if(eventType == "") {
+    if(eventType === "") {
       setErrorMsg("Please choose an event type.")
       return false;
     }

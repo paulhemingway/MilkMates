@@ -23,6 +23,9 @@ export default function CreateListing() {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState(0);
   const [desc, setDesc] = useState("");
+  const [showPhone, setShowPhone] = useState(0);
+  const [showEmail, setShowEmail] = useState(0);
+
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -30,6 +33,7 @@ export default function CreateListing() {
     batch: true,
     title: true,
     desc: true,
+    contact: true
   });
 
   // don't judge the variable name.
@@ -37,6 +41,7 @@ export default function CreateListing() {
   const notListableStatuses = ["discarded", "shared", "consumed"];
 
   function mysql_real_escape_string(str) {
+    // eslint-disable-next-line
     return str.replace(/[\0\x08\x09\x1a\n\r"'\\\%]/g, function (char) {
       switch (char) {
         case "\0":
@@ -88,12 +93,13 @@ export default function CreateListing() {
     let index = 0;
     if (batchId !== undefined) {
       index = newOptions.findIndex((option) => {
-        return option.value == batchId;
+        return option.value === batchId;
       });
     }
     setSelectedBatch(newOptions[index]);
 
     setNotListedOptions(newOptions);
+    //  eslint-disable-next-line
   }, [batches]);
 
   const clearClicked = () => {
@@ -106,6 +112,7 @@ export default function CreateListing() {
       batch: true,
       title: true,
       desc: true,
+      contact: true,
     });
   };
 
@@ -114,10 +121,12 @@ export default function CreateListing() {
       batch: selectedBatch !== undefined,
       title: title.length >= 12,
       desc: desc.length >= 50,
+      contact: showPhone === 1 || showEmail === 1,
     };
     setValid(newValid);
-
-    return newValid.title && newValid.desc;
+    return (
+      newValid.batch && newValid.title && newValid.desc && newValid.contact
+    );
   };
 
   const handleSubmit = async (e) => {
@@ -136,7 +145,9 @@ export default function CreateListing() {
       selectedBatch.value,
       mysql_real_escape_string(title),
       price.toString(),
-      mysql_real_escape_string(desc)
+      mysql_real_escape_string(desc),
+      showPhone,
+      showEmail
     );
 
     switch (errorCode) {
@@ -259,7 +270,39 @@ export default function CreateListing() {
             </p>
           )}
         </div>
-        {loading && <p className="loading"><Loading /></p>}
+        <div className="input-cont contact">
+          <div className="checkboxes">
+            <label>
+              <input
+                type="checkbox"
+                name="showPhone"
+                value="Show phone number"
+                onChange={(e) => setShowPhone(e.target.checked ? 1 : 0)}
+              />
+              Show my phone number
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="showEmail"
+                value="Show email address"
+                onChange={(e) => setShowEmail(e.target.checked ? 1 : 0)}
+              />
+              Show my email address
+            </label>
+          </div>
+
+          {!valid.contact && (
+            <p className="error-msg">
+              Please select at least one contact option.
+            </p>
+          )}
+        </div>
+        {loading && (
+          <p className="loading">
+            <Loading />
+          </p>
+        )}
         <p className="error-msg center">{errorMsg}</p>
         <div className="buttons">
           <button

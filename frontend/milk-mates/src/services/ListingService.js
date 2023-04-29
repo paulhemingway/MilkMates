@@ -1,6 +1,5 @@
 import React, { createContext, useState, useContext } from "react";
 import axios from "axios";
-import moment from "moment";
 import { useBatchService } from "./BatchService";
 
 const apiURL = "http://milkmates.org:3000";
@@ -108,7 +107,9 @@ export const ListingProvider = ({ children }) => {
     batchId,
     title,
     price,
-    description
+    description,
+    showPhone,
+    showEmail
   ) => {
     const isGiving = 1;
     try {
@@ -121,6 +122,8 @@ export const ListingProvider = ({ children }) => {
           title,
           price,
           description,
+          showPhone,
+          showEmail
         },
         {
           timeout: 5000, // Timeout after 5 seconds

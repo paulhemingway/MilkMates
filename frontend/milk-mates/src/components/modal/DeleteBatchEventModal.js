@@ -1,7 +1,6 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useModalService } from "services/ModalService";
-import moment from "moment";
 import BatchEvent from "../batch/BatchEvent";
 import { useBatchService } from "services/BatchService";
 import Loading from "components/global/Loading";

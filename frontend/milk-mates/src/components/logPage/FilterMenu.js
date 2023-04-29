@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import FocusTrap from "focus-trap-react";
@@ -21,13 +22,13 @@ export default function FilterMenu(props) {
 
   const populateInputs = () => {
     props.filters.status.map((stat) => {
-      console.log(stat);
       let statusCheck = document.getElementById(
         stat.charAt(0).toUpperCase() + stat.slice(1)
       );
       if (statusCheck) {
         statusCheck.checked = true;
       }
+      return true
     });
   };
 

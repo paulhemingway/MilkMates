@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useRef, useEffect } from "react";
 import "assets/styles/global/Modal.scss";
 import { useModalService } from "services/ModalService";
@@ -33,10 +34,6 @@ export default function Modal() {
       document.removeEventListener("keydown", handleEscapeKey);
     };
   }, [modalRef]);
-
-  function handleDateTimePickerClick(event) {
-    event.stopPropagation();
-  }
 
   return (
     <div className="modal-cont">
