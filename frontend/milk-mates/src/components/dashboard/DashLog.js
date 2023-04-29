@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import LogTableRow from "components/logPage/LogTableRow";
 import { useBatchService } from "services/BatchService";
 

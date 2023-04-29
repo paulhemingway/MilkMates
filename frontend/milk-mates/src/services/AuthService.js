@@ -108,6 +108,29 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const editUserInfo = async (
+    username,
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    zipCode
+  ) => {
+    try {
+      const response = await axios.put(
+        `${apiURL}/profile/EditUserInfo`,
+        { username, firstName, lastName, email, phoneNumber, zipCode },
+        {
+          timeout: 5000, // Timeout after 5 seconds
+        }
+      );
+      return response.data[0].errorCode === 0;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
+
   /*
   0 success
   1 no user with that username
@@ -144,13 +167,13 @@ export const AuthProvider = ({ children }) => {
       console.log(error);
       return false;
     }
-  }
+  };
 
   const logoutWithDelay = async () => {
-    setTimeout(function() {
+    setTimeout(function () {
       logout();
-    }, 3000); 
-  }
+    }, 3000);
+  };
 
   // Pass the authentication state and methods to the AuthContext.Provider component
   return (
@@ -165,8 +188,9 @@ export const AuthProvider = ({ children }) => {
         registerErrorCode,
         register,
         getUserInfo,
+        editUserInfo,
         changePassword,
-        deleteAccount
+        deleteAccount,
       }}
     >
       {children}
