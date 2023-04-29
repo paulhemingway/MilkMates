@@ -63,9 +63,9 @@ export default function DoughnutChart({ data }) {
         display: true,
         position: "left",
         labels: {
-          boxWidth: 10,
+          boxWidth: 12,
           font: {
-            size: 10,
+            size: 11,
           },
         },
       },

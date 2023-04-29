@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import { InputMask } from "primereact/inputmask";
 import { useModalService } from "services/ModalService";
 import DeleteUserModal from "../modal/DeleteUserModal";
+import { useAuth } from "services/AuthService";
+import SuccessModal from "components/modal/SuccessModal";
 
 
 export default function EditProfile({ user }) {
   const [changed, setChanged] = useState(false);
   const { openModal } = useModalService();
+  const {editUserInfo} = useAuth()
 
   const [fName, setFName] = useState(user.fName);
   const [lName, setLName] = useState(user.LName);
@@ -55,9 +58,21 @@ export default function EditProfile({ user }) {
     setZip(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!valid()) return;
+    const success = await editUserInfo(user.username, fName, lName, email, phone, zip)
+    if(success) {
+      successModal()
+    } else {
+      
+    }
+  };
+
+  const successModal = () => {
+    openModal(
+      <SuccessModal message={`Your user information has been updated successfully.`} />
+    );
   };
 
   const valid = () => {

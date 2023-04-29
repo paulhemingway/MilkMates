@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { useModalService } from "services/ModalService";
 import { useAuth } from "services/AuthService";
-import { useNavigate } from "react-router-dom";
 import Loading from "components/global/Loading";
-import SuccessModal from "./SuccessModal";
 
 export default function DeleteUserModal() {
   const { closeModal } = useModalService();

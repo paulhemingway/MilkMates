@@ -1,8 +1,8 @@
+/* eslint-disable */
 import React, { useState, useEffect, useRef } from "react";
 import { useListingService } from "services/ListingService";
 import ListingItem from "./ListingItem";
 import Pagination from "components/global/Pagination";
-import Loading from "components/global/Loading";
 
 export default function MyListings() {
   const { userListings } = useListingService();

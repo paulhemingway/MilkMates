@@ -47,8 +47,56 @@ export const BatchProvider = ({ children }) => {
         return response.data[0].errorCode;
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         return 7;
+      });
+  };
+
+  const editBatch = async (
+    batchId,
+    username,
+    date,
+    volume,
+    sickness,
+    medications,
+    vaccines,
+    diet,
+    caffeine
+  ) => {
+    date = moment(new Date(date)).format("YYYY-MM-DD HH:mm:ss");
+    return axios
+      .put(
+        `${apiURL}/tracker/EditBatch`,
+        {
+          batchId,
+          username,
+          date,
+          volume,
+          sickness,
+          medications,
+          vaccines,
+          diet,
+          caffeine,
+        },
+        {
+          timeout: 5000, // Timeout after 5 seconds
+        }
+      )
+      .then(async (response) => {
+        // add the new batch to the batches state so you don't have to call the api again
+        if (response.data[0].errorCode === 0) {
+          // copy batches, remove the edited batch.
+          let newBatches = [...batches].filter(batch => batch.batchId !== batchId)
+          
+          newBatches.push(response.data[1])
+
+          await setBatches(newBatches);
+        }
+        return response.data[0].errorCode;
+      })
+      .catch((error) => {
+        console.log(error);
+        return 7
       });
   };
 
@@ -107,7 +155,6 @@ export const BatchProvider = ({ children }) => {
     const batch = batches.find((batch) => batch.batchId == batchId);
     return batch;
   };
-  
 
   const addBatchEvent = async (batchId, batchEventType, eventDate, notes) => {
     const date = moment(new Date(eventDate)).format("YYYY-MM-DD HH:mm:ss");
@@ -125,34 +172,34 @@ export const BatchProvider = ({ children }) => {
         }
       )
       .then((response) => {
-        if(response.data[0].errorCode === 0) {
+        if (response.data[0].errorCode === 0) {
           // event object returned by api
-          const newEvent = response.data[1]
+          const newEvent = response.data[1];
 
           // get index of batch in batch array
-          const index = batches.findIndex(batch => batch.batchId === batchId)
+          const index = batches.findIndex((batch) => batch.batchId === batchId);
 
           // create a new event array with the new event added
-          const newEventsArray = [...batches[index].events, newEvent]
+          const newEventsArray = [...batches[index].events, newEvent];
 
           // copy the batch object with the events as the new events array
-          const newBatch = { ...batches[index], events: newEventsArray}
-          
+          const newBatch = { ...batches[index], events: newEventsArray };
+
           // copy the batches array
-          const newBatches = [...batches]
+          const newBatches = [...batches];
 
           // set the newBatch at the index
-          newBatches[index] = newBatch
-          
-          // update batches
-          setBatches(newBatches)
+          newBatches[index] = newBatch;
 
-          return response.data[1]
+          // update batches
+          setBatches(newBatches);
+
+          return response.data[1];
         }
         return null;
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         return null;
       });
   };
@@ -169,34 +216,33 @@ export const BatchProvider = ({ children }) => {
         }
       )
       .then((response) => {
-        if(response.data[0].errorCode === 0) {
-
+        if (response.data[0].errorCode === 0) {
           // get index of batch in batch array
-          const index = batches.findIndex(batch => batch.batchId === batchId)
+          const index = batches.findIndex((batch) => batch.batchId === batchId);
 
           // create a new event array and remove the event
-          const newEventsArray = [...batches[index].events].filter(event => {
-            return event.batchEventId !== batchEventId
-          })
+          const newEventsArray = [...batches[index].events].filter((event) => {
+            return event.batchEventId !== batchEventId;
+          });
 
           // copy the batch object with the events as the new events array
-          const newBatch = { ...batches[index], events: newEventsArray}
-          
+          const newBatch = { ...batches[index], events: newEventsArray };
+
           // copy the batches array
-          const newBatches = [...batches]
+          const newBatches = [...batches];
 
           // set the newBatch at the index
-          newBatches[index] = newBatch
-          
-          // update batches
-          setBatches(newBatches)
+          newBatches[index] = newBatch;
 
-          return true
+          // update batches
+          setBatches(newBatches);
+
+          return true;
         }
         return false;
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         return false;
       });
   };
@@ -207,6 +253,7 @@ export const BatchProvider = ({ children }) => {
         batches,
         setBatches,
         addBatch,
+        editBatch,
         deleteBatch,
         getBatchesByUser,
         getBatch,

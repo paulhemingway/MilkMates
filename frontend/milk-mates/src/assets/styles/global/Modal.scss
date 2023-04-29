@@ -50,6 +50,7 @@
 
     .modal-content {
       margin: 20px 0;
+      text-align: center;
 
       form {
         display: flex;
@@ -109,6 +110,8 @@
   .success {
     text-align: center;
     color: var(--lime-green);
+
+
 
     svg {
       font-size: 8em;
