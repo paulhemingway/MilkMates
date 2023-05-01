@@ -7,7 +7,6 @@ import { useAuth } from "services/AuthService";
 import "assets/styles/global/Header.scss";
 
 export default function Header(props) {
-  const isAtLanding = window.location.pathname === "/";
   const { loggedIn } = useAuth()
 
   function NavButton() {
@@ -47,9 +46,9 @@ export default function Header(props) {
       </Link>
 
       <div className="right">
-        {isAtLanding ? (
+        {props.isAtLanding ? (
           <Link to="/help" className="link">
-            Need Help?
+            Help Center
           </Link>
         ) : (
           <NavButton onClick={toggleCollapse} />

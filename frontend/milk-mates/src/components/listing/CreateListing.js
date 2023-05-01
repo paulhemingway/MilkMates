@@ -7,6 +7,7 @@ import CurrencyInput from "react-currency-input-field";
 import { useAuth } from "services/AuthService";
 import { useModalService } from "services/ModalService";
 import Loading from "components/global/Loading";
+import { Link } from "react-router-dom";
 
 import SuccessModal from "components/modal/SuccessModal";
 
@@ -33,7 +34,7 @@ export default function CreateListing() {
     batch: true,
     title: true,
     desc: true,
-    contact: true
+    contact: true,
   });
 
   // don't judge the variable name.
@@ -98,7 +99,8 @@ export default function CreateListing() {
     }
     setSelectedBatch(newOptions[index]);
 
-    setNotListedOptions(newOptions);
+    // setNotListedOptions(newOptions);
+    setNotListedOptions([]);
     //  eslint-disable-next-line
   }, [batches]);
 
@@ -172,154 +174,166 @@ export default function CreateListing() {
 
   return (
     <div className="create-listing">
-      <form onSubmit={handleSubmit} className="flex-column">
-        <div className="input-cont">
-          <label className="flex-column">
-            Batch
-            <Select
-              options={notListedOptions}
-              defaultValue={selectedBatch}
-              value={selectedBatch}
-              placeholder="Select a batch..."
-              className="select"
-              id="batch-select"
-              components={{
-                IndicatorSeparator: () => null,
-              }}
-              isSearchable={false}
-              theme={(theme) => ({
-                ...theme,
-                colors: {
-                  ...theme.colors,
-                  text: "orangered",
-                  primary25: "var(--light-pink)",
-                  primary: "var(--blue)",
-                },
-              })}
-              onChange={(e) => setSelectedBatch(e)}
-            />
-          </label>
-          {!valid.batch && <p className="error-msg">Please select a batch.</p>}
-        </div>
-        <div className="two-col">
+      {notListedOptions.length === 0 && (
+        <>
+          <p>You do not have any logged milk batches to list!</p>
+          <Link to="/log" className="milk-log-btn button primary-button">Milk Log</Link>
+        </>
+      )}
+      {notListedOptions.length > 0 && (
+        <form onSubmit={handleSubmit} className="flex-column">
           <div className="input-cont">
             <label className="flex-column">
-              Title
-              <input
-                type="text"
-                placeholder="Title"
-                onChange={(e) => setTitle(e.target.value)}
-                maxLength="64"
-                value={title}
+              Batch
+              <Select
+                options={notListedOptions}
+                defaultValue={selectedBatch}
+                value={selectedBatch}
+                placeholder="Select a batch..."
+                className="select"
+                id="batch-select"
+                components={{
+                  IndicatorSeparator: () => null,
+                }}
+                isSearchable={false}
+                theme={(theme) => ({
+                  ...theme,
+                  colors: {
+                    ...theme.colors,
+                    text: "orangered",
+                    primary25: "var(--light-pink)",
+                    primary: "var(--blue)",
+                  },
+                })}
+                onChange={(e) => setSelectedBatch(e)}
               />
             </label>
-            <p
-              className={`char-limit ${title.length >= 54 && "yellow"} ${
-                (title.length < 12 || title.length === 64) && "red"
-              }`}
-            >
-              {title.length}/64
-            </p>
-            {!valid.title && (
-              <p className="error-msg">Title must be at least 12 characters.</p>
+            {!valid.batch && (
+              <p className="error-msg">Please select a batch.</p>
             )}
           </div>
+          <div className="two-col">
+            <div className="input-cont">
+              <label className="flex-column">
+                Title
+                <input
+                  type="text"
+                  placeholder="Title"
+                  onChange={(e) => setTitle(e.target.value)}
+                  maxLength="64"
+                  value={title}
+                />
+              </label>
+              <p
+                className={`char-limit ${title.length >= 54 && "yellow"} ${
+                  (title.length < 12 || title.length === 64) && "red"
+                }`}
+              >
+                {title.length}/64
+              </p>
+              {!valid.title && (
+                <p className="error-msg">
+                  Title must be at least 12 characters.
+                </p>
+              )}
+            </div>
+            <div className="input-cont">
+              <label className="flex-column">
+                <span className="price-label">
+                  Price <span className="optional">(optional)</span>
+                </span>
+                <CurrencyInput
+                  id="price-input"
+                  name="price-input"
+                  prefix="$"
+                  placeholder="Price"
+                  value={price}
+                  decimalsLimit={2}
+                  onValueChange={(value) =>
+                    setPrice(value === undefined ? 0 : value)
+                  }
+                />
+              </label>
+            </div>
+          </div>
           <div className="input-cont">
             <label className="flex-column">
-              <span className="price-label">
-                Price <span className="optional">(optional)</span>
-              </span>
-              <CurrencyInput
-                id="price-input"
-                name="price-input"
-                prefix="$"
-                placeholder="Price"
-                value={price}
-                decimalsLimit={2}
-                onValueChange={(value) =>
-                  setPrice(value === undefined ? 0 : value)
-                }
-              />
+              Description
+              <textarea
+                name="desc"
+                id="desc"
+                maxLength="1000"
+                cols="30"
+                rows="8"
+                onChange={(e) => setDesc(e.target.value)}
+                value={desc}
+                placeholder="12 oz of frozen breastmilk from a healthy, non-smoking, and drug-free mother. Milk was pumped between January and March of 2023 and stored in a deep freezer immediately after pumping. No alcohol or caffeine was consumed during this time. Milk has been screened and tested negative for any contamination..."
+              ></textarea>
             </label>
-          </div>
-        </div>
-        <div className="input-cont">
-          <label className="flex-column">
-            Description
-            <textarea
-              name="desc"
-              id="desc"
-              maxLength="1000"
-              cols="30"
-              rows="8"
-              onChange={(e) => setDesc(e.target.value)}
-              value={desc}
-              placeholder="12 oz of frozen breastmilk from a healthy, non-smoking, and drug-free mother. Milk was pumped between January and March of 2023 and stored in a deep freezer immediately after pumping. No alcohol or caffeine was consumed during this time. Milk has been screened and tested negative for any contamination..."
-            ></textarea>
-          </label>
-          <p
-            className={`char-limit ${desc.length >= 900 && "yellow"} ${
-              (desc.length < 50 || desc.length === 1000) && "red"
-            }`}
-          >
-            {desc.length}/1000
-          </p>
-          {!valid.desc && (
-            <p className="error-msg">
-              Description must be at least 50 characters.
+            <p
+              className={`char-limit ${desc.length >= 900 && "yellow"} ${
+                (desc.length < 50 || desc.length === 1000) && "red"
+              }`}
+            >
+              {desc.length}/1000
             </p>
-          )}
-        </div>
-        <div className="input-cont contact">
-          <div className="checkboxes">
-            <label>
-              <input
-                type="checkbox"
-                name="showPhone"
-                value="Show phone number"
-                onChange={(e) => setShowPhone(e.target.checked ? 1 : 0)}
-              />
-              Show my phone number
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="showEmail"
-                value="Show email address"
-                onChange={(e) => setShowEmail(e.target.checked ? 1 : 0)}
-              />
-              Show my email address
-            </label>
+            {!valid.desc && (
+              <p className="error-msg">
+                Description must be at least 50 characters.
+              </p>
+            )}
           </div>
+          <div className="input-cont contact">
+            <div className="checkboxes">
+              <label>
+                <input
+                  type="checkbox"
+                  name="showPhone"
+                  value="Show phone number"
+                  onChange={(e) => setShowPhone(e.target.checked ? 1 : 0)}
+                />
+                Show my phone number
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="showEmail"
+                  value="Show email address"
+                  onChange={(e) => setShowEmail(e.target.checked ? 1 : 0)}
+                />
+                Show my email address
+              </label>
+            </div>
 
-          {!valid.contact && (
-            <p className="error-msg">
-              Please select at least one contact option.
+            {!valid.contact && (
+              <p className="error-msg">
+                Please select at least one contact option.
+              </p>
+            )}
+          </div>
+          {loading && (
+            <p className="loading">
+              <Loading />
             </p>
           )}
-        </div>
-        {loading && (
-          <p className="loading">
-            <Loading />
-          </p>
-        )}
-        <p className="error-msg center">{errorMsg}</p>
-        <div className="buttons">
-          <button
-            type="button"
-            onClick={clearClicked}
-            className="button secondary-button-blue"
-          >
-            Clear
-          </button>
-          <input
-            type="submit"
-            onClick={handleSubmit}
-            value="List Batch"
-            className="button primary-button-blue"
-          />
-        </div>
-      </form>
+          <p className="error-msg center">{errorMsg}</p>
+          <div className="buttons">
+            <button
+              type="button"
+              onClick={clearClicked}
+              className="button secondary-button-blue"
+            >
+              Clear
+            </button>
+            <input
+              type="submit"
+              onClick={handleSubmit}
+              value="List Batch"
+              className="button primary-button-blue"
+            />
+          </div>
+        </form>
+      )}
     </div>
   );
 }

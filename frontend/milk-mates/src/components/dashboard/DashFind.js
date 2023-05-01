@@ -32,7 +32,7 @@ export default function DashFind() {
     newListings = newListings.filter((listing) => {
       return listing.username !== user.username;
     });
-    setListings(newListings);
+    setListings(newListings.slice(0,3));
   };
 
   return (

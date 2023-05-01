@@ -45,12 +45,12 @@ export default function Landing(props) {
 
   return (
     <div className="landing">
-      <Header />
+      <Header isAtLanding={true} />
       <div className="form-container">
         <Form />
       </div>
       <div className="info-container">
-        <h2>Giving Breastmilk a Second Life!</h2>
+        <h2><i>Giving breastmilk a second life</i></h2>
         <div className="icons shadow">
           <div className="icon">
             <BiBarChartAlt2 />
