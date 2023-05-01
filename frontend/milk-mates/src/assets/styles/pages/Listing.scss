@@ -1,5 +1,10 @@
 .share {
   .create-listing {
+    .milk-log-btn {
+      display: inline-block;
+      margin-top: 1em;
+      text-decoration: none;
+    }
     form {
       gap: 1em;
 
@@ -268,13 +273,6 @@
   }
 }
 
-
-// @media only screen and (max-width: 1380px) {
-//   .listing-item {
-//     width: calc(50% - 2em);
-//   }
-// }
-
 @media only screen and (max-width: 680px) {
   .bottle {
     display: none !important;
@@ -282,16 +280,18 @@
 }
 
 @media only screen and (max-width: 560px) {
+  .share {
+    .create-listing {
+      .two-col {
+        display: block !important;
+      }
+    }
+  }
+
   .listing {
-    .two-col {
-      flex-wrap: wrap !important;
+    .buttons {
+      flex-direction: column !important;
+
     }
   }
 }
-
-
-// @media only screen and (max-width: 800px) {
-//   .listing-item {
-//     width: 100%;
-//   }
-// }

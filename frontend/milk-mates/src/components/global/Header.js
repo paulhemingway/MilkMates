@@ -49,7 +49,7 @@ export default function Header(props) {
       <div className="right">
         {isAtLanding ? (
           <Link to="/help" className="link">
-            Need Help?
+            Help Center
           </Link>
         ) : (
           <NavButton onClick={toggleCollapse} />
