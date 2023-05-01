@@ -5,6 +5,7 @@
       margin-top: 1em;
       text-decoration: none;
     }
+
     form {
       gap: 1em;
 
@@ -101,6 +102,146 @@
 }
 
 .find {
+  .find-filter {
+    background-image: var(--blue-gradient);
+    color: white;
+    padding: 1em;
+    border-radius: 15px;
+    margin-bottom: 2em;
+
+    .filter-content {
+      margin-top: 1em;
+      color: var(--dark-blue);
+      background-color: white;
+      padding: 15px;
+      border-radius: 10px;
+
+      .basic-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1em;
+        justify-content: center;
+        margin-bottom: 1em;
+      }
+
+      .advanced {
+        margin-bottom: 1em;
+        gap: 1em;
+
+        .note {
+          text-align: center;
+          color: var(--pink);
+        }
+
+        .checkboxes {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 5px;
+
+          .filter-label {
+            width: 100%;
+          }
+
+          label {
+            font-size: 0.8em;
+            width: calc(50% - 3px);
+            min-width: 100px;
+          }
+        }
+      }
+
+      .filter-cont {
+        border: 1px solid rgb(197, 197, 197);
+        padding: 10px;
+        border-radius: 5px;
+
+        &.earliest {
+          width: calc(50% - 1em);
+          min-width: 220px;
+
+          .MuiFormControl-root {
+            width: 100%;
+          }
+
+
+        }
+
+        input[type=number] {
+          border: 1px solid rgb(194, 194, 194);
+          border-radius: 4px;
+          padding: 10px;
+          max-width: 80px;
+
+          &:hover {
+            border-color: black;
+          }
+        }
+
+        &.batch-info {
+          max-width: 400px;
+
+          &>div {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+          }
+        }
+
+        &.zip {
+          .zip-input {
+            padding: 10px;
+            max-width: 80px;
+            border: 1px solid rgb(197, 197, 197);
+            border-radius: 4px;
+          }
+        }
+
+        .filter-label {
+          font-weight: bold;
+          margin-bottom: 3px;
+        }
+
+        input[type=checkbox] {
+          margin-right: 5px;
+        }
+      }
+
+      .show-more {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 1em;
+
+        a {
+          text-decoration: none;
+          color: var(--blue);
+          font-weight: bold;
+
+          svg {
+            font-size: 2em;
+          }
+
+          &:hover,
+          &:focus {
+            text-decoration: underline;
+          }
+        }
+
+        svg {
+          font-size: 2em;
+          color: var(--blue);
+        }
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1em;
+      }
+
+    }
+  }
+
   .find-listings {
     align-items: center;
     gap: 2em;
@@ -169,22 +310,21 @@
     box-shadow: 12px 12px 15px var(--blue);
   }
 
-  &:focus-within {
-    outline: 2px solid var(--pink);
+  &:focus {
+    outline: 2px dashed black
   }
-
-
 }
 
 .listing {
-
   .top {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     h1 {
       font-size: 2em;
     }
+
     .bottle {
       font-size: 7em;
       color: var(--pink);
@@ -279,6 +419,12 @@
   }
 }
 
+@media only screen and (max-width: 600px) {
+  .two-col {
+    display: block !important;
+  }
+}
+
 @media only screen and (max-width: 560px) {
   .share {
     .create-listing {
@@ -293,5 +439,9 @@
       flex-direction: column !important;
 
     }
+  }
+
+  .find-filter {
+    font-size: 0.8em !important;
   }
 }

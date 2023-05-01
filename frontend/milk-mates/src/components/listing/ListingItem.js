@@ -39,6 +39,10 @@ export default function ListingItem({ listing, isOwn }) {
           <h4>Posted</h4>
           <p>{moment(listing.createdDateTime).fromNow()}</p>
         </div>
+        <div className="price">
+          <h4>Price</h4>
+          <p>{listing.price > 0 ? '$'+listing.price : "Free"}</p>
+        </div>
         <div className="author">
           <h4>Author</h4>
           <Link

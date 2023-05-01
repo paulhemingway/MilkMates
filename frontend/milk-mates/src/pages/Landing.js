@@ -45,7 +45,7 @@ export default function Landing(props) {
 
   return (
     <div className="landing">
-      <Header />
+      <Header isAtLanding={true} />
       <div className="form-container">
         <Form />
       </div>

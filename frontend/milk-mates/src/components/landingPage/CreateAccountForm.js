@@ -186,7 +186,6 @@ export default function CreateAccountForm({ switchToLogin }) {
     const firstError = Object.keys(newErrors).find(
       (error) => newErrors[error].length > 0
     );
-    console.log(firstError);
     return !Object.values(newErrors).some((value) => value.length > 0);
   };
 
