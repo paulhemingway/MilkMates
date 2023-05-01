@@ -2,7 +2,7 @@ import React, { createContext, useState, useContext } from "react";
 import axios from "axios";
 import { useBatchService } from "./BatchService";
 
-const apiURL = "http://milkmates.org:3000";
+const apiURL = "https://milkmates.org:3000";
 
 // Create a context for storing the batch state and related methods
 export const ListingContext = createContext();
