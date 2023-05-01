@@ -4,7 +4,7 @@ import PublicWrapper from "components/global/PublicWrapper";
 import useDocumentTitle from "services/DocumentTitle";
 
 export default function Terms(props) {
-  useDocumentTitle(props.title)
+  useDocumentTitle(props.title);
 
   return (
     <PublicWrapper header="Terms of Service">
@@ -31,6 +31,7 @@ export default function Terms(props) {
             <a href="#t8">8. Indemnification</a>
             <a href="#t9">9. Governing Law and Dispute Resolution</a>
             <a href="#t10">10. Changes to Terms of Use</a>
+            <a href="#t11">11. General Information</a>
           </div>
         </div>
         <div className="terms">
@@ -38,9 +39,9 @@ export default function Terms(props) {
             <h2>1. Eligibility</h2>
             <p>
               To use our app, you must be at least 18 years old and be a parent
-              or legal guardian of a child who is breastfeeding. By using the
-              app, you represent and warrant that you meet these eligibility
-              requirements.
+              or legal guardian of a child who is currently breastfeeding. By
+              using the app, you represent and warrant that you meet these
+              eligibility requirements.
             </p>
           </div>
           <div className="term" id="t2">
@@ -73,7 +74,8 @@ export default function Terms(props) {
               informational purposes only and are not intended to diagnose,
               treat, or cure any medical condition. You should always consult
               with your healthcare provider if you have any questions or
-              concerns about your breastfeeding experience.
+              concerns about your breastfeeding experience. Nothing on our app
+              is intended to nor does create a clinician/patient relationship.
             </p>
           </div>
           <div className="term" id="t5">
@@ -135,20 +137,47 @@ export default function Terms(props) {
             <h2>9. Governing Law and Dispute Resolution</h2>
             <p>
               These terms of use will be governed by and construed in accordance
-              with the laws of the State in which you reside. Any dispute
-              arising out of or relating to these terms of use or your use of
-              our app will be resolved exclusively in the state or federal
-              courts located in [insert county], and you consent to the
-              jurisdiction of such courts.
+              with the laws of the State of Missouri. Any dispute arising out of
+              or relating to these terms of use or your use of our app will be
+              resolved exclusively in the state courts located in Boone County,
+              Missouri, and you consent to the jurisdiction of such courts.
             </p>
           </div>
           <div className="term" id="t10">
             <h2>10. Changes to Terms of Use</h2>
             <p>
-              We reserve the right to modify these terms of use at any time,
+              We reserve the right to modify these Terms of Use at any time,
               without prior notice.
             </p>
           </div>
+          <div className="term" id="t11">
+            <h2>11. General Information</h2>
+            <p>
+              These Terms of Service constitute the entire agreement between you
+              and MilkMates with respect to the app and supersedes all prior
+              agreements and understandings between you and MilkMates.
+              MilkMates&#39; failure to enforce any provision of these Terms of
+              Service will not be construed as a waiver of any provision or
+              right. In the event that a portion of these Terms of Service is
+              held unenforceable, the unenforceable portion will be construed in
+              accordance with applicable law as nearly as possible to reflect
+              the original intentions of the parties, and the remainder of the
+              provisions will remain in full force and effect. Sections 6, 7, 8,
+              9, 10, and 11 of these Terms of Service shall survive any
+              termination of the Terms of Service.
+            </p>
+            <br />
+            <p>
+              If you are a California resident, you may have a copy of these
+              Terms of Service e-mailed to you by sending a letter with your
+              e-mail address and a written request for the Terms of Service to:
+              MilkMates Administrator, 1224 E. Walnut, #411, Columbia, MO 65201.
+            </p>
+          </div>
+          <br />
+          <br />
+          <br />
+          <br />
         </div>
       </div>
     </PublicWrapper>

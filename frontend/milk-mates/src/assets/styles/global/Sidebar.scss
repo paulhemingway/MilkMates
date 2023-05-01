@@ -95,6 +95,7 @@
   .nav {
     height: calc(100vh - 60px);
     justify-content: start;
+    border-radius: 0 !important;
 
     &>div {
       ul {

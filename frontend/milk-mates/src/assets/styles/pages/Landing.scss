@@ -31,7 +31,6 @@
         display: flex;
         flex-direction: column;
         margin-bottom: 5px;
-
         label {
           font-size: 0.75em;
         }
@@ -209,12 +208,29 @@
       h2 {
         font-size: 1em !important;
       }
+      .icons {
+        gap: 10px !important;
+        padding: 10px 10px 15px !important;
+
+        svg {
+          font-size: 3em !important;
+        }
+      }
 
     }
 
 
     form {
       padding: 15px !important;
+    }
+    .error {
+      min-height: 0 !important;
+    }
+
+    .form-container {
+      & > * {
+        padding: 10px;
+      }
     }
   }
 }

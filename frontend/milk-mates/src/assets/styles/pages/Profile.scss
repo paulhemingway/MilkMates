@@ -264,12 +264,14 @@
 }
 
 @media only screen and (max-width: 450px) {
-  .two-col {
-    flex-direction: column !important;
-  }
-
-  .tab {
-    font-size: 0.7em !important;
-    padding: 5px 10px;
+  .profile {
+    .two-col {
+      flex-direction: column !important;
+    }
+  
+    .tab {
+      font-size: 0.7em !important;
+      padding: 5px 10px;
+    }
   }
 }

@@ -20,8 +20,11 @@ export default function LogTableRow(props) {
   const formattedDate = moment(date).format("MMM D");
   const formattedYear = moment(date).format(", YYYY");
   const formattedTime = moment(date).format("h:mm A");
-
-  const status = props.batch.events.reduce((prev, curr) => (new Date(curr.eventDate) > new Date(prev.eventDate) ? curr : prev)).event;
+  let status = ""
+  if(props.batch.events && props.batch.events.length > 0) {
+    status = props.batch.events.reduce((prev, curr) => (new Date(curr.eventDate) > new Date(prev.eventDate) ? curr : prev)).event;
+  }
+  
   
   function StatusIcon() {
     switch (status.toLowerCase()) {

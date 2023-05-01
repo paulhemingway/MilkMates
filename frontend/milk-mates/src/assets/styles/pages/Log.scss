@@ -301,7 +301,7 @@
   }
 
   .log-charts {
-    max-height: 600px;
+    max-height: 700px;
   }
 }
 
@@ -311,10 +311,6 @@
       .inputs {
         gap: 10px;
         padding: 10px;
-
-        *:not(svg){
-          font-size: 0.8em !important;
-        }
 
         .input {
           .option {
@@ -328,9 +324,36 @@
             }
           }
         }
+
+        div[class*="indicatorContainer"] {
+          padding: 2px !important;
+        }
       }
 
       
+    }
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .log-charts {
+
+    .buttons {
+      margin: 0.5em auto !important;
+      button {
+        padding: 7px !important;
+      }
+    }
+
+    .timespan-select {
+      font-size: 0.8em;
+      padding: 3px !important;
+    }
+    .total {
+      margin-top: 0.5em !important;
+      &-amount {
+        font-size: 1em !important;
+      }
     }
   }
 }

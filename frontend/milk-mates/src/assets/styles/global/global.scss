@@ -624,5 +624,14 @@
       display: none !important;
     }
   }
+
+  .wrapper {
+    h2 {
+      margin-bottom: 20px !important;
+      &::before {
+        top: calc(100% + 8px) !important;
+      }
+    }
+  }
 }
 

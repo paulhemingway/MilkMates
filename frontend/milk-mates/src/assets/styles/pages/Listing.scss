@@ -282,8 +282,10 @@
 }
 
 @media only screen and (max-width: 560px) {
-  .two-col {
-    flex-wrap: wrap !important;
+  .listing {
+    .two-col {
+      flex-wrap: wrap !important;
+    }
   }
 }
 

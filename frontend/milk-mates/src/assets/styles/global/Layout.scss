@@ -72,6 +72,10 @@
       .nav-container {
         width: 100%;
         height: calc(100vh - 70px);
+
+        &.collapsed {
+          top: -100vh;
+        }
       }
       .outlet {
         padding: 15px !important;
