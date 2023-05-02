@@ -99,8 +99,7 @@ export default function CreateListing() {
     }
     setSelectedBatch(newOptions[index]);
 
-    // setNotListedOptions(newOptions);
-    setNotListedOptions([]);
+    setNotListedOptions(newOptions);
     //  eslint-disable-next-line
   }, [batches]);
 
