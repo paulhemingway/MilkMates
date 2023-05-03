@@ -27,7 +27,7 @@ export default function DashLog() {
             {batches.length > 0 &&
               [...batches]
                 .reverse()
-                .slice(0, 3)
+                .slice(0, 5)
                 .map((batch) => (
                   <LogTableRow batch={batch} key={batch.batchId} tabIndex="0" />
                 ))}

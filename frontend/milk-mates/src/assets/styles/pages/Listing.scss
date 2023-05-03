@@ -157,7 +157,7 @@
 
         &.earliest {
           width: calc(50% - 1em);
-          min-width: 220px;
+          max-width: 300px;
 
           .MuiFormControl-root {
             width: 100%;
@@ -178,7 +178,7 @@
         }
 
         &.batch-info {
-          max-width: 400px;
+          max-width: 300px;
 
           &>div {
             display: flex;
@@ -212,7 +212,9 @@
         align-items: center;
         margin-bottom: 1em;
 
-        a {
+        button {
+          all: unset;
+          background-color: white;
           text-decoration: none;
           color: var(--blue);
           font-weight: bold;

@@ -35,10 +35,21 @@ export const AuthProvider = ({ children }) => {
         await setLoginErrorCode(response.data[0].errorCode);
         setUser(null);
       } else {
-        const fetchedUser = response.data[1];
+        const res = response.data[1];
+        const fetchedUser = {
+          username: res.username,
+          userid: res.userid,
+          firstName: res.firstName,
+          lastName: res.lastName,
+          isAdmin: res.isAdmin,
+        };
+
         await setLoginErrorCode(0);
         setLoggedIn(true);
         setUser(fetchedUser);
+
+        localStorage.setItem("authToken", res.authToken);
+        localStorage.setItem("userId", res.userid);
 
         await getBatchesByUser(fetchedUser.username);
         await getUserListings(fetchedUser.username);
@@ -52,6 +63,8 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     setBatches([]);
     setUserListings([]);
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userId');    
     setLoggedIn(false);
     setUser(null);
   };
@@ -89,8 +102,6 @@ export const AuthProvider = ({ children }) => {
       setLoginErrorCode(4);
     }
   };
-
-  const checkToken = () => {};
 
   const getUserInfo = async (username) => {
     try {
@@ -175,6 +186,43 @@ export const AuthProvider = ({ children }) => {
     }, 3000);
   };
 
+  const checkToken = async () => {
+    const authToken = localStorage.getItem("authToken");
+    const userid = localStorage.getItem("userId");
+    if (authToken && userid) {
+      console.log("Auth token: " + authToken)
+      console.log("userid: " + userid)
+      try {
+        const response = await axios.post(
+          `${apiURL}/login/IsUserAuthenticated`,
+          { userid, authToken },
+          {
+            timeout: 5000, // Timeout after 5 seconds
+          }
+        );
+        if (response.data[0].errorCode === 0) {
+          const res = response.data[1];
+          const fetchedUser = {
+            username: res.username,
+            userid: res.userid,
+            firstName: res.fName,
+            lastName: res.lName,
+            isAdmin: res.isAdmin,
+          };
+
+          setUser(fetchedUser);
+          setLoggedIn(true);
+
+          await getBatchesByUser(fetchedUser.username);
+          await getUserListings(fetchedUser.username);
+        }
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
+    }
+  };
+
   // Pass the authentication state and methods to the AuthContext.Provider component
   return (
     <AuthContext.Provider
@@ -191,6 +239,7 @@ export const AuthProvider = ({ children }) => {
         editUserInfo,
         changePassword,
         deleteAccount,
+        checkToken,
       }}
     >
       {children}
