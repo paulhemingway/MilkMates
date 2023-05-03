@@ -7,7 +7,7 @@ import { useAuth } from "services/AuthService";
 import "assets/styles/global/Header.scss";
 
 export default function Header(props) {
-  const { loggedIn } = useAuth()
+  const { loggedIn } = useAuth();
 
   function NavButton() {
     if (props.showMenu === false) {
@@ -34,25 +34,22 @@ export default function Header(props) {
 
   return (
     <header className="top-bar">
-      <Link to={loggedIn ? '/dashboard' : '/'}>
+      <Link to={loggedIn ? "/dashboard" : "/"}>
         <div className="logo">
           <div className="logo-circle"></div>
           <img src={MilkMatesLogo} alt="MilkMates logo" />
         </div>
       </Link>
 
-      <Link to={loggedIn ? '/dashboard' : '/'}>
+      <Link to={loggedIn ? "/dashboard" : "/"}>
         <span className="title">MilkMates</span>
       </Link>
 
       <div className="right">
-        
-          <Link to="/help" className="link">
-            Help Center
-          </Link>
-        
-          <NavButton onClick={toggleCollapse} />
-        
+        <Link to="/help" className="link">
+          Help Center
+        </Link>
+        {!props.isAtLanding && <NavButton onClick={toggleCollapse} />}
       </div>
     </header>
   );
