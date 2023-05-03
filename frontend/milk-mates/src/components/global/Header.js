@@ -46,13 +46,13 @@ export default function Header(props) {
       </Link>
 
       <div className="right">
-        {props.isAtLanding ? (
+        
           <Link to="/help" className="link">
             Help Center
           </Link>
-        ) : (
+        
           <NavButton onClick={toggleCollapse} />
-        )}
+        
       </div>
     </header>
   );
