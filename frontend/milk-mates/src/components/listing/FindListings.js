@@ -82,7 +82,6 @@ export default function FindListings({ filters }) {
 
       return true;
     });
-    console.log(newListings);
     setFilteredListings(newListings);
   };
 

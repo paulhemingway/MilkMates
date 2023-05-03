@@ -27,10 +27,12 @@ import ListingsAdmin from "pages/admin/ListingsAdmin";
 
 function App() {
   // must get token on load eventually and redirect if it's valid
+  const { loggedIn, user, checkToken } = useAuth();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    checkToken(); // check for auth token in local storage
+  }, []);
 
-  const { loggedIn, user } = useAuth();
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <BrowserRouter>

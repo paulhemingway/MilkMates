@@ -9,6 +9,7 @@ import "assets/styles/pages/Profile.scss";
 import EditProfile from "components/profile/EditProfile";
 import SellerRating from "components/profile/SellerRating";
 import ChangePassword from "components/profile/ChangePassword";
+import Loading from "components/global/Loading";
 
 export default function Profile() {
   // 1: edit profile
@@ -17,6 +18,7 @@ export default function Profile() {
   const [tab, setTab] = useState(1);
   const [userInfo, setUserInfo] = useState(null);
   const { userId } = useParams();
+  const [loading, setLoading] = useState(true);
 
   useDocumentTitle(`${userId}'s Profile`);
 
@@ -26,6 +28,7 @@ export default function Profile() {
     const fetchUser = async () => {
       const fetchedUserInfo = await getUserInfo(userId);
       setUserInfo(fetchedUserInfo);
+      setLoading(false);
     };
     fetchUser();
   }, [userId, getUserInfo]);
@@ -61,6 +64,7 @@ export default function Profile() {
 
   return (
     <div className="profile">
+      {loading && <Loading />}
       {userInfo !== null && user && (
         <>
           <div className="header">

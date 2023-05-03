@@ -239,9 +239,9 @@ export default function FindFilter({ setFilters }) {
           
         </div>
         <div className="show-more">
-          <a href="javascript: void(0)" onClick={() => setExpanded(!expanded)}>
+          <button onClick={() => setExpanded(!expanded)}>
             {expanded ? "Hide" : ""} Advanced Filters
-          </a>
+          </button>
           {expanded ? <BiChevronUp /> : <BiChevronDown />}
         </div>
         {expanded && (

@@ -1,7 +1,6 @@
 import useDocumentTitle from "services/DocumentTitle";
 import React from "react";
 import DashWrapper from "components/dashboard/DashWrapper";
-import DashFind from "components/dashboard/DashFind";
 import DashLog from "components/dashboard/DashLog";
 import DashShare from "components/dashboard/DashShare";
 
@@ -15,9 +14,6 @@ export default function Dashboard(props) {
       <div className="dashboard-content">
         <DashWrapper header="Recent Batches" path="/log">
           <DashLog />
-        </DashWrapper>
-        <DashWrapper header="Find Milk" path="/find">
-          <DashFind />
         </DashWrapper>
         <DashWrapper header="Your Latest Listing" path="/share">
           <DashShare />
