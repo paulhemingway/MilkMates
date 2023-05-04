@@ -32,7 +32,7 @@
         flex-direction: column;
         margin-bottom: 5px;
         label {
-          font-size: 0.75em;
+          font-size: 0.9em;
         }
 
         .field {
@@ -83,7 +83,7 @@
 
         .forgot {
           text-align: right;
-          font-size: 0.7em;
+          font-size: 0.8em;
           display: inline-block;
           width: auto;
         }
@@ -196,6 +196,58 @@
         p {
           font-size: 12px;
         }
+      }
+    }
+  }
+
+  .forgot-landing {
+    .desc {
+      text-align: center;
+    }
+
+    .error {
+      color: var(--red);
+      text-align: center;
+    }
+
+    .success {
+      color: var(--green);
+      text-align: center;
+      font-size: 0.9em;
+    }
+
+    form {
+      margin: 1em 0 2em;
+      gap: 1em;
+      display: flex;
+      flex-direction: column;
+
+      label {
+        display: flex;
+        flex-direction: column;
+
+        input {
+          padding: 10px;
+          border: 1px solid #c3c3c3;
+          border-radius: 4px;
+        }
+      }
+
+      .button {
+        display: inline-block;
+      }
+    }
+
+    .back {
+      all: unset;
+      color: var(--blue);
+      cursor: pointer;
+      
+      display: block;
+      margin: 0 auto;
+
+      &:hover, &:focus {
+        text-decoration: underline;
       }
     }
   }

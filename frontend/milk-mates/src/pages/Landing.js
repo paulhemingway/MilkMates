@@ -28,16 +28,20 @@ export default function Landing(props) {
     setForgotPasswordShowing(true);
   };
 
+  const backToLogin = () => {
+    setForgotPasswordShowing(false)
+  }
+
   const toggleForm = () => {
     setIsLogin(!isLogin);
   };
 
   function Form() {
     if (forgotPasswordShowing) {
-      return <ForgotPassword />;
+      return <ForgotPassword backToLogin={backToLogin} />;
     }
     return isLogin ? (
-      <LoginForm forgotPassword={forgotPasswordClicked} switchToSignUp={toggleForm} />
+      <LoginForm forgotPassword={forgotPasswordClicked} backToLogin={backToLogin} switchToSignUp={toggleForm} />
     ) : (
       <CreateAccountForm switchToLogin={toggleForm} />
     );
