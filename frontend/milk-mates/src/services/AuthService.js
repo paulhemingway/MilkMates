@@ -190,8 +190,6 @@ export const AuthProvider = ({ children }) => {
     const authToken = localStorage.getItem("authToken");
     const userid = localStorage.getItem("userId");
     if (authToken && userid) {
-      console.log("Auth token: " + authToken)
-      console.log("userid: " + userid)
       try {
         const response = await axios.post(
           `${apiURL}/login/IsUserAuthenticated`,
@@ -223,6 +221,59 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const sendForgotToken = async (username) => {
+    try {
+      const response = await axios.post(
+        `${apiURL}/login/ForgotUserPasswordSendEmail`,
+        { username },
+        {
+          timeout: 5000, // Timeout after 5 seconds
+        }
+      );
+      return response.data[0].errorCode !== 2
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+
+  const verifyForgotToken = async (resetToken) => {
+    try {
+      const response = await axios.post(
+        `${apiURL}/login/AuthenticateForgotToken`,
+        { resetToken },
+        {
+          timeout: 5000, // Timeout after 5 seconds
+        }
+      );
+      if(response.data) {
+        return response.data
+      }
+      return null
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  }
+  const forgotChangePassword = async (username, newPassword, resetToken) => {
+    try {
+      const response = await axios.put(
+        `${apiURL}/login/ForgotUserPassword`,
+        { username, newPassword, resetToken },
+        {
+          timeout: 5000, // Timeout after 5 seconds
+        }
+      );
+      if(response.data) {
+        return response.data
+      }
+      return null
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  }
+
   // Pass the authentication state and methods to the AuthContext.Provider component
   return (
     <AuthContext.Provider
@@ -240,6 +291,9 @@ export const AuthProvider = ({ children }) => {
         changePassword,
         deleteAccount,
         checkToken,
+        sendForgotToken,
+        verifyForgotToken,
+        forgotChangePassword
       }}
     >
       {children}
