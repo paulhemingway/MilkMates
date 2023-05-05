@@ -17,6 +17,7 @@ router.post('/CheckForUser', async function(req, res, next)
     // 3 - blank username received
     // 4 - blank password received
     // 5 - inactive account
+    // 6 - authToken insert failed
 
     var finalResponse = 
     [
@@ -51,17 +52,33 @@ router.post('/CheckForUser', async function(req, res, next)
     {
         if(response[0].password === hash)
         {
-            var returnObject =
+            var authToken = crypto.randomBytes(32).toString('hex');
+
+            let authTokenInserted = await QueryDatabase(
+                "INSERT INTO auth_tokens(userid, auth_token, exp_date)" +
+                "VALUES (" + response[0].userid + ", '" + authToken + "', DATE_ADD(now(),interval 1 day));");
+
+            if(!authTokenInserted)
+            {
+                finalResponse[0].success = false;
+                finalResponse[0].errorCode = 6;
+                res.send(finalResponse).status(200).end();
+            }
+            else
+            {
+                var returnObject =
             {
                 userid: response[0].userid,
+                authToken: authToken,
                 username: response[0].username,
                 firstName: response[0].fName,
                 lastName: response[0].LName,
                 isAdmin: response[0].isAdmin
             };
-
+    
             finalResponse[1] = returnObject;
             res.send(finalResponse).status(200).end();
+            }
         }
         else
         {
@@ -306,7 +323,11 @@ router.put('/UpdateUserPassword', async function(req, res, next)
 router.post('/ForgotUserPasswordSendEmail', async function(req, res, next)
 {
     const username = req.body.username;
-    const email = req.body.email; 
+
+    //ERROR CODES:
+    // 0 - success
+    // 1 - No user with that username exists
+    // 2 - insert token error
 
     var finalResponse = 
     [
@@ -316,37 +337,106 @@ router.post('/ForgotUserPasswordSendEmail', async function(req, res, next)
         }
     ]
 
-    let transporter = nodemailer.createTransport({
-        host: 'smtp.zoho.com',
-        secure: true, // use SSL
-        port: 465,
-        auth: {
-            user: 'milkmates@zohomail.com',
-            pass: 'CapstoneEmail12'
-        }
-      });
-    
-      // Define the email options
-      const mailOptions = {
-        from: 'milkmates@zohomail.com',
-        to: email,
-        subject: 'Reset your MilkMates password',
-        text: `Hello ` + username + `, we received a request to reset your password. If you attempted to reset your password then click the following link: http://ec2-54-159-200-221.compute-1.amazonaws.com/
-Otherwise, consider signing in and changing it as someone attempted to change it.
+    const forgotPasswordToken = crypto.randomBytes(16).toString('hex');
+
+    let selectEmail = await QueryDatabase("SELECT email, userid FROM users WHERE username = '" + username + "';");
+    if(selectEmail && selectEmail.length === 0)
+    {
+        finalResponse[0].success = false;
+        finalResponse[0].errorCode = 1;
+        res.send(finalResponse).status(200).end();
+    }
+    else
+    {
+        let email = selectEmail[0].email;
+        let userid = selectEmail[0].userid;
         
-        Thanks, MilkMates`
-      };
-    
-      // Send the email
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.log(error);
-          res.status(500).send('Error sending email');
-        } else {
-          console.log('Email sent: ' + info.response);
-          res.status(200).send('Email sent');
+        let transporter = nodemailer.createTransport({
+            host: 'smtp.zoho.com',
+            secure: true, // use SSL
+            port: 465,
+            auth: {
+                user: 'milkmates@zohomail.com',
+                pass: 'CapstoneEmail12'
+            }
+          });
+        
+          // Define the email options
+          const mailOptions = {
+            from: 'milkmates@zohomail.com',
+            to: email,
+            subject: 'Reset your MilkMates password',
+            text: `Hello ` + username + `, we received a request to reset your password. 
+            If you attempted to reset your password then click the following link: https://milkmates.org/forgot/` + forgotPasswordToken + `
+            Otherwise, consider signing in and changing it as someone attempted to change it.
+            
+            Thanks, MilkMates`
+          };
+        
+          let insertToken = await QueryDatabase("INSERT INTO reset_tokens (userid, email, reset_token, exp_date) "+
+          "VALUES (" + userid + ", '" + email + "', '" + forgotPasswordToken + "', DATE_ADD(now(),interval 1 day))");
+          if(!insertToken)
+          {
+                finalResponse[0].success = false;
+                finalResponse[0].errorCode = 2;
+                res.send(finalResponse).status(200).end();
+          }
+          else
+          {
+              // Send the email
+              transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                  console.log(error);
+                  res.status(500).send('Error sending email');
+                } else {
+                    finalResponse[1] = forgotPasswordToken;
+                    finalResponse[0].success = true;
+                    finalResponse[0].errorCode = 0;
+                    res.send(finalResponse).status(200).end();
+                }
+              });
+          }
+    }
+});
+
+router.post('/AuthenticateForgotToken', async function(req, res, next)
+{
+    const resetToken = req.body.resetToken;
+
+    //ERROR CODES:
+    // 0 - success
+    // 1 - select token error
+    // 2 - no valid token
+
+    var finalResponse = 
+    [
+        {
+            success: true,
+            errorCode: 0
         }
-      });
+    ]
+
+    let authenticateToken = await QueryDatabase("SELECT r.*, u.username FROM reset_tokens r INNER JOIN users u ON r.userid = u.userid " +
+                                                "WHERE reset_token = '" + resetToken + "' AND exp_date > NOW();");
+    if(!authenticateToken)
+    {
+        finalResponse[0].success = false;
+        finalResponse[0].errorCode = 1;
+        res.send(finalResponse).status(200).end();
+    }
+    else if(authenticateToken && authenticateToken.length === 0)
+    {
+        finalResponse[0].success = false;
+        finalResponse[0].errorCode = 2;
+        res.send(finalResponse).status(200).end();
+    }
+    else
+    {
+        finalResponse[1] = authenticateToken[0].username;
+        finalResponse[0].success = true;
+        finalResponse[0].errorCode = 0;
+        res.send(finalResponse).status(200).end();
+    }
 });
 
 router.put('/ForgotUserPassword', async function(req, res, next)
@@ -394,16 +484,46 @@ router.put('/ForgotUserPassword', async function(req, res, next)
     }
 });
 
-router.get('/IsUserAuthenticated', async function(req, res, next)
+router.post('/IsUserAuthenticated', async function(req, res, next)
 {
-    const user = req.query.username;
-    const authToken = req.query.authenticationToken;
+    const userid = req.body.userid;
+    const authToken = req.body.authToken;
     
-    //TODO: Make this find auth token not user
-    let response = await QueryDatabase("SELECT * FROM test WHERE firstname = '" + user + "';");
+    //ERROR CODES:
+    // 0 - success
+    // 1 - Error selecting auth entries
+    // 2 - User is not authenticated
+
+    var finalResponse = 
+    [
+        {
+            success: true,
+            errorCode: 0
+        }
+    ]
+
+    let authenticated = await QueryDatabase(
+        "SELECT a.*, u.username, u.isAdmin, u.fName, u.lName FROM auth_tokens a INNER JOIN users u ON a.userid = u.userid WHERE a.userId = " + userid + " AND auth_token = '" + authToken + "' AND exp_date > NOW();");
     
-    console.log(response);
-    res.send(response).status(200).end();
+    if(!authenticated)
+    {
+        finalResponse[0].success = false;
+        finalResponse[0].errorCode = 1;
+        res.send(finalResponse).status(200).end();
+    }
+    else if(authenticated && authenticated.length === 0)
+    {
+        finalResponse[0].success = false;
+        finalResponse[0].errorCode = 2;
+        res.send(finalResponse).status(200).end();
+    }
+    else
+    {
+        finalResponse[1] = authenticated[0];
+        finalResponse[0].success = true;
+        finalResponse[0].errorCode = 0;
+        res.send(finalResponse).status(200).end();
+    }
 });
 
 router.get('/IsUserAdmin', async function(req, res, next)
@@ -449,6 +569,8 @@ router.get('/IsUserAdmin', async function(req, res, next)
         }
     }
 });
+
+
 
 async function QueryDatabase(sqlQuery)
 {
